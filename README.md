@@ -7,7 +7,6 @@
 * [Features](#features)
 * [Contacts](#contacts)
 * [Issues](#issues)
-* [Building](#building)
 
 ## About
 Matter Overdrive is a Minecraft mod inspired by the popular Sci-fi TV series Star Trek. It dwells in the concept of replicating and transforming one type matter into another.
@@ -36,9 +35,9 @@ Mini-Changelog (from InfiniteBlock):
 2. Fixed Villager trades.
 3. Fixed Emergencyshield/Shield no more single shot kill's for Skeleton's/TechGun's
 
-Issues:
+## Issues:
 
-1. Attempted to get matter storage pipes to attach to more than just the back of the replicator. It connects, but nothing transfers.
+https://github.com/infiniteblock/MatterOverdrive-Community-Edition/issues
 
 Todo:
 
