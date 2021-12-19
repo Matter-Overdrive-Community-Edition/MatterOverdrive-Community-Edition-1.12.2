@@ -1,0 +1,60 @@
+<!--
+  ~ This file is part of Matter Overdrive
+  ~ Copyright (c) 2015., Simeon Radivoev, All rights reserved.
+  ~
+  ~ Matter Overdrive is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Matter Overdrive is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Matter Overdrive.  If not, see <http://www.gnu.org/licenses>.
+  -->
+
+<entry stylesheet="matteroverdrive:info/styles/guide.css">
+    <page class="padded-page">
+        <title size="2" class="matter-text small-title">Weapon Barrels</title>
+        <text class="matter-text text-block">Weapon Barrels are Upgrades for the Tools/Weapons. They can applied at the weapon in the Weapon Station</text>
+    </page>
+    <page class="padded-page">
+        <title size="2" class="matter-text small-title">Dilithium Focusing Matrix</title>
+        <text class="matter-text text-block">It buff the Weapon damage but let the weapon earlier overheat and take more energy for every shot. It can be applied on every weapon except of the Omni Tool.</text>
+        <recipe item="[item name=weapon_module_barrel meta=0]" style="float:left"></recipe>
+        <details item="[item name=weapon_module_barrel meta=0]" style="margin-left:16px;margin-top:8px"></details>
+    </page>
+    <page class="padded-page">
+        <title size="2" class="matter-text small-title">Incendiary Filter</title>
+        <text class="matter-text text-block">It decrease the Wepon damage but let the target burn. It can be applied on every Weapon except of the Omni Tool.</text>
+        <recipe item="[item name=weapon_module_barrel meta=1]" style="float:left"></recipe>
+        <details item="[item name=weapon_module_barrel meta=1]" style="margin-left:16px;margin-top:8px"></details>
+    </page>
+    <page class="padded-page">
+        <title size="2" class="matter-text small-title">Burst Inductive Drum</title>
+        <text class="matter-text text-block">It buff the fire rate so your weapon will faster shoot but it overheat after a second. It can be applied on every Weapon except of the Omni Tool.</text>
+        <recipe item="[item name=weapon_module_barrel meta=2]" style="float:left"></recipe>
+        <details item="[item name=weapon_module_barrel meta=2]" style="margin-left:16px;margin-top:8px"></details>
+    </page>
+    <page class="padded-page">
+        <title size="2" class="matter-text small-title">Regenerative Converter</title>
+        <text class="matter-text text-block">It heals the player when the target get damage from the weapon. Can only applied on the Phaser.</text>
+        <recipe item="[item name=weapon_module_barrel meta=3]" style="float:left"></recipe>
+        <details item="[item name=weapon_module_barrel meta=3]" style="margin-left:16px;margin-top:8px"></details>
+    </page>
+    <page class="padded-page">
+        <title size="2" class="matter-text small-title">Degenerative Explosive Focusing Matrix (Doomsday)</title>
+        <text class="matter-text text-block">It buff the fire rate so your weapon will shoot faster but it overheat after a second. On the Phaser it will deal splashdamage on the targeted block. It can be applied on every Weapon except of the Omni Tool.</text>
+        <recipe item="[item name=weapon_module_barrel meta=4]" style="float:left"></recipe>
+        <details item="[item name=weapon_module_barrel meta=4]" style="margin-left:16px;margin-top:8px"></details>
+    </page>
+    <page class="padded-page">
+        <title size="2" class="matter-text small-title">Voxel Exaggerating Nullification Obliteration Matrix (Venom)</title>
+        <text class="matter-text text-block">can be applied on every weapon but only make sense on the Omni Tool because it let the Omni Tool break blocks much faster.</text>
+        <recipe item="[item name=weapon_module_barrel meta=5]" style="float:left"></recipe>
+        <details item="[item name=weapon_module_barrel meta=5]" style="margin-left:16px;margin-top:8px"></details>
+    </page>
+</entry>

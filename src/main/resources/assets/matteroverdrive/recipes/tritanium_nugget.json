@@ -1,0 +1,12 @@
+{
+  "result": {
+    "item": "matteroverdrive:tritanium_nugget",
+    "count": 9
+  },
+  "ingredients": [
+    {
+      "item": "#INGOTTRITANIUM"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless"
+}

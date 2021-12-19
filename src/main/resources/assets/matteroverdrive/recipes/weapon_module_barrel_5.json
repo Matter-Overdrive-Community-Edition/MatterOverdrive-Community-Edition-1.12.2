@@ -1,0 +1,26 @@
+{
+  "result": {
+    "item": "matteroverdrive:weapon_module_barrel",
+    "data": 5
+  },
+  "pattern": [
+    " S ",
+    "SAS",
+    "ETE"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "E": {
+      "item": "minecraft:fire_charge"
+    },
+    "S": {
+      "item": "minecraft:tnt"
+    },
+    "T": {
+      "item": "matteroverdrive:tritanium_plate"
+    },
+    "A": {
+      "item": "#GEMDILITHIUM"
+    }
+  }
+}

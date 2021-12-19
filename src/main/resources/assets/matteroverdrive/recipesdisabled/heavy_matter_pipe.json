@@ -1,0 +1,23 @@
+{
+  "result": {
+    "item": "matteroverdrive:heavy_matter_pipe",
+    "count": 8
+  },
+  "pattern": [
+    "RMR",
+    "TMT",
+    "RMR"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "R": {
+      "item": "#DUSTREDSTONE"
+    },
+    "T": {
+      "item": "matteroverdrive:tritanium_plate"
+    },
+    "M": {
+      "item": "matteroverdrive:s_magnet"
+    }
+  }
+}

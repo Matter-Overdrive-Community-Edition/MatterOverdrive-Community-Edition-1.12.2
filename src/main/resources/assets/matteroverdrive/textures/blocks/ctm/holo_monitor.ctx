@@ -1,0 +1,7 @@
+{
+    "type": "CTM",
+    "textures": {
+        "blocks/holo_monitor",
+        "./holo_monitor"
+    }
+}

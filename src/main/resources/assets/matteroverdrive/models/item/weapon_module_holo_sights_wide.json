@@ -1,0 +1,6 @@
+{
+  "parent": "matteroverdrive:item/weapon_module_holo_sights",
+  "textures": {
+    "layer0": "matteroverdrive:items/holo_sight_1"
+  }
+}

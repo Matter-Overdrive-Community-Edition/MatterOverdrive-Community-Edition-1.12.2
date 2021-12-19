@@ -1,0 +1,58 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "matteroverdrive:tritanium_crate_red.obj",
+    "custom":{
+      "flip-v": true
+    }
+  },
+  "variants": {
+    "facing":{
+	
+      "north":{
+        "transform": {
+          "rotation": {
+            "y": 0
+          }
+        }
+      },
+	  
+      "south": {
+        "transform": {
+          "rotation": {
+            "y": 180
+          }
+        }
+      },
+	  
+      "west": {
+        "transform": {
+          "rotation": {
+            "y": 90
+          }
+        }
+      },
+	  
+      "east":{
+        "transform": {
+          "rotation": {
+            "y": 270
+          }
+        }
+      },
+	  
+      "up":{
+
+      },
+	  
+      "down":{
+
+      }
+	  
+    },
+    "inventory": {
+      "model": "matteroverdrive:tritanium_crate_red.obj",
+      "transform": "forge:default-block"
+    }
+  }
+}

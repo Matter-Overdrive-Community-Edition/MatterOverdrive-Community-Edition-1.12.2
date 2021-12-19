@@ -1,0 +1,28 @@
+<!--
+  ~ This file is part of Matter Overdrive
+  ~ Copyright (c) 2015., Simeon Radivoev, All rights reserved.
+  ~
+  ~ Matter Overdrive is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Matter Overdrive is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Matter Overdrive.  If not, see <http://www.gnu.org/licenses>.
+  -->
+
+<entry stylesheet="matteroverdrive:info/styles/guide.css">
+    <page class="padded-page">
+        <title size="2" class="matter-text small-title">Matter Scanner</title>
+        <text class="matter-text text-block">The Matter Scanner is used to scann blocks for the matter network.</text>
+		<text class="matter-text text-block">First you have to link it to an active Pattern Storage with enough space on the Pattern Drive.</text>
+		<text class="matter-text text-block">Next you have to aim at the block you want to scan and hold the righte mouse button down.</text>
+		<text class="matter-text text-block">Be warned that scanned blocks will be destroyed in the process.</text>
+        <text class="matter-text text-block">To have a whole block scanned you have to scan it 10 times.</text>
+    </page>
+</entry>

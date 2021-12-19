@@ -1,0 +1,15 @@
+{
+  "result": {
+    "item": "matteroverdrive:data_pad"
+  },
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "matteroverdrive:isolinear_circuit",
+      "data":0
+    }
+  ],
+  "type": "minecraft:crafting_shapeless"
+}

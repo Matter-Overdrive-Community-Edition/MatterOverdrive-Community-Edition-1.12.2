@@ -1,0 +1,25 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "matteroverdrive:item/base"
+  },
+  "variants": {
+    "level": {
+      "empty": {
+        "textures": {
+          "layer0": "matteroverdrive:items/pattern_drive"
+        }
+      },
+      "partial": {
+        "textures": {
+          "layer0": "matteroverdrive:items/pattern_drive_partially_full"
+        }
+      },
+      "full": {
+        "textures": {
+          "layer0": "matteroverdrive:items/pattern_drive_full"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "result": {
+    "item": "matteroverdrive:weapon_module_barrel",
+    "data": 3
+  },
+  "pattern": [
+    " S ",
+    "SAS",
+    "ETE"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": {
+      "item": "minecraft:golden_apple",
+      "data": 0
+    },
+    "S": {
+      "item": "minecraft:sugar"
+    },
+    "T": {
+      "item": "matteroverdrive:tritanium_plate"
+    },
+    "E": {
+      "item": "#GEMEMERALD"
+    }
+  }
+}

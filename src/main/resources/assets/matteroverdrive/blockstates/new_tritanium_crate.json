@@ -1,0 +1,141 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "matteroverdrive:new_tritanium_crate.obj",
+    "custom":{
+      "flip-v": true
+    }
+  },
+  "variants": {
+    "color=base,facing=north": { "model": "matteroverdrive:new_tritanium_crate.obj", "y": 0 },
+    "color=base,facing=south": { "model": "matteroverdrive:new_tritanium_crate.obj", "y": 180 },
+    "color=base,facing=west":  { "model": "matteroverdrive:new_tritanium_crate.obj", "y": 270 },
+    "color=base,facing=east":  { "model": "matteroverdrive:new_tritanium_crate.obj", "y": 90 },
+    "color=base,facing=down":  { "model": "matteroverdrive:new_tritanium_crate.obj" },
+    "color=base,facing=up":    { "model": "matteroverdrive:new_tritanium_crate.obj" },
+
+    "color=red,facing=north": { "model": "matteroverdrive:new_tritanium_crate_red.obj", "y": 0 },
+    "color=red,facing=south": { "model": "matteroverdrive:new_tritanium_crate_red.obj", "y": 180 },
+    "color=red,facing=west":  { "model": "matteroverdrive:new_tritanium_crate_red.obj", "y": 270 },
+    "color=red,facing=east":  { "model": "matteroverdrive:new_tritanium_crate_red.obj", "y": 90 },
+    "color=red,facing=down":  { "model": "matteroverdrive:new_tritanium_crate_red.obj" },
+    "color=red,facing=up":    { "model": "matteroverdrive:new_tritanium_crate_red.obj" },
+
+    "color=green,facing=north": { "model": "matteroverdrive:new_tritanium_crate_green.obj", "y": 0 },
+    "color=green,facing=south": { "model": "matteroverdrive:new_tritanium_crate_green.obj", "y": 180 },
+    "color=green,facing=west":  { "model": "matteroverdrive:new_tritanium_crate_green.obj", "y": 270 },
+    "color=green,facing=east":  { "model": "matteroverdrive:new_tritanium_crate_green.obj", "y": 90 },
+    "color=green,facing=down":  { "model": "matteroverdrive:new_tritanium_crate_green.obj" },
+    "color=green,facing=up":    { "model": "matteroverdrive:new_tritanium_crate_green.obj" },
+
+    "color=brown,facing=north": { "model": "matteroverdrive:new_tritanium_crate_brown.obj", "y": 0 },
+    "color=brown,facing=south": { "model": "matteroverdrive:new_tritanium_crate_brown.obj", "y": 180 },
+    "color=brown,facing=west":  { "model": "matteroverdrive:new_tritanium_crate_brown.obj", "y": 270 },
+    "color=brown,facing=east":  { "model": "matteroverdrive:new_tritanium_crate_brown.obj", "y": 90 },
+    "color=brown,facing=down":  { "model": "matteroverdrive:new_tritanium_crate_brown.obj" },
+    "color=brown,facing=up":    { "model": "matteroverdrive:new_tritanium_crate_brown.obj" },
+
+    "color=blue,facing=north": { "model": "matteroverdrive:new_tritanium_crate_blue.obj", "y": 0 },
+    "color=blue,facing=south": { "model": "matteroverdrive:new_tritanium_crate_blue.obj", "y": 180 },
+    "color=blue,facing=west":  { "model": "matteroverdrive:new_tritanium_crate_blue.obj", "y": 270 },
+    "color=blue,facing=east":  { "model": "matteroverdrive:new_tritanium_crate_blue.obj", "y": 90 },
+    "color=blue,facing=down":  { "model": "matteroverdrive:new_tritanium_crate_blue.obj" },
+    "color=blue,facing=up":    { "model": "matteroverdrive:new_tritanium_crate_blue.obj" },
+
+    "color=purple,facing=north": { "model": "matteroverdrive:new_tritanium_crate_purple.obj", "y": 0 },
+    "color=purple,facing=south": { "model": "matteroverdrive:new_tritanium_crate_purple.obj", "y": 180 },
+    "color=purple,facing=west":  { "model": "matteroverdrive:new_tritanium_crate_purple.obj", "y": 270 },
+    "color=purple,facing=east":  { "model": "matteroverdrive:new_tritanium_crate_purple.obj", "y": 90 },
+    "color=purple,facing=down":  { "model": "matteroverdrive:new_tritanium_crate_purple.obj" },
+    "color=purple,facing=up":    { "model": "matteroverdrive:new_tritanium_crate_purple.obj" },
+
+    "color=cyan,facing=north": { "model": "matteroverdrive:new_tritanium_crate_cyan.obj", "y": 0 },
+    "color=cyan,facing=south": { "model": "matteroverdrive:new_tritanium_crate_cyan.obj", "y": 180 },
+    "color=cyan,facing=west":  { "model": "matteroverdrive:new_tritanium_crate_cyan.obj", "y": 270 },
+    "color=cyan,facing=east":  { "model": "matteroverdrive:new_tritanium_crate_cyan.obj", "y": 90 },
+    "color=cyan,facing=down":  { "model": "matteroverdrive:new_tritanium_crate_cyan.obj" },
+    "color=cyan,facing=up":    { "model": "matteroverdrive:new_tritanium_crate_cyan.obj" },
+
+    "color=light_gray,facing=north": { "model": "matteroverdrive:new_tritanium_crate_gray.obj", "y": 0 },
+    "color=light_gray,facing=south": { "model": "matteroverdrive:new_tritanium_crate_gray.obj", "y": 180 },
+    "color=light_gray,facing=west":  { "model": "matteroverdrive:new_tritanium_crate_gray.obj", "y": 270 },
+    "color=light_gray,facing=east":  { "model": "matteroverdrive:new_tritanium_crate_gray.obj", "y": 90 },
+    "color=light_gray,facing=down":  { "model": "matteroverdrive:new_tritanium_crate_gray.obj" },
+    "color=light_gray,facing=up":    { "model": "matteroverdrive:new_tritanium_crate_gray.obj" },
+
+    "color=gray,facing=north": { "model": "matteroverdrive:new_tritanium_crate_gray.obj", "y": 0 },
+    "color=gray,facing=south": { "model": "matteroverdrive:new_tritanium_crate_gray.obj", "y": 180 },
+    "color=gray,facing=west":  { "model": "matteroverdrive:new_tritanium_crate_gray.obj", "y": 270 },
+    "color=gray,facing=east":  { "model": "matteroverdrive:new_tritanium_crate_gray.obj", "y": 90 },
+    "color=gray,facing=down":  { "model": "matteroverdrive:new_tritanium_crate_gray.obj" },
+    "color=gray,facing=up":    { "model": "matteroverdrive:new_tritanium_crate_gray.obj" },
+
+    "color=pink,facing=north": { "model": "matteroverdrive:new_tritanium_crate_pink.obj", "y": 0 },
+    "color=pink,facing=south": { "model": "matteroverdrive:new_tritanium_crate_pink.obj", "y": 180 },
+    "color=pink,facing=west":  { "model": "matteroverdrive:new_tritanium_crate_pink.obj", "y": 270 },
+    "color=pink,facing=east":  { "model": "matteroverdrive:new_tritanium_crate_pink.obj", "y": 90 },
+    "color=pink,facing=down":  { "model": "matteroverdrive:new_tritanium_crate_pink.obj" },
+    "color=pink,facing=up":    { "model": "matteroverdrive:new_tritanium_crate_pink.obj" },
+
+    "color=lime,facing=north": { "model": "matteroverdrive:new_tritanium_crate_lime.obj", "y": 0 },
+    "color=lime,facing=south": { "model": "matteroverdrive:new_tritanium_crate_lime.obj", "y": 180 },
+    "color=lime,facing=west":  { "model": "matteroverdrive:new_tritanium_crate_lime.obj", "y": 270 },
+    "color=lime,facing=east":  { "model": "matteroverdrive:new_tritanium_crate_lime.obj", "y": 90 },
+    "color=lime,facing=down":  { "model": "matteroverdrive:new_tritanium_crate_lime.obj" },
+    "color=lime,facing=up":    { "model": "matteroverdrive:new_tritanium_crate_lime.obj" },
+
+    "color=yellow,facing=north": { "model": "matteroverdrive:new_tritanium_crate_yellow.obj", "y": 0 },
+    "color=yellow,facing=south": { "model": "matteroverdrive:new_tritanium_crate_yellow.obj", "y": 180 },
+    "color=yellow,facing=west":  { "model": "matteroverdrive:new_tritanium_crate_yellow.obj", "y": 270 },
+    "color=yellow,facing=east":  { "model": "matteroverdrive:new_tritanium_crate_yellow.obj", "y": 90 },
+    "color=yellow,facing=down":  { "model": "matteroverdrive:new_tritanium_crate_yellow.obj" },
+    "color=yellow,facing=up":    { "model": "matteroverdrive:new_tritanium_crate_yellow.obj" },
+
+    "color=light_blue,facing=north": { "model": "matteroverdrive:new_tritanium_crate_light_blue.obj", "y": 0 },
+    "color=light_blue,facing=south": { "model": "matteroverdrive:new_tritanium_crate_light_blue.obj", "y": 180 },
+    "color=light_blue,facing=west":  { "model": "matteroverdrive:new_tritanium_crate_light_blue.obj", "y": 270 },
+    "color=light_blue,facing=east":  { "model": "matteroverdrive:new_tritanium_crate_light_blue.obj", "y": 90 },
+    "color=light_blue,facing=down":  { "model": "matteroverdrive:new_tritanium_crate_light_blue.obj" },
+    "color=light_blue,facing=up":    { "model": "matteroverdrive:new_tritanium_crate_light_blue.obj" },
+
+    "color=magenta,facing=north": { "model": "matteroverdrive:new_tritanium_crate_magenta.obj", "y": 0 },
+    "color=magenta,facing=south": { "model": "matteroverdrive:new_tritanium_crate_magenta.obj", "y": 180 },
+    "color=magenta,facing=west":  { "model": "matteroverdrive:new_tritanium_crate_magenta.obj", "y": 270 },
+    "color=magenta,facing=east":  { "model": "matteroverdrive:new_tritanium_crate_magenta.obj", "y": 90 },
+    "color=magenta,facing=down":  { "model": "matteroverdrive:new_tritanium_crate_magenta.obj" },
+    "color=magenta,facing=up":    { "model": "matteroverdrive:new_tritanium_crate_magenta.obj" },
+
+    "color=orange,facing=north": { "model": "matteroverdrive:new_tritanium_crate_orange.obj", "y": 0 },
+    "color=orange,facing=south": { "model": "matteroverdrive:new_tritanium_crate_orange.obj", "y": 180 },
+    "color=orange,facing=west":  { "model": "matteroverdrive:new_tritanium_crate_orange.obj", "y": 270 },
+    "color=orange,facing=east":  { "model": "matteroverdrive:new_tritanium_crate_orange.obj", "y": 90 },
+    "color=orange,facing=down":  { "model": "matteroverdrive:new_tritanium_crate_orange.obj" },
+    "color=orange,facing=up":    { "model": "matteroverdrive:new_tritanium_crate_orange.obj" },
+
+    "color=second_white,facing=north": { "model": "matteroverdrive:new_tritanium_crate_white.obj", "y": 0 },
+    "color=second_white,facing=south": { "model": "matteroverdrive:new_tritanium_crate_white.obj", "y": 180 },
+    "color=second_white,facing=west":  { "model": "matteroverdrive:new_tritanium_crate_white.obj", "y": 270 },
+    "color=second_white,facing=east":  { "model": "matteroverdrive:new_tritanium_crate_white.obj", "y": 90 },
+    "color=second_white,facing=down":  { "model": "matteroverdrive:new_tritanium_crate_white.obj" },
+    "color=second_white,facing=up":    { "model": "matteroverdrive:new_tritanium_crate_white.obj" },
+
+    "color=black,facing=north": { "model": "matteroverdrive:new_tritanium_crate_black.obj", "y": 0 },
+    "color=black,facing=south": { "model": "matteroverdrive:new_tritanium_crate_black.obj", "y": 180 },
+    "color=black,facing=west":  { "model": "matteroverdrive:new_tritanium_crate_black.obj", "y": 270 },
+    "color=black,facing=east":  { "model": "matteroverdrive:new_tritanium_crate_black.obj", "y": 90 },
+    "color=black,facing=down":  { "model": "matteroverdrive:new_tritanium_crate_black.obj" },
+    "color=black,facing=up":    { "model": "matteroverdrive:new_tritanium_crate_black.obj" },
+
+    "color=white,facing=north": { "model": "matteroverdrive:new_tritanium_crate_white.obj", "y": 0 },
+    "color=white,facing=south": { "model": "matteroverdrive:new_tritanium_crate_white.obj", "y": 180 },
+    "color=white,facing=west":  { "model": "matteroverdrive:new_tritanium_crate_white.obj", "y": 270 },
+    "color=white,facing=east":  { "model": "matteroverdrive:new_tritanium_crate_white.obj", "y": 90 },
+    "color=white,facing=down":  { "model": "matteroverdrive:new_tritanium_crate_white.obj" },
+    "color=white,facing=up":    { "model": "matteroverdrive:new_tritanium_crate_white.obj" },
+
+    "inventory": {
+      "model": "matteroverdrive:tritanium_crate.obj",
+      "transform": "forge:default-block"
+    }
+  }
+}

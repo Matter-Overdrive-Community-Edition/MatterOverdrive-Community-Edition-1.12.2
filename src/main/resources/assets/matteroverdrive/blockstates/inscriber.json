@@ -1,0 +1,62 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "matteroverdrive:inscriber.obj",
+    "custom":{
+      "flip-v": true
+    }
+  },
+  "variants": {
+    "facing":{
+	
+      "north":{
+        "transform": {
+          "rotation": {
+            "y": 0
+          }
+        }
+      },
+	  
+      "south": {
+        "transform": {
+          "rotation": {
+            "y": 180
+          }
+        }
+      },
+	  
+      "west": {
+        "transform": {
+          "rotation": {
+            "y": 90
+          }
+        }
+      },
+	  
+      "east":{
+        "transform": {
+          "rotation": {
+            "y": 270
+          }
+        }
+      },
+	  
+      "up":{
+
+      },
+	  
+      "down":{
+
+      }
+	  
+    },
+    "ctm": {
+      "true": {},
+      "false":{}
+    },
+    "inventory": {
+      "model": "matteroverdrive:inscriber.obj",
+      "transform": "forge:default-block"
+    }
+  }
+}

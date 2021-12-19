@@ -1,0 +1,14 @@
+{
+  "result": {
+    "item": "matteroverdrive:tritanium_plate"
+  },
+  "pattern": [
+    "TT"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "T": {
+      "item": "#INGOTTRITANIUM"
+    }
+  }
+}

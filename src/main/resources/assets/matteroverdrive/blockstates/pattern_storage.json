@@ -1,0 +1,52 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "matteroverdrive:pattern_storage.obj",
+    "custom":{
+      "flip-v": true
+    }
+  },
+  "variants": {
+    "facing":{
+	
+      "north":{
+      },
+	  
+      "south":{
+        "transform": {
+          "rotation": {
+            "y": 180
+          }
+        }
+      },
+	  
+      "west": {
+        "transform": {
+          "rotation": {
+            "y": 90
+          }
+        }
+      },
+	  
+      "east":{
+        "transform": {
+          "rotation": {
+            "y": 270
+          }
+        }
+      },
+	  
+      "up":{
+
+      },
+	  
+      "down":{
+
+      }
+    },
+    "inventory": {
+      "model": "matteroverdrive:pattern_storage.obj",
+      "transform": "forge:default-block"
+    }
+  }
+}

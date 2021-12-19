@@ -1,0 +1,5 @@
+newmtl helix_walls
+Kd 0.6627 0.8863 0.9843
+
+newmtl pairs
+Kd 0.6627 0.8824 0.9804

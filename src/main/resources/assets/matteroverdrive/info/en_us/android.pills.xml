@@ -1,0 +1,36 @@
+<!--
+  ~ This file is part of Matter Overdrive
+  ~ Copyright (c) 2015., Simeon Radivoev, All rights reserved.
+  ~
+  ~ Matter Overdrive is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Matter Overdrive is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Matter Overdrive.  If not, see <http://www.gnu.org/licenses>.
+  -->
+
+<entry stylesheet="matteroverdrive:info/styles/guide.css">
+    <page class="padded-page">
+        <title size="2" class="matter-text small-title">Android Pills</title>
+        <text class="matter-text text-block">You can find every Pill inside a dungeon. The possibility to find one is 5%.</text>
+    </page>
+   <page class="padded-page">
+        <title size="2" class="matter-text small-title">Red Pill</title>
+        <text class="matter-text text-block">Swallow the Red Pill and you become an Android. You can also search in villages for the Mad Scientist to become an Android. But for that you have to collect a full android set.</text>
+    </page>
+   <page class="padded-page">
+        <title size="2" class="matter-text small-title">Blue Pill</title>
+        <text class="matter-text text-block">Swallow the Blue Pill and you will be a normal player again. You will lose all your abilities. You can Also get a Blue Pill when you get transformed to an android by a Mad Scientist.</text>
+    </page>
+   <page class="padded-page">
+        <title size="2" class="matter-text small-title">Yellow Pill</title>
+        <text class="matter-text text-block">Swallow the Yellow Pill to reset your android abilities and get back your used xp and items.</text>
+    </page>
+</entry>

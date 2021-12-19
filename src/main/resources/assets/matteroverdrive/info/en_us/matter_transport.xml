@@ -1,0 +1,28 @@
+<!--
+  ~ This file is part of Matter Overdrive
+  ~ Copyright (c) 2015., Simeon Radivoev, All rights reserved.
+  ~
+  ~ Matter Overdrive is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Matter Overdrive is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Matter Overdrive.  If not, see <http://www.gnu.org/licenses>.
+  -->
+
+<entry stylesheet="matteroverdrive:info/styles/guide.css">
+    <page class="padded-page">
+        <title size="2" class="matter-text small-title">Matter Transport Pipe</title>
+        <text class="matter-text text-block">This pipe is used to transfer matter from one to another machine.</text>
+        <text class="matter-text text-block">There is also a better variant which can transport more than the normal variant at once.</text>
+        <text class="matter-text text-block"></text>
+        <text class="matter-text text-block">These Pipes have no recipe beacause they can cause crashes and heavy lags.</text>
+        <text class="matter-text text-block">Please use fluid pipes from another mod f.e. Thermal Dynamics, EnderIO, Mekanism,... to connect your machines and fill them with matter.</text>
+    </page>
+</entry>

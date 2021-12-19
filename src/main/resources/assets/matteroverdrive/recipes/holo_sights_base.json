@@ -1,0 +1,17 @@
+  {
+  "result": {
+    "item": "matteroverdrive:holo_sights_base",
+    "data": 0
+  },
+  "pattern": [
+    "   ",
+    "T T",
+    "TTT"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "T": {
+      "item": "matteroverdrive:tritanium_plate"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+<!--
+  ~ This file is part of Matter Overdrive
+  ~ Copyright (c) 2015., Simeon Radivoev, All rights reserved.
+  ~
+  ~ Matter Overdrive is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Matter Overdrive is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Matter Overdrive.  If not, see <http://www.gnu.org/licenses>.
+  -->
+
+<entry stylesheet="matteroverdrive:info/styles/guide.css">
+    <page class="padded-page">
+        <title size="2" class="matter-text small-title">Scopes</title>
+        <text class="matter-text text-block">I know the name should be Sniper Scope but the mod has more scopes than the Sniper Scope.</text>
+        <text class="matter-text text-block">Scopes can be applied on the Phase Rifle and the Ion Sniper in the Weapon Station.</text>
+        <text class="matter-text text-block">There are two type of scopes: The Holo Sight and the Sniper Scope. The Sniper Scope has one variant and the Holo Sight has three variants.</text>
+<!--		<text class="matter-text text-block">If you are using JEI and Crafttweaker, I hope you downloaded the .zs file because it give the Holo Sight a recipe and also add two Holo Sight variants.</text> -->
+	</page>
+<!--<page class="padded-page">
+		<text class="matter-text text-block">If you want to add the two other scope variants also install Not Enough Items, JEI, CodeChickenCore and Crafttweaker.</text>
+		<text class="matter-text text-block">1. Create a script in your cript folder named MatterPverdrive.zs.</text>
+		<text class="matter-text text-block">2. Add the folowing lines to it and save the script and start the game.</text>
+        <image src="holo_sights.png" style="text-align:center" width="225" height="89" ></image>
+	</page>	
+	<page class="padded-page">
+		<text class="matter-text text-block">3. Now you can see the scopes in Not Enough Items and use them on your weapons. The only thing is that they dont have an item texture because it is not possible to add one.</text>
+	</page> -->
+</entry>

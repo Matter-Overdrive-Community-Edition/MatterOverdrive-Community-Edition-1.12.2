@@ -1,0 +1,27 @@
+{
+  "result": {
+    "item": "matteroverdrive:weapon_module_holo_sights",
+    "data": 2
+  },
+  "pattern": [
+    "GGG",
+    "TFT",
+    "TIT"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "T": {
+      "item": "matteroverdrive:tritanium_ingot"
+    },
+    "F": {
+      "item": "matteroverdrive:forcefield_emitter"
+    },
+    "I": {
+      "item": "matteroverdrive:isolinear_circuit",
+      "data": 2
+    }
+  }
+}
