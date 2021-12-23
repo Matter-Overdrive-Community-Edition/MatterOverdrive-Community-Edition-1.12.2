@@ -14,6 +14,7 @@ import net.minecraft.world.biome.Biome;
 import java.util.Random;
 
 public class MOSandPit extends MOWorldGenBuilding {
+	private static final int MIN_DISTANCE_APART = 1024;
     private int airLeeway;
 
     public MOSandPit(String name, int airLeeway) {

@@ -65,7 +65,7 @@ public class MatterOverdriveEntities {
     @SubscribeEvent
     public static void registerProfessions(final RegistryEvent.Register<VillagerProfession> event) {
 		final IForgeRegistry<VillagerProfession> registry = event.getRegistry();
-        MAD_SCIENTIST_PROFESSION = new VillagerProfession("matteroverdrive:mad_scientist",
+        MAD_SCIENTIST_PROFESSION = new VillagerProfession(Reference.MOD_ID + ":mad_scientist",
 		Reference.PATH_ENTITIES + "mad_scientist.png",
 		Reference.PATH_ENTITIES + "hulking_scinetist.png");
 		{
@@ -89,7 +89,7 @@ public class MatterOverdriveEntities {
     public static boolean addEntity(Class<? extends Entity> enityClass, String name, int mainColor, int spotsColor, int id) {
         boolean enabled = MatterOverdrive.CONFIG_HANDLER.config.getBoolean("enable", String.format("%s.%s", ConfigurationHandler.CATEGORY_ENTITIES, name), true, "");
         if (enabled)
-            EntityRegistry.registerModEntity(new ResourceLocation(Reference.MOD_ID, name), enityClass, name, id, MatterOverdrive.INSTANCE, 64, 1, true, mainColor, spotsColor);
+            EntityRegistry.registerModEntity(new ResourceLocation(Reference.MOD_ID + ":" + name), enityClass, name, id, MatterOverdrive.INSTANCE, 64, 1, true, mainColor, spotsColor);
         return enabled;
     }
 }

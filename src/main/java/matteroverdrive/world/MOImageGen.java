@@ -22,17 +22,17 @@ import java.util.*;
 import java.util.List;
 
 public abstract class MOImageGen<T extends MOImageGen.ImageGenWorker> {
-    public static final HashMap<Block, Integer> worldGenerationBlockColors = new HashMap<>();
-    protected final int layerWidth;
-    protected final int layerHeight;
-    protected final Random localRandom;
-    private final HashMap<Integer, BlockMapping> blockMap;
-    protected ResourceLocation texture;
-    protected int placeNotify;
+    public static HashMap<Block, Integer> worldGenerationBlockColors = new HashMap<>();
+	private HashMap<Integer, BlockMapping> blockMap;
+	protected ResourceLocation texture;
     private List<int[][]> layers;
-    private int textureWidth;
+	private int textureWidth;
     private int textureHeight;
     private int layerCount;
+	protected int placeNotify;
+	protected final int layerWidth;
+    protected final int layerHeight;
+	protected final Random localRandom;
 
     public MOImageGen(ResourceLocation texture, int layerWidth, int layerHeight) {
         localRandom = new Random();
@@ -42,6 +42,47 @@ public abstract class MOImageGen<T extends MOImageGen.ImageGenWorker> {
         setTexture(texture);
     }
 
+    public void placeBlock(World world, int color, BlockPos pos, int layer, Random random, int placeNotify, T worker) {
+        IBlockState block = getBlockFromColor(color, random);
+        if (block != null) {
+            world.setBlockState(pos, block, placeNotify);
+            onBlockPlace(world, block, pos, random, color, worker);
+        }
+    }
+	
+	public abstract void onBlockPlace(World world, IBlockState block, BlockPos pos, Random random, int color, T worker);
+	
+	public IBlockState getBlockFromColor(int color, Random random) {
+        BlockMapping blockMapping = blockMap.get(color & 0xffffff);
+        if (blockMapping != null) {
+			
+            return blockMapping.getBlock(random).getStateFromMeta(getMetaFromColor(color, random));
+        }
+        return null;
+    }
+		
+    public int getMetaFromColor(int color, Random random) {
+        return 0;
+    }
+	
+    public void generateFromImage(World world, Random random, BlockPos start, int layer, int placeNotify, T worker) {
+        if (layers != null && layers.size() > 0) {
+            for (BlockMapping blockMapping : blockMap.values()) {
+                blockMapping.reset(localRandom);
+            }
+            generateFromImage(world, random, new BlockPos(start.getX(), Math.min(start.getY(), world.getHeight() - layerCount), start.getZ()), layers, layer, placeNotify, worker);
+        }
+    }
+
+    public void generateFromImage(World world, Random random, BlockPos start, List<int[][]> layers, int layer, int placeNotify, T worker) {
+        for (int x = 0; x < layerWidth; x++) {
+            for (int z = 0; z < layerHeight; z++) {
+
+                placeBlock(world, layers.get(layer)[x][z], start.add(x, layer, z), layer, random, placeNotify, worker);
+            }
+        }
+    }
+
     public static void generateFromImage(World world, BlockPos start, int layerWidth, int layerHeight, List<int[][]> layers, Map<Integer, IBlockState> blockMap) {
         for (int layer = 0; layer < layers.size(); layer++) {
             for (int x = 0; x < layerWidth; x++) {
@@ -49,7 +90,9 @@ public abstract class MOImageGen<T extends MOImageGen.ImageGenWorker> {
 
                     int color = layers.get(layer)[x][z];
                     Color c = new Color(color, true);
+					int alpha = c.getAlpha();
                     IBlockState block = blockMap.get(color & 0xffffff);
+					int meta = 255 - alpha;
                     if (block != null) {
                         world.setBlockState(start.add(x, layer, z), block, 2);
                     }
@@ -57,12 +100,76 @@ public abstract class MOImageGen<T extends MOImageGen.ImageGenWorker> {
             }
         }
     }
+	
+    public boolean isOnSolidGround(World world, BlockPos pos, int leaway) {
+ return isPointOnSolidGround(world, pos, leaway) && isPointOnSolidGround(world, pos.add(layerWidth, 0, 0), leaway) && isPointOnSolidGround(world, pos.add(layerWidth, 0, layerHeight), leaway) && isPointOnSolidGround(world, pos.add(0, 0, layerHeight), leaway);
+    }
 
+    public boolean isPointOnSolidGround(World world, BlockPos pos, int leaway) {
+        for (int i = 0; i < leaway; i++) {
+            if (isBlockSolid(world, pos.add(0, -i, 0))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean canFit(World world, BlockPos pos) {
+        return !isBlockSolid(world, pos.add(0, layerCount, 0)) && !isBlockSolid(world, pos.add(layerCount, layerCount, 0)) && !isBlockSolid(world, pos.add(layerCount, layerCount, layerCount)) && !isBlockSolid(world, pos.add(0, layerCount, layerCount));
+    }
+
+    public boolean isBlockSolid(World world, BlockPos pos) {
+        IBlockState block = world.getBlockState(pos);
+        if (block.getBlock() == Blocks.LOG || block.getBlock() == Blocks.LOG2 && block.getBlock() == Blocks.LEAVES2 || block.getBlock() == Blocks.LEAVES) {
+            return false;
+        }
+        return block.getBlock().isFullBlock(block);
+    }
+
+    private boolean inAirFloatRange(World world, BlockPos pos, int maxAirRange) {
+        for (int i = 0; i < maxAirRange; i++) {
+            if (isBlockSolid(world, pos.add(0, -i, 0)) && !isBlockSolid(world, pos.add(0, -i + 1, 0))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    protected boolean colorsMatch(int color0, int color1) {
+        return (color0 & 0xffffff) == (color1 & 0xffffff);
+    }
+
+    public void manageTextureLoading() {
+        if (layers == null || layers.size() == 0) {
+            loadTexture(getTexture());
+        }
+    }
+	
+    private void loadTexture(ResourceLocation textureLocation) throws RuntimeException {
+        try {
+
+            String path = "/assets/matteroverdrive/" + textureLocation.getPath();
+            InputStream imageStream = getClass().getResourceAsStream(path);
+            BufferedImage image = ImageIO.read(imageStream);
+
+            textureWidth = image.getWidth();
+            textureHeight = image.getHeight();
+            layerCount = (image.getWidth() / layerWidth) * (image.getHeight() / layerHeight);
+            for (int i = 0; i < layerCount; i++) {
+                layers.add(new int[layerWidth][layerHeight]);
+            }
+            convertTo2DWithoutUsingGetRGB(image, layerWidth, layerHeight, textureWidth, layers);
+        } catch (IOException e) {
+            //e.printStackTrace();
+        }
+    }
+	
     public static List<int[][]> loadTexture(File textureLocation, int layerWidth, int layerHeight) {
         try {
             BufferedImage image = ImageIO.read(textureLocation);
 
             int textureWidth = image.getWidth();
+			int textureHeight = image.getHeight();
             int layerCount = (image.getWidth() / layerWidth) * (image.getHeight() / layerHeight);
             List<int[][]> layers = new ArrayList<>();
             for (int i = 0; i < layerCount; i++) {
@@ -71,7 +178,7 @@ public abstract class MOImageGen<T extends MOImageGen.ImageGenWorker> {
             convertTo2DWithoutUsingGetRGB(image, layerWidth, layerHeight, textureWidth, layers);
             return layers;
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return null;
     }
@@ -144,109 +251,6 @@ public abstract class MOImageGen<T extends MOImageGen.ImageGenWorker> {
         transpose(m);
     }
 
-    public void placeBlock(World world, int color, BlockPos pos, int layer, Random random, int placeNotify, T worker) {
-        IBlockState block = getBlockFromColor(color, random);
-        if (block != null) {
-            world.setBlockState(pos, block, placeNotify);
-            onBlockPlace(world, block, pos, random, color, worker);
-        }
-    }
-
-    public abstract void onBlockPlace(World world, IBlockState block, BlockPos pos, Random random, int color, T worker);
-
-    public IBlockState getBlockFromColor(int color, Random random) {
-        BlockMapping blockMapping = blockMap.get(color & 0xffffff);
-        if (blockMapping != null) {
-            return blockMapping.getBlock(random).getStateFromMeta(getMetaFromColor(color, random));
-        }
-        return null;
-    }
-
-    public int getMetaFromColor(int color, Random random) {
-        return 0;
-    }
-
-    public void generateFromImage(World world, Random random, BlockPos start, int layer, int placeNotify, T worker) {
-        if (layers != null && layers.size() > 0) {
-            for (BlockMapping blockMapping : blockMap.values()) {
-                blockMapping.reset(localRandom);
-            }
-            generateFromImage(world, random, new BlockPos(start.getX(), Math.min(start.getY(), world.getHeight() - layerCount), start.getZ()), layers, layer, placeNotify, worker);
-        }
-    }
-
-    public void generateFromImage(World world, Random random, BlockPos start, List<int[][]> layers, int layer, int placeNotify, T worker) {
-        for (int x = 0; x < layerWidth; x++) {
-            for (int z = 0; z < layerHeight; z++) {
-
-                placeBlock(world, layers.get(layer)[x][z], start.add(x, layer, z), layer, random, placeNotify, worker);
-            }
-        }
-    }
-
-    public boolean isOnSolidGround(World world, BlockPos pos, int leaway) {
-        return isPointOnSolidGround(world, pos, leaway) && isPointOnSolidGround(world, pos.add(layerWidth, 0, 0), leaway) && isPointOnSolidGround(world, pos.add(layerWidth, 0, layerHeight), leaway) && isPointOnSolidGround(world, pos.add(0, 0, layerHeight), leaway);
-    }
-
-    public boolean isPointOnSolidGround(World world, BlockPos pos, int leaway) {
-        for (int i = 0; i < leaway; i++) {
-            if (isBlockSolid(world, pos.add(0, -i, 0))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean canFit(World world, BlockPos pos) {
-        return !isBlockSolid(world, pos.add(0, layerCount, 0)) && !isBlockSolid(world, pos.add(layerCount, layerCount, 0)) && !isBlockSolid(world, pos.add(layerCount, layerCount, layerCount)) && !isBlockSolid(world, pos.add(0, layerCount, layerCount));
-    }
-
-    public boolean isBlockSolid(World world, BlockPos pos) {
-        IBlockState block = world.getBlockState(pos);
-        if (block.getBlock() == Blocks.LOG || block.getBlock() == Blocks.LOG2 && block.getBlock() == Blocks.LEAVES2 || block.getBlock() == Blocks.LEAVES) {
-            return false;
-        }
-        return block.getBlock().isFullBlock(block);
-    }
-
-    private boolean inAirFloatRange(World world, BlockPos pos, int maxAirRange) {
-        for (int i = 0; i < maxAirRange; i++) {
-            if (isBlockSolid(world, pos.add(0, -i, 0)) && !isBlockSolid(world, pos.add(0, -i + 1, 0))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    protected boolean colorsMatch(int color0, int color1) {
-        return (color0 & 0xffffff) == (color1 & 0xffffff);
-    }
-
-    public void manageTextureLoading() {
-        if (layers == null || layers.isEmpty()) {
-            loadTexture(getTexture());
-        }
-    }
-
-    private void loadTexture(ResourceLocation textureLocation) throws RuntimeException {
-        try {
-
-            String path = "/assets/" + textureLocation.getNamespace() + "/" + textureLocation.getPath();
-            InputStream imageStream = getClass().getResourceAsStream(path);
-            BufferedImage image = ImageIO.read(imageStream);
-
-            textureWidth = image.getWidth();
-            textureHeight = image.getHeight();
-            layerCount = (image.getWidth() / layerWidth) * (image.getHeight() / layerHeight);
-            for (int i = 0; i < layerCount; i++) {
-                layers.add(new int[layerWidth][layerHeight]);
-            }
-            convertTo2DWithoutUsingGetRGB(image, layerWidth, layerHeight, textureWidth, layers);
-        } catch (IOException e) {
-            MOLog.error(e.getMessage(), e);
-        }
-    }
-
     public void rotateByNinetyToLeft() {
         layers.forEach(MOImageGen::rotateByNinetyToLeft);
     }
@@ -260,7 +264,7 @@ public abstract class MOImageGen<T extends MOImageGen.ImageGenWorker> {
     }
 
     public int getBlueFromColor(int color) {
-        return color & 255;
+        return color >> 0 & 255;
     }
 
     public int getAlphaFromColor(int color) {
@@ -290,15 +294,6 @@ public abstract class MOImageGen<T extends MOImageGen.ImageGenWorker> {
         return texture;
     }
 
-    public void setTexture(ResourceLocation textureLocation) {
-        this.texture = textureLocation;
-        if (layers == null) {
-            layers = new ArrayList<>();
-        } else {
-            layers.clear();
-        }
-    }
-
     public void addMapping(int color, Block... blocks) {
         this.addMapping(color, new BlockMapping(blocks));
     }
@@ -314,25 +309,23 @@ public abstract class MOImageGen<T extends MOImageGen.ImageGenWorker> {
     public BlockMapping getMapping(int color) {
         return blockMap.get(color);
     }
-
-    public abstract void onGenerationWorkerCreated(T worker);
-
-    public abstract T getNewWorkerInstance();
-
-    public T createWorker(Random random, BlockPos pos, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-        T worker = getNewWorkerInstance();
-        worker.init(random, pos, world, chunkGenerator, chunkProvider);
-        onGenerationWorkerCreated(worker);
-        return worker;
+	
+    public void setTexture(ResourceLocation textureLocation) {
+        this.texture = textureLocation;
+        if (layers == null) {
+            layers = new ArrayList<>();
+        } else {
+            layers.clear();
+        }
     }
 
     public static class BlockMapping {
-        private final Block[] blocks;
+        private Block[] blocks;
         private boolean noise;
         private int lastSelected;
 
         public BlockMapping(boolean noise, Block... blocks) {
-            this(blocks);
+            this.blocks = blocks;
             this.noise = noise;
         }
 
@@ -405,5 +398,16 @@ public abstract class MOImageGen<T extends MOImageGen.ImageGenWorker> {
         public void setPlaceNotify(int placeNotify) {
             this.placeNotify = placeNotify;
         }
+    }
+	
+    public abstract void onGenerationWorkerCreated(T worker);
+
+    public abstract T getNewWorkerInstance();
+
+    public T createWorker(Random random, BlockPos pos, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+        T worker = getNewWorkerInstance();
+        worker.init(random, pos, world, chunkGenerator, chunkProvider);
+        onGenerationWorkerCreated(worker);
+        return worker;
     }
 }

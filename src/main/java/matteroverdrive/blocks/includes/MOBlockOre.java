@@ -8,7 +8,7 @@ import net.minecraftforge.oredict.OreDictionary;
 /**
  * @author shadowfacts
  */
-public class MOBlockOre extends MOBlock implements OreDictItem {
+public class MOBlockOre extends MOBlock{ // implements OreDictItem {
 
     private final String oreDict;
 
@@ -17,8 +17,8 @@ public class MOBlockOre extends MOBlock implements OreDictItem {
         this.oreDict = oreDict;
     }
 
-    @Override
-    public void registerOreDict() {
-        OreDictionary.registerOre(oreDict, this);
-    }
+    //@Override
+    //public void registerOreDict() {
+    //    OreDictionary.registerOre(oreDict, this);
+    //}
 }

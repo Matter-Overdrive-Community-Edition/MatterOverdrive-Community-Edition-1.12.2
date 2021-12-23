@@ -21,11 +21,11 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import java.util.*;
 
 public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
-    private static final int TRITANIUM_VEINS_PER_CHUNK = 10;
-    private static final int TRITANIUM_VEIN_SIZE = 6;
-    private static final int DILITHIUM_VEINS_PER_CHUNK = 6;
-    private static final int DILITHIUM_VEIN_SIZE = 5;
-    private static float BUILDING_SPAWN_CHANCE = 10000000.0f;
+    private static float BUILDING_SPAWN_CHANCE = 0.01f;
+    private static final int TRITANIUM_VEINS_PER_CHUNK = 5;
+    private static final int TRITANIUM_VEIN_SIZE = 4;
+    private static final int DILITHIUM_VEINS_PER_CHUNK = 2;
+    private static final int DILITHIUM_VEIN_SIZE = 3;
     public final List<WeightedRandomMOWorldGenBuilding> buildings;
     private final Random oreRandom;
     private final Random anomaliesRandom;
@@ -66,10 +66,11 @@ public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
         buildings.add(new WeightedRandomMOWorldGenBuilding(new MOAndroidHouseBuilding("android_house"), 40));
         buildings.add(new WeightedRandomMOWorldGenBuilding(new MOSandPit("sand_pit_house", 3), 100));
         buildings.add(new WeightedRandomMOWorldGenBuilding(new MOWorldGenCrashedSpaceShip("crashed_ship"), 75));
-        buildings.add(new WeightedRandomMOWorldGenBuilding(new MOWorldGenUnderwaterBase("underwater_base"), 30));
-        buildings.add(new WeightedRandomMOWorldGenBuilding(new MOWorldGenCargoShip("cargo_ship"), 5));
+        buildings.add(new WeightedRandomMOWorldGenBuilding(new MOWorldGenUnderwaterBase("underwater_base"), 75));
+		//30
+        buildings.add(new WeightedRandomMOWorldGenBuilding(new MOWorldGenCargoShip("cargo_ship"), 45));
 
-        anomalyGen = new WorldGenGravitationalAnomaly("gravitational_anomaly", 0.05f, 2048, 2048 + 8192);
+        anomalyGen = new WorldGenGravitationalAnomaly("gravitational_anomaly", 0.001f, 2048, 2048 + 8192);
         configurationHandler.subscribe(anomalyGen);
     }
 
@@ -85,6 +86,7 @@ public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
         buildingsRandom.setSeed(chunkSeed);
         generateGravitationalAnomalies(world, anomaliesRandom, chunkX * 16, chunkZ * 16);
         generateOres(world, oreRandom, chunkX * 16, chunkZ * 16, world.provider.getDimension());
+		startGenerateBuildings(world, buildingsRandom, chunkX, chunkZ, chunkGenerator, chunkProvider);
     }
 
     public void generateOres(World world, Random random, int chunkX, int chunkZ, int dimentionID) {
@@ -131,9 +133,9 @@ public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
         if (generateBuildings && random.nextDouble() <= BUILDING_SPAWN_CHANCE) {
             BlockPos pos = world.getHeight(new BlockPos(chunkX * 16 + random.nextInt(16), 0, chunkZ * 16 + random.nextInt(16)));
 
-            WeightedRandomMOWorldGenBuilding building = getRandomBuilding(world, pos.add(0, -2, 0), random);
+            WeightedRandomMOWorldGenBuilding building = getRandomBuilding(world, pos.add(0, 0, 0), random);
             if (building != null) {
-                startBuildingGeneration(building.worldGenBuilding, pos.add(0, -2, 0), random, world, chunkGenerator, chunkProvider, false);
+                startBuildingGeneration(building.worldGenBuilding, pos.add(0, 0, 0), random, world, chunkGenerator, chunkProvider, false);
             }
         }
     }
@@ -141,12 +143,13 @@ public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
     public MOImageGen.ImageGenWorker startBuildingGeneration(MOWorldGenBuilding building, BlockPos pos, Random random, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider, boolean forceGeneration) {
         if (building == null)
             return null;
-        pos = pos.add(8, 0, 8);
-        if ((forceGeneration || (building.shouldGenerate(random, world, pos) && building.isLocationValid(world, pos)))) {
+        if ((forceGeneration || (building.shouldGenerate(random, world, pos)))) {
             MOImageGen.ImageGenWorker worker = building.createWorker(random, pos, world, chunkGenerator, chunkProvider);
             worldGenBuildingQueue.add(worker);
+			MOLog.debug("Successful Generation of: %s at: %s", building, pos);
             return worker;
         }
+		MOLog.debug("Failed Generation of: %s at: %s", building, pos);
         return null;
     }
 
@@ -167,6 +170,7 @@ public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
 
         for (Iterator iterator = collection.iterator(); iterator.hasNext(); i += building.getWeight(random, world, pos)) {
             building = (WeightedRandomMOWorldGenBuilding) iterator.next();
+			
         }
 
         return i;

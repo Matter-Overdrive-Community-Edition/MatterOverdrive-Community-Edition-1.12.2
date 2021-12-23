@@ -1,31 +1,51 @@
-
 package matteroverdrive.world.buildings;
 
 import matteroverdrive.MatterOverdrive;
 import matteroverdrive.Reference;
 import matteroverdrive.api.quest.QuestStack;
-import matteroverdrive.blocks.BlockDecorative;
 import matteroverdrive.data.quest.logic.QuestLogicBlockInteract;
+import matteroverdrive.blocks.BlockTritaniumCrate;
+import matteroverdrive.blocks.BlockWeaponStation;
+import matteroverdrive.blocks.BlockDecorative;
+import matteroverdrive.blocks.includes.MOBlock;
+import matteroverdrive.tile.TileEntityHoloSign;
 import matteroverdrive.tile.TileEntityTritaniumCrate;
+import matteroverdrive.tile.TileEntityWeaponStation;
+import matteroverdrive.util.MOInventoryHelper;
+import matteroverdrive.util.WeaponFactory;
+import matteroverdrive.world.MOImageGen;
+import matteroverdrive.world.MOLootTableManager;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.gen.NoiseGeneratorSimplex;
+import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraft.world.storage.loot.LootContext;
+import net.minecraft.world.storage.loot.LootTable;
 
 import java.util.Random;
 
-public class MOWorldGenCargoShip extends MOWorldGenBuilding<MOWorldGenCargoShip.Worker> {
-    private static final int MIN_DISTANCE_APART = 4096;
-
+public class MOWorldGenCargoShip extends MOWorldGenBuilding {
+    private static final int MIN_DISTANCE_APART = 256;
+	private final String[] holoTexts;
+	final NoiseGeneratorSimplex noise;
+	
     public MOWorldGenCargoShip(String name) {
         super(name, new ResourceLocation(Reference.PATH_WORLD_TEXTURES + "cargo_ship.png"), 58, 23);
+		holoTexts = new String[]{"Critical\nError", "Contacting\nSection 9", "System\nFailure", "Emergency\nPower\nOffline", "System\nReboot\nFailure", "Help Me", "I Need\nWater"};
+		noise = new NoiseGeneratorSimplex(new Random());
         for (BlockDecorative blockDecorative : BlockDecorative.decorativeBlocks) {
             addMapping(blockDecorative.getBlockColor(0), blockDecorative);
         }
+		setyOffset(86);
         addMapping(0xdb9c3a, MatterOverdrive.BLOCKS.holoSign);
         addMapping(0x5fffbe, MatterOverdrive.BLOCKS.transporter);
         addMapping(0xd2fb50, MatterOverdrive.BLOCKS.industrialGlass);
@@ -48,14 +68,7 @@ public class MOWorldGenCargoShip extends MOWorldGenBuilding<MOWorldGenCargoShip.
     }
 
     @Override
-    protected void onGeneration(Random random, World world, BlockPos pos, Worker worker) {
-        if (worker.contractDestination != null) {
-            TileEntity tileEntity = world.getTileEntity(worker.contractDestination);
-            if (tileEntity instanceof TileEntityTritaniumCrate) {
-                ItemStack contract = worker.contractQuest.getContract();
-                ((TileEntityTritaniumCrate) tileEntity).getInventory().addItem(contract);
-            }
-        }
+    protected void onGeneration(Random random, World world, BlockPos pos, WorldGenBuildingWorker worker) {
     }
 
     @Override
@@ -78,55 +91,47 @@ public class MOWorldGenCargoShip extends MOWorldGenBuilding<MOWorldGenCargoShip.
 
     @Override
     public boolean shouldGenerate(Random random, World world, BlockPos pos) {
-        return (world.provider.getDimension() == 0 || world.provider.getDimension() == 1) && isFarEnoughFromOthers(world, pos.getX(), pos.getZ(), MIN_DISTANCE_APART) && random.nextDouble() < 0.1;
+        return (world.provider.getDimension() == 0 || world.provider.getDimension() == 1) && isFarEnoughFromOthers(world, pos.getX(), pos.getZ(), MIN_DISTANCE_APART);
     }
 
     @Override
-    public void onGenerationWorkerCreated(Worker worker) {
-        super.onGenerationWorkerCreated(worker);
-        setyOffset(86);
+    public WorldGenBuildingWorker getNewWorkerInstance() {
+        return new WorldGenBuildingWorker();
     }
 
     @Override
-    public Worker getNewWorkerInstance() {
-        return new Worker();
-    }
-
-    @Override
-    public void onBlockPlace(World world, IBlockState blockState, BlockPos pos, Random random, int color, Worker worker) {
-        if (colorsMatch(color, 0x69960c)) {
-            TileEntity tritaniumCrate = world.getTileEntity(pos);
-            if (tritaniumCrate instanceof TileEntityTritaniumCrate) {
-                worker.setQuestPos(pos);
-                ItemStack itemStack = new ItemStack(MatterOverdrive.ITEMS.isolinear_circuit).setStackDisplayName("Trade Route Agreement");
-                ((TileEntityTritaniumCrate) tritaniumCrate).getInventory().addItem(itemStack);
+    public void onBlockPlace(World world, IBlockState state, BlockPos pos, Random random, int color, MOImageGen.ImageGenWorker worker) {
+        if (state.getBlock() == MatterOverdrive.BLOCKS.holoSign) {
+            if (colorsMatch(color, 0xd8ff00)) {
+                world.setBlockState(pos, state.withProperty(MOBlock.PROPERTY_DIRECTION, EnumFacing.EAST), 3);
+            } else if (colorsMatch(color, 0xaccb00)) {
+                world.setBlockState(pos, state.withProperty(MOBlock.PROPERTY_DIRECTION, EnumFacing.WEST), 3);
             }
-        } else if (colorsMatch(color, 0x1f2312)) {
-            TileEntity tritaniumCrate = world.getTileEntity(pos);
-            if (tritaniumCrate instanceof TileEntityTritaniumCrate) {
-                if (!worker.questAdded) {
-                    worker.markQuestAdded();
-                    worker.contractDestination = pos;
+            TileEntity tileEntity = world.getTileEntity(pos);
+            if (tileEntity instanceof TileEntityHoloSign) {
+                if (random.nextInt(100) < 30) {
+                    ((TileEntityHoloSign) tileEntity).setText(holoTexts[random.nextInt(holoTexts.length)]);
                 }
             }
-        }
-    }
+        } else if (state.getBlock() instanceof BlockTritaniumCrate) {
+            TileEntity tileEntity = world.getTileEntity(pos);
+            if (tileEntity instanceof IInventory) {
+				TileEntityTritaniumCrate chest = (TileEntityTritaniumCrate) tileEntity;
+				LootContext.Builder lootcontext$builder = new LootContext.Builder((WorldServer) world);
+				LootTable loottable = world.getLootTableManager().getLootTableFromLocation(MOLootTableManager.MO_CRASHED_SHIP);
+				loottable.fillInventory(chest, world.rand, lootcontext$builder.build());
+                QuestStack questStack = MatterOverdrive.QUEST_FACTORY.generateQuestStack(random, MatterOverdrive.QUESTS.getQuestByName("crash_landing"));
+                questStack.getTagCompound().setLong("pos", pos.toLong());
+                MOInventoryHelper.insertItemStackIntoInventory((IInventory) tileEntity, questStack.getContract(), EnumFacing.DOWN);
+            }
 
-    static class Worker extends MOWorldGenBuilding.WorldGenBuildingWorker {
-        private QuestStack contractQuest;
-        private BlockPos contractDestination;
-        private boolean questAdded;
-
-        public Worker() {
-            contractQuest = new QuestStack(MatterOverdrive.QUESTS.getQuestByName("trade_route"));
-        }
-
-        private void setQuestPos(BlockPos pos) {
-            QuestLogicBlockInteract.setBlockPosition(contractQuest, pos);
-        }
-
-        private void markQuestAdded() {
-            this.questAdded = true;
+        } else if (state.getBlock() instanceof BlockWeaponStation) {
+            TileEntity tileEntity = world.getTileEntity(pos);
+            if (tileEntity instanceof TileEntityWeaponStation) {
+                if (random.nextInt(200) < 10) {
+                    ((TileEntityWeaponStation) tileEntity).setInventorySlotContents(((TileEntityWeaponStation) tileEntity).INPUT_SLOT, MatterOverdrive.WEAPON_FACTORY.getRandomDecoratedEnergyWeapon(new WeaponFactory.WeaponGenerationContext(3, null, true)));
+                }
+            }
         }
     }
 }

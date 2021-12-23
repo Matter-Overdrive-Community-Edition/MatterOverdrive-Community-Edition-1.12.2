@@ -130,7 +130,8 @@ public class TileEntityBoundingBox extends TileEntity implements IMOTileEntity, 
     public void onNeighborBlockChange(IBlockAccess world, BlockPos pos, IBlockState state, Block neighborBlock) {
 
     }
-
+	
+    @Nullable
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
         return getOwnerTile().map(tile -> tile.hasCapability(capability, facing)).orElseGet(() -> super.hasCapability(capability, facing));

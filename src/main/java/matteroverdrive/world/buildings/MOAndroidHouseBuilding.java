@@ -3,19 +3,43 @@ package matteroverdrive.world.buildings;
 
 import matteroverdrive.MatterOverdrive;
 import matteroverdrive.Reference;
+import matteroverdrive.api.quest.QuestStack;
+import matteroverdrive.blocks.BlockTritaniumCrate;
+import matteroverdrive.blocks.BlockWeaponStation;
+import matteroverdrive.blocks.includes.MOBlock;
+import matteroverdrive.tile.TileEntityHoloSign;
+import matteroverdrive.tile.TileEntityTritaniumCrate;
+import matteroverdrive.tile.TileEntityWeaponStation;
+import matteroverdrive.util.MOInventoryHelper;
+import matteroverdrive.util.WeaponFactory;
+import matteroverdrive.world.MOImageGen;
+import matteroverdrive.world.MOLootTableManager;
 import matteroverdrive.entity.monster.EntityMeleeRougeAndroidMob;
 import matteroverdrive.entity.monster.EntityRangedRogueAndroidMob;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraft.world.storage.loot.LootContext;
+import net.minecraft.world.storage.loot.LootTable;
 
 import java.util.Random;
 
 public class MOAndroidHouseBuilding extends MOWorldGenBuilding {
+	private static final int MIN_DISTANCE_APART = 1024;
+	private final String[] holoTexts;
+	
     public MOAndroidHouseBuilding(String name) {
         super(name, new ResourceLocation(Reference.PATH_WORLD_TEXTURES + "android_house.png"), 21, 21);
+		holoTexts = new String[]{"Critical\nError", "Contacting\nSection 9", "System\nFailure", "Emergency\nPower\nOffline", "System\nReboot\nFailure", "Help Me", "I Need\nWater"};
         setyOffset(-2);
         addMapping(0x00fffc, MatterOverdrive.BLOCKS.decorative_beams, MatterOverdrive.BLOCKS.decorative_carbon_fiber_plate, MatterOverdrive.BLOCKS.decorative_white_plate);
         addMapping(0x623200, Blocks.DIRT);
@@ -51,23 +75,44 @@ public class MOAndroidHouseBuilding extends MOWorldGenBuilding {
 
     @Override
     public boolean shouldGenerate(Random random, World world, BlockPos pos) {
-        return world.provider.getDimension() == 0;
+        return world.provider.getDimension() == 0 && world.getBiome(pos) != Biome.REGISTRY.getObject(new ResourceLocation("minecraft", "ocean")) && world.getBiome(pos) != Biome.REGISTRY.getObject(new ResourceLocation("minecraft", "frozen_ocean")) && world.getBiome(pos) != Biome.REGISTRY.getObject(new ResourceLocation("minecraft", "deep_ocean")) && isFarEnoughFromOthers(world, pos.getX(), pos.getZ(), MIN_DISTANCE_APART);
     }
 
     @Override
-    public void onBlockPlace(World world, IBlockState block, BlockPos pos, Random random, int color, ImageGenWorker worker) {
-        // TODO: 3/25/2016 Find how to get chest gen hook
-		/*if ((color & 0xffffff) == 0xc8d43d)
-		{
-            TileEntity inventory = world.getTileEntity(pos);
-            if (inventory instanceof IInventory) {
-                WeightedRandomChestContent.generateDispenserContents(random,ChestGenHooks.getInfo(Reference.CHEST_GEN_ANDROID_HOUSE).getItems(random), (IInventory) inventory,random.nextInt(10) + 10);
-                if (random.nextInt(200) < 10)
-                {
-                    MOInventoryHelper.insertItemStackIntoInventory((IInventory)inventory, MatterOverdrive.WEAPON_FACTORY.getRandomDecoratedEnergyWeapon(new WeaponFactory.WeaponGenerationContext(3,null,true)), EnumFacing.DOWN);
+    public void onBlockPlace(World world, IBlockState state, BlockPos pos, Random random, int color, MOImageGen.ImageGenWorker worker) {
+        if (state.getBlock() == MatterOverdrive.BLOCKS.holoSign) {
+            if (colorsMatch(color, 0xd8ff00)) {
+                world.setBlockState(pos, state.withProperty(MOBlock.PROPERTY_DIRECTION, EnumFacing.EAST), 3);
+            } else if (colorsMatch(color, 0xaccb00)) {
+                world.setBlockState(pos, state.withProperty(MOBlock.PROPERTY_DIRECTION, EnumFacing.WEST), 3);
+            }
+            TileEntity tileEntity = world.getTileEntity(pos);
+            if (tileEntity instanceof TileEntityHoloSign) {
+                if (random.nextInt(100) < 30) {
+                    ((TileEntityHoloSign) tileEntity).setText(holoTexts[random.nextInt(holoTexts.length)]);
                 }
             }
-        }*/
+        } else if (state.getBlock() instanceof BlockTritaniumCrate) {
+            TileEntity tileEntity = world.getTileEntity(pos);
+			
+            if (tileEntity instanceof IInventory) {
+				TileEntityTritaniumCrate chest = (TileEntityTritaniumCrate) tileEntity;
+				LootContext.Builder lootcontext$builder = new LootContext.Builder((WorldServer) world);
+				LootTable loottable = world.getLootTableManager().getLootTableFromLocation(MOLootTableManager.MO_CRASHED_SHIP);
+				loottable.fillInventory(chest, world.rand, lootcontext$builder.build());
+                QuestStack questStack = MatterOverdrive.QUEST_FACTORY.generateQuestStack(random, MatterOverdrive.QUESTS.getQuestByName("crash_landing"));
+                questStack.getTagCompound().setLong("pos", pos.toLong());
+                MOInventoryHelper.insertItemStackIntoInventory((IInventory) tileEntity, questStack.getContract(), EnumFacing.DOWN);
+            }
+
+        } else if (state.getBlock() instanceof BlockWeaponStation) {
+            TileEntity tileEntity = world.getTileEntity(pos);
+            if (tileEntity instanceof TileEntityWeaponStation) {
+                if (random.nextInt(200) < 10) {
+                    ((TileEntityWeaponStation) tileEntity).setInventorySlotContents(((TileEntityWeaponStation) tileEntity).INPUT_SLOT, MatterOverdrive.WEAPON_FACTORY.getRandomDecoratedEnergyWeapon(new WeaponFactory.WeaponGenerationContext(3, null, true)));
+                }
+            }
+        }
     }
 
     public void spawnAndroid(World world, Random random, BlockPos pos) {

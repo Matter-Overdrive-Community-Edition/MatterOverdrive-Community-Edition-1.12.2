@@ -147,6 +147,7 @@ public class MatterOverdrive {
         GUI_HANDLER.register(event.getSide());
         NetworkRegistry.INSTANCE.registerGuiHandler(this, GUI_HANDLER);
         MinecraftForge.EVENT_BUS.register(ENTITY_HANDLER);
+		MinecraftForge.EVENT_BUS.register(LOOT_TABLE_MANAGER);
         CONFIG_HANDLER.init();
         MatterOverdriveCompat.init(event);
 

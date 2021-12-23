@@ -3,7 +3,7 @@
 		"name": "crashedShip",
 		"rolls": {
 			"min": 1,
-			"max": 7
+			"max": 1
 		},
 		"entries": [{
 				"type": "item",
@@ -18,17 +18,6 @@
 				"type": "item",
 				"name": "matteroverdrive:romulan_ale",
 				"weight": 50
-			}, {
-				"type": "item",
-				"name": "matteroverdrive:isolinear_circuit",
-				"weight": 50,
-				"functions": [{
-					"function": "set_data",
-					"data": {
-						"min": 0,
-						"max": 3
-					}
-				}]
 			}, {
 				"type": "item",
 				"name": "matteroverdrive:android_Pill",
@@ -49,17 +38,6 @@
 					"data": {
 						"min": 0,
 						"max": 5
-					}
-				}]
-			}, {
-				"type": "item",
-				"name": "matteroverdrive:rogue_android_part",
-				"weight": 15,
-				"functions": [{
-					"function": "set_data",
-					"data": {
-						"min": 0,
-						"max": 3
 					}
 				}]
 			}, {
