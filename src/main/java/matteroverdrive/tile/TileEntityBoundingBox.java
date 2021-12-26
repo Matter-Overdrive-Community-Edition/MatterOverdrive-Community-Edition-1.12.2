@@ -57,7 +57,6 @@ public class TileEntityBoundingBox extends TileEntity implements IMOTileEntity, 
     public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
         ownerPos = BlockPos.fromLong(tag.getLong("owner"));
-
         String ownerModid = tag.getString("owner_block_modid");
         String ownerName = tag.getString("owner_block_name");
         Block block = Block.REGISTRY.getObject(new ResourceLocation(ownerModid, ownerName));

@@ -15,12 +15,12 @@ import javax.annotation.Nonnull;
 public class BlockGravitationalStabilizer extends MOBlockMachine<TileEntityMachineGravitationalStabilizer> {
     public BlockGravitationalStabilizer(Material material, String name) {
         super(material, name);
+		setHasRotation();
         setHardness(20.0F);
         this.setResistance(10.0f);
         this.setHarvestLevel("pickaxe", 2);
         lightValue = 10;
         setRotationType(MOBlockHelper.RotationType.SIX_WAY);
-        setHasRotation();
     }
 
     /*@SideOnly(Side.CLIENT)

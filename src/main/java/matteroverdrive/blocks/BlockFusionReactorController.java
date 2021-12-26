@@ -19,13 +19,13 @@ import javax.annotation.Nonnull;
 public class BlockFusionReactorController extends MOBlockMachine<TileEntityMachineFusionReactorController> {
     public BlockFusionReactorController(Material material, String name) {
         super(material, name);
+		setHasRotation();
         setHardness(30.0F);
         this.setResistance(10.0f);
         this.setHarvestLevel("pickaxe", 2);
         setHasGui(true);
         lightValue = 10;
         setRotationType(MOBlockHelper.RotationType.SIX_WAY);
-        setHasRotation();
     }
 
    /* @SideOnly(Side.CLIENT)

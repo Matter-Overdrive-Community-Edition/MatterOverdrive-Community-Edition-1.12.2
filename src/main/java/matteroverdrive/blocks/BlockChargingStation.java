@@ -24,11 +24,11 @@ public class BlockChargingStation extends MOBlockMachine<TileEntityMachineChargi
 
     public BlockChargingStation(Material material, String name) {
         super(material, name);
+		setHasRotation();
         setHardness(20.0F);
         this.setResistance(9.0f);
         this.setHarvestLevel("pickaxe", 2);
         setHasGui(true);
-        setHasRotation();
     }
 
     @Nonnull
@@ -58,8 +58,8 @@ public class BlockChargingStation extends MOBlockMachine<TileEntityMachineChargi
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-       // BlockBoundingBox.createBoundingBox(worldIn, pos.add(0, 1, 0), pos, this);
-     //   BlockBoundingBox.createBoundingBox(worldIn, pos.add(0, 2, 0), pos, this);
+   //     BlockBoundingBox.createBoundingBox(worldIn, pos.add(0, 1, 0), pos, this);
+   //     BlockBoundingBox.createBoundingBox(worldIn, pos.add(0, 2, 0), pos, this);
     }
 
     @Override

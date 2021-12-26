@@ -13,6 +13,10 @@ import net.minecraft.world.IBlockAccess;
 public class BlockIndustrialGlass extends MOBlock {
     public BlockIndustrialGlass(Material material, String name) {
         super(Material.GLASS, name);
+        setHardness(30.0F);
+        this.setResistance(10.0f);
+        this.setHarvestLevel("pickaxe", 2);
+		lightValue = 10;
     }
 
     @Override

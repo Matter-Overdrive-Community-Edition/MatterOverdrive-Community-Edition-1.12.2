@@ -18,15 +18,14 @@ import javax.annotation.Nonnull;
 
 public class BlockInscriber extends MOBlockMachine<TileEntityInscriber> {
     public static final PropertyBool CTM = PropertyBool.create("ctm");
-
     public BlockInscriber(Material material, String name) {
         super(material, name);
+		setHasRotation();
+		setBoundingBox(new AxisAlignedBB(0, 0, 0, 1, 12 / 16d, 1));
         setHardness(20.0F);
         this.setResistance(9.0f);
         this.setHarvestLevel("pickaxe", 2);
         setHasGui(true);
-        setHasRotation();
-        setBoundingBox(new AxisAlignedBB(0, 0, 0, 1, 12 / 16d, 1));
     }
 
     @Override

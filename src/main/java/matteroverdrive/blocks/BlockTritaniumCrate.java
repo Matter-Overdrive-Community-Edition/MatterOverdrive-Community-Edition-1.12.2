@@ -1,4 +1,3 @@
-
 package matteroverdrive.blocks;
 
 import matteroverdrive.Reference;
@@ -36,10 +35,10 @@ public class BlockTritaniumCrate extends MOBlockMachine<TileEntityTritaniumCrate
 
     public BlockTritaniumCrate(Material material, String name) {
         super(material, name);
+		setHasRotation();
         setHardness(20.0F);
         this.setResistance(9.0f);
         this.setHarvestLevel("pickaxe", 2);
-        setHasRotation();
         setRotationType(MOBlockHelper.RotationType.FOUR_WAY);
     }
 
