@@ -1,4 +1,3 @@
-
 package matteroverdrive.blocks;
 
 import matteroverdrive.blocks.includes.MOBlockMachine;
@@ -59,8 +58,8 @@ public class BlockChargingStation extends MOBlockMachine<TileEntityMachineChargi
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-        BlockBoundingBox.createBoundingBox(worldIn, pos.add(0, 1, 0), pos, this);
-        BlockBoundingBox.createBoundingBox(worldIn, pos.add(0, 2, 0), pos, this);
+       // BlockBoundingBox.createBoundingBox(worldIn, pos.add(0, 1, 0), pos, this);
+     //   BlockBoundingBox.createBoundingBox(worldIn, pos.add(0, 2, 0), pos, this);
     }
 
     @Override

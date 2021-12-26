@@ -1,4 +1,3 @@
-
 package matteroverdrive.blocks;
 
 import matteroverdrive.MatterOverdrive;
@@ -45,7 +44,7 @@ public class BlockBoundingBox extends MOBlockContainer<TileEntityBoundingBox> im
         }
     }
 
-    @Override
+/*    @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         TileEntityBoundingBox te = getTileEntity(world, pos);
         IBlockState ownerState = world.getBlockState(te.getOwnerPos());
@@ -60,7 +59,7 @@ public class BlockBoundingBox extends MOBlockContainer<TileEntityBoundingBox> im
         TileEntityBoundingBox te = getTileEntity(world, pos);
         return te.getOwnerBlock().getPickBlock(world.getBlockState(te.getOwnerPos()), target, world, te.getOwnerPos(), player);
     }
-
+*/
     @Override
     public boolean addDestroyEffects(World world, BlockPos pos, ParticleManager manager) {
         return true; // see javadoc, this actually disables break effects
@@ -87,9 +86,14 @@ public class BlockBoundingBox extends MOBlockContainer<TileEntityBoundingBox> im
     @Override
     @Deprecated
     @SuppressWarnings("deprecation")
-    public float getBlockHardness(IBlockState blockState, World world, BlockPos pos) {
+	public float getBlockHardness(IBlockState blockState, World world, BlockPos pos) {
+
         TileEntityBoundingBox te = getTileEntity(world, pos);
-        return te.getOwnerBlock().getBlockHardness(world.getBlockState(te.getOwnerPos()), world, te.getOwnerPos());
+        if (te instanceof IMultiBlockTileEntity) { 
+            return te.getOwnerBlock().getBlockHardness(world.getBlockState(te.getOwnerPos()), world, te.getOwnerPos());
+        } else {
+            return 0.6F;
+        }
     }
 
     @Override

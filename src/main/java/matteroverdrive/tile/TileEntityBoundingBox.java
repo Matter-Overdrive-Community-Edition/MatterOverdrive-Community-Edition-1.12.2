@@ -3,6 +3,7 @@ package matteroverdrive.tile;
 
 import matteroverdrive.api.IMOTileEntity;
 import matteroverdrive.util.MOLog;
+import matteroverdrive.items.includes.MOItemEnergyContainer;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,6 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.energy.CapabilityEnergy;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -130,16 +132,23 @@ public class TileEntityBoundingBox extends TileEntity implements IMOTileEntity, 
     public void onNeighborBlockChange(IBlockAccess world, BlockPos pos, IBlockState state, Block neighborBlock) {
 
     }
-	
-    @Nullable
+ 
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-        return getOwnerTile().map(tile -> tile.hasCapability(capability, facing)).orElseGet(() -> super.hasCapability(capability, facing));
+		if (capability == CapabilityEnergy.ENERGY) {
+         return getOwnerTile().map(tile -> tile.hasCapability(capability, facing)).orElseGet(() -> super.hasCapability(capability, facing));
+		} else {
+		 return super.hasCapability(capability, facing);
+		}
     }
 
     @Nullable
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        return getOwnerTile().map(tile -> tile.getCapability(capability, facing)).orElseGet(() -> super.getCapability(capability, facing));
-    }
+		if (capability == CapabilityEnergy.ENERGY) {
+         return getOwnerTile().map(tile -> tile.getCapability(capability, facing)).orElseGet(() -> super.getCapability(capability, facing));
+		} else {
+		 return super.getCapability(capability, facing);
+		}
+	}
 }
