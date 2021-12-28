@@ -15,6 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraft.util.math.AxisAlignedBB;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class BlockChargingStation extends MOBlockMachine<TileEntityMachineChargi
         this.setResistance(9.0f);
         this.setHarvestLevel("pickaxe", 2);
         setHasGui(true);
+		setBoundingBox(new AxisAlignedBB(1.7 / 16d, 0, 0, 14.4 / 16d, 2.3, 1));
     }
 
     @Nonnull
@@ -47,29 +49,9 @@ public class BlockChargingStation extends MOBlockMachine<TileEntityMachineChargi
         return super.dismantleBlock(player, world, pos, returnDrops);
     }
 
-    //	Multiblock
-    @Override
-    public boolean canPlaceBlockAt(World world, BlockPos pos) {
-        return world.getBlockState(pos).getBlock().isReplaceable(world, pos) &&
-                world.getBlockState(pos.add(0, 1, 0)).getBlock().isReplaceable(world, pos.add(0, 1, 0)) &&
-                world.getBlockState(pos.add(0, 2, 0)).getBlock().isReplaceable(world, pos.add(0, 2, 0));
-    }
-
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-   //     BlockBoundingBox.createBoundingBox(worldIn, pos.add(0, 1, 0), pos, this);
-   //     BlockBoundingBox.createBoundingBox(worldIn, pos.add(0, 2, 0), pos, this);
-    }
-
-    @Override
-    public void breakBlock(World world, BlockPos pos, IBlockState blockState) {
-        TileEntity te = world.getTileEntity(pos);
-        if (te instanceof TileEntityMachineChargingStation) {
-            ((TileEntityMachineChargingStation) te).getBoundingBlocks().forEach(world::setBlockToAir);
-        }
-
-        super.breakBlock(world, pos, blockState);
     }
 
     @Override

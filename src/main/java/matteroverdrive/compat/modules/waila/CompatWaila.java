@@ -28,8 +28,6 @@ public class CompatWaila {
         registrar.registerBodyProvider(new Matter(), BlockDecomposer.class);
         registrar.registerBodyProvider(new Replicator(), BlockReplicator.class);
         registrar.registerBodyProvider(new Matter(), BlockFusionReactorController.class);
-
-        registrar.registerStackProvider(new BoundingBox(), BlockBoundingBox.class);
     }
 
 }

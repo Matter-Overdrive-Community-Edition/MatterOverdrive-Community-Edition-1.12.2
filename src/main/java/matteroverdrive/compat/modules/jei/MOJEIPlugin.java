@@ -44,7 +44,6 @@ public class MOJEIPlugin implements IModPlugin {
 
         registry.addAdvancedGuiHandlers(new MOAdvancedGuiHandler());
 
-        registry.getJeiHelpers().getIngredientBlacklist().addIngredientToBlacklist(new ItemStack(MatterOverdrive.BLOCKS.boundingBox));
     }
 
 }
