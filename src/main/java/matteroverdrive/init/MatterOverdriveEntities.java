@@ -70,7 +70,7 @@ public class MatterOverdriveEntities {
 		Reference.PATH_ENTITIES + "hulking_scinetist.png");
 		{
 			registry.register(MAD_SCIENTIST_PROFESSION);
-			new VillagerCareer(MAD_SCIENTIST_PROFESSION, "Mad Scientist")
+			new VillagerCareer(MAD_SCIENTIST_PROFESSION, Reference.MOD_ID + ".mad_scientist.name")
 				
 			.addTrade(1, new EntityVillager.ListItemForEmeralds(MatterOverdrive.ITEMS.androidPill, new EntityVillager.PriceInfo(20, 30)))
 			.addTrade(1, new EntityVillager.ListItemForEmeralds(new ItemStack(MatterOverdrive.ITEMS.androidPill, 1, 1), new EntityVillager.PriceInfo(20, 30)))

@@ -41,7 +41,7 @@ public class PhaserRifle extends EnergyWeapon {
 
     public static final int RANGE = 32;
     private static final int HEAT_PER_SHOT = 20;
-    private static final int MAX_HEAT = 80;
+    private static final int MAX_HEAT = 100;
     private static final int MAX_USE_TIME = 72000;
     private static final int ENERGY_PER_SHOT = 1024;
 
@@ -236,9 +236,9 @@ public class PhaserRifle extends EnergyWeapon {
         DrainEnergy(weapon, getShootCooldown(weapon), false);
         float newHeat = (getHeat(weapon) + 4) * 2.2f;
 
-        //if (newHeat > 2.0f) {
-       //     newHeat = 2.0f;
-       // }
+        if (newHeat > 2.0f) {
+            newHeat = 2.0f;
+       }
 
         setHeat(weapon, newHeat);
 

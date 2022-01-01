@@ -35,7 +35,9 @@ public class QuestLogicCocktailOfAscension extends AbstractQuestLogic {
 
     @Override
     public String modifyInfo(QuestStack questStack, String info) {
-        return String.format(info, "", MAX_GUNPOWDER_COUNT, MAX_MUSHROOM_COUNT);
+		info = info.replace("$gunpowdermaxAmount", Integer.toString(MAX_GUNPOWDER_COUNT));
+		info = info.replace("$mushroommaxAmount", Integer.toString(MAX_MUSHROOM_COUNT));
+        return info;
     }
 
     @Override
@@ -54,14 +56,14 @@ public class QuestLogicCocktailOfAscension extends AbstractQuestLogic {
 
     @Override
     public String modifyObjective(QuestStack questStack, EntityPlayer entityPlayer, String objective, int objectiveIndex) {
-        if (objectiveIndex == 0) {
-            return objective.replace("%2$s", Integer.toString(getCreeperKillCount(questStack))).replace("%3$s", Integer.toString(MAX_CREEPER_KILS));
-        } else if (objectiveIndex == 1) {
-            return objective.replace("%2$s", Integer.toString(getGunpowderCount(questStack))).replace("%3$s", Integer.toString(MAX_GUNPOWDER_COUNT));
-        } else if (objectiveIndex == 2) {
-            return objective.replace("%2$s", Integer.toString(getMushroomCount(questStack))).replace("%3$s", Integer.toString(MAX_MUSHROOM_COUNT));
-        }
+        objective = objective.replace("$creeperAmount", Integer.toString(getCreeperKillCount(questStack)));
+        objective = objective.replace("$creepermaxAmount", Integer.toString(MAX_CREEPER_KILS));
+        objective = objective.replace("$gunpowderAmount", Integer.toString(getGunpowderCount(questStack)));
+        objective = objective.replace("$gunpowdermaxAmount", Integer.toString(MAX_GUNPOWDER_COUNT));
+        objective = objective.replace("$mushroomAmount", Integer.toString(getMushroomCount(questStack)));
+        objective = objective.replace("$mushroommaxAmount", Integer.toString(MAX_MUSHROOM_COUNT));
         return objective;
+		
     }
 
     @Override

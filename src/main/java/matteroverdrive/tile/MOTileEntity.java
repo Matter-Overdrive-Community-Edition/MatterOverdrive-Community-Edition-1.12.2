@@ -20,6 +20,7 @@ import javax.annotation.Nullable;
 import java.util.EnumSet;
 
 public abstract class MOTileEntity extends TileEntity implements IMOTileEntity {
+	private boolean awoken = false;
     public MOTileEntity() {
         super();
     }
@@ -27,7 +28,13 @@ public abstract class MOTileEntity extends TileEntity implements IMOTileEntity {
     public MOTileEntity(World world, int meta) {
         super();
     }
-
+	
+    public void update() {
+        if (!awoken) {
+            onAwake(world.isRemote ? Side.CLIENT : Side.SERVER);
+			awoken = true;
+        }
+	}
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);

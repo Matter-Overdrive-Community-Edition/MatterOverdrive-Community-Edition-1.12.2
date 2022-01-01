@@ -5,12 +5,14 @@ import matteroverdrive.api.inventory.UpgradeTypes;
 import matteroverdrive.api.machines.IUpgradeHandler;
 import matteroverdrive.entity.player.MOPlayerCapabilityProvider;
 import matteroverdrive.machines.events.MachineEvent;
+import matteroverdrive.blocks.includes.MOBlock;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -18,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TileEntityMachineChargingStation extends MOTileEntityMachineEnergy implements IMultiBlockTileEntity {
+public class TileEntityMachineChargingStation extends MOTileEntityMachineEnergy {
 
     public static final int ENERGY_CAPACITY = 512000;
     public static final int ENERGY_TRANSFER = 512;
@@ -42,7 +44,7 @@ public class TileEntityMachineChargingStation extends MOTileEntityMachineEnergy 
 
     private void manageAndroidCharging() {
         if (!world.isRemote && getEnergyStorage().getEnergyStored() > 0) {
-            int range = getRage();
+            int range = getRange();
             AxisAlignedBB radius = new AxisAlignedBB(getPos().add(-range, -range, -range), getPos().add(range, range, range));
             List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, radius);
             for (EntityPlayer player : players) {
@@ -56,7 +58,7 @@ public class TileEntityMachineChargingStation extends MOTileEntityMachineEnergy 
         }
     }
 
-    public int getRage() {
+    public int getRange() {
         return (int) (BASE_MAX_RANGE * getUpgradeMultiply(UpgradeTypes.Range));
     }
 
@@ -101,16 +103,6 @@ public class TileEntityMachineChargingStation extends MOTileEntityMachineEnergy 
     @SideOnly(Side.CLIENT)
     public double getMaxRenderDistanceSquared() {
         return 8192.0D;
-    }
-
-    @Override
-    public List<BlockPos> getBoundingBlocks() {
-        List<BlockPos> s = new ArrayList<>();
-
-        s.add(getPos().add(0, 1, 0));
-        s.add(getPos().add(0, 2, 0));
-
-        return s;
     }
 
     public IUpgradeHandler getUpgradeHandler() {

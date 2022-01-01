@@ -65,7 +65,7 @@ public class ConnectionPathfind<T extends IGridNode> {
                                     return true;
                                 }
                             } else {
-                                MOLog.info("Matter Network Pathfind: cannot connect to node");
+                               // MOLog.info("Matter Network Pathfind: cannot connect to node");
                             }
                         }
                     }

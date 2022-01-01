@@ -52,6 +52,7 @@ public class ConfigurationHandler {
     public static final String KEY_GRAVITATIONAL_ANOMALY_FORGE_FLUIDS = "gravitational anomaly forge fluids";
     public static final String KEY_ANDROID_ENERGY_WATCH_ID = "android energy watch id";
     public static final String KEY_MATTER_REGISTRATION_DEBUG = "matter registration";
+	public static final String KEY_STRUCTURE_REGISTRATION_DEBUG = "structure worldgen registration";
     public static final String KEY_MATTER_CALCULATION_DEBUG = "matter calculation";
 
     public final File configDir;

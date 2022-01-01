@@ -15,6 +15,7 @@ public class BlockPatternMonitor extends BlockMonitor<TileEntityMachinePatternMo
         super(material, name);
         setHasGui(true);
         setBoundingBox(new AxisAlignedBB(0, 1, 0, 1, 11 / 16d, 1));
+		
     }
 
     @Override

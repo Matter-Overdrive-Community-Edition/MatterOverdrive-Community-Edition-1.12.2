@@ -111,31 +111,35 @@ public abstract class MOTileEntityMachine extends MOTileEntity implements IMOTil
 
     @Override
     public void update() {
-        if (!awoken) {
-            awoken = true;
-            onAwake(world.isRemote ? Side.CLIENT : Side.SERVER);
-        }
+		super.update();
 
         if (world.isRemote) {
             manageSound();
-
-            if (lastActive != isActive()) {
-                onActiveChange();
-                lastActive = isActive();
+			 
+			if (forceClientUpdate) {
+                world.notifyNeighborsOfStateChange(getPos(), blockType, false);
+                forceClientUpdate = false;
             }
+			return;
         } else {
             activeState = getServerActive();
+			//System.out.println("state: " + activeState);
             if (lastActive != activeState) {
                 forceSync();
                 onActiveChange();
                 lastActive = activeState;
             }
-
-            manageRedstoneState();
+			}
+			manageRedstoneState();
             manageClientSync();
+			if (lastActive != isActive()) {
+				//System.out.println("!state: " + activeState);
+                onActiveChange();
+                lastActive = isActive();
         }
 
         components.stream().filter(component -> component instanceof ITickable).forEach(component -> {
+			//System.out.println("Components stream" + component);
             try {
                 ((ITickable) component).update();
             } catch (Exception e) {

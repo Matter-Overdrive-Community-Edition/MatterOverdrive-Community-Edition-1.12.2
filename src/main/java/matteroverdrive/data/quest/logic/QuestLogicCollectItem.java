@@ -93,6 +93,7 @@ public class QuestLogicCollectItem extends AbstractQuestLogicRandomItem {
     @Override
     public String modifyObjective(QuestStack questStack, EntityPlayer entityPlayer, String objective, int objectiveIndex) {
         return String.format(objective, "", getItemCount(entityPlayer, questStack), getMaxItemCount(questStack), getItemName(questStack));
+
     }
 
     @Override

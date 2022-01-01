@@ -103,7 +103,6 @@ public class MatterOverdriveBlocks {
     public BlockDecorative decorative_engine_exhaust_plasma;
     public BlockMicrowave microwave;
     public BlockIndustrialGlass industrialGlass;
-    public BlockBoundingBox boundingBox;
     private int registeredCount = 0;
 
     // Test new crates.
@@ -213,8 +212,6 @@ public class MatterOverdriveBlocks {
         decorative_engine_exhaust_plasma.setLightLevel(1);
         microwave = register(new BlockMicrowave(Material.IRON, "microwave"));
         industrialGlass = register(new BlockIndustrialGlass(Material.GLASS, "industrial_glass"));
-
-        boundingBox = register(new BlockBoundingBox("bounding_box"));
 
         // Register test crates.
         new_tritanium_crate_base = register(new BlockNewTritaniumCrate(TRITANIUM, "new_tritanium_crate", 0));

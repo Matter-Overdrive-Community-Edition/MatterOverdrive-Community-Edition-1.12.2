@@ -37,7 +37,7 @@ public class TileEntityMachineDecomposer extends MOTileEntityMachineMatter imple
     public int INPUT_SLOT_ID;
     public int OUTPUT_SLOT_ID;
     public int decomposeTime;
-
+	private long worldTickLast = 0;
     public TileEntityMachineDecomposer() {
         super(4);
         this.energyStorage.setCapacity(ENERGY_STORAGE);
@@ -61,9 +61,12 @@ public class TileEntityMachineDecomposer extends MOTileEntityMachineMatter imple
 
     @Override
     public void update() {
+		 if (worldTickLast != getWorld().getTotalWorldTime()) {
+         worldTickLast = getWorld().getTotalWorldTime();
         super.update();
         this.manageDecompose();
         this.manageExtract();
+		 }
     }
 
     @Override

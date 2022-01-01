@@ -42,7 +42,7 @@ public class Phaser extends EnergyWeapon implements IWeapon {
     public static final int RANGE = 18;
     private static final double ENERGY_MULTIPLY = 2.1;
     private static final int MAX_USE_TIME = 60;
-    private static final int MAX_HEAT = 80;
+    private static final int MAX_HEAT = 100;
     private static final int KILL_MODE_LEVEL = 3;
     private static final float KILL_DAMAGE_MULTIPLY = 2f;
     private static final int STUN_SLEEP_MULTIPLY = 5;

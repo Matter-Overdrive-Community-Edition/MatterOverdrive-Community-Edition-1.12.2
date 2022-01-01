@@ -45,7 +45,7 @@ public class GalaxyClient extends GalaxyCommon {
                 return true;
             }
         }
-        return false;
+        return true;
     }
     //endregion
 
