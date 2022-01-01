@@ -1,11 +1,11 @@
 {
 	"forge_marker": 1,
 	"defaults": {
-		"model": "matteroverdrive:base/orientable"
+		"model": "matteroverdrive:base/sphere"
 	},
 	"variants": {
 		"normal": {
-			"model": "matteroverdrive:base/orientable"
+			"model": "matteroverdrive:base/sphere"
 		}
 	}
 }
