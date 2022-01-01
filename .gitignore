@@ -40,3 +40,7 @@ classes/
 
 # secret curse shiz
 curse.json
+gradle/scripts/artifacts.gradle
+gradle/scripts/dependencies.gradle
+gradle/wrapper/gradle-wrapper.jar
+gradle/wrapper/gradle-wrapper.properties
