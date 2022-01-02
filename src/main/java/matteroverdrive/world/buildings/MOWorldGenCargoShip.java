@@ -58,7 +58,7 @@ public class MOWorldGenCargoShip extends MOWorldGenBuilding {
         addMapping(0x68d738, Blocks.CARPET);
         addMapping(0xbdea8f, Blocks.LADDER);
         addMapping(0xeff73d, MatterOverdrive.BLOCKS.network_switch);
-        addMapping(0xa8ed1c, MatterOverdrive.BLOCKS.heavy_matter_pipe);
+        addMapping(0xa8ed1c, MatterOverdrive.BLOCKS.network_pipe);
         addMapping(0x4b285d, Blocks.OAK_STAIRS);
         addMapping(0xcfd752, MatterOverdrive.BLOCKS.network_router);
         addMapping(0x4d8dd3, MatterOverdrive.BLOCKS.pattern_monitor);

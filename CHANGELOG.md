@@ -3,6 +3,8 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* lang fixes (infiniteblock)
+* small updates (infiniteblock)
 * current work (infiniteblock)
 * lang fixes, anomaly work/quest's new commands (infiniteblock)
 * Removing matteroverdrive:bounding_box. (infiniteblock)
