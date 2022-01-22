@@ -106,7 +106,6 @@ public class MOWorldGenUnderwaterBase extends MOWorldGenBuilding {
                 return blocksInWater > 19;
             }
             pos = pos.add(0, -1, 0);
-			System.out.println("Try Generation  at: " + pos);
         }
         return false;
     }

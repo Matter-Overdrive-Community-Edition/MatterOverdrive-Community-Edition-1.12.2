@@ -137,16 +137,6 @@ public class TileEntityMachineTransporter extends MOTileEntityMachineMatter impl
     }
 
     @Override
-    public void readFromPlaceItem(ItemStack itemStack) {
-        super.readFromPlaceItem(itemStack);
-        if (!itemStack.hasTagCompound()) {
-            itemStack.setTagCompound(new NBTTagCompound());
-        }
-
-        readLocations(itemStack.getTagCompound());
-    }
-
-    @Override
     public void update() {
         super.update();
         manageTeleportation();

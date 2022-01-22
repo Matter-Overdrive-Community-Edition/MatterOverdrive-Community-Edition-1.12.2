@@ -25,6 +25,7 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.NoiseGeneratorSimplex;
 import net.minecraft.world.storage.loot.LootTableList;
@@ -70,7 +71,7 @@ public class MOFusion extends MOWorldGenBuilding {
 
     @Override
     public boolean shouldGenerate(Random random, World world, BlockPos pos) {
-        return (world.provider.getDimension() == 0 || world.provider.getDimension() == 1) && isFarEnoughFromOthers(world, pos.getX(), pos.getZ(), MIN_DISTANCE_APART);
+        return (world.provider.getDimension() != 0 || world.provider.getDimension() != 1) && world.getBiome(pos) == Biome.REGISTRY.getObject(new ResourceLocation("minecraft", "desert")) && isFarEnoughFromOthers(world, pos.getX(), pos.getZ(), MIN_DISTANCE_APART);
     }
 
     @Override

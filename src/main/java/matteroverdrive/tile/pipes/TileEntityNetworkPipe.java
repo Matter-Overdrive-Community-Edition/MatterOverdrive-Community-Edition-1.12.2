@@ -117,6 +117,7 @@ public class TileEntityNetworkPipe extends TileEntityPipe implements IMatterNetw
 
     @Override
     public void onChunkUnload() {
+		super.onChunkUnload();
         if (!world.isRemote) {
             IBlockState blockState = world.getBlockState(getPos());
             if (matterNetwork != null) {
