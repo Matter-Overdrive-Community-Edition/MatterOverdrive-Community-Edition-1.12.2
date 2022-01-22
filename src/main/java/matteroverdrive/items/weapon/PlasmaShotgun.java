@@ -204,7 +204,7 @@ public class PlasmaShotgun extends EnergyWeapon {
         if (hand == EnumHand.OFF_HAND) {
             return ActionResult.newResult(EnumActionResult.PASS, itemStackIn);
         }
-        if (worldIn.isRemote && canFire(itemStackIn, worldIn, playerIn) && hasShootDelayPassed() && playerIn.getActiveHand() != EnumHand.MAIN_HAND) {
+        if (worldIn.isRemote && canFire(itemStackIn, worldIn, playerIn) && hasShootDelayPassed()) { 
             playerIn.setActiveHand(hand);
             playChargingSound(playerIn);
         }
@@ -236,6 +236,7 @@ public class PlasmaShotgun extends EnergyWeapon {
             Vec3d pos = getFirePosition(entityLiving, dir, Mouse.isButtonDown(1));
             WeaponShot shot = createShot(stack, entityLiving, Mouse.isButtonDown(1));
             shot.setCount(count);
+			shot.setDamage(15 + count);
             shot.setAccuracy(shot.getAccuracy() * shotPercent);
             shot.setRange(shot.getRange() + (int) (shot.getRange() * (1 - shotPercent)));
             onClientShot(stack, entityLiving, pos, dir, shot);
