@@ -3,6 +3,7 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Update CHANGELOG.md (infiniteblock)
 * Update PlasmaShotgun.java (infiniteblock)
 * Current work. (infiniteblock)
 * remove heavy matter pipes from worldgen (infiniteblock)

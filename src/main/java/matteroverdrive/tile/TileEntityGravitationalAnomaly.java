@@ -292,6 +292,7 @@ public class TileEntityGravitationalAnomaly extends MOTileEntity implements ISca
     }
 
     public void onChunkUnload() {
+		super.onChunkUnload();
         if (world.isRemote) {
             stopSounds();
         }

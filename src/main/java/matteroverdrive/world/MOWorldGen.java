@@ -67,10 +67,9 @@ public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
         buildings.add(new WeightedRandomMOWorldGenBuilding(new MOSandPit("sand_pit_house", 3), 100));
         buildings.add(new WeightedRandomMOWorldGenBuilding(new MOWorldGenCrashedSpaceShip("crashed_ship"), 75));
         buildings.add(new WeightedRandomMOWorldGenBuilding(new MOWorldGenUnderwaterBase("underwater_base"), 75));
+        buildings.add(new WeightedRandomMOWorldGenBuilding(new MOWorldGenCargoShip("cargo_ship"), 30));
 		buildings.add(new WeightedRandomMOWorldGenBuilding(new MOAdvFusion("advfusion"), 0));
 		buildings.add(new WeightedRandomMOWorldGenBuilding(new MOFusion("fusion"), 0));
-		//30
-        buildings.add(new WeightedRandomMOWorldGenBuilding(new MOWorldGenCargoShip("cargo_ship"), 45));
 
         anomalyGen = new WorldGenGravitationalAnomaly("gravitational_anomaly", 0.005f, 2048, 2048 + 8192);
         configurationHandler.subscribe(anomalyGen);
