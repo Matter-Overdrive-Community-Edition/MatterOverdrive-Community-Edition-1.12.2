@@ -7,6 +7,7 @@ import matteroverdrive.handler.ConfigurationHandler;
 import matteroverdrive.init.MatterOverdriveSounds;
 import matteroverdrive.util.IConfigSubscriber;
 import matteroverdrive.util.MOEnergyHelper;
+import matteroverdrive.util.MOStringHelper;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
@@ -25,7 +26,7 @@ public class BioticStatCloak extends AbstractBioticStat implements IConfigSubscr
 
     @Override
     public String getDetails(int level) {
-        return String.format(super.getDetails(level), TextFormatting.YELLOW.toString() + ENERGY_PER_TICK + MOEnergyHelper.ENERGY_UNIT + TextFormatting.GRAY);
+		return MOStringHelper.translateToLocal(getUnlocalizedDetails(), TextFormatting.YELLOW.toString() + ENERGY_PER_TICK + MOEnergyHelper.ENERGY_UNIT + TextFormatting.GRAY);
     }
 
     @Override
