@@ -27,7 +27,7 @@ apply plugin: 'java'
 
 //def BUILD_NUMBER = System.getenv("BUILD_NUMBER") ?: "0"
 //def mod_version = "0.7.1.$BUILD_NUMBER"
-def mod_version = "0.7.3";
+def mod_version = "0.7.4";
 
 version = "1.12.2-$mod_version"
 

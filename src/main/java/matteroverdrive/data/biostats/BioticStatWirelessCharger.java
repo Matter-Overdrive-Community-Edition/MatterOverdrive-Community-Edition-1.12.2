@@ -4,6 +4,7 @@ package matteroverdrive.data.biostats;
 import com.google.common.collect.Multimap;
 import matteroverdrive.entity.android_player.AndroidPlayer;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import matteroverdrive.util.MOStringHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.energy.CapabilityEnergy;
@@ -20,7 +21,7 @@ public class BioticStatWirelessCharger extends AbstractBioticStat {
     }
 
     public String getDetails(int level) {
-        return String.format(super.getDetails(level), TextFormatting.YELLOW.toString() + CHARGE_SPEED + TextFormatting.GRAY);
+		return MOStringHelper.translateToLocal(getUnlocalizedDetails(), TextFormatting.YELLOW.toString() + CHARGE_SPEED + TextFormatting.GRAY);
     }
 
     @Override
