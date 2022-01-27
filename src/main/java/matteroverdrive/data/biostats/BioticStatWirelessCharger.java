@@ -1,4 +1,3 @@
-
 package matteroverdrive.data.biostats;
 
 import com.google.common.collect.Multimap;
@@ -18,10 +17,11 @@ public class BioticStatWirelessCharger extends AbstractBioticStat {
 
     public BioticStatWirelessCharger(String name, int xp) {
         super(name, xp);
+		setShowOnHud(true);
     }
-
+	@Override
     public String getDetails(int level) {
-		return MOStringHelper.translateToLocal(getUnlocalizedDetails(), TextFormatting.YELLOW.toString() + CHARGE_SPEED + TextFormatting.GRAY);
+		return MOStringHelper.translateToLocal(getUnlocalizedDetails(), TextFormatting.YELLOW.toString() + CHARGE_SPEED);
     }
 
     @Override
@@ -58,8 +58,8 @@ public class BioticStatWirelessCharger extends AbstractBioticStat {
     }
 
     @Override
-    public boolean isEnabled(AndroidPlayer android, int level) {
-        return super.isEnabled(android, level) && android.getEnergyStored() > CHARGE_SPEED;
+    public boolean isEnabled(AndroidPlayer androidPlayer, int level) {
+		return super.isEnabled(androidPlayer, level) && androidPlayer.hasEnoughEnergyScaled(CHARGE_SPEED);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class BioticStatWirelessCharger extends AbstractBioticStat {
 
     @Override
     public boolean isActive(AndroidPlayer androidPlayer, int level) {
-        return androidPlayer.getAndroidEffects().getEffectBool(AndroidPlayer.EFFECT_WIRELESS_CHARGING);
+        return true;
     }
 
     @Override
