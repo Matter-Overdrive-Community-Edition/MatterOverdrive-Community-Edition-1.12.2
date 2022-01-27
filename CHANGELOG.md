@@ -3,6 +3,9 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Update BioticStatCloak.java (infiniteblock)
+* format error fix. (infiniteblock)
+* Fixes (infiniteblock)
 * Update CHANGELOG.md (infiniteblock)
 * Update PlasmaShotgun.java (infiniteblock)
 * Current work. (infiniteblock)
