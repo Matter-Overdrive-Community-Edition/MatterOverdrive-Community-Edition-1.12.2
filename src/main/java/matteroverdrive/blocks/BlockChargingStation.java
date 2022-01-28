@@ -30,7 +30,7 @@ public class BlockChargingStation extends MOBlockMachine<TileEntityMachineChargi
         this.setResistance(9.0f);
         this.setHarvestLevel("pickaxe", 2);
         setHasGui(true);
-		setBoundingBox(new AxisAlignedBB(1.7 / 16d, 0, 0, 14.4 / 16d, 2.3, 1));
+		setBoundingBox(new AxisAlignedBB(0 / 16d, 0, 0, 16 / 16d, 2.3, 1));
     }
 
     @Nonnull

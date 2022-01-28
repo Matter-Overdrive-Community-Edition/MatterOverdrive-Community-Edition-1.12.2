@@ -6,6 +6,7 @@ import matteroverdrive.Reference;
 import matteroverdrive.api.quest.QuestStack;
 import matteroverdrive.blocks.BlockTritaniumCrate;
 import matteroverdrive.blocks.BlockWeaponStation;
+import matteroverdrive.blocks.BlockChargingStation;
 import matteroverdrive.blocks.includes.MOBlock;
 import matteroverdrive.tile.TileEntityHoloSign;
 import matteroverdrive.tile.TileEntityTritaniumCrate;
@@ -112,19 +113,23 @@ public class MOAndroidHouseBuilding extends MOWorldGenBuilding {
                     ((TileEntityWeaponStation) tileEntity).setInventorySlotContents(((TileEntityWeaponStation) tileEntity).INPUT_SLOT, MatterOverdrive.WEAPON_FACTORY.getRandomDecoratedEnergyWeapon(new WeaponFactory.WeaponGenerationContext(3, null, true)));
                 }
             }
-        }
+        } else if (state.getBlock() instanceof BlockChargingStation) {
+			if (colorsMatch(color, 0xa16a3e)) {
+                world.setBlockState(pos, state.withProperty(MOBlock.PROPERTY_DIRECTION, EnumFacing.SOUTH), 3);
+            }
+		}
     }
 
     public void spawnAndroid(World world, Random random, BlockPos pos) {
         if (random.nextInt(100) < 60) {
             EntityRangedRogueAndroidMob androidMob = new EntityRangedRogueAndroidMob(world);
-            androidMob.setPosition(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+            androidMob.setPosition(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
             world.spawnEntity(androidMob);
             androidMob.onInitialSpawn(world.getDifficultyForLocation(pos), null);
             androidMob.enablePersistence();
         } else {
             EntityMeleeRougeAndroidMob androidMob = new EntityMeleeRougeAndroidMob(world);
-            androidMob.setPosition(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+            androidMob.setPosition(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
             world.spawnEntity(androidMob);
             androidMob.onInitialSpawn(world.getDifficultyForLocation(pos), null);
             androidMob.enablePersistence();

@@ -1,6 +1,10 @@
 MatterOverdrive - Changelog
 ===========================
 
+Unreleased
+----------
+* Oredict, UnderwaterBase work. (infiniteblock)
+
 0.7.5 (2022-01-28 22:13:32 +1300)
 ---------------------------------
 * Last? of weapon fixes (infiniteblock)
