@@ -56,7 +56,7 @@ public class MOAndroidHouseBuilding extends MOWorldGenBuilding {
         addMapping(0x9553c3, MatterOverdrive.BLOCKS.industrialGlass);
         addMapping(0x35d6e0, MatterOverdrive.BLOCKS.replicator);
         addMapping(0x35e091, MatterOverdrive.BLOCKS.network_switch);
-        addMapping(0xc8d43d, MatterOverdrive.BLOCKS.tritaniumCrate);
+        addMapping(0xc8d43d, MatterOverdrive.BLOCKS.tritaniumCrateColored[EnumDyeColor.ORANGE.getMetadata()]); //orange crate
         addMapping(0x2a4071, MatterOverdrive.BLOCKS.androidStation, MatterOverdrive.BLOCKS.weapon_station);
         addMapping(0xa13e5f, MatterOverdrive.BLOCKS.network_pipe);
         addMapping(0xa16a3e, MatterOverdrive.BLOCKS.chargingStation);
@@ -94,6 +94,7 @@ public class MOAndroidHouseBuilding extends MOWorldGenBuilding {
                 }
             }
         } else if (state.getBlock() instanceof BlockTritaniumCrate) {
+			world.setBlockState(pos, state.withProperty(MOBlock.PROPERTY_DIRECTION, EnumFacing.WEST), 3);
             TileEntity tileEntity = world.getTileEntity(pos);
 			
             if (tileEntity instanceof IInventory) {

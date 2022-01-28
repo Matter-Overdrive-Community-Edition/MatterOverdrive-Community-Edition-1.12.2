@@ -48,7 +48,7 @@ public class MOWorldGenCrashedSpaceShip extends MOWorldGenBuilding {
         addMapping(0xdfd938, MatterOverdrive.BLOCKS.decorative_tritanium_plate_stripe);
         addMapping(0x5d89ab, MatterOverdrive.BLOCKS.decorative_holo_matrix);
         addMapping(0x77147d, MatterOverdrive.BLOCKS.weapon_station);
-        addMapping(0xb04a90, MatterOverdrive.BLOCKS.tritaniumCrate);
+        addMapping(0xb04a90, MatterOverdrive.BLOCKS.tritaniumCrateColored[EnumDyeColor.LIGHT_BLUE.getMetadata()]); //light blue
         addMapping(0x94deea, MatterOverdrive.BLOCKS.decorative_separator);
         addMapping(0xff9c00, MatterOverdrive.BLOCKS.decorative_coils);
         addMapping(0xaca847, MatterOverdrive.BLOCKS.decorative_matter_tube);
@@ -71,6 +71,7 @@ public class MOWorldGenCrashedSpaceShip extends MOWorldGenBuilding {
                 }
             }
         } else if (state.getBlock() instanceof BlockTritaniumCrate) {
+			world.setBlockState(pos, state.withProperty(MOBlock.PROPERTY_DIRECTION, EnumFacing.WEST), 3);
             TileEntity tileEntity = world.getTileEntity(pos);
 			
             if (tileEntity instanceof IInventory) {
