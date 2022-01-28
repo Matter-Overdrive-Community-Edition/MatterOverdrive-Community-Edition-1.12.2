@@ -3,6 +3,8 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Update CHANGELOG.md (infiniteblock)
+* Wireless Charging. (infiniteblock)
 * Update BioticStatCloak.java (infiniteblock)
 * format error fix. (infiniteblock)
 * Fixes (infiniteblock)

@@ -41,8 +41,8 @@ public class PhaserRifle extends EnergyWeapon {
 
     public static final int RANGE = 32;
     private static final int HEAT_PER_SHOT = 20;
-    private static final int MAX_HEAT = 100;
-    private static final int MAX_USE_TIME = 72000;
+    private static final int MAX_HEAT = 80;
+    private static final int MAX_USE_TIME = 512;
     private static final int ENERGY_PER_SHOT = 1024;
 
     public PhaserRifle(String name) {
@@ -65,13 +65,6 @@ public class PhaserRifle extends EnergyWeapon {
     protected int getOutput() {
         return 128;
     }
-
-    /*@Override
-	@SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister iconRegistry)
-    {
-
-    }*/
 
     @Override
     public int getMaxItemUseDuration(ItemStack item) {
@@ -161,8 +154,6 @@ public class PhaserRifle extends EnergyWeapon {
     public boolean isWeaponZoomed(EntityLivingBase entityPlayer, ItemStack weapon) {
         // Fix the requirement to have the button down for a "right click".
         return entityPlayer.isHandActive() && entityPlayer.getActiveHand() == EnumHand.MAIN_HAND;
-
-//        return Mouse.isButtonDown(1) && entityPlayer.isHandActive() && entityPlayer.getActiveHand() == EnumHand.MAIN_HAND;
     }
 
     @Override
@@ -203,21 +194,14 @@ public class PhaserRifle extends EnergyWeapon {
 
             if (! canFire(itemStack, world, entityPlayer)) {
                 MOPositionedSound sound = new MOPositionedSound(MatterOverdriveSounds.weaponsOverheat, SoundCategory.PLAYERS, 0.8f + itemRand.nextFloat() * 0.2f, 0.9f + itemRand.nextFloat() * 0.2f);
-
                 BlockPos position = entityPlayer.getPosition();
-
                 sound.setPosition((float) position.getX(), (float) position.getY(), (float) position.getZ());
-
                 Minecraft.getMinecraft().getSoundHandler().playSound(sound);
-
                 sound = new MOPositionedSound(MatterOverdriveSounds.weaponsOverheatAlarm, SoundCategory.PLAYERS, 0.8f + itemRand.nextFloat() * 0.2f, 0.9f + itemRand.nextFloat() * 0.2f);
-
                 sound.setPosition((float) position.getX(), (float) position.getY(), (float) position.getZ());
-
                 Minecraft.getMinecraft().getSoundHandler().playSound(sound);
             }
         }
-
         super.onShooterClientUpdate(itemStack, world, entityPlayer, sendServerTick);
     }
 
@@ -235,15 +219,8 @@ public class PhaserRifle extends EnergyWeapon {
     public boolean onServerFire(ItemStack weapon, EntityLivingBase shooter, WeaponShot shot, Vec3d position, Vec3d dir, int delay) {
         DrainEnergy(weapon, getShootCooldown(weapon), false);
         float newHeat = (getHeat(weapon) + 4) * 2.2f;
-
-        if (newHeat > 2.0f) {
-            newHeat = 2.0f;
-       }
-
         setHeat(weapon, newHeat);
-
         manageOverheat(weapon, shooter.world, shooter);
-
         if (! isOverheated(weapon)) {
             PlasmaBolt fire = spawnProjectile(weapon, shooter, position, dir, shot);
             fire.simulateDelay(delay);
@@ -258,12 +235,9 @@ public class PhaserRifle extends EnergyWeapon {
         //ClientProxy.weaponHandler.addShootDelay(this);
         if (isOverheated(weapon)) {
             MOPositionedSound sound = new MOPositionedSound(MatterOverdriveSounds.weaponsOverheat, SoundCategory.PLAYERS, 0.8f + itemRand.nextFloat() * 0.2f, 0.9f + itemRand.nextFloat() * 0.2f);
-
             Minecraft.getMinecraft().getSoundHandler().playSound(sound);
-
             return;
         }
-
         MOPositionedSound sound = new MOPositionedSound(MatterOverdriveSounds.weaponsPhaserRifleShot, SoundCategory.PLAYERS, 0.8f + itemRand.nextFloat() * 0.2f, 0.9f + itemRand.nextFloat() * 0.2f);
         sound.setPosition((float) position.x, (float) position.y, (float) position.z);
         Minecraft.getMinecraft().getSoundHandler().playSound(sound);

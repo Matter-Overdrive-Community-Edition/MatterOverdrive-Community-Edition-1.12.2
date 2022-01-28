@@ -291,7 +291,7 @@ public abstract class EnergyWeapon extends MOItemEnergyContainer implements IWea
             setHeat(itemStack, Math.max(0, newHeat));
         }
         if (isOverheated(itemStack)) {
-            if (getHeat(itemStack) < 1) {
+            if (getHeat(itemStack) < 2) {
                 setOverheated(itemStack, false);
             }
         }
@@ -459,7 +459,10 @@ public abstract class EnergyWeapon extends MOItemEnergyContainer implements IWea
     }
 
     public boolean isOverheated(ItemStack weapon) {
+		if (weapon.hasTagCompound()) {
         return weapon.hasTagCompound() && weapon.getTagCompound().getBoolean("Overheated");
+		}
+        return false;
     }
 
     protected void setOverheated(ItemStack weapon, boolean overheated) {
