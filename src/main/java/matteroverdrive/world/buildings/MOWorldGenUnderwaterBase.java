@@ -6,6 +6,7 @@ import matteroverdrive.blocks.BlockDecorative;
 import matteroverdrive.api.quest.QuestStack;
 import matteroverdrive.blocks.BlockTritaniumCrate;
 import matteroverdrive.blocks.BlockWeaponStation;
+import matteroverdrive.blocks.BlockPatternStorage;
 import matteroverdrive.blocks.includes.MOBlock;
 import matteroverdrive.tile.TileEntityHoloSign;
 import matteroverdrive.tile.TileEntityTritaniumCrate;
@@ -150,7 +151,10 @@ public class MOWorldGenUnderwaterBase extends MOWorldGenBuilding {
                     ((TileEntityWeaponStation) tileEntity).setInventorySlotContents(((TileEntityWeaponStation) tileEntity).INPUT_SLOT, MatterOverdrive.WEAPON_FACTORY.getRandomDecoratedEnergyWeapon(new WeaponFactory.WeaponGenerationContext(3, null, true)));
                 }
             }
-        }
+        } else if (state.getBlock() instanceof BlockPatternStorage) {
+			if (colorsMatch(color, 0x4d12f4)) {
+                world.setBlockState(pos, state.withProperty(MOBlock.PROPERTY_DIRECTION, EnumFacing.WEST), 3);
+            }
+		}
     }
-
 }

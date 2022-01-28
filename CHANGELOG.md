@@ -1,8 +1,9 @@
 MatterOverdrive - Changelog
 ===========================
 
-Unreleased
-----------
+0.7.5 (2022-01-28 22:13:32 +1300)
+---------------------------------
+* Last? of weapon fixes (infiniteblock)
 * Weapon Stat Fixes (infiniteblock)
 * Overheat stuff (infiniteblock)
 * Update CHANGELOG.md (infiniteblock)
