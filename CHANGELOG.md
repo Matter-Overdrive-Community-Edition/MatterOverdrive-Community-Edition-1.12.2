@@ -3,6 +3,7 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Weapon Stat Fixes (infiniteblock)
 * Overheat stuff (infiniteblock)
 * Update CHANGELOG.md (infiniteblock)
 * Wireless Charging. (infiniteblock)

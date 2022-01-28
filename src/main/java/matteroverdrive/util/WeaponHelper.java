@@ -39,10 +39,9 @@ public class WeaponHelper {
     public static float modifyStat(IWeaponStat stat, ItemStack weapon, float original) {
         if (isWeapon(weapon)) {
             List<ItemStack> itemStacks = MOInventoryHelper.getStacks(weapon);
-
             for (ItemStack module : itemStacks) {
                 if (module != null && module.getItem() instanceof IWeaponModule) {
-                    original = ((IWeaponModule) module.getItem()).modifyWeaponStat(stat, module, weapon, original);
+                    original += ((IWeaponModule) module.getItem()).modifyWeaponStat(stat, module, weapon, original);
                 }
             }
         }

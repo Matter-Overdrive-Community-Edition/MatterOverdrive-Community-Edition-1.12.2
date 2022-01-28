@@ -269,13 +269,7 @@ public class PhaserRifle extends EnergyWeapon {
 
     @Override
     public int getBaseEnergyUse(ItemStack item) {
-        int cooldown = getShootCooldown(item);
-
-        if (cooldown == 0) {
-            cooldown = 1;
-        }
-
-        return ENERGY_PER_SHOT / cooldown==0?1:cooldown;
+        return ENERGY_PER_SHOT / getBaseShootCooldown(item);
     }
 
     @Override

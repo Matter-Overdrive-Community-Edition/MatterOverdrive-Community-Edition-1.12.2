@@ -178,7 +178,6 @@ public class BioticStatShield extends AbstractBioticStat implements IConfigSubsc
     }
 
     boolean isDamageValid(DamageSource damageSource) {
-		System.out.println("damagesource: " + damageSource);
         return damageSource.isExplosion() || damageSource.isProjectile();
     }
 
@@ -196,7 +195,6 @@ public class BioticStatShield extends AbstractBioticStat implements IConfigSubsc
                 androidPlayer.getAndroidEffects().updateEffect(AndroidPlayer.EFFECT_SHIELD, false);
                 //androidPlayer.removeEffect(AndroidPlayer.NBT_HITS);
                 //androidPlayer.sync(EnumSet.of(AndroidPlayer.DataType.EFFECTS),true);
-				System.out.println("shieldtime < SHIELD_COOLDOWN");
                 androidPlayer.getPlayer().world.playSound(null, androidPlayer.getPlayer().posX, androidPlayer.getPlayer().posY, androidPlayer.getPlayer().posZ, MatterOverdriveSounds.androidShieldPowerDown, SoundCategory.PLAYERS, 0.6f + random.nextFloat() * 0.2f, 1);
                 //androidPlayer.init(androidPlayer.getPlayer(),androidPlayer.getPlayer().world);
             }
