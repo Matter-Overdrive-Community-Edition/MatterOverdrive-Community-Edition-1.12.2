@@ -3,6 +3,7 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Overheat stuff (infiniteblock)
 * Update CHANGELOG.md (infiniteblock)
 * Wireless Charging. (infiniteblock)
 * Update BioticStatCloak.java (infiniteblock)
