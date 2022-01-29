@@ -266,6 +266,7 @@ public class RenderHandler {
     }
 
     @SubscribeEvent
+    public void onRenderPlayerPreEvent(RenderPlayerEvent.Pre event) {
         //GL11.glEnable(GL11.GL_LIGHTING);
         //GL11.glColor3f(1, 1, 1);
 
@@ -418,9 +419,9 @@ public class RenderHandler {
             }
         }, Item.getItemFromBlock(MatterOverdrive.BLOCKS.decorative_tritanium_plate_colored));
         FMLClientHandler.instance().getClient().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
-            if (stack.getItemDamage() == 0) return 0xd00000;
-            else if (stack.getItemDamage() == 1) return 0x019fea;
-            else if (stack.getItemDamage() == 2) return 0xffe400;
+            if (tintIndex == 1 && stack.getItemDamage() == 0) return 0xd00000;
+            else if (tintIndex == 1 && stack.getItemDamage() == 1) return 0x019fea;
+            else if (tintIndex == 1 && stack.getItemDamage() == 2) return 0xffe400;
             return 0xffffff;
         }, MatterOverdrive.ITEMS.androidPill);
     }
