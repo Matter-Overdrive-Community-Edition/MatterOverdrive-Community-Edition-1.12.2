@@ -3,6 +3,7 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Offhand render (infiniteblock)
 * Android/player offhand fixes (infiniteblock)
 * Fixes (infiniteblock)
 * Fixes (infiniteblock)
