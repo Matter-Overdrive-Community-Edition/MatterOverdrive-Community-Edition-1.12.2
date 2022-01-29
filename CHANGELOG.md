@@ -3,6 +3,9 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Update RenderHandler.java (infiniteblock)
+* Fixes (infiniteblock)
+* Minimap Bugfix (infiniteblock)
 * Updates (infiniteblock)
 * Update AndroidBionicPartRenderRegistry.java (infiniteblock)
 * Updates (infiniteblock)
