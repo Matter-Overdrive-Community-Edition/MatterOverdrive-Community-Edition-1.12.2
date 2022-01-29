@@ -123,6 +123,8 @@ public class WeaponRenderHandler {
             if (this.mc.gameSettings.viewBobbing) {
                 this.setupViewBobbing(event.getPartialTicks());
             }
+        } else if (event.getHand() == EnumHand.OFF_HAND && !weapon.isEmpty() && weapon.getItem() instanceof EnergyWeapon) {
+            event.setCanceled(true);
         }
     }
 

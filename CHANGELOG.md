@@ -3,6 +3,7 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Android/player offhand fixes (infiniteblock)
 * Fixes (infiniteblock)
 * Fixes (infiniteblock)
 * Oredict, UnderwaterBase work. (infiniteblock)
