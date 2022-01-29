@@ -10,6 +10,7 @@ import matteroverdrive.gui.element.MOElementEnergy;
 import matteroverdrive.gui.pages.PageTasks;
 import matteroverdrive.machines.analyzer.TileEntityMachineMatterAnalyzer;
 import matteroverdrive.proxy.ClientProxy;
+import matteroverdrive.util.MOStringHelper;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.Item;
 
@@ -31,7 +32,7 @@ public class GuiMatterAnalyzer extends MOGuiNetworkMachine<TileEntityMachineMatt
         super.registerPages(container, machine);
         pageTasks = new PageTasks(this, 0, 0, xSize, ySize, machine.getTaskQueue((byte) 0));
         pageTasks.setName("Tasks");
-        AddPage(pageTasks, ClientProxy.holoIcons.getIcon("page_icon_tasks"), "gui.tooltip.page.tasks").setIconColor(Reference.COLOR_MATTER);
+        AddPage(pageTasks, ClientProxy.holoIcons.getIcon("page_icon_tasks"), MOStringHelper.translateToLocal("gui.tooltip.page.tasks")).setIconColor(Reference.COLOR_MATTER);
     }
 
     @Override

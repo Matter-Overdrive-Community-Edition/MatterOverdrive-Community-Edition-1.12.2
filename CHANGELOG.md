@@ -3,6 +3,8 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Update AndroidBionicPartRenderRegistry.java (infiniteblock)
+* Updates (infiniteblock)
 * Offhand render (infiniteblock)
 * Android/player offhand fixes (infiniteblock)
 * Fixes (infiniteblock)

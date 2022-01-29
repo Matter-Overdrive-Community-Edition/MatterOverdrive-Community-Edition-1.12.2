@@ -7,6 +7,7 @@ import matteroverdrive.api.quest.QuestStack;
 import matteroverdrive.blocks.BlockTritaniumCrate;
 import matteroverdrive.blocks.BlockWeaponStation;
 import matteroverdrive.blocks.BlockChargingStation;
+import matteroverdrive.blocks.BlockReplicator;
 import matteroverdrive.blocks.includes.MOBlock;
 import matteroverdrive.tile.TileEntityHoloSign;
 import matteroverdrive.tile.TileEntityTritaniumCrate;
@@ -69,7 +70,7 @@ public class MOAndroidHouseBuilding extends MOWorldGenBuilding {
     @Override
     protected void onGeneration(Random random, World world, BlockPos pos, WorldGenBuildingWorker worker) {
         for (int i = 0; i < random.nextInt(3) + 3; i++) {
-            spawnAndroid(world, random, pos.add(7, i, 10));
+            spawnAndroid(world, random, pos.add(7, i, 8));
         }
         spawnLegendary(world, random, pos.add(12, 4, 10));
     }
@@ -117,6 +118,10 @@ public class MOAndroidHouseBuilding extends MOWorldGenBuilding {
         } else if (state.getBlock() instanceof BlockChargingStation) {
 			if (colorsMatch(color, 0xa16a3e)) {
                 world.setBlockState(pos, state.withProperty(MOBlock.PROPERTY_DIRECTION, EnumFacing.SOUTH), 3);
+            }
+		} else if (state.getBlock() instanceof BlockReplicator) {
+			if (colorsMatch(color, 0x35d6e0)) {
+                world.setBlockState(pos, state.withProperty(MOBlock.PROPERTY_DIRECTION, EnumFacing.EAST), 3);
             }
 		}
     }

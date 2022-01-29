@@ -61,7 +61,7 @@ public class TileEntityMachinePatternMonitor extends MOTileEntityMachine impleme
 
     @Override
     public boolean shouldRenderInPass(int pass) {
-        return pass == 1;
+        return pass == 0;
     }
 
 
