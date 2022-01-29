@@ -70,7 +70,9 @@ public class ContainerPatternMonitor extends ContainerTaskQueueMachine<TileEntit
     }
 
     private void sendAllPatterns(IMatterDatabaseMonitor monitor) {
+		int patternCount = 0;
         for (IMatterDatabase database : monitor.getConnectedDatabases()) {
+			patternCount += database.getPatternStorageCount();
             for (int d = 0; d < database.getPatternStorageCount(); d++) {
                 ItemStack storageStack = database.getPatternStorage(d);
                 if (storageStack != null) {
@@ -82,6 +84,7 @@ public class ContainerPatternMonitor extends ContainerTaskQueueMachine<TileEntit
             }
 
         }
+		System.out.println("Total Patterns: " + patternCount / 6 + ".");
     }
 
     @Override

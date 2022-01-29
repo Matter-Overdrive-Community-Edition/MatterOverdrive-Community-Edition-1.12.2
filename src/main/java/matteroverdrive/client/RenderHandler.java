@@ -266,7 +266,6 @@ public class RenderHandler {
     }
 
     @SubscribeEvent
-    public void onPlayerRenderPre(RenderPlayerEvent.Pre event) {
         //GL11.glEnable(GL11.GL_LIGHTING);
         //GL11.glColor3f(1, 1, 1);
 

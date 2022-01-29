@@ -133,6 +133,7 @@ public class TileEntityMachinePatternStorage extends MOTileEntityMachineEnergy i
         }
         if (patternCount > 0) {
             infos.add(patternCount + "xPatterns");
+			System.out.println("Total Patterns: " + patternCount + ".");
         } else {
             infos.add("No Patterns.");
         }
