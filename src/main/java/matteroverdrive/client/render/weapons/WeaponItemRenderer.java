@@ -74,6 +74,13 @@ public abstract class WeaponItemRenderer implements IBakedModel {
         mat.setTranslation(new Vector3f(-0.8f, 0.8f, -0.6f));
         mat.setScale(1.6f);
         transforms.put(ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND, mat);
+		
+		mat = new Matrix4f();
+        mat.setIdentity();
+        mat.rotY((float) Math.toRadians(180));
+        mat.setTranslation(new Vector3f(0.8f, 0.8f, -0.6f));
+        mat.setScale(1.6f);
+        transforms.put(ItemCameraTransforms.TransformType.THIRD_PERSON_LEFT_HAND, mat);
 
         mat = new Matrix4f();
         mat.setIdentity();

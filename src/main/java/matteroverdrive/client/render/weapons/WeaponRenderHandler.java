@@ -123,7 +123,6 @@ public class WeaponRenderHandler {
             if (this.mc.gameSettings.viewBobbing) {
                 this.setupViewBobbing(event.getPartialTicks());
             }
-
         }
     }
 
@@ -261,7 +260,6 @@ public class WeaponRenderHandler {
         GlStateManager.rotate(MOMathHelper.Lerp(185, 180, zoomValue), 0, 1, 0);
         GlStateManager.rotate(MOMathHelper.Lerp(3, 0, zoomValue), -1, 0, 0);
         GlStateManager.scale(1, 1, 0.8);
-        //GlStateManager.rotate(-80,0,1,0);
     }
 
     private void setupViewBobbing(float partialTicks) {
