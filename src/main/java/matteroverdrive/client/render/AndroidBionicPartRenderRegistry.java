@@ -1,4 +1,3 @@
-
 package matteroverdrive.client.render;
 
 import matteroverdrive.api.inventory.IBionicPart;
