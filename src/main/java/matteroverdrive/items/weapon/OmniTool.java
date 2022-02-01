@@ -46,9 +46,9 @@ public class OmniTool extends EnergyWeapon {
 
     public OmniTool(String name) {
         super(name, RANGE);
-        setHarvestLevel("pickaxe", 5);
-        setHarvestLevel("axe", 5);
-        setHarvestLevel("shovel", 5);
+        setHarvestLevel("pickaxe", 3);
+        setHarvestLevel("axe", 3);
+        setHarvestLevel("shovel", 3);
         this.bFull3D = true;
         this.leftClickFire = true;
     }
@@ -107,13 +107,10 @@ public class OmniTool extends EnergyWeapon {
 
                 if (hit != null && hit.typeOfHit == RayTraceResult.Type.BLOCK) {
                     IBlockState state = player.world.getBlockState(hit.getBlockPos());
-                    boolean canMine = ((EntityPlayer) player).capabilities.allowEdit;
-
+                    boolean canMine = state.getBlock().canHarvestBlock(player.world, hit.getBlockPos(), (EntityPlayer) player);
                     if (!state.getBlock().isAir(state, player.world, hit.getBlockPos()) && canMine) {
-
                         ++STEP_SOUND_COUNTER;
                         LAST_SIDE = hit.sideHit;
-
                         if (isSameBlock(hit.getBlockPos())) {
                             if (BLOCK_DAMAGE >= 1.0F) {
                                 //this.isHittingBlock = false;

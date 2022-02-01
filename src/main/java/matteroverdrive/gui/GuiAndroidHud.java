@@ -320,8 +320,6 @@ public class GuiAndroidHud extends Gui implements IConfigSubscriber {
                         GlStateManager.pushMatrix();
                         int elementWidth = (int) (element.getWidth(event.getResolution(), android) * element.getPosition().x);
                         GlStateManager.translate(element.getPosition().x * event.getResolution().getScaledWidth_double() - elementWidth, element.getPosition().y * event.getResolution().getScaledHeight_double() - element.getHeight(event.getResolution(), android) * element.getPosition().y, 0);
-                        element.setBaseColor(baseGuiColor);
-                        element.setBackgroundAlpha(opacityBackground);
                         element.drawElement(android, event.getResolution(), event.getPartialTicks());
                         GlStateManager.popMatrix();
                     }
