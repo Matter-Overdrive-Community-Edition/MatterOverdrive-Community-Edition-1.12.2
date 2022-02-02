@@ -263,7 +263,6 @@ public abstract class MatterNetworkComponentClient<T extends MOTileEntityMachine
     }
 
     protected void onUnload(MachineEvent.Unload event) {
-        if (!getNodeWorld().isRemote) {
             if (!getNodeWorld().isRemote) {
                 IBlockState blockState = getNodeWorld().getBlockState(getNodePos());
                 if (matterNetwork != null) {
@@ -271,6 +270,4 @@ public abstract class MatterNetworkComponentClient<T extends MOTileEntityMachine
                 }
             }
         }
-    }
-
 }

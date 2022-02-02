@@ -1,8 +1,12 @@
 MatterOverdrive - Changelog
 ===========================
 
-0.7.5b2 (2022-01-29 21:01:19 +1300)
------------------------------------
+Unreleased
+----------
+* OmniTool (infiniteblock)
+
+0.7.5Release (2022-01-29 21:01:19 +1300)
+----------------------------------------
 * Update CHANGELOG.md (infiniteblock)
 * Update RenderHandler.java (infiniteblock)
 * Fixes (infiniteblock)

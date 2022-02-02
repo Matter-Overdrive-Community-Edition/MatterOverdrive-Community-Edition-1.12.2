@@ -107,23 +107,21 @@ public class OmniTool extends EnergyWeapon {
 
                 if (hit != null && hit.typeOfHit == RayTraceResult.Type.BLOCK) {
                     IBlockState state = player.world.getBlockState(hit.getBlockPos());
+					final float hardness = state.getPlayerRelativeBlockHardness((EntityPlayer) player, player.world, hit.getBlockPos());
                     boolean canMine = state.getBlock().canHarvestBlock(player.world, hit.getBlockPos(), (EntityPlayer) player);
                     if (!state.getBlock().isAir(state, player.world, hit.getBlockPos()) && canMine) {
                         ++STEP_SOUND_COUNTER;
                         LAST_SIDE = hit.sideHit;
                         if (isSameBlock(hit.getBlockPos())) {
                             if (BLOCK_DAMAGE >= 1.0F) {
-                                //this.isHittingBlock = false;
                                 MatterOverdrive.NETWORK.sendToServer(new PacketDigBlock(hit.getBlockPos(), PacketDigBlock.Type.HARVEST, hit.sideHit));
                                 Minecraft.getMinecraft().playerController.onPlayerDestroyBlock(hit.getBlockPos());
                                 BLOCK_DAMAGE = 0.0F;
                                 STEP_SOUND_COUNTER = 0.0F;
-                                //this.blockHitDelay = 5;
                             } else if (BLOCK_DAMAGE == 0) {
                                 MatterOverdrive.NETWORK.sendToServer(new PacketDigBlock(hit.getBlockPos(), PacketDigBlock.Type.CLICK, hit.sideHit));
                             }
-
-                            BLOCK_DAMAGE = MathHelper.clamp(modifyStatFromModules(WeaponStats.BLOCK_DAMAGE, stack, (BLOCK_DAMAGE + state.getPlayerRelativeBlockHardness((EntityPlayer) player, player.world, hit.getBlockPos()))*2), 0, 1);
+                            BLOCK_DAMAGE = MathHelper.clamp(modifyStatFromModules(WeaponStats.BLOCK_DAMAGE, stack, (BLOCK_DAMAGE + hardness)*2), 0, 1);
                             player.world.sendBlockBreakProgress(player.getEntityId(), hit.getBlockPos(), (int) (BLOCK_DAMAGE * 10));
                         } else {
                             stopMiningLastBlock((EntityPlayer) player, player.world);
