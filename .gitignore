@@ -45,3 +45,5 @@ gradle/scripts/dependencies.gradle
 gradle/wrapper/gradle-wrapper.jar
 gradle/wrapper/gradle-wrapper.properties
 build.gradle
+*.gradle
+build.gradle
