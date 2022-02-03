@@ -3,6 +3,11 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* tidy up (infiniteblock)
+
+0.7.6B (2022-02-02 17:49:59 +1300)
+----------------------------------
+* Galacticraft Crash Fix (infiniteblock)
 * OmniTool (infiniteblock)
 
 0.7.5Release (2022-01-29 21:01:19 +1300)

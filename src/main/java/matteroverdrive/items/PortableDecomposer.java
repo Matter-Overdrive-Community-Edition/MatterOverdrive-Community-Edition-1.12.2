@@ -57,6 +57,7 @@ public class PortableDecomposer extends MOItemEnergyContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void addDetails(ItemStack itemstack, EntityPlayer player, @Nullable World worldIn, List<String> infos) {
+		super.addDetails(itemstack, player, worldIn, infos);
         infos.add(String.format("%s/%s %s", DecimalFormat.getIntegerInstance().format(getMatter(itemstack)), getMaxMatter(itemstack), MatterHelper.MATTER_UNIT));
         if (itemstack.getTagCompound() != null) {
             ItemStack s;
@@ -133,7 +134,7 @@ public class PortableDecomposer extends MOItemEnergyContainer {
 
     public void decomposeItem(ItemStack decomposer, ItemStack itemStack) {
         if (MatterHelper.containsMatter(itemStack) && isStackListed(decomposer, itemStack)) {
-            IEnergyStorage storage = getStorage(itemStack);
+            IEnergyStorage storage = getStorage(decomposer);
             float matterFromItem = MatterHelper.getMatterAmountFromItem(itemStack) * defaultMatterRatio;
             int energyForItem = MathHelper.ceil(matterFromItem / defaultMatterRatio);
             float freeMatter = getMaxMatter(decomposer) - getMatter(decomposer);
