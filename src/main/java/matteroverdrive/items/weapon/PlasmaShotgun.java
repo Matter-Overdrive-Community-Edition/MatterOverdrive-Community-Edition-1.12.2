@@ -19,6 +19,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.EnumAction;
 import net.minecraft.nbt.NBTTagLong;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -221,6 +222,11 @@ public class PlasmaShotgun extends EnergyWeapon {
     @SideOnly(Side.CLIENT)
     public void stopChargingSound() {
         Minecraft.getMinecraft().getSoundHandler().stopSound(lastChargingSound);
+    }
+
+    @Override
+    public EnumAction getItemUseAction(ItemStack itemStack) {
+        return EnumAction.BOW;
     }
 
     @Override

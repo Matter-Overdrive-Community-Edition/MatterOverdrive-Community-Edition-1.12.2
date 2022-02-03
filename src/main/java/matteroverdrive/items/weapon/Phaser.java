@@ -103,8 +103,8 @@ public class Phaser extends EnergyWeapon implements IWeapon {
     }
 
     @Override
-    public EnumAction getItemUseAction(ItemStack p_77661_1_) {
-        return EnumAction.NONE;
+    public EnumAction getItemUseAction(ItemStack itemStack) {
+        return EnumAction.BOW;
     }
 
     private void ManageShooting(ItemStack item, World w, EntityPlayer player, int useCount) {

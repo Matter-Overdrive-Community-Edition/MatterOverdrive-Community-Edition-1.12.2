@@ -20,6 +20,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.EnumAction;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
@@ -75,6 +76,11 @@ public class OmniTool extends EnergyWeapon {
 
     public int getItemEnchantability() {
         return 1;
+    }
+
+    @Override
+    public EnumAction getItemUseAction(ItemStack itemStack) {
+        return EnumAction.BOW;
     }
 
     @Nonnull

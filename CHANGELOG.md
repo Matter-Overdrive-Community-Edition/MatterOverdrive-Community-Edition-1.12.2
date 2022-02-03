@@ -3,6 +3,7 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Portable Decomposer (infiniteblock)
 * tidy up (infiniteblock)
 
 0.7.6B (2022-02-02 17:49:59 +1300)
