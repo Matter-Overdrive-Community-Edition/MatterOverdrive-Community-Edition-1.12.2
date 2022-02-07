@@ -43,7 +43,7 @@ public abstract class MOTileEntityMachineMatter extends MOTileEntityMachineEnerg
     }
 
     public void updateClientMatter() {
-        if (world != null) {
+        if (!world.isRemote) {
             MatterOverdrive.NETWORK.sendToAllAround(new PacketMatterUpdate(this), this, 64);
         }
     }

@@ -3,6 +3,7 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* 3RD Person view fix's (infiniteblock)
 * Portable Decomposer (infiniteblock)
 * tidy up (infiniteblock)
 
