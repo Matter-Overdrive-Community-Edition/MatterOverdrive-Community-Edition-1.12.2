@@ -27,7 +27,7 @@ Although it may seem overpowered, Matter Overdrive takes a more realistic approa
 * [Androids](https://mo.simeonradivoev.com/android-guide/), become an Android and learn powerful RPG like abilities, such as Teleportation and Forefield Shields.
 
 
-![Matter Overdrive Blocks and Items](https://media-elerium.cursecdn.com/attachments/210/237/main_screenshot.png)
+![Matter Overdrive Blocks and Items](https://mo.simeonradivoev.com/wp-content/uploads/2015/05/main_screenshot.png)
 
 Mini-Changelog (from InfiniteBlock):
 
