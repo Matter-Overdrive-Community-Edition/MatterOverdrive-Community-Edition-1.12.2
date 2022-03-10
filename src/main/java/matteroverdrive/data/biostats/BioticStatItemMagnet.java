@@ -19,6 +19,8 @@ public class BioticStatItemMagnet extends AbstractBioticStat {
 
     public BioticStatItemMagnet(String name, int xp) {
         super(name, xp);
+        setShowOnHud(true);
+        setShowOnWheel(true);
     }
 
     @Override
@@ -89,10 +91,6 @@ public class BioticStatItemMagnet extends AbstractBioticStat {
         return 0;
     }
 
-    @Override
-    public boolean showOnWheel(AndroidPlayer androidPlayer, int level) {
-        return androidPlayer.getPlayer().isSneaking();
-    }
 
     @Override
     public boolean showOnHud(AndroidPlayer android, int level) {

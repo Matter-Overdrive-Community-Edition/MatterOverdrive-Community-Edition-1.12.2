@@ -21,6 +21,8 @@ public class BioticStatHighJump extends AbstractBioticStat implements IConfigSub
 
     public BioticStatHighJump(String name, int xp) {
         super(name, xp);
+        setShowOnHud(true);
+        setShowOnWheel(true);
         setMaxLevel(2);
     }
 
@@ -49,7 +51,7 @@ public class BioticStatHighJump extends AbstractBioticStat implements IConfigSub
 
     @Override
     public void onLivingEvent(AndroidPlayer androidPlayer, int level, LivingEvent event) {
-        if (event instanceof LivingEvent.LivingJumpEvent) {
+        if (event instanceof LivingEvent.LivingJumpEvent && isActive(androidPlayer, level)) {
             if (!MinecraftForge.EVENT_BUS.post(new MOEventBionicStat(this, level, androidPlayer))) {
                 if (!androidPlayer.getPlayer().isSneaking()) {
                     if (!event.getEntity().world.isRemote) {
@@ -82,11 +84,6 @@ public class BioticStatHighJump extends AbstractBioticStat implements IConfigSub
     @Override
     public boolean showOnHud(AndroidPlayer android, int level) {
         return isActive(android, level);
-    }
-
-    @Override
-    public boolean showOnWheel(AndroidPlayer androidPlayer, int level) {
-        return androidPlayer.getPlayer().isSneaking();
     }
 
     @Override
