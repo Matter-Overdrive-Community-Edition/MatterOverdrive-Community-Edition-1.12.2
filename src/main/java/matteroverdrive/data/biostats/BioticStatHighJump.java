@@ -49,7 +49,7 @@ public class BioticStatHighJump extends AbstractBioticStat implements IConfigSub
 
     @Override
     public void onLivingEvent(AndroidPlayer androidPlayer, int level, LivingEvent event) {
-        if (event instanceof LivingEvent.LivingJumpEvent && isActive(androidPlayer, level)) {
+        if (event instanceof LivingEvent.LivingJumpEvent) {
             if (!MinecraftForge.EVENT_BUS.post(new MOEventBionicStat(this, level, androidPlayer))) {
                 if (!androidPlayer.getPlayer().isSneaking()) {
                     if (!event.getEntity().world.isRemote) {

@@ -26,7 +26,7 @@ public class EnergyPack extends MOBaseItem implements IEnergyPack {
 
     @Override
     public boolean showDurabilityBar(ItemStack stack) {
-        return true;
+        return false;
     }
 
     @Override
