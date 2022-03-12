@@ -19,7 +19,7 @@
 <entry stylesheet="matteroverdrive:info/styles/guide.css">
     <page class="padded-page">
         <title size="2" class="matter-text small-title">Dimensional Pylon</title>
-        <text class="matter-text text-block">You can build with it a 2x2x3 multi structure. Place the Dimensional Paylon blocks in a 2x2x3 pattern and righte klick it with a wrench. Sometimes there will go sparks from it.</text>
-        <text class="matter-text text-block">But the way how you can create power with it is unknown.</text>
+        <text class="matter-text text-block">A multi-structure. Place Dimensional Pylon blocks in a 2x2x3 pattern and right click it with a wrench. Sometimes sparks will fly from it.</text>
+        <text class="matter-text text-block">How you can create power with it is unknown.</text>
     </page>
 </entry>

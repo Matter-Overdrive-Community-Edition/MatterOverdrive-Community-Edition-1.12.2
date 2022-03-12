@@ -18,6 +18,7 @@ public class BioticStatWirelessCharger extends AbstractBioticStat {
     public BioticStatWirelessCharger(String name, int xp) {
         super(name, xp);
 		setShowOnHud(true);
+		setShowOnWheel(true);
     }
 	@Override
     public String getDetails(int level) {
@@ -53,11 +54,6 @@ public class BioticStatWirelessCharger extends AbstractBioticStat {
     }
 
     @Override
-    public boolean showOnWheel(AndroidPlayer androidPlayer, int level) {
-        return androidPlayer.getPlayer().isSneaking();
-    }
-
-    @Override
     public boolean isEnabled(AndroidPlayer androidPlayer, int level) {
 		return super.isEnabled(androidPlayer, level) && androidPlayer.hasEnoughEnergyScaled(CHARGE_SPEED);
     }
@@ -84,7 +80,7 @@ public class BioticStatWirelessCharger extends AbstractBioticStat {
 
     @Override
     public boolean isActive(AndroidPlayer androidPlayer, int level) {
-        return true;
+        return androidPlayer.getAndroidEffects().getEffectBool(AndroidPlayer.EFFECT_WIRELESS_CHARGING);
     }
 
     @Override

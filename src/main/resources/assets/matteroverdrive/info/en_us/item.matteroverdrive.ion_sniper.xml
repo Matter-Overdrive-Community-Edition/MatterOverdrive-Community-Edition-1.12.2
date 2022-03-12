@@ -23,7 +23,7 @@
         <text class="matter-text text-block">The $itemName is a powerful long range Energy weapon, that fires powerful single phaser bolts. It also allows the player to zoom in for significantly greater accuracy.</text>
     </page>
     <page class="padded-page">
-        <text class="matter-text text-block">The range of the $itemName allows it for kills over great distances. It is also the weapon that benefits most by weapon scopes, especially the [item name=sniper_scope].</text>
+        <text class="matter-text text-block">The range of the $itemName allows it to kill over great distances. It is also the weapon that benefits the most by weapon scopes, especially the [item name=sniper_scope].</text>
         <text class="matter-text text-block">Ranged rogue androids can wield this weapon as well, and will be quite deadly and will target enemies from great distances.</text>
         <text class="matter-text text-block">Like most energy weapons the $itemName can be rapidly recharged by [item name=energy_pack],
             overhead if fired continually without stopping and can be upgraded using weapon modules at the [block name=weapon_station].</text>

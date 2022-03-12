@@ -3,6 +3,11 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Fix for stats (infiniteblock)
+* High jump Fix (infiniteblock)
+* Update README.md (infiniteblock)
+* Create industrial_glass.json (infiniteblock)
+* Fix for #13 (infiniteblock)
 * 3RD Person view fix's (infiniteblock)
 * Portable Decomposer (infiniteblock)
 * tidy up (infiniteblock)
