@@ -69,7 +69,7 @@ public class GuiDimensionalPylon extends MOGuiMachine<TileEntityMachineDimension
             yPos = 110;
             fontRenderer.drawStringWithShadow(info, xPos, yPos, Reference.COLOR_HOLO_RED.getColor());
 
-            info = "-" + format.format(container.getMatterDrainPerSec()) + MatterHelper.MATTER_UNIT + "/s";
+            info = "-" + format.format(container.getMatterDrainPerSec()) + MatterHelper.MATTER_UNIT + "/t";
             width = fontRenderer.getStringWidth(info);
             xPos = 138 - width / 2;
             yPos = 98;

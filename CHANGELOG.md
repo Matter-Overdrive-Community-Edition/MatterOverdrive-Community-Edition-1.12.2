@@ -3,6 +3,7 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Wireless Charging Fix, En lang Fix's (infiniteblock)
 * Fix for stats (infiniteblock)
 * High jump Fix (infiniteblock)
 * Update README.md (infiniteblock)

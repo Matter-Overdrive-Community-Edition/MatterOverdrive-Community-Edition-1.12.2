@@ -47,6 +47,8 @@ public abstract class MOImageGen<T extends MOImageGen.ImageGenWorker> {
         if (block != null) {
             world.setBlockState(pos, block, placeNotify);
             onBlockPlace(world, block, pos, random, color, worker);
+			world.markBlockRangeForRenderUpdate(pos, pos);
+			world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 3);
         }
     }
 	

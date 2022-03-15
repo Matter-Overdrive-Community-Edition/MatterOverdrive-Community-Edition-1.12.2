@@ -63,7 +63,11 @@ public class BioticStatTeleport extends AbstractBioticStat implements IConfigSub
     @SideOnly(Side.CLIENT)
     private void manageActivate(AndroidPlayer androidPlayer) {
         if (ClientProxy.keyHandler.getBinding(KeyHandler.ABILITY_USE_KEY).isKeyDown() && this.equals(androidPlayer.getActiveStat())) {
-            hasPressedKey = true;
+			if (ClientProxy.keyHandler.getBinding(KeyHandler.ABILITY_SWITCH_KEY).isKeyDown()) {
+            hasPressedKey = false;
+			} else {
+				hasPressedKey = true;
+			}
         } else if (hasPressedKey) {
             Vec3d pos = getPos(androidPlayer);
             if (pos != null && !MinecraftForge.EVENT_BUS.post(new MOEventBionicStat(this, androidPlayer.getUnlockedLevel(this), androidPlayer))) {
