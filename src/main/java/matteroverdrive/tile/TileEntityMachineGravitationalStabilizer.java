@@ -7,6 +7,7 @@ import matteroverdrive.blocks.BlockGravitationalAnomaly;
 import matteroverdrive.blocks.includes.MOBlock;
 import matteroverdrive.client.render.RenderParticlesHandler;
 import matteroverdrive.fx.GravitationalStabilizerBeamParticle;
+import matteroverdrive.machines.MOTileEntityMachine;
 import matteroverdrive.init.MatterOverdriveSounds;
 import matteroverdrive.machines.events.MachineEvent;
 import matteroverdrive.proxy.ClientProxy;
@@ -30,7 +31,7 @@ import java.awt.*;
 
 import static matteroverdrive.util.MOBlockHelper.getAboveSide;
 
-public class TileEntityMachineGravitationalStabilizer extends MOTileEntityMachineEnergy implements IMOTickable {
+public class TileEntityMachineGravitationalStabilizer extends MOTileEntityMachine implements IMOTickable {
     public static Color color1 = new Color(0xFFFFFF);
     public static Color color2 = new Color(0xFF0000);
     public static Color color3 = new Color(0x115A84);

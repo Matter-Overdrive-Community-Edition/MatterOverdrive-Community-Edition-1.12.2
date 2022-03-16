@@ -11,10 +11,10 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "G": {
-      "item": "minecraft:glass"
+      "item": "#BLOCKGLASS"
     },
     "T": {
-      "item": "matteroverdrive:tritanium_ingot"
+      "item": "#INGOTTRITANIUM"
     },
     "F": {
       "item": "matteroverdrive:forcefield_emitter"

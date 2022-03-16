@@ -20,8 +20,7 @@
       "item": "#BLOCKGLASS"
     },
     "W": {
-      "item": "minecraft:wool",
-      "data": 0
+      "item": "#WOOL"
     },
     "H": {
       "item": "matteroverdrive:weapon_handle"

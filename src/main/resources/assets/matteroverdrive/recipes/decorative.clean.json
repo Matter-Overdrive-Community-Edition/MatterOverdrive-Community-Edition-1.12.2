@@ -4,18 +4,14 @@
     "count": 8
   },
   "pattern": [
-    " S ",
-    "STS",
-    " S "
+    "SS ",
+    "SS ",
+    "   "
   ],
   "type": "minecraft:crafting_shaped",
   "key": {
     "S": {
-      "item": "minecraft:stone",
-      "data": 0
-    },
-    "T": {
-      "item": "matteroverdrive:tritanium_plate"
+      "item": "#INGOTTRITANIUM"
     }
   }
 }

@@ -14,8 +14,7 @@
       "data": 0
     },
     "B": {
-      "item": "minecraft:wool",
-      "data": 15
+      "item": "#WOOL"
     },
     "2": {
       "item": "matteroverdrive:isolinear_circuit",

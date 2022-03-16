@@ -17,8 +17,7 @@
       "item": "matteroverdrive:forcefield_emitter"
     },
     "G": {
-      "item": "minecraft:stained_glass_pane",
-      "data": 5
+      "item": "#GLASSPANE"
     },
     "I": {
       "item": "#INGOTIRON"

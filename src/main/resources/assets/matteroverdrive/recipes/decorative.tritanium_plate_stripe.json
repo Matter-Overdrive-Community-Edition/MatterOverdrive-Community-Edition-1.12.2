@@ -14,8 +14,7 @@
       "item": "matteroverdrive:decorative.tritanium_plate"
     },
     "Y": {
-      "item": "minecraft:dye",
-      "data": 11
+      "item": "#DYEYELLOW"
     }
   }
 }

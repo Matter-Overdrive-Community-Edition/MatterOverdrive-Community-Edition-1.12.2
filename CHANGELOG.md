@@ -3,6 +3,7 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* World Generation Bug Fix! (infiniteblock)
 * Wireless Charging Fix, En lang Fix's (infiniteblock)
 * Fix for stats (infiniteblock)
 * High jump Fix (infiniteblock)

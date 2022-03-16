@@ -17,8 +17,7 @@
       "item": "minecraft:clay"
     },
     "G": {
-      "item": "minecraft:dye",
-      "data": 1
+      "item": "#DYEGREEN"
     }
   }
 }

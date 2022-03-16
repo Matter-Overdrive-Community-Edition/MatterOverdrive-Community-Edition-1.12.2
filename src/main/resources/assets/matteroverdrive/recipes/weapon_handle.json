@@ -13,8 +13,7 @@
       "item": "#INGOTTRITANIUM"
     },
     "W": {
-      "item": "minecraft:wool",
-      "data": 15
+      "item": "#WOOL"
     },
     "I": {
       "item": "#INGOTIRON"
