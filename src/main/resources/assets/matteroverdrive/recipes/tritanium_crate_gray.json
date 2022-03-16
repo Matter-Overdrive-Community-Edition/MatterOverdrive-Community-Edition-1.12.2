@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "matteroverdrive:tritanium_crate_yellow"
+    "item": "matteroverdrive:tritanium_crate_gray"
   },
   "pattern": [
     " D ",
@@ -16,7 +16,7 @@
       "item": "matteroverdrive:tritanium_plate"
     },
     "D": {
-      "item": "#DYEYELLOW"
+      "item": "#DYEGRAY"
     }
   }
 }

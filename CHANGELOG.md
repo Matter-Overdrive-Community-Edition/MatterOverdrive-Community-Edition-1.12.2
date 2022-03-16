@@ -3,6 +3,8 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Tweak's & Fix's (infiniteblock)
+* Update issue templates (infiniteblock)
 * World Generation Bug Fix! (infiniteblock)
 * Wireless Charging Fix, En lang Fix's (infiniteblock)
 * Fix for stats (infiniteblock)
