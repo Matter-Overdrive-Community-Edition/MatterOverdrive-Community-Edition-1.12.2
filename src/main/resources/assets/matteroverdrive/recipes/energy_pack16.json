@@ -1,0 +1,27 @@
+{
+	"type": "forge:ore_shapeless",
+	"ingredients": [{
+			"type": "minecraft:item_nbt",
+			"item": "matteroverdrive:battery",
+			"nbt": {
+				"energy": {
+					"maxReceive": 400,
+					"maxExtract": 800,
+					"energy": 524288,
+					"capacity": 524288
+				}
+			}
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "gunpowder"
+		},
+		{
+			"item": "matteroverdrive:tritanium_plate"
+		}
+	],
+	"result": {
+		"item": "matteroverdrive:energy_pack",
+		"count": 16
+	}
+}
