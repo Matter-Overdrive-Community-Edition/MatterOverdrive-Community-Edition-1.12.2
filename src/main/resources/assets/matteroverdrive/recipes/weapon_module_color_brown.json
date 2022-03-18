@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "matteroverdrive:weapon_module_color",
+    "data": 3,
+    "count": 1
+  },
+  "pattern": [
+    "#  ",
+    "D  ",
+    "   "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "matteroverdrive:upgrade",
+      "data": 0
+    },
+    "D": {
+      "item": "#DYEBROWN"
+    }
+  }
+}
