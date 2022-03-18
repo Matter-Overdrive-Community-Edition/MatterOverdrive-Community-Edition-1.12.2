@@ -5,9 +5,9 @@
     "count": 1
   },
   "pattern": [
-    "#  ",
-    "D  ",
-    "   "
+    " G ",
+    " D ",
+    " # "
   ],
   "type": "minecraft:crafting_shaped",
   "key": {
@@ -17,6 +17,9 @@
     },
     "D": {
       "item": "#DYEGRAY"
+    },
+    "G": {
+      "item": "#BLOCKGLASS"
     }
   }
 }

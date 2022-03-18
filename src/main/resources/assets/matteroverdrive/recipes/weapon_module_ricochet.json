@@ -1,0 +1,27 @@
+{
+  "result": {
+    "item": "matteroverdrive:weapon_module_ricochet",
+    "data": 0
+  },
+  "pattern": [
+    " G ",
+    "DSD",
+    " T "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "slimeball"
+    },
+    "G": {
+      "item": "#BLOCKGLASS"
+    },
+    "T": {
+      "item": "matteroverdrive:tritanium_plate"
+    },
+    "D": {
+      "item": "minecraft:fire_charge"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "result": {
+    "item": "matteroverdrive:weapon_module_barrel",
+    "data": 4
+  },
+  "pattern": [
+    " G ",
+    "SRS",
+    "DTD"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "R": {
+      "item": "matteroverdrive:isolinear_circuit",
+      "data": 3
+    },
+    "G": {
+      "item": "#BLOCKGLASS"
+    },
+    "S": {
+      "item": "minecraft:nether_star"
+    },
+    "T": {
+      "item": "matteroverdrive:tritanium_plate"
+    },
+    "D": {
+      "item": "minecraft:fire_charge"
+    }
+  }
+}
