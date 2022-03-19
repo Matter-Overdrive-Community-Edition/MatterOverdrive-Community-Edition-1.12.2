@@ -3,6 +3,11 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Color Module Recipes (infiniteblock)
+* Energy Pack Crafting (infiniteblock)
+* Cleaning up presentation of the guide. (Joseph)
+* Update item.matteroverdrive.energy_pack.xml (infiniteblock)
+* Crate Recipes (infiniteblock)
 * Tweak's & Fix's (infiniteblock)
 * Update issue templates (infiniteblock)
 * World Generation Bug Fix! (infiniteblock)
