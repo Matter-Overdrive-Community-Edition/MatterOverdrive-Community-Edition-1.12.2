@@ -3,6 +3,8 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* tweak (infiniteblock)
+* Recipes Work (infiniteblock)
 * Color Module Recipes (infiniteblock)
 * Energy Pack Crafting (infiniteblock)
 * Cleaning up presentation of the guide. (Joseph)

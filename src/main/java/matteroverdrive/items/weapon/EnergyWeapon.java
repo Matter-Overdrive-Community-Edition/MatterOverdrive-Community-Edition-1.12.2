@@ -232,12 +232,12 @@ public abstract class EnergyWeapon extends MOItemEnergyContainer implements IWea
             for (int i = 0; i < player.inventory.mainInventory.size(); i++) {
                 ItemStack stack = player.inventory.mainInventory.get(i);
                 if (!stack.isEmpty() && stack.getItem() instanceof IEnergyPack && stack.getCount() > 0) {
-                    stack.shrink(1);
                     IEnergyStorage container = getStorage(weapon);
                     if (container instanceof EnergyContainer)
                         ((EnergyContainer) container).setEnergy(container.getEnergyStored() + ((IEnergyPack) stack.getItem()).getEnergyAmount(stack));
                     //player.inventory.inventoryChanged = true;
                     player.world.playSound(null, player.getPosition(), MatterOverdriveSounds.weaponsReload, SoundCategory.PLAYERS, 0.7f + itemRand.nextFloat() * 0.2f, 0.9f + itemRand.nextFloat() * 0.2f);
+                    stack.shrink(1);
                     if (stack.getCount() <= 0) {
                         player.inventory.mainInventory.set(i, ItemStack.EMPTY);
                     }
