@@ -3,6 +3,7 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Weapon Reload bug Fix. (infiniteblock)
 * tweak (infiniteblock)
 * Recipes Work (infiniteblock)
 * Color Module Recipes (infiniteblock)

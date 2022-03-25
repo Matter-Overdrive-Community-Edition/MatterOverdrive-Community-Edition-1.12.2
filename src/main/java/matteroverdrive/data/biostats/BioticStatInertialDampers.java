@@ -23,8 +23,12 @@ public class BioticStatInertialDampers extends AbstractBioticStat {
     }
 
     public String getDetails(int level) {
-        return MOStringHelper.translateToLocal(getUnlocalizedDetails(), TextFormatting.GREEN + DecimalFormat.getPercentInstance().format(level * 0.5f) + TextFormatting.GRAY);
-    }
+		if (level == 1) {
+			return MOStringHelper.translateToLocal(getUnlocalizedDetails(), TextFormatting.GREEN + DecimalFormat.getPercentInstance().format(1 * 0.5f) + TextFormatting.GRAY);
+		} else {
+			return MOStringHelper.translateToLocal(getUnlocalizedDetails(), TextFormatting.GREEN + DecimalFormat.getPercentInstance().format(2 * 0.5f) + TextFormatting.GRAY);	
+		}
+	}
 
     @Override
     public void onActionKeyPress(AndroidPlayer androidPlayer, int level, boolean server) {
