@@ -1,0 +1,40 @@
+repositories {
+	maven {
+		name "Mobius"
+		url "http://mobiusstrip.eu/maven"
+	}
+
+	maven {
+		name "tterrag"
+		url "http://maven.tterrag.com"
+	}
+
+	maven {
+		name "shadowfacts"
+		url "http://maven.shadowfacts.net/"
+	}
+	maven {
+		name "darkhax"
+		url "http://maven.epoxide.xyz"
+	}
+	maven {
+		name "progwml6"
+		url "http://dvs1.progwml6.com/files/maven"
+	}
+}
+
+dependencies {
+	deobfCompile group: "net.shadowfacts", name: "ShadowMC", version: config.mc_version + "-" + config.shadowmc_version
+	deobfCompile group: "net.darkhax.tesla", name: "Tesla", version: config.mc_version + "-" + config.tesla_version
+
+	deobfCompile group: "mezz.jei", name: "jei_" + config.mc_version, version: config.jei_version
+
+	deobfCompile group: 'mcp.mobius.waila', name: 'Waila', version: config.waila_version + "_1.9.4"
+	deobfCompile group: "mcjty.theoneprobe", name: "TheOneProbe", version: "1.9.4-" + config.top_version
+	
+	deobfCompile group: 'com.enderio.core', name: 'EnderCore', version: config.mc_version + "-" + config.endercore_version
+	deobfCompile group: 'com.enderio', name: 'EnderIO', version: config.mc_version + "-" + config.enderio_version
+
+	deobfCompile group: "slimeknights.mantle", name: "Mantle", version: config.mc_version + "-" + config.mantle_version
+	deobfCompile group: "slimeknights", name: "TConstruct", version: "1.10-" + config.tico_version
+}

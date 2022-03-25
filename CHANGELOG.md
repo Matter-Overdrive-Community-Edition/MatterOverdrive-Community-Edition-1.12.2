@@ -3,6 +3,7 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Inertial Dampers Level Fix (infiniteblock)
 * Weapon Reload bug Fix. (infiniteblock)
 * tweak (infiniteblock)
 * Recipes Work (infiniteblock)
