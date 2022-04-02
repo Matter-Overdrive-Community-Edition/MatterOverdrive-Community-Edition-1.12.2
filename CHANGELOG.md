@@ -3,6 +3,8 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* updates (infiniteblock)
+* gradle fix. (infiniteblock)
 * Inertial Dampers Level Fix (infiniteblock)
 * Weapon Reload bug Fix. (infiniteblock)
 * tweak (infiniteblock)

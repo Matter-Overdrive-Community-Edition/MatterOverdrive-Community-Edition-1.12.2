@@ -191,16 +191,6 @@ public class PhaserRifle extends EnergyWeapon {
             } else if (needsRecharge(itemStack)) {
                 chargeFromEnergyPack(itemStack, entityPlayer);
             }
-
-            if (! canFire(itemStack, world, entityPlayer)) {
-                MOPositionedSound sound = new MOPositionedSound(MatterOverdriveSounds.weaponsOverheat, SoundCategory.PLAYERS, 0.8f + itemRand.nextFloat() * 0.2f, 0.9f + itemRand.nextFloat() * 0.2f);
-                BlockPos position = entityPlayer.getPosition();
-                sound.setPosition((float) position.getX(), (float) position.getY(), (float) position.getZ());
-                Minecraft.getMinecraft().getSoundHandler().playSound(sound);
-                sound = new MOPositionedSound(MatterOverdriveSounds.weaponsOverheatAlarm, SoundCategory.PLAYERS, 0.8f + itemRand.nextFloat() * 0.2f, 0.9f + itemRand.nextFloat() * 0.2f);
-                sound.setPosition((float) position.getX(), (float) position.getY(), (float) position.getZ());
-                Minecraft.getMinecraft().getSoundHandler().playSound(sound);
-            }
         }
         super.onShooterClientUpdate(itemStack, world, entityPlayer, sendServerTick);
     }
@@ -233,11 +223,11 @@ public class PhaserRifle extends EnergyWeapon {
     @SideOnly(Side.CLIENT)
     public void onClientShot(ItemStack weapon, EntityLivingBase shooter, Vec3d position, Vec3d dir, WeaponShot shot) {
         //ClientProxy.weaponHandler.addShootDelay(this);
-        if (isOverheated(weapon)) {
-            MOPositionedSound sound = new MOPositionedSound(MatterOverdriveSounds.weaponsOverheat, SoundCategory.PLAYERS, 0.8f + itemRand.nextFloat() * 0.2f, 0.9f + itemRand.nextFloat() * 0.2f);
-            Minecraft.getMinecraft().getSoundHandler().playSound(sound);
-            return;
-        }
+        //if (isOverheated(weapon)) {
+        //    MOPositionedSound sound = new MOPositionedSound(MatterOverdriveSounds.weaponsOverheat, SoundCategory.PLAYERS, 0.8f + itemRand.nextFloat() * 0.2f, 0.9f + itemRand.nextFloat() * 0.2f);
+        //    Minecraft.getMinecraft().getSoundHandler().playSound(sound);
+        //    return;
+       // }
         MOPositionedSound sound = new MOPositionedSound(MatterOverdriveSounds.weaponsPhaserRifleShot, SoundCategory.PLAYERS, 0.8f + itemRand.nextFloat() * 0.2f, 0.9f + itemRand.nextFloat() * 0.2f);
         sound.setPosition((float) position.x, (float) position.y, (float) position.z);
         Minecraft.getMinecraft().getSoundHandler().playSound(sound);
@@ -283,8 +273,8 @@ public class PhaserRifle extends EnergyWeapon {
     }
 
     @Override
-    public boolean canFire(ItemStack weapon, World world, EntityLivingBase shooter) {
-        return DrainEnergy(weapon, getShootCooldown(weapon), true) && !isOverheated(weapon) && !isEntitySpectator(shooter);
+    public boolean canFire(ItemStack itemStack, World world, EntityLivingBase shooter) {
+        return !isOverheated(itemStack) && DrainEnergy(itemStack, getShootCooldown(itemStack), true) && !isEntitySpectator(shooter);
     }
 
     @Override
@@ -297,31 +287,4 @@ public class PhaserRifle extends EnergyWeapon {
         return 1f + getHeat(weapon) / (zoomed ? 30f : 10f);
     }
 
-//    public PlasmaBolt spawnProjectile(ItemStack weapon, EntityLivingBase shooter, Vec3d position, Vec3d dir, WeaponShot shot) {
-//        //PlasmaBolt fire = new PlasmaBolt(entityPlayer.world, entityPlayer,position,dir, getWeaponScaledDamage(weapon), 2, getAccuracy(weapon, zoomed), getRange(weapon), WeaponHelper.getColor(weapon).getColor(), zoomed,seed);
-//        PlasmaBolt[] bolts = new PlasmaBolt[shot.getCount()];
-//        for (int i = 0; i < shot.getCount(); i++) {
-//            WeaponShot newShot = new WeaponShot(shot);
-//            if (shooter.world.isRemote) {
-//                newShot.setSeed(((ClientWeaponHandler) MatterOverdrive.PROXY.getWeaponHandler()).getNextShotID());
-//            } else {
-//                newShot.setSeed(shot.getSeed() + i);
-//            }
-//            newShot.setDamage(shot.getDamage() / shot.getCount());
-//            bolts[i] = new PlasmaBolt(shooter.world, shooter, position, dir, newShot, getShotSpeed(weapon, shooter));
-//            bolts[i].setWeapon(weapon);
-//            bolts[i].setRenderSize((getShotCount(weapon, shooter) / shot.getCount()) * 0.5f);
-//            bolts[i].setFireDamageMultiply(WeaponHelper.modifyStat(WeaponStats.FIRE_DAMAGE, weapon, 0));
-//            float explosionMultiply = WeaponHelper.modifyStat(WeaponStats.EXPLOSION_DAMAGE, weapon, 0);
-//            if (explosionMultiply > 0) {
-//                bolts[i].setExplodeMultiply((getWeaponBaseDamage(weapon) * 0.3f * explosionMultiply) / shot.getCount());
-//            }
-//            bolts[i].setKnockBack(0.5f);
-//            if (WeaponHelper.modifyStat(WeaponStats.RICOCHET, weapon, 0) == 1) {
-//                bolts[i].markRicochetable();
-//            }
-//            shooter.world.spawnEntity(bolts[i]);
-//        }
-//        return bolts;
-//    }
 }
