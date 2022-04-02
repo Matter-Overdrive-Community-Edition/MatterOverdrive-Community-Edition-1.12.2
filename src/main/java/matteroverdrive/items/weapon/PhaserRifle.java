@@ -222,7 +222,6 @@ public class PhaserRifle extends EnergyWeapon {
     @Override
     @SideOnly(Side.CLIENT)
     public void onClientShot(ItemStack weapon, EntityLivingBase shooter, Vec3d position, Vec3d dir, WeaponShot shot) {
-        ClientProxy.weaponHandler.addShootDelay(this);
         MOPositionedSound sound = new MOPositionedSound(MatterOverdriveSounds.weaponsPhaserRifleShot, SoundCategory.PLAYERS, 0.8f + itemRand.nextFloat() * 0.2f, 0.9f + itemRand.nextFloat() * 0.2f);
         sound.setPosition((float) position.x, (float) position.y, (float) position.z);
         Minecraft.getMinecraft().getSoundHandler().playSound(sound);
