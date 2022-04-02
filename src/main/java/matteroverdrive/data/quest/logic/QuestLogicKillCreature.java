@@ -60,7 +60,7 @@ public class QuestLogicKillCreature extends AbstractQuestLogic {
         shootOnly = MOJsonHelper.getBool(jsonObject, "shoot_only", false);
         onlyChildren = MOJsonHelper.getBool(jsonObject, "children_only", false);
         minKillCount = MOJsonHelper.getInt(jsonObject, "kill_count_min");
-        minKillCount = MOJsonHelper.getInt(jsonObject, "kill_count_max");
+        maxKillCount = MOJsonHelper.getInt(jsonObject, "kill_count_max");
         xpPerKill = MOJsonHelper.getInt(jsonObject, "xp");
         JsonArray creatureTypes = jsonObject.getAsJsonArray("creatures");
         this.creatureTypes = new String[creatureTypes.size()];
