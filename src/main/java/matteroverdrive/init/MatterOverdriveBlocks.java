@@ -197,7 +197,7 @@ public class MatterOverdriveBlocks {
         decorative_carbon_fiber_plate = register(new BlockDecorative(TRITANIUM, "decorative.carbon_fiber_plate", 10, 1, 12, 0x1c1f20));
         decorative_matter_tube = register(new BlockDecorativeRotated(Material.GLASS, "decorative.matter_tube", 3, 1, 4, 0x5088a5));
         decorative_beams = register(new BlockDecorativeRotated(TRITANIUM, "decorative.beams", 8, 1, 8, 0x1e2220));
-		decorative_floor_tiles = register(new BlockDecorativeColored(Material.CLAY, "decorative.floor_tiles", 4, 0, 4, 0x958d7c));
+        decorative_floor_tiles = register(new BlockDecorativeColored(Material.CLAY, "decorative.floor_tiles", 4, 0, 4, 0x958d7c));
         decorative_floor_tile = register(new BlockDecorativeColored(Material.CLAY, "decorative.floor_tile", 4, 0, 4, 0xa3a49c));
         decorative_floor_noise = register(new BlockDecorative(Material.CLAY, "decorative.floor_noise", 4, 0, 4, 0x7f7e7b));
         decorative_white_plate = register(new BlockDecorative(TRITANIUM, "decorative.white_plate", 8, 1, 8, 0xe3e3e3));
