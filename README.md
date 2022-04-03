@@ -1,4 +1,4 @@
-![alt tag](https://bitbucket.org/hrznstudio/mo-legacy-edition/raw/1.12.2/Banner.png)
+![alt tag](![image](https://user-images.githubusercontent.com/5800555/161414801-f64c5a26-34b1-449c-b6c3-8d206754c43b.png))
 
 [![Discord](https://img.shields.io/discord/703124643149643818.svg?style=for-the-badge)](https://discord.gg/hQyAEZV)
 
