@@ -1,0 +1,25 @@
+{
+  "result": {
+    "item": "matteroverdrive:decorative.floor_tiles",
+    "data": 3,
+    "count": 16
+  },
+  "pattern": [
+    "#D#",
+    "#P#",
+    "#D#"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "P": {
+    "type": "forge:ore_dict",
+	"ore": "blockFloorTile"
+    },
+	"#": {
+      "item": "minecraft:clay"
+    },
+    "D": {
+      "item": "#DYEBROWN"
+    }
+  }
+}

@@ -1,7 +1,7 @@
 
 package matteroverdrive;
 
-import matteroverdrive.commands.AndoidCommands;
+import matteroverdrive.commands.AndroidCommands;
 import matteroverdrive.commands.CommandMatterRegistry;
 import matteroverdrive.commands.QuestCommands;
 import matteroverdrive.commands.WorldGenCommands;
@@ -181,7 +181,7 @@ public class MatterOverdrive {
 
     @EventHandler
     public void serverStarting(FMLServerStartingEvent event) {
-        event.registerServerCommand(new AndoidCommands());
+        event.registerServerCommand(new AndroidCommands());
         event.registerServerCommand(new CommandMatterRegistry());
         event.registerServerCommand(new QuestCommands());
 

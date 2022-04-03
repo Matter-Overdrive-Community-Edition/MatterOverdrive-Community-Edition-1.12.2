@@ -2,6 +2,20 @@
   {
     "ingredient": {
       "type": "forge:ore_dict",
+      "ore": "blockFloorTile"
+    },
+    "name": "BLOCKFLOORTILE"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "blockFloorTiles"
+    },
+    "name": "BLOCKFLOORTILES"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
       "ore": "blockGlass"
     },
     "name": "BLOCKGLASS"

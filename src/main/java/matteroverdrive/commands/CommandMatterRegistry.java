@@ -23,7 +23,7 @@ public class CommandMatterRegistry extends MOCommand {
         addCommand(new SubCommand("recalculate") {
             @Override
             public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
-                MatterOverdrive.MATTER_REGISTRY.getItemEntires().clear();
+                MatterOverdrive.MATTER_REGISTRY.getItemEntries().clear();
                 MatterOverdriveMatter.registerBasic(MatterOverdrive.CONFIG_HANDLER);
                 MatterOverdrive.MATTER_REGISTRATION_HANDLER.runCalculationThread(sender.getEntityWorld());
             }

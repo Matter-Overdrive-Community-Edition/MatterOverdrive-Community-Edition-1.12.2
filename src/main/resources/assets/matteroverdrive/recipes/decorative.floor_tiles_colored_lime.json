@@ -1,20 +1,24 @@
 {
   "result": {
     "item": "matteroverdrive:decorative.floor_tiles",
-    "count": 32
+    "data": 10,
+    "count": 16
   },
   "pattern": [
-    "###",
-    "#Q#",
-    "###"
+    "#D#",
+    "#P#",
+    "#D#"
   ],
   "type": "minecraft:crafting_shaped",
   "key": {
-    "Q": {
-      "item": "#GEMQUARTZ"
+    "P": {
+      "item": "#BLOCKFLOORTILE"
     },
-    "#": {
+	"#": {
       "item": "minecraft:clay"
+    },
+    "D": {
+      "item": "#DYELIME"
     }
   }
 }

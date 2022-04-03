@@ -37,8 +37,8 @@ public class MatterRegistry implements IMatterRegistry {
     public boolean hasComplitedRegistration = false;
     public int basicEntries = 0;
     private boolean REGISTRATION_DEBUG = false;
-    private Map<Item, MatterEntryItem> itemEntires = new HashMap<>();
-    private Map<Block, MatterEntryBlock> blockEntires = new HashMap<>();
+    private Map<Item, MatterEntryItem> itemEntries = new HashMap<>();
+    private Map<Block, MatterEntryBlock> blockEntries = new HashMap<>();
     private Map<String, MatterEntryOre> oreEntries = new HashMap<>();
 
     public void preInit(final FMLPreInitializationEvent event, final ConfigurationHandler configurationHandler) {
@@ -55,7 +55,7 @@ public class MatterRegistry implements IMatterRegistry {
         file.createNewFile();
         FileOutputStream fileOutputStream = new FileOutputStream(file);
         NBTTagCompound tagCompound = new NBTTagCompound();
-        saveListToNBT("Items", tagCompound, itemEntires.values());
+        saveListToNBT("Items", tagCompound, itemEntries.values());
         saveListToNBT("Ores", tagCompound, oreEntries.values());
         tagCompound.setString("Version", Reference.VERSION);
         tagCompound.setInteger("RecipeCount", CraftingManager.REGISTRY.getKeys().size());
@@ -85,12 +85,12 @@ public class MatterRegistry implements IMatterRegistry {
             for (String key : itemsList.getKeySet()) {
                 MatterEntryItem item = new MatterEntryItem();
                 item.readKey(key);
-                MatterEntryItem existingEntry = this.itemEntires.get(item.getKey());
+                MatterEntryItem existingEntry = this.itemEntries.get(item.getKey());
                 if (existingEntry != null) {
                     existingEntry.readFrom(itemsList.getCompoundTag(key));
                 } else {
                     item.readFrom(itemsList.getCompoundTag(key));
-                    this.itemEntires.put(item.getKey(), item);
+                    this.itemEntries.put(item.getKey(), item);
                 }
             }
             NBTTagCompound oresList = tagCompound.getCompoundTag("Ores");
@@ -107,7 +107,7 @@ public class MatterRegistry implements IMatterRegistry {
             }
             String version = tagCompound.getString("Version");
             fileInputStream.close();
-            MOLog.info("Registry Loaded %1$s cached itemEntires, from version %2$s from: %3$s", itemsList.getKeySet().size() + oresList.getKeySet().size(), version, file.getPath());
+            MOLog.info("Registry Loaded %1$s cached itemEntries, from version %2$s from: %3$s", itemsList.getKeySet().size() + oresList.getKeySet().size(), version, file.getPath());
         }
     }
 
@@ -139,7 +139,7 @@ public class MatterRegistry implements IMatterRegistry {
     }
 
     public void unload() {
-        itemEntires.values().forEach(MatterEntryItem::clearAllCashed);
+        itemEntries.values().forEach(MatterEntryItem::clearAllCashed);
         oreEntries.values().forEach(MatterEntryOre::clearAllCashed);
     }
 
@@ -181,7 +181,7 @@ public class MatterRegistry implements IMatterRegistry {
 
     public IMatterEntry<?, ?> getEntry(final ItemStack item) {
         try {
-            IMatterEntry e = itemEntires.get(item.getItem());
+            IMatterEntry e = itemEntries.get(item.getItem());
             if (e == null) {
                 e = getOreDicionaryEntry(item);
             }
@@ -224,7 +224,7 @@ public class MatterRegistry implements IMatterRegistry {
 
 
     public IMatterEntry register(final @Nonnull Item item, final IMatterEntryHandler handler) {
-        IMatterEntry existingEntry = itemEntires.get(item);
+        IMatterEntry existingEntry = itemEntries.get(item);
         if (existingEntry != null) {
             existingEntry.addHandler(handler);
             return existingEntry;
@@ -234,7 +234,7 @@ public class MatterRegistry implements IMatterRegistry {
 
             if (!MinecraftForge.EVENT_BUS.post(new MOEventRegisterMatterEntry(entry))) {
                 //debug("Registered: %1$s - %2$s kM", entry.getSpaceBodyName(), entry.getMatter());
-                itemEntires.put(entry.getKey(), entry);
+                itemEntries.put(entry.getKey(), entry);
             }
             return entry;
         }
@@ -365,8 +365,8 @@ public class MatterRegistry implements IMatterRegistry {
         return (int) Math.round((double) totalMatter / (double) item.getCount());
     }
 
-    public Map<Item, MatterEntryItem> getItemEntires() {
-        return itemEntires;
+    public Map<Item, MatterEntryItem> getItemEntries() {
+        return itemEntries;
     }
 
     public Map<String, MatterEntryOre> getOreEntries() {

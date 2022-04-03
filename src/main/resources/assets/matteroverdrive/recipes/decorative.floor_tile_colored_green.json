@@ -1,22 +1,23 @@
 {
   "result": {
-    "item": "matteroverdrive:decorative.floor_tiles_green",
+    "item": "matteroverdrive:decorative.floor_tile",
+    "data": 2,
     "count": 32
   },
   "pattern": [
-    "#G#",
-    "#Q#",
-    "#G#"
+    "#D#",
+    "#P#",
+    "#D#"
   ],
   "type": "minecraft:crafting_shaped",
   "key": {
-    "Q": {
-      "item": "#GEMQUARTZ"
+    "P": {
+      "item": "matteroverdrive:decorative.tritanium_plate"
     },
-    "#": {
+	"#": {
       "item": "minecraft:clay"
     },
-    "G": {
+    "D": {
       "item": "#DYEGREEN"
     }
   }

@@ -93,8 +93,7 @@ public class MatterOverdriveBlocks {
     public BlockDecorative decorative_matter_tube;
     public BlockDecorative decorative_beams;
     public BlockDecorative decorative_floor_tiles;
-    public BlockDecorative decorative_floor_tile_white;
-    public BlockDecorative decorative_floor_tiles_green;
+    public BlockDecorative decorative_floor_tile;
     public BlockDecorative decorative_floor_noise;
     public BlockDecorative decorative_white_plate;
     public BlockDecorative decorative_separator;
@@ -118,8 +117,8 @@ public class MatterOverdriveBlocks {
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         items.forEach(i -> event.getRegistry().register(i));
-        MatterOverdriveItems.items.stream().filter(item -> item instanceof OreDictItem).forEach(item -> ((OreDictItem) item).registerOreDict());
         MatterOverdriveBlocks.blocks.stream().filter(block -> block instanceof OreDictItem).forEach(block -> ((OreDictItem) block).registerOreDict());
+        MatterOverdriveItems.items.stream().filter(item -> item instanceof OreDictItem).forEach(item -> ((OreDictItem) item).registerOreDict());
     }
 
     public void init() {
@@ -161,7 +160,6 @@ public class MatterOverdriveBlocks {
 
 //		Fluids
         blockMatterPlasma = register(new BlockFluidMatterPlasma(OverdriveFluids.matterPlasma, Material.WATER));
-//        blockMoltenTritanium = register((BlockFluidClassic) new BlockFluidClassic(OverdriveFluids.moltenTritanium, Material.LAVA).setRegistryName(new ResourceLocation(Reference.MOD_ID, "molten_tritanium")));
         blockMoltenTritanium = register(new BlockFluidMoltenTritanium(OverdriveFluids.moltenTritanium, Material.LAVA));
 
 //		Storage
@@ -199,9 +197,8 @@ public class MatterOverdriveBlocks {
         decorative_carbon_fiber_plate = register(new BlockDecorative(TRITANIUM, "decorative.carbon_fiber_plate", 10, 1, 12, 0x1c1f20));
         decorative_matter_tube = register(new BlockDecorativeRotated(Material.GLASS, "decorative.matter_tube", 3, 1, 4, 0x5088a5));
         decorative_beams = register(new BlockDecorativeRotated(TRITANIUM, "decorative.beams", 8, 1, 8, 0x1e2220));
-        decorative_floor_tiles = register(new BlockDecorative(Material.CLAY, "decorative.floor_tiles", 4, 0, 4, 0x958d7c));
-        decorative_floor_tile_white = register(new BlockDecorative(Material.CLAY, "decorative.floor_tile_white", 4, 0, 4, 0xa3a49c));
-        decorative_floor_tiles_green = register(new BlockDecorative(Material.CLAY, "decorative.floor_tiles_green", 4, 0, 4, 0x53593f));
+		decorative_floor_tiles = register(new BlockDecorativeColored(Material.CLAY, "decorative.floor_tiles", 4, 0, 4, 0x958d7c));
+        decorative_floor_tile = register(new BlockDecorativeColored(Material.CLAY, "decorative.floor_tile", 4, 0, 4, 0xa3a49c));
         decorative_floor_noise = register(new BlockDecorative(Material.CLAY, "decorative.floor_noise", 4, 0, 4, 0x7f7e7b));
         decorative_white_plate = register(new BlockDecorative(TRITANIUM, "decorative.white_plate", 8, 1, 8, 0xe3e3e3));
         decorative_separator = register(new BlockDecorativeRotated(TRITANIUM, "decorative.separator", 8, 1, 8, 0x303837));

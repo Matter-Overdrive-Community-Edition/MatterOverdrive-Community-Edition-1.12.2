@@ -1,6 +1,7 @@
-
 package matteroverdrive.blocks;
 
+import matteroverdrive.api.internal.OreDictItem;
+import matteroverdrive.MatterOverdrive;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
@@ -16,10 +17,11 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nonnull;
 
-public class BlockDecorativeColored extends BlockDecorative {
+public class BlockDecorativeColored extends BlockDecorative implements OreDictItem {
     public static final PropertyEnum<EnumDyeColor> COLOR = PropertyEnum.create("color", EnumDyeColor.class);
 
     public BlockDecorativeColored(Material material, String name, float hardness, int harvestLevel, float resistance, int mapColor) {
@@ -28,6 +30,14 @@ public class BlockDecorativeColored extends BlockDecorative {
 
     public static void registerRecipes() {
 
+    }
+
+    @Override
+    public void registerOreDict() {
+        for(int i = 0; i < 16; i++) {
+		OreDictionary.registerOre("blockFloorTile", new ItemStack(MatterOverdrive.BLOCKS.decorative_floor_tile, 1, i));
+		OreDictionary.registerOre("blockFloorTiles", new ItemStack(MatterOverdrive.BLOCKS.decorative_floor_tiles, 1, i));
+		}
     }
 
     @Override

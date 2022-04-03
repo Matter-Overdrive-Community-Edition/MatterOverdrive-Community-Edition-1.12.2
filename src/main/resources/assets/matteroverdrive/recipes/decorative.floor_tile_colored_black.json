@@ -1,0 +1,23 @@
+{
+  "result": {
+    "item": "matteroverdrive:decorative.floor_tile",
+    "count": 32
+  },
+  "pattern": [
+    "#D#",
+    "#P#",
+    "#D#"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "P": {
+      "item": "matteroverdrive:decorative.tritanium_plate"
+    },
+	"#": {
+      "item": "minecraft:clay"
+    },
+    "D": {
+      "item": "#DYEBLACK"
+    }
+  }
+}

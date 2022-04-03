@@ -3,7 +3,7 @@
   "defaults": {
     "model": "matteroverdrive:base/cube_colored_all",
     "textures": {
-      "all": "matteroverdrive:blocks/floor_tiles"
+      "all": "matteroverdrive:blocks/floor_tile"
     }
   },
   "variants": {

@@ -22,7 +22,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AndoidCommands extends CommandBase {
+public class AndroidCommands extends CommandBase {
     public static String[] subCommands = new String[]{
             "set", "stats", "unlock", "forget"
     };
