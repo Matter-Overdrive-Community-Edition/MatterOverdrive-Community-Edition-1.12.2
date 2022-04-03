@@ -3,6 +3,8 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Update MatterOverdriveBlocks.java (infiniteblock)
+* More work (infiniteblock)
 * Update PhaserRifle.java (infiniteblock)
 * Update PhaserRifle.java (infiniteblock)
 * Fix overheat sound when gun has no ammo. (infiniteblock)

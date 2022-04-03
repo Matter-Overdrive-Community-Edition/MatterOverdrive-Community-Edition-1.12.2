@@ -5,14 +5,14 @@
     "count": 32
   },
   "pattern": [
-    "#D#",
     "#P#",
-    "#D#"
+    "#D#",
+    "#P#"
   ],
   "type": "minecraft:crafting_shaped",
   "key": {
     "P": {
-      "item": "matteroverdrive:decorative.tritanium_plate"
+      "item": "matteroverdrive:tritanium_ingot"
     },
 	"#": {
       "item": "minecraft:clay"
