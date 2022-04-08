@@ -1,4 +1,4 @@
-![alt tag](https://bitbucket.org/hrznstudio/mo-legacy-edition/raw/1.12.2/Banner.png)
+![alt tag](https://github.com/Matter-Overdrive-Community-Edition/MatterOverdrive-Community-Edition-1.12.2/blob/main/BannerBlinks.gif)
 
 [![Discord](https://img.shields.io/discord/703124643149643818.svg?style=for-the-badge)](https://discord.gg/hQyAEZV)
 
