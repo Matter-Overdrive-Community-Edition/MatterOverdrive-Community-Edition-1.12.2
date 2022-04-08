@@ -2,6 +2,7 @@
 package matteroverdrive.commands;
 
 import matteroverdrive.MatterOverdrive;
+import matteroverdrive.Reference;
 import matteroverdrive.data.matter.DamageAwareStackHandler;
 import matteroverdrive.data.matter.ItemHandler;
 import matteroverdrive.data.matter.OreHandler;
@@ -31,6 +32,9 @@ public class CommandMatterRegistry extends MOCommand {
         addCommand(new SubCommand("blacklist") {
             @Override
             public void execute(MinecraftServer server, ICommandSender commandSender, String[] args) throws CommandException {
+				if (args.length <= 1) {
+					throw new CommandException("Missing option.\nmatterregistry blacklist <item/itemstack/ore> <player(optional)>");
+				}
                 ItemStack stack;
                 if (args.length >= 3) {
                     stack = getPlayer(server, commandSender, args[2]).getHeldItem(EnumHand.MAIN_HAND);
@@ -63,16 +67,19 @@ public class CommandMatterRegistry extends MOCommand {
                     newBlacklist[oldBlacklist.length] = key;
                     MatterOverdrive.CONFIG_HANDLER.config.get(ConfigurationHandler.CATEGORY_MATTER, ConfigurationHandler.KEY_MBLACKLIST, new String[]{}, "").set(newBlacklist);
                     MatterOverdrive.CONFIG_HANDLER.save();
-                    commandSender.sendMessage(new TextComponentString(TextFormatting.GOLD + "[" + key + "]" + TextFormatting.RESET + " Added $s to matter blacklist and config.\nYou must recalculate the registry for changes to take effect.\nUse /matter_registry recalculate."));
+                    commandSender.sendMessage(new TextComponentString(TextFormatting.GOLD + "[" + Reference.MOD_NAME + "]" + TextFormatting.RESET + " Added " + key + " to matter blacklist and config.\nYou must recalculate the registry for changes to take effect.\nUse /matterregistry recalculate."));
                     return;
                 } else {
-                    throw new CommandException("Player not holding any item", args[1]);
+                    throw new CommandException("Player is not holding any item", args[1]);
                 }
             }
         });
         addCommand(new SubCommand("register") {
             @Override
             public void execute(MinecraftServer server, ICommandSender commandSender, String[] args) throws CommandException {
+				if (args.length <= 2) {
+					throw new CommandException("Missing option.\nmatterregistry register <item/itemstack/ore> <matter value> <player(optional)>");
+				}
                 int matter = parseInt(args[2]);
                 ItemStack stack;
                 if (args.length >= 4) {
@@ -103,11 +110,22 @@ public class CommandMatterRegistry extends MOCommand {
 
                     MatterOverdrive.CONFIG_HANDLER.setInt(key, ConfigurationHandler.CATEGORY_MATTER_ITEMS, matter);
                     MatterOverdrive.CONFIG_HANDLER.save();
-                    commandSender.sendMessage(new TextComponentString(TextFormatting.GOLD + "[" + key + "]" + TextFormatting.RESET + " Added $s to matter registry and config.\nYou can now recalculated the registry.\nUse /matter_registry recalculate."));
+                    commandSender.sendMessage(new TextComponentString(TextFormatting.GOLD + "[" + Reference.MOD_NAME + "]" + TextFormatting.RESET + " Added " + key + " to matter registry and config.\nYou can now recalculated the registry.\nUse /matterregistry recalculate."));
                 } else {
-                    throw new CommandException("Player iz not holding any item", args[1]);
+                    throw new CommandException("Player is not holding any item", args[1]);
                 }
             }
         });
     }
+
+    @Override
+    public String getName() {
+        return "matterregistry";
+    }
+
+    @Override
+    public String getUsage(ICommandSender commandSender) {
+        return "matterregistry <recalculate/blacklist/register> <item/itemstack/ore> <matter value> <player(optional)>";
+	}
+
 }

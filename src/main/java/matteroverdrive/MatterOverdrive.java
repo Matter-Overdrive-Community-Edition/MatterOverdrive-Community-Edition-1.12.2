@@ -5,6 +5,7 @@ import matteroverdrive.commands.AndroidCommands;
 import matteroverdrive.commands.CommandMatterRegistry;
 import matteroverdrive.commands.QuestCommands;
 import matteroverdrive.commands.WorldGenCommands;
+import matteroverdrive.commands.HelpCommand;
 import matteroverdrive.compat.MatterOverdriveCompat;
 import matteroverdrive.entity.EntityVillagerMadScientist;
 import matteroverdrive.entity.android_player.AndroidPlayer;
@@ -181,10 +182,10 @@ public class MatterOverdrive {
 
     @EventHandler
     public void serverStarting(FMLServerStartingEvent event) {
+		event.registerServerCommand(new HelpCommand());
         event.registerServerCommand(new AndroidCommands());
         event.registerServerCommand(new CommandMatterRegistry());
         event.registerServerCommand(new QuestCommands());
-
         event.registerServerCommand(new WorldGenCommands());
     }
 

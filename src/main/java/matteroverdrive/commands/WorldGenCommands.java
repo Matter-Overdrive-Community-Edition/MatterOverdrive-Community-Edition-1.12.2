@@ -2,6 +2,7 @@
 package matteroverdrive.commands;
 
 import matteroverdrive.MatterOverdrive;
+import matteroverdrive.Reference;
 import matteroverdrive.world.MOImageGen;
 import matteroverdrive.world.buildings.WeightedRandomMOWorldGenBuilding;
 import net.minecraft.command.CommandBase;
@@ -10,6 +11,8 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -23,13 +26,21 @@ public class WorldGenCommands extends CommandBase {
     }
 
     @Override
-    public String getUsage(ICommandSender p_71518_1_) {
+    public String getUsage(ICommandSender commandSender) {
         return "mo_gen <command> <structure name> <options>";
     }
 
     @Override
     public void execute(MinecraftServer server, ICommandSender commandSender, String[] parameters) throws CommandException {
         EntityPlayer entityPlayer = null;
+		entityPlayer = (EntityPlayer) commandSender;
+		 if (parameters.length == 0) {
+				commandSender.sendMessage(new TextComponentString(TextFormatting.GOLD + "[" + Reference.MOD_NAME + "] " + TextFormatting.RESET + "Help"));
+				commandSender.sendMessage(new TextComponentString("Format: /mo_gen generate <structure> <force> <player>"));
+				commandSender.sendMessage(new TextComponentString("Example: /mo_gen generate cargo_ship f " + ((EntityPlayer) entityPlayer).getName()));
+				commandSender.sendMessage(new TextComponentString("Structures: advfusion, android_house, cargo_ship, crashed_ship, fusion, sand_pit_house, underwater_base"));
+			  
+			} else {
         if (parameters.length >= 4) {
             entityPlayer = getPlayer(server, commandSender, parameters[3]);
         } else if (commandSender instanceof EntityPlayer) {
@@ -53,9 +64,9 @@ public class WorldGenCommands extends CommandBase {
                     }
                 }
             }
-        }
-    }
-
+		}
+	}
+	}
     @Override
     public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos targetPos) {
         List<String> commands = new ArrayList<>();
