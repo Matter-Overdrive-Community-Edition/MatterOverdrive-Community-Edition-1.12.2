@@ -117,8 +117,6 @@ public class MatterOverdriveBlocks {
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         items.forEach(i -> event.getRegistry().register(i));
-        MatterOverdriveBlocks.blocks.stream().filter(block -> block instanceof OreDictItem).forEach(block -> ((OreDictItem) block).registerOreDict());
-        MatterOverdriveItems.items.stream().filter(item -> item instanceof OreDictItem).forEach(item -> ((OreDictItem) item).registerOreDict());
     }
 
     public void init() {

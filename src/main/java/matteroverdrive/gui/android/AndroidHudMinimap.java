@@ -86,6 +86,7 @@ public class AndroidHudMinimap extends AndroidHudElement {
         endMask();
 
         GlStateManager.enableTexture2D();
+        GlStateManager.enableDepth();
         GlStateManager.enableAlpha();
     }
 

@@ -145,7 +145,11 @@ public class GuiAndroidHud extends Gui implements IConfigSubscriber {
 
             mc.getTextureManager().bindTexture(Gui.ICONS);
         } else if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR) {
-            //glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            GlStateManager.clear(GL_DEPTH_BUFFER_BIT);
+            GlStateManager.clearDepth(1f);
+            GlStateManager.depthFunc(GL11.GL_LESS);
+            GlStateManager.enableDepth();
+            GlStateManager.enableBlend();
             renderHud(event);
 
             if (android.isAndroid()) {

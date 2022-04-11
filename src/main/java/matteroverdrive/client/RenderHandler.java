@@ -18,6 +18,9 @@ import matteroverdrive.client.render.*;
 import matteroverdrive.client.render.biostat.BioticStatRendererShield;
 import matteroverdrive.client.render.biostat.BioticStatRendererTeleporter;
 import matteroverdrive.client.render.entity.*;
+import matteroverdrive.client.render.parts.*;
+import matteroverdrive.client.render.parts.RogueAndroidPartsRender;
+import matteroverdrive.client.render.parts.TritaniumSpineRenderer;
 import matteroverdrive.client.render.tileentity.*;
 import matteroverdrive.client.render.tileentity.starmap.*;
 import matteroverdrive.client.render.weapons.*;
@@ -240,18 +243,22 @@ public class RenderHandler {
     }
 
     @SubscribeEvent
-    public void onPlayerRenderPost(RenderPlayerEvent.Post event) {
+    public void onRenderPlayerPostEvent(RenderPlayerEvent.Post event) {
         //GL11.glEnable(GL11.GL_LIGHTING);
         //GL11.glColor3f(1, 1, 1);
 
         AndroidPlayer androidPlayer = MOPlayerCapabilityProvider.GetAndroidCapability(event.getEntity());
         if (androidPlayer != null && androidPlayer.isAndroid() && !event.getEntity().isInvisible()) {
+			//System.out.println("Is android");
             for (int i = 0; i < 5; i++) {
                 ItemStack part = androidPlayer.getStackInSlot(i);
+				//System.out.println(androidPlayer.getStackInSlot(i));
                 if (part != null && part.getItem() instanceof IBionicPart) {
                     IBionicPartRenderer renderer = bionicPartRenderRegistry.getRenderer(((IBionicPart) part.getItem()).getClass());
+					//System.out.println(renderer);
                     if (renderer != null) {
                         try {
+							System.out.println("trying to render");
                             GlStateManager.pushMatrix();
                             GlStateManager.enableBlend();
                             renderer.renderPart(part, androidPlayer, event.getRenderer(), event.getPartialRenderTick());
@@ -264,7 +271,7 @@ public class RenderHandler {
             }
         }
     }
-
+ 
     @SubscribeEvent
     public void onRenderPlayerPreEvent(RenderPlayerEvent.Pre event) {
         //GL11.glEnable(GL11.GL_LIGHTING);
@@ -325,6 +332,14 @@ public class RenderHandler {
             EnumDyeColor color = state.getValue(BlockDecorativeColored.COLOR);
             return ItemDye.DYE_COLORS[MathHelper.clamp(color.getMetadata(), 0, ItemDye.DYE_COLORS.length - 1)];
         }, MatterOverdrive.BLOCKS.decorative_tritanium_plate_colored);
+		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, p_186720_2_, pos, tintIndex) -> {
+            EnumDyeColor color = state.getValue(BlockDecorativeColored.COLOR);
+            return ItemDye.DYE_COLORS[MathHelper.clamp(color.getMetadata(), 0, ItemDye.DYE_COLORS.length - 1)];
+        }, MatterOverdrive.BLOCKS.decorative_floor_tile);
+		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, p_186720_2_, pos, tintIndex) -> {
+            EnumDyeColor color = state.getValue(BlockDecorativeColored.COLOR);
+            return ItemDye.DYE_COLORS[MathHelper.clamp(color.getMetadata(), 0, ItemDye.DYE_COLORS.length - 1)];
+        }, MatterOverdrive.BLOCKS.decorative_floor_tiles);
     }
 
     public void createItemRenderers() {
@@ -418,6 +433,20 @@ public class RenderHandler {
                 return -1;
             }
         }, Item.getItemFromBlock(MatterOverdrive.BLOCKS.decorative_tritanium_plate_colored));
+		FMLClientHandler.instance().getClient().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
+            if (tintIndex == 0 && !stack.isEmpty() && stack.getItem() != null) {
+                return ItemDye.DYE_COLORS[MathHelper.clamp(stack.getItemDamage(), 0, ItemDye.DYE_COLORS.length - 1)];
+            } else {
+                return -1;
+            }
+        }, Item.getItemFromBlock(MatterOverdrive.BLOCKS.decorative_floor_tile));
+		FMLClientHandler.instance().getClient().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
+            if (tintIndex == 0 && !stack.isEmpty() && stack.getItem() != null) {
+                return ItemDye.DYE_COLORS[MathHelper.clamp(stack.getItemDamage(), 0, ItemDye.DYE_COLORS.length - 1)];
+            } else {
+                return -1;
+            }
+        }, Item.getItemFromBlock(MatterOverdrive.BLOCKS.decorative_floor_tiles));
         FMLClientHandler.instance().getClient().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
             if (tintIndex == 1 && stack.getItemDamage() == 0) return 0xd00000;
             else if (tintIndex == 1 && stack.getItemDamage() == 1) return 0x019fea;
@@ -454,7 +483,8 @@ public class RenderHandler {
     }
 
     public void registerBionicPartRenderers() {
-
+        //bionicPartRenderRegistry.register(TritaniumSpine.class, TritaniumSpineRenderer::new);
+        //bionicPartRenderRegistry.register(RogueAndroidParts.class, RogueAndroidPartsRender::new);
     }
 
     public void createStarmapRenderers() {

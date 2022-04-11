@@ -1,6 +1,7 @@
 
 package matteroverdrive;
 
+import matteroverdrive.api.internal.OreDictItem;
 import matteroverdrive.commands.AndroidCommands;
 import matteroverdrive.commands.CommandMatterRegistry;
 import matteroverdrive.commands.QuestCommands;
@@ -36,6 +37,7 @@ import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 import java.io.File;
 import java.util.concurrent.ExecutorService;
@@ -145,6 +147,8 @@ public class MatterOverdrive {
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
+        MatterOverdriveBlocks.blocks.stream().filter(block -> block instanceof OreDictItem).forEach(block -> ((OreDictItem) block).registerOreDict());
+        MatterOverdriveItems.items.stream().filter(item -> item instanceof OreDictItem).forEach(item -> ((OreDictItem) item).registerOreDict());
         GUI_HANDLER.register(event.getSide());
         NetworkRegistry.INSTANCE.registerGuiHandler(this, GUI_HANDLER);
         MinecraftForge.EVENT_BUS.register(ENTITY_HANDLER);

@@ -30,7 +30,6 @@ public class AndroidHudBionicStats extends AndroidHudElement {
 
     @Override
     public void drawElement(AndroidPlayer android, ScaledResolution resolution, float ticks) {
-        GlStateManager.enableAlpha();
         int count = 0;
         for (int i = 0; i < android.getSizeInventory(); i++) {
             if (!android.getStackInSlot(i).isEmpty()) {
@@ -54,7 +53,7 @@ public class AndroidHudBionicStats extends AndroidHudElement {
                 }
             }
         }
-
+        GlStateManager.enableBlend();
         GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE);
         RenderUtils.applyColorWithAlpha(baseColor);
         if (getPosition().y == 1) {
@@ -96,10 +95,12 @@ public class AndroidHudBionicStats extends AndroidHudElement {
     }
 
     private void drawAndroidPart(ItemStack stack, Color color, int x, int y) {
+		GlStateManager.enableBlend();
         drawNormalBG(color, x, y);
         GlStateManager.color(1, 1, 1, 0.5f);
         GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE);
         RenderUtils.renderStack(x + 3, y + 3, stack);
+		GlStateManager.disableBlend();
     }
 
     private void drawBioticStat(IBioticStat stat, AndroidPlayer androidPlayer, int level, Color color, int x, int y) {
@@ -108,12 +109,14 @@ public class AndroidHudBionicStats extends AndroidHudElement {
         } else {
             drawNormalBG(color, x, y);
         }
+		GlStateManager.enableBlend();
         ClientProxy.holoIcons.renderIcon(stat.getIcon(level), x + 2, y + 2, 18, 18);
         if (stat.getDelay(androidPlayer, level) > 0) {
             String delay = MOStringHelper.formatRemainingTime(stat.getDelay(androidPlayer, level) / 20f, true);
             int delayWidth = ClientProxy.moFontRender.getStringWidth(delay);
             ClientProxy.moFontRender.drawString(delay, x + 22 - delayWidth, y + 22 - ClientProxy.moFontRender.FONT_HEIGHT - 1, Reference.COLOR_HOLO.getColor());
         }
+		GlStateManager.disableBlend();
     }
 
     private void drawNormalBG(Color color, int x, int y) {
