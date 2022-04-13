@@ -161,7 +161,6 @@ public class HoloIcons implements ITextureMapPopulator {
         reg(ir, "list", 16);
         reg(ir, "grid", 16);
         reg(ir, "sort_random", 16);
-        reg(ir, "minimap_target", 21);
         reg(ir, "question_mark", 20);
         reg(ir, "android_feature_icon_bg_black", 22);
         reg(ir, "smile", 16);

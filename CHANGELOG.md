@@ -3,6 +3,8 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Fix and minor format fix. (Joseph)
+* render fix,oredict fix (infiniteblock)
 * command work. (infiniteblock)
 * Update README.md (infiniteblock)
 * Add files via upload (infiniteblock)
