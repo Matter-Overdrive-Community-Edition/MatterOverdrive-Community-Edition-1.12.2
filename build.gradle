@@ -3,12 +3,8 @@ buildscript {
         jcenter()
         mavenCentral()
         maven { url = "http://files.minecraftforge.net/maven" }
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-		maven {
-        url 'http://maven.blamejared.com'
-    }
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url 'http://maven.blamejared.com' }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
@@ -101,7 +97,7 @@ repositories {
         name "tterrag"
         url "http://maven.tterrag.com"
     }
-   // maven {url "http://maven.tehnut.info"}
+    maven {url "http://maven.tehnut.info"}
     maven {url "http://modmaven.k-4u.nl"}
     maven {
         name "progwml6"
