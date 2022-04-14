@@ -1,20 +1,3 @@
-/*
- * This file is part of Matter Overdrive
- * Copyright (C) 2018, Horizon Studio <contact@hrznstudio.com>, All rights reserved.
- *
- * Matter Overdrive is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Matter Overdrive is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Matter Overdrive.  If not, see <http://www.gnu.org/licenses>.
- */
 package matteroverdrive.gui;
 
 import matteroverdrive.Reference;
@@ -46,7 +29,6 @@ public class GuiMicrowave extends MOGuiMachine<TileEntityMicrowave> {
         cook_progress.setMode(1);
         cook_progress.setSize(24, 16);
         cook_progress.setTexture(Reference.TEXTURE_ARROW_PROGRESS, 48, 16);
-        energyElement.setTexture(Reference.TEXTURE_FE_METER, 32, 64);
     }
 
     @Override
@@ -66,10 +48,10 @@ public class GuiMicrowave extends MOGuiMachine<TileEntityMicrowave> {
                                                    int p_146976_2_, int p_146976_3_) {
         super.drawGuiContainerBackgroundLayer(p_146976_1_, p_146976_2_, p_146976_3_);
         cook_progress.setQuantity(Math.round(((ContainerMachine) getContainer()).getProgress() * 24));
-        manageRequirementTooltips();
+        manageRequirementsTooltips();
     }
 
-    void manageRequirementTooltips() {
+    void manageRequirementsTooltips() {
         if (!machine.getStackInSlot(machine.INPUT_SLOT_ID).isEmpty()) {
             energyElement.setEnergyRequired(-(machine.getEnergyDrainMax()));
             energyElement.setEnergyRequiredPerTick(-machine.getEnergyDrainPerTick());

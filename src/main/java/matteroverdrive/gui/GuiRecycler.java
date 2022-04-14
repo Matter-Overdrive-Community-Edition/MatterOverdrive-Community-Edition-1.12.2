@@ -47,10 +47,10 @@ public class GuiRecycler extends MOGuiMachine<TileEntityMachineMatterRecycler> {
                                                    int p_146976_2_, int p_146976_3_) {
         super.drawGuiContainerBackgroundLayer(p_146976_1_, p_146976_2_, p_146976_3_);
         recycle_progress.setQuantity(Math.round(((ContainerMachine) getContainer()).getProgress() * 24));
-        manageRequirementTooltips();
+        manageRequirementsTooltips();
     }
 
-    void manageRequirementTooltips() {
+    void manageRequirementsTooltips() {
         if (!machine.getStackInSlot(machine.INPUT_SLOT_ID).isEmpty()) {
             energyElement.setEnergyRequired(-(machine.getEnergyDrainMax()));
             energyElement.setEnergyRequiredPerTick(-machine.getEnergyDrainPerTick());

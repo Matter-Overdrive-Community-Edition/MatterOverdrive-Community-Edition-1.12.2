@@ -1,4 +1,3 @@
-
 package matteroverdrive.tile;
 
 import matteroverdrive.api.inventory.UpgradeTypes;

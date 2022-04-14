@@ -47,10 +47,10 @@ public class GuiDecomposer extends MOGuiMachine<TileEntityMachineDecomposer> {
                                                    int p_146976_2_, int p_146976_3_) {
         super.drawGuiContainerBackgroundLayer(p_146976_1_, p_146976_2_, p_146976_3_);
         decompose_progress.setQuantity(Math.round((((ContainerMachine) getContainer()).getProgress() * 24)));
-        ManageReqiremnetsTooltips();
+        manageRequirementsTooltips();
     }
 
-    void ManageReqiremnetsTooltips() {
+    void manageRequirementsTooltips() {
         if (machine.getStackInSlot(machine.INPUT_SLOT_ID) != null) {
             int matterAmount = MatterHelper.getMatterAmountFromItem(machine.getStackInSlot(machine.INPUT_SLOT_ID));
             energyElement.setEnergyRequired(-(machine.getEnergyDrainMax()));

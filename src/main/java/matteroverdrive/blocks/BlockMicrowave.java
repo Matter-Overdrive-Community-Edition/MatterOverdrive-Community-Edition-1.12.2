@@ -1,7 +1,6 @@
-
 package matteroverdrive.blocks;
 
-import matteroverdrive.blocks.includes.MOMatterEnergyStorageBlock;
+import matteroverdrive.blocks.includes.MOBlockMachine;
 import matteroverdrive.tile.TileEntityMicrowave;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -10,9 +9,9 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class BlockMicrowave extends MOMatterEnergyStorageBlock<TileEntityMicrowave> {
+public class BlockMicrowave extends MOBlockMachine<TileEntityMicrowave> {
     public BlockMicrowave(Material material, String name) {
-        super(material, name, true, false);
+        super(material, name);
         setHasRotation();
         setHardness(20.0F);
         this.setResistance(9.0f);

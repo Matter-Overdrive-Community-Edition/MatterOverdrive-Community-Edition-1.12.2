@@ -9,6 +9,7 @@ import matteroverdrive.init.MatterOverdriveSounds;
 import matteroverdrive.machines.MachineNBTCategory;
 import matteroverdrive.machines.events.MachineEvent;
 import matteroverdrive.util.math.MOMathHelper;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -21,17 +22,14 @@ import javax.annotation.Nonnull;
 import java.util.EnumSet;
 
 public class TileEntityMicrowave extends MOTileEntityMachineEnergy {
-    private static final EnumSet<UpgradeTypes> upgradeTypes = EnumSet.of(UpgradeTypes.PowerUsage, UpgradeTypes.Speed,
-            UpgradeTypes.PowerStorage, UpgradeTypes.PowerTransfer, UpgradeTypes.Muffler);
-
+    private static final EnumSet<UpgradeTypes> upgradeTypes = EnumSet.of(UpgradeTypes.PowerUsage, UpgradeTypes.Speed, UpgradeTypes.PowerStorage, UpgradeTypes.PowerTransfer, UpgradeTypes.Muffler);
     public int INPUT_SLOT_ID, OUTPUT_SLOT_ID;
-
     @SideOnly(Side.CLIENT)
     private float nextHeadX, nextHeadY;
     @SideOnly(Side.CLIENT)
     private float lastHeadX, lastHeadY;
     @SideOnly(Side.CLIENT)
-
+    public int currentItemBurnTime;
     private float headAnimationTime;
     private int cookTime;
     private MicrowaveRecipe cachedRecipe;
@@ -41,7 +39,6 @@ public class TileEntityMicrowave extends MOTileEntityMachineEnergy {
         energyStorage.setCapacity(512000);
         energyStorage.setMaxExtract(256);
         energyStorage.setMaxReceive(256);
-
         playerSlotsHotbar = true;
         playerSlotsMain = true;
     }
@@ -50,16 +47,26 @@ public class TileEntityMicrowave extends MOTileEntityMachineEnergy {
     protected void RegisterSlots(Inventory inventory) {
         INPUT_SLOT_ID = inventory.AddSlot(new FoodFurnaceSlot(true).setSendToClient(true));
         OUTPUT_SLOT_ID = inventory.AddSlot(new RemoveOnlySlot(false).setSendToClient(true));
-
         super.RegisterSlots(inventory);
     }
 
     public boolean canPutInOutput() {
-        ItemStack outputStack = inventory.getStackInSlot(OUTPUT_SLOT_ID);
+        ItemStack input = inventory.getStackInSlot(INPUT_SLOT_ID);
+        ItemStack output = inventory.getStackInSlot(OUTPUT_SLOT_ID);
 
-        return outputStack.isEmpty();
-
-//        return outputStack.isEmpty() || (cachedRecipe != null && outputStack.isItemEqual(cachedRecipe.getOutput(this)));
+        if (input.isEmpty()) {
+            return false;
+        } else {
+            ItemStack res = FurnaceRecipes.instance().getSmeltingResult(input);
+            if (res.isEmpty())
+                return false;
+            if (output.isEmpty())
+                return true;
+            if (!output.isItemEqual(res))
+                return false;
+            int result = output.getCount() + res.getCount();
+            return result <= res.getMaxStackSize();
+        }
     }
 
     @Override
@@ -95,27 +102,27 @@ public class TileEntityMicrowave extends MOTileEntityMachineEnergy {
     }
 
     public int getEnergyDrainMax() {
-        if (cachedRecipe != null) {
-            return (int) (cachedRecipe.getEnergy() * getUpgradeMultiply(UpgradeTypes.PowerUsage));
+        ItemStack input = inventory.getStackInSlot(INPUT_SLOT_ID);
+        ItemStack res = FurnaceRecipes.instance().getSmeltingResult(input);
+        if (res != null) {
+           return (int) (1000 * getUpgradeMultiply(UpgradeTypes.PowerUsage));
         }
-
         return 0;
     }
 
     public int getSpeed() {
-        if (cachedRecipe != null) {
-            return (int) (cachedRecipe.getTime() * getUpgradeMultiply(UpgradeTypes.Speed));
+        ItemStack input = inventory.getStackInSlot(INPUT_SLOT_ID);
+        ItemStack res = FurnaceRecipes.instance().getSmeltingResult(input);
+        if (res != null) {
+            return (int) (1 * getUpgradeMultiply(UpgradeTypes.Speed));
         }
-
         return 0;
     }
 
-//    public boolean isCooking() {
-//        return cachedRecipe != null &&canPutInOutput();
-//    }
-
     public boolean isCooking() {
-        return canPutInOutput();
+        ItemStack input = inventory.getStackInSlot(INPUT_SLOT_ID);
+        ItemStack res = FurnaceRecipes.instance().getSmeltingResult(input);
+        return res != null && canPutInOutput();
     }
 
     @Override
@@ -135,7 +142,6 @@ public class TileEntityMicrowave extends MOTileEntityMachineEnergy {
         if (getUpgradeMultiply(UpgradeTypes.Muffler) == 2d || stack.isEmpty()) {
             return 0.0f;
         }
-
         return 1;
     }
 
@@ -160,9 +166,6 @@ public class TileEntityMicrowave extends MOTileEntityMachineEnergy {
 
     @Override
     protected void onMachineEvent(MachineEvent event) {
-        if (event instanceof MachineEvent.Awake) {
-//            calculateRecipe();
-        }
     }
 
     @Override
@@ -216,16 +219,12 @@ public class TileEntityMicrowave extends MOTileEntityMachineEnergy {
         if (!world.isRemote) {
             if (this.isCooking()) {
                 if (this.energyStorage.getEnergyStored() >= getEnergyDrainPerTick()) {
-
                     this.cookTime++;
-
                     energyStorage.modifyEnergyStored(-getEnergyDrainPerTick());
-
                     UpdateClientPower();
 
                     if (this.cookTime >= getSpeed()) {
                         this.cookTime = 0;
-
                         this.cookItem();
                     }
                 }
@@ -238,16 +237,17 @@ public class TileEntityMicrowave extends MOTileEntityMachineEnergy {
     }
 
     public void cookItem() {
-        if (cachedRecipe != null && canPutInOutput()) {
+        if (canPutInOutput()){
+            ItemStack input = inventory.getStackInSlot(INPUT_SLOT_ID);
             ItemStack outputSlot = inventory.getStackInSlot(OUTPUT_SLOT_ID);
-
+            ItemStack result = FurnaceRecipes.instance().getSmeltingResult(input);
             if (!outputSlot.isEmpty()) {
+				input.shrink(1);
                 outputSlot.grow(1);
             } else {
-                inventory.setInventorySlotContents(OUTPUT_SLOT_ID, cachedRecipe.getOutput(this));
-            }
-
-            inventory.decrStackSize(INPUT_SLOT_ID, 1);
-        }
-    }
+			input.shrink(1);
+            inventory.setInventorySlotContents(OUTPUT_SLOT_ID, result.copy());
+			}
+		}
+}
 }
