@@ -3,7 +3,6 @@ package matteroverdrive.items.weapon;
 
 import matteroverdrive.Reference;
 import matteroverdrive.api.weapon.IWeaponModule;
-import matteroverdrive.api.weapon.IWeaponModuleOld;
 import matteroverdrive.api.weapon.WeaponShot;
 import matteroverdrive.client.sound.MOPositionedSound;
 import matteroverdrive.client.sound.WeaponSound;

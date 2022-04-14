@@ -12,9 +12,6 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraft.entity.player.EntityPlayer;
-
 
 public class BioticStatAutoShield extends AbstractBioticStat {
     public BioticStatAutoShield(String name, int xp) {

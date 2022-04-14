@@ -8,7 +8,6 @@ import matteroverdrive.api.quest.QuestStack;
 import matteroverdrive.api.quest.QuestState;
 import matteroverdrive.data.quest.PlayerQuestData;
 import matteroverdrive.gui.GuiDataPad;
-import matteroverdrive.items.DataPad;
 import matteroverdrive.network.packet.client.quest.PacketSyncQuests;
 import matteroverdrive.network.packet.client.quest.PacketUpdateQuest;
 import matteroverdrive.proxy.ClientProxy;

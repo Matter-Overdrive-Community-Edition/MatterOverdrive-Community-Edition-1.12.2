@@ -3,7 +3,6 @@ package matteroverdrive.data.biostats;
 
 import com.google.common.collect.Multimap;
 import matteroverdrive.api.events.bionicStats.MOEventBionicStat;
-import matteroverdrive.init.OverdriveBioticStats;
 import matteroverdrive.client.sound.MOPositionedSound;
 import matteroverdrive.entity.android_player.AndroidAttributes;
 import matteroverdrive.entity.android_player.AndroidPlayer;
@@ -25,7 +24,6 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
-import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -39,7 +37,7 @@ public class BioticStatShield extends AbstractBioticStat implements IConfigSubsc
     private static final int SHIELD_TIME = 20 * 8;
     private static int ENERGY_PER_TICK = 64;
     private static int ENERGY_PER_DAMAGE = 256;
-    private final AttributeModifier modifyer;
+    private final AttributeModifier modifier;
     private final Random random;
     @SideOnly(Side.CLIENT)
     private MOPositionedSound shieldSound;
@@ -47,7 +45,7 @@ public class BioticStatShield extends AbstractBioticStat implements IConfigSubsc
     public BioticStatShield(String name, int xp) {
         super(name, xp);
         setShowOnHud(true);
-        modifyer = new AttributeModifier(UUID.fromString("ead117ad-105a-43fe-ab22-a31aee6adc42"), "Shield Slowdown", -0.4, 2);
+        modifier = new AttributeModifier(UUID.fromString("ead117ad-105a-43fe-ab22-a31aee6adc42"), "Shield Slowdown", -0.4, 2);
         random = new Random();
         setShowOnWheel(true);
     }

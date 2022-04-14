@@ -1,6 +1,5 @@
 
 package matteroverdrive.entity;
-import matteroverdrive.init.MatterOverdriveItems;
 import matteroverdrive.MatterOverdrive;
 import matteroverdrive.api.dialog.IDialogMessage;
 import matteroverdrive.api.dialog.IDialogNpc;

@@ -17,7 +17,7 @@ import net.minecraftforge.client.model.ModelLoader;
  */
 public class MOItemFood extends ItemFood implements ItemModelProvider {
 
-    private String name;
+    public String name;
 
     public MOItemFood(String name, int amount, float saturation, boolean isWolfFood) {
         super(amount, saturation, isWolfFood);

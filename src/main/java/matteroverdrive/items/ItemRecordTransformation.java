@@ -2,20 +2,16 @@
 package matteroverdrive.items;
 
 import matteroverdrive.MatterOverdrive;
-import matteroverdrive.Reference;
 import matteroverdrive.api.internal.ItemModelProvider;
 import matteroverdrive.client.ClientUtil;
 import matteroverdrive.init.MatterOverdriveSounds;
 import net.minecraft.item.ItemRecord;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 
 /**
  * @author shadowfacts
  */
 public class ItemRecordTransformation extends ItemRecord implements ItemModelProvider {
-
-    private static final ResourceLocation SOUND = new ResourceLocation(Reference.MOD_ID, "transformation_music");
 
     public ItemRecordTransformation() {
         super("matteroverdrive.transformation", MatterOverdriveSounds.musicTransformation);

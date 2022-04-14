@@ -1,4 +1,3 @@
-
 package matteroverdrive.items;
 
 public interface IAdvancedModelProvider {

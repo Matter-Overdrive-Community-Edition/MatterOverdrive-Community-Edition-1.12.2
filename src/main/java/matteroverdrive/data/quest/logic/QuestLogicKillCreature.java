@@ -3,7 +3,6 @@ package matteroverdrive.data.quest.logic;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import matteroverdrive.api.exceptions.MOQuestParseException;
 import matteroverdrive.api.quest.IQuestReward;
 import matteroverdrive.api.quest.QuestLogicState;
 import matteroverdrive.api.quest.QuestStack;
@@ -68,8 +67,6 @@ public class QuestLogicKillCreature extends AbstractQuestLogic {
             for (int i = 0; i < creatureTypes.size(); i++) {
                 this.creatureTypes[i] = creatureTypes.get(i).getAsString();
             }
-        } else {
-            throw new MOQuestParseException("Missing creatures type list in Quest logic");
         }
     }
 

@@ -53,7 +53,6 @@ public class BioticStatAttack extends AbstractBioticStat {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public Multimap<String, AttributeModifier> attributes(AndroidPlayer androidPlayer, int level) {
         Multimap<String, AttributeModifier> multimap = HashMultimap.create();
         multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new MOAttributeModifier(modifierID, "Android Attack Damage", getAttackPower(level), 1).setSaved(false));

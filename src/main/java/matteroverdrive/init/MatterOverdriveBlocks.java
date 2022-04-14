@@ -3,7 +3,6 @@ package matteroverdrive.init;
 
 import matteroverdrive.MatterOverdrive;
 import matteroverdrive.api.internal.IItemBlockFactory;
-import matteroverdrive.api.internal.OreDictItem;
 import matteroverdrive.blocks.*;
 import matteroverdrive.blocks.includes.MOBlock;
 import matteroverdrive.blocks.includes.MOBlockMachine;

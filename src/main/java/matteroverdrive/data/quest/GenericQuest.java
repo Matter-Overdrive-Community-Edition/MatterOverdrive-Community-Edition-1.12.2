@@ -3,17 +3,12 @@ package matteroverdrive.data.quest;
 
 import com.google.gson.JsonObject;
 import matteroverdrive.api.quest.*;
-import matteroverdrive.data.quest.logic.AbstractQuestLogic;
 import matteroverdrive.entity.player.MOPlayerCapabilityProvider;
 import matteroverdrive.entity.player.OverdriveExtendedProperties;
-import matteroverdrive.util.MOJsonHelper;
 import matteroverdrive.util.MOStringHelper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 

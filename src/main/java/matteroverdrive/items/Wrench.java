@@ -61,7 +61,7 @@ public class Wrench extends MOBaseItem {
         return true;
     }
 
-    private void DisplayInfo(EntityPlayer player, String msg, TextFormatting formatting) {
+    public void DisplayInfo(EntityPlayer player, String msg, TextFormatting formatting) {
         if (player != null && !msg.isEmpty()) {
             player.sendStatusMessage(new TextComponentString(formatting + msg), true);
         }

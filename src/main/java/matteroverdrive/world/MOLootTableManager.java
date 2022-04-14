@@ -2,13 +2,9 @@ package matteroverdrive.world;
 
 import matteroverdrive.Reference;
 import matteroverdrive.MatterOverdrive;
-import matteroverdrive.items.food.AndroidPill;
 import net.minecraft.world.storage.loot.LootTableList;
-import net.minecraft.world.storage.loot.LootContext;
-import net.minecraft.world.storage.loot.LootTable;
 import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.LootEntryItem;
-import net.minecraft.world.storage.loot.LootEntryTable;
 import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraft.world.storage.loot.conditions.LootCondition;
 

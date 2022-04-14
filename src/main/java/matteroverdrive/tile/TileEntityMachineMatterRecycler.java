@@ -3,7 +3,6 @@ package matteroverdrive.tile;
 
 import matteroverdrive.api.inventory.UpgradeTypes;
 import matteroverdrive.api.matter.IRecyclable;
-import matteroverdrive.blocks.BlockMatterAnalyzer;
 import matteroverdrive.blocks.BlockMatterRecycler;
 import matteroverdrive.data.Inventory;
 import matteroverdrive.data.inventory.RemoveOnlySlot;

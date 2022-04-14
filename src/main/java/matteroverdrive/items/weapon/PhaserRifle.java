@@ -1,19 +1,14 @@
-
 package matteroverdrive.items.weapon;
 
-import matteroverdrive.MatterOverdrive;
 import matteroverdrive.Reference;
 import matteroverdrive.api.weapon.IWeaponModule;
 import matteroverdrive.api.weapon.WeaponShot;
-import matteroverdrive.api.weapon.WeaponStats;
 import matteroverdrive.client.sound.MOPositionedSound;
 import matteroverdrive.client.sound.WeaponSound;
 import matteroverdrive.entity.weapon.PlasmaBolt;
-import matteroverdrive.handler.weapon.ClientWeaponHandler;
 import matteroverdrive.init.MatterOverdriveSounds;
 import matteroverdrive.items.weapon.module.WeaponModuleBarrel;
 import matteroverdrive.proxy.ClientProxy;
-import matteroverdrive.util.WeaponHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,7 +19,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;

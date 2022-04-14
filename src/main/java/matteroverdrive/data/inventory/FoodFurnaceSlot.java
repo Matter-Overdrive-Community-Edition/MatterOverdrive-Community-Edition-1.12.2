@@ -1,7 +1,5 @@
 package matteroverdrive.data.inventory;
 
-import matteroverdrive.api.matter.IRecyclable;
-import matteroverdrive.items.food.MOItemFood;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 

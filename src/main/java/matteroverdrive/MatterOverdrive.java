@@ -37,7 +37,6 @@ import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.oredict.OreDictionary;
 
 import java.io.File;
 import java.util.concurrent.ExecutorService;

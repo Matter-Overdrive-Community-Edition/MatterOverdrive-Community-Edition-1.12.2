@@ -5,19 +5,15 @@ import matteroverdrive.api.inventory.UpgradeTypes;
 import matteroverdrive.api.machines.IUpgradeHandler;
 import matteroverdrive.entity.player.MOPlayerCapabilityProvider;
 import matteroverdrive.machines.events.MachineEvent;
-import matteroverdrive.blocks.includes.MOBlock;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TileEntityMachineChargingStation extends MOTileEntityMachineEnergy {

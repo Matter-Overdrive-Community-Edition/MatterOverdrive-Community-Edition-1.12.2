@@ -249,10 +249,6 @@ public class StarMapRendererStar extends StarMapRendererAbstract {
         Tessellator.getInstance().draw();
     }
 
-    private void bindTexture(ResourceLocation location) {
-        Minecraft.getMinecraft().renderEngine.bindTexture(location);
-    }
-
     public void renderSphere(int color) {
         List<BakedQuad> quadList = star_model.getQuads(null, null, 0);
         for (BakedQuad quad : quadList) {

@@ -56,7 +56,6 @@ public class RenderWeaponsBeam extends RenderBeam<EntityPlayer> {
         GlStateManager.enableCull();
     }
 
-    @SuppressWarnings("unchecked")
     public void renderOthers(RenderHandler renderHandler, float ticks) {
         Minecraft.getMinecraft().world.getLoadedEntityList().stream()
                 .filter(o -> o instanceof EntityPlayer)

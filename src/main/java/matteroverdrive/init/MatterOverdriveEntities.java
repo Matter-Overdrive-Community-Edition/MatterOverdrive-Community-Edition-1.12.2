@@ -22,11 +22,7 @@ import net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfessio
 import net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerCareer;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.entity.passive.EntityVillager.ITradeList;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Item;
-import net.minecraft.init.Blocks;
 
 @Mod.EventBusSubscriber
 public class MatterOverdriveEntities {

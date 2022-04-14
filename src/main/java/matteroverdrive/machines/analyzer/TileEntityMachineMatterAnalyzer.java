@@ -15,7 +15,6 @@ import matteroverdrive.machines.events.MachineEvent;
 import matteroverdrive.matter_network.MatterNetworkTaskQueue;
 import matteroverdrive.matter_network.components.MatterNetworkComponentClient;
 import matteroverdrive.tile.MOTileEntityMachineEnergy;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;

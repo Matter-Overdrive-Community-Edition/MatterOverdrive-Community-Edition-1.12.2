@@ -11,7 +11,6 @@ import matteroverdrive.entity.weapon.PlasmaBolt;
 import matteroverdrive.handler.weapon.ClientWeaponHandler;
 import matteroverdrive.init.MatterOverdriveSounds;
 import matteroverdrive.items.weapon.module.WeaponModuleBarrel;
-import matteroverdrive.items.weapon.module.WeaponModuleHoloSights;
 import matteroverdrive.network.packet.bi.PacketFirePlasmaShot;
 import matteroverdrive.proxy.ClientProxy;
 import matteroverdrive.util.WeaponHelper;

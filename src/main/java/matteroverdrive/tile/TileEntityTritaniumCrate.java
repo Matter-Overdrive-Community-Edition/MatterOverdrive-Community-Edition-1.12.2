@@ -1,7 +1,6 @@
 
 package matteroverdrive.tile;
 
-import matteroverdrive.api.wrench.IDismantleable;
 import matteroverdrive.data.TileEntityInventory;
 import matteroverdrive.data.inventory.CrateSlot;
 import matteroverdrive.machines.MachineNBTCategory;
@@ -20,16 +19,13 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
 import java.util.EnumSet;
-import java.util.List;
 
 public class TileEntityTritaniumCrate extends MOTileEntity implements IInventory, IInteractionObject {
     final TileEntityInventory inventory;

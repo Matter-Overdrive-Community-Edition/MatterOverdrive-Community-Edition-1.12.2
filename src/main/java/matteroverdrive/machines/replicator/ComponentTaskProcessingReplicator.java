@@ -11,7 +11,6 @@ import matteroverdrive.handler.SoundHandler;
 import matteroverdrive.init.MatterOverdriveCapabilities;
 import matteroverdrive.init.MatterOverdriveSounds;
 import matteroverdrive.machines.MachineNBTCategory;
-import matteroverdrive.machines.analyzer.TileEntityMachineMatterAnalyzer;
 import matteroverdrive.matter_network.components.TaskQueueComponent;
 import matteroverdrive.matter_network.tasks.MatterNetworkTaskReplicatePattern;
 import matteroverdrive.network.packet.client.PacketReplicationComplete;

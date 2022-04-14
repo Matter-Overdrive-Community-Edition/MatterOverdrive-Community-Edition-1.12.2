@@ -18,7 +18,6 @@ import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 import java.util.Map;
 
-@SuppressWarnings({"WeakerAccess", "CanBeFinal", "unused"})
 public final class ModelUtil {
     public static Vector4f FULL_FACE_UV = new Vector4f(0.0F, 0.0F, 16.0F, 16.0F);
     public static Vector4f[] FULL_FACES;

@@ -19,11 +19,5 @@ public class OverdriveFluids {
         FluidRegistry.registerFluid(moltenTritanium);
         FluidRegistry.addBucketForFluid(moltenTritanium);
 
-        registerFluidContainers();
-    }
-
-    @SuppressWarnings("deprecation")
-    private static void registerFluidContainers() {
-//		FluidContainerRegistry.registerFluidContainer(new FluidStack(matterPlasma, 32), new ItemStack(MatterOverdrive.items.matterContainerFull), new ItemStack(MatterOverdrive.items.matterContainer));
     }
 }
