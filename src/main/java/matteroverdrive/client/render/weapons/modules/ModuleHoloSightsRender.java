@@ -3,7 +3,6 @@ package matteroverdrive.client.render.weapons.modules;
 
 import com.google.common.collect.ImmutableMap;
 import matteroverdrive.Reference;
-import matteroverdrive.api.weapon.IWeapon;
 import matteroverdrive.api.weapon.IWeaponModule;
 import matteroverdrive.client.RenderHandler;
 import matteroverdrive.client.render.weapons.WeaponRenderHandler;
