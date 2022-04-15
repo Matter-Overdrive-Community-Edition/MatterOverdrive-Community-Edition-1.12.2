@@ -4,7 +4,6 @@ package matteroverdrive.util;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 
-@SuppressWarnings({"unused", "WeakerAccess"})
 public final class AABBUtils {
     public static AxisAlignedBB rotateFace(AxisAlignedBB box, EnumFacing side) {
         switch (side) {

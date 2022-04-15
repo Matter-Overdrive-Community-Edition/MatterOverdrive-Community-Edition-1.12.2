@@ -42,7 +42,6 @@ public class BlockGravitationalAnomaly extends MOBlockContainer<TileEntityGravit
 
     @Override
     @Deprecated
-    @SuppressWarnings("deprecation")
     public RayTraceResult collisionRayTrace(IBlockState state, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull Vec3d start, @Nonnull Vec3d end) {
         return super.collisionRayTrace(state, world, pos, start, end);
     }

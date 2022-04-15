@@ -1,4 +1,3 @@
-
 package matteroverdrive.starmap.data;
 
 import io.netty.buffer.ByteBuf;
@@ -28,7 +27,6 @@ import javax.annotation.Nonnull;
 import java.io.File;
 import java.util.UUID;
 
-@SuppressWarnings("unused")
 public class Planet extends SpaceBody implements IInventory {
     //region Static Vars
     public static final int SLOT_COUNT = 4;
