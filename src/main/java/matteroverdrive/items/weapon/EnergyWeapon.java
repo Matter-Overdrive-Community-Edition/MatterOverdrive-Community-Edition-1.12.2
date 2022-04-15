@@ -578,7 +578,6 @@ public abstract class EnergyWeapon extends MOItemEnergyContainer implements IWea
         }
 
         @Override
-        @SuppressWarnings("unchecked")
         public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
             if (capability != CapabilityEnergy.ENERGY) {
                 return null;

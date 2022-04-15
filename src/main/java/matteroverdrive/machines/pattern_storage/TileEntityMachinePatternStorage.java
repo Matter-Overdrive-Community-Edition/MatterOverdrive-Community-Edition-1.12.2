@@ -415,12 +415,12 @@ public class TileEntityMachinePatternStorage extends MOTileEntityMachineEnergy i
     }
 
     @Override
-    public MatterNetworkComponentClient getMatterNetworkComponent() {
+    public MatterNetworkComponentClient<?> getMatterNetworkComponent() {
         return networkComponent;
     }
 
     @Override
-    public MatterNetworkTaskQueue getTaskQueue(int queueID) {
+    public MatterNetworkTaskQueue<MatterNetworkTaskReplicatePattern> getTaskQueue(int queueID) {
         return taskQueueComponent.getTaskQueue();
     }
 

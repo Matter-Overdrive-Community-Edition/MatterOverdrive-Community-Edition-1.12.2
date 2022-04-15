@@ -161,7 +161,7 @@ public class OmniTool extends EnergyWeapon {
             stopMiningLastBlock((EntityPlayer) entity, world);
         } else {
             int ticks = getMaxItemUseDuration(stack) - timeLeft;
-            //DrainEnergy(itemStack, ticks, false);
+            DrainEnergy(stack, ticks, false);
         }
     }
 

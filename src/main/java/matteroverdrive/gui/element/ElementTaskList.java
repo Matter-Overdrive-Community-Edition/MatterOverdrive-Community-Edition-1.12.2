@@ -83,7 +83,7 @@ public class ElementTaskList extends MOElementListBox {
     public void drawElementTooltip(int index, int mouseX, int mouseY) {
         GlStateManager.pushMatrix();
         GlStateManager.translate(-posX, 0, 0);
-        List tooltip = new ArrayList();
+        List<String> tooltip = new ArrayList<String>();
         taskQueue.getAt(index).addInfo(tooltip);
         gui.setTooltip(tooltip);
         GlStateManager.popMatrix();

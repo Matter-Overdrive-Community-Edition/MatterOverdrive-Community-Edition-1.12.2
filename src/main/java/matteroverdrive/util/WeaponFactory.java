@@ -68,7 +68,7 @@ public class WeaponFactory {
         return module;
     }
 
-    public static WeightedRandomWeaponModule getRandomModule(Random random, Collection collection, WeaponGenerationContext context) {
+    public static WeightedRandomWeaponModule getRandomModule(Random random, Collection<WeightedRandomWeaponModule> collection, WeaponGenerationContext context) {
         return getItem(collection, random.nextInt(getTotalModulesWeight(collection, context) + 1), context);
     }
 

@@ -33,7 +33,7 @@ public class WeightedRandomSpaceGen<T extends SpaceBody> {
             totalWeight += i.getWeight(spaceBody);
         }
         // Now choose a random item
-        ISpaceBodyGen gen = null;
+        ISpaceBodyGen<T> gen = null;
         double random = rangomGen.nextDouble() * totalWeight;
         for (ISpaceBodyGen<T> i : collection) {
             random -= i.getWeight(spaceBody);

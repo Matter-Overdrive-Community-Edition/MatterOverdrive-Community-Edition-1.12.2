@@ -109,7 +109,6 @@ public class BlockPylon extends MOBlockContainer<TileEntityMachineDimensionalPyl
 
     @Override
     @Deprecated
-    @SuppressWarnings("deprecated")
     public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
         IBlockState originalBlockState = world.getBlockState(pos.offset(side.getOpposite()));
         if (originalBlockState.getBlock() == this) {

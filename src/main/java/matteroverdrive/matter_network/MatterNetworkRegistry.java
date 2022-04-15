@@ -31,7 +31,7 @@ public class MatterNetworkRegistry {
         throw new NoSuchElementException(String.format("Task %s was not registered", type));
     }
 
-    public static Class getTaskClass(int id) {
+    public static Class<?> getTaskClass(int id) {
         return taskTypes.get(id);
     }
 }

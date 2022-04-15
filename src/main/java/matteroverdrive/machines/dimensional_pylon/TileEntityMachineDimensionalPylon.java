@@ -16,6 +16,7 @@ import matteroverdrive.machines.MOTileEntityMachine;
 import matteroverdrive.machines.MachineNBTCategory;
 import matteroverdrive.machines.events.MachineEvent;
 import matteroverdrive.proxy.ClientProxy;
+import matteroverdrive.tile.MOTileEntityMachineEnergy;
 import matteroverdrive.tile.MOTileEntityMachineMatter;
 import matteroverdrive.util.MOLog;
 import matteroverdrive.util.MOStringHelper;
@@ -260,7 +261,7 @@ public class TileEntityMachineDimensionalPylon extends MOTileEntityMachineMatter
                         TileEntityMachineDimensionalPylon tileEntityDimensionalPylon = (TileEntityMachineDimensionalPylon) tileEntity;
                         tileEntityDimensionalPylon.addChild(getPos());
                         this.matterStorage = tileEntityDimensionalPylon.matterStorage;
-                        this.energyStorage = (MachineEnergyStorage<TileEntityMachineDimensionalPylon>) tileEntityDimensionalPylon.getEnergyStorage();
+                        this.energyStorage = (MachineEnergyStorage<MOTileEntityMachineEnergy>) tileEntityDimensionalPylon.getEnergyStorage();
                     } else {
                         registerPylonComponents();
                     }

@@ -164,11 +164,11 @@ public class MatterNetworkTaskQueue<T extends MatterNetworkTask> {
         ByteBufUtils.writeTag(byteBuf, tagCompound);
     }
 
-    protected Class getElementClassFromNBT(NBTTagCompound tagCompound) {
+    protected Class<?> getElementClassFromNBT(NBTTagCompound tagCompound) {
         return MatterNetworkRegistry.getTaskClass(tagCompound.getInteger("Type"));
     }
 
-    protected Class getElementClassFromBuffer(ByteBuf byteBuf) {
+    protected Class<?> getElementClassFromBuffer(ByteBuf byteBuf) {
         return MatterNetworkRegistry.getTaskClass(byteBuf.readInt());
     }
 

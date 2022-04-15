@@ -17,7 +17,7 @@ import javax.annotation.Nullable;
 import java.util.EnumSet;
 
 public abstract class MOTileEntityMachineMatter extends MOTileEntityMachineEnergy {
-    protected MachineMatterStorage matterStorage;
+    protected MachineMatterStorage<MOTileEntityMachineMatter> matterStorage;
 
     public MOTileEntityMachineMatter(int upgradesCount) {
         super(upgradesCount);
@@ -77,7 +77,7 @@ public abstract class MOTileEntityMachineMatter extends MOTileEntityMachineEnerg
         }
     }
 
-    public MachineMatterStorage getMatterStorage() {
+    public MachineMatterStorage<MOTileEntityMachineMatter> getMatterStorage() {
         return matterStorage;
     }
 

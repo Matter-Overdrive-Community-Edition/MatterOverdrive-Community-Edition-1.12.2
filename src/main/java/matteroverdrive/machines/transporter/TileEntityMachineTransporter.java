@@ -214,10 +214,6 @@ public class TileEntityMachineTransporter extends MOTileEntityMachineMatter impl
     public TransportLocation getSelectedLocation() {
         if (selectedLocation < locations.size() && selectedLocation >= 0) {
             TransportLocation location = locations.get(selectedLocation);
-            int range = getTransportRange();
-            //location.x = MathHelper.clampI(location.x,x - range,x + range);
-            //location.y = MathHelper.clampI(location.y,y - range,y + range);
-            //location.z = MathHelper.clampI(location.z,z - range,z + range);
             return location;
         }
         return new TransportLocation(getPos(), "Unknown");

@@ -206,7 +206,7 @@ public class TileEntityMachineReplicator extends MOTileEntityMachineMatter imple
         }
 
         AxisAlignedBB bb = new AxisAlignedBB(getPos().add(-RADIATION_RANGE, -RADIATION_RANGE, -RADIATION_RANGE), getPos().add(RADIATION_RANGE, RADIATION_RANGE, RADIATION_RANGE));
-        List entities = world.getEntitiesWithinAABB(EntityLivingBase.class, bb);
+        List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, bb);
         for (Object e : entities) {
             if (e instanceof EntityLivingBase) {
                 EntityLivingBase l = (EntityLivingBase) e;
@@ -382,12 +382,12 @@ public class TileEntityMachineReplicator extends MOTileEntityMachineMatter imple
     }
 
     @Override
-    public MatterNetworkComponentClient getMatterNetworkComponent() {
+    public MatterNetworkComponentClient<?> getMatterNetworkComponent() {
         return networkComponent;
     }
 
     @Override
-    public MatterNetworkTaskQueue getTaskQueue(int queueID) {
+    public MatterNetworkTaskQueue<?> getTaskQueue(int queueID) {
         return taskProcessingComponent.getTaskQueue();
     }
 

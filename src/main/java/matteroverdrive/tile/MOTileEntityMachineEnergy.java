@@ -22,7 +22,7 @@ import java.util.EnumSet;
 
 public abstract class MOTileEntityMachineEnergy extends MOTileEntityMachine {
     public static final int ENERGY_CLIENT_SYNC_RANGE = 16;
-    protected MachineEnergyStorage energyStorage;
+    protected MachineEnergyStorage<MOTileEntityMachineEnergy> energyStorage;
     protected int energySlotID;
 
     public MOTileEntityMachineEnergy(int upgradeCount) {
@@ -84,7 +84,7 @@ public abstract class MOTileEntityMachineEnergy extends MOTileEntityMachine {
         return this.energySlotID;
     }
 
-    public MachineEnergyStorage getEnergyStorage() {
+    public MachineEnergyStorage<MOTileEntityMachineEnergy> getEnergyStorage() {
         return this.energyStorage;
     }
 
@@ -136,7 +136,6 @@ public abstract class MOTileEntityMachineEnergy extends MOTileEntityMachine {
 
     @Nonnull
     @Override
-    @SuppressWarnings("unchecked")
     public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
         if (capability == CapabilityEnergy.ENERGY) {
             return CapabilityEnergy.ENERGY.cast(energyStorage);

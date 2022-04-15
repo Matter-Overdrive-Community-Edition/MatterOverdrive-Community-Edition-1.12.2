@@ -133,7 +133,7 @@ public class RenderUtils {
             GlStateManager.enableCull();
         }
     }
-
+//TODO
     public static void rotateFromBlock(World world, BlockPos pos) {
         if (world != null) {
             IBlockState blockState = world.getBlockState(pos);
@@ -149,6 +149,14 @@ public class RenderUtils {
                 case NORTH:
                     GlStateManager.rotate(-180, 0, 1, 0);
                     break;
+			case DOWN:
+				break;
+			case SOUTH:
+				break;
+			case UP:
+				break;
+			default:
+				break;
             }
         }
 
@@ -487,14 +495,14 @@ public class RenderUtils {
         if (maxWidth > 0) {
             scaleFactor = MathHelper.clamp((float) sizeX / (float) maxWidth, 0.02f, maxScaleFactor);
         }
-
-        for (String anInfo : info) {
+//TODO
+       /* for (String anInfo : info) {
             int scaledHeight = (int) (fontRenderer.FONT_HEIGHT * scaleFactor);
 
             if (height + scaledHeight < sizeY) {
                 height += scaledHeight;
             }
-        }
+        }*/
 
         height = MathHelper.clamp(height, 0, sizeY);
 
@@ -593,7 +601,7 @@ public class RenderUtils {
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lastLightMapX, lastLightMapY);
     }
 
-    public static void DrawMultilineInfo(List infos, int x, int y, int maxLines, int maxLineWidth, int color) {
+    public static void DrawMultilineInfo(List<?> infos, int x, int y, int maxLines, int maxLineWidth, int color) {
         try {
             int linesCounter = 0;
             String infoText = StringUtils.join(infos, "\n");
@@ -603,7 +611,7 @@ public class RenderUtils {
         }
     }
 
-    public static void DrawMultilineInfoCentered(List infos, int x, int y, int maxLines, int maxLineWidth, int color) {
+    public static void DrawMultilineInfoCentered(List<?> infos, int x, int y, int maxLines, int maxLineWidth, int color) {
         try {
             for (int i = 0; i < Math.min(maxLines, infos.size()); i++) {
                 String info = infos.get(i).toString();

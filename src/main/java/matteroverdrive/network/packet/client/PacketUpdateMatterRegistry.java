@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.Map;
 
 public class PacketUpdateMatterRegistry extends PacketAbstract {
-    private static Map<String, MatterEntryItem> entries;
+    public static Map<String, MatterEntryItem> entries;
 
     public PacketUpdateMatterRegistry() {
         super();

@@ -139,7 +139,7 @@ public class Quadrant extends SpaceBody {
         return starHashMap.containsKey(id);
     }
 
-    private boolean isLoaded() {
+    public boolean isLoaded() {
         return loaded;
     }
 

@@ -53,7 +53,7 @@ public class MOPhysicsHelper {
             Vec3d Vec3d2 = Vec3d.add(dir.x * distance, dir.y * distance, dir.z * distance);
             Vec3d Vec3d3 = null;
             float f1 = 1.0F;
-            List list = world.getEntitiesWithinAABBExcludingEntity(viewer, viewer.getEntityBoundingBox().expand(dir.x * distance, dir.y * distance, dir.z * distance).expand((double) f1, (double) f1, (double) f1));
+            List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(viewer, viewer.getEntityBoundingBox().expand(dir.x * distance, dir.y * distance, dir.z * distance).expand((double) f1, (double) f1, (double) f1));
             double d2 = d1;
 
             for (Object aList : list) {

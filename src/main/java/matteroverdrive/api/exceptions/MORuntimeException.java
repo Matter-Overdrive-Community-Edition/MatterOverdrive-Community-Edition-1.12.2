@@ -2,7 +2,10 @@
 package matteroverdrive.api.exceptions;
 
 public class MORuntimeException extends RuntimeException {
-    public MORuntimeException() {
+
+    private static final long serialVersionUID = 2098661208456481956L;
+
+	public MORuntimeException() {
     }
 
     public MORuntimeException(String message) {

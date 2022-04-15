@@ -41,7 +41,6 @@ public abstract class BlockMonitor<TE extends TileEntity> extends MOBlockMachine
     @Override
     @Deprecated
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings("deprecation")
     public AxisAlignedBB getSelectedBoundingBox(IBlockState state, @Nonnull World world, @Nonnull BlockPos pos) {
         //this.setBlockBoundsBasedOnState(worldIn,pos);
         return super.getSelectedBoundingBox(state, world, pos);
@@ -49,7 +48,6 @@ public abstract class BlockMonitor<TE extends TileEntity> extends MOBlockMachine
 
     @Override
     @Deprecated
-    @SuppressWarnings("deprecation")
     public RayTraceResult collisionRayTrace(IBlockState state, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull Vec3d start, @Nonnull Vec3d end) {
         //this.setBlockBoundsBasedOnState(worldIn,pos);
         return super.collisionRayTrace(state, world, pos, start, end);

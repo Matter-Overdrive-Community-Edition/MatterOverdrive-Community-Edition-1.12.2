@@ -166,7 +166,7 @@ public class TileEntityMachinePatternMonitor extends MOTileEntityMachine impleme
     }
 
     @Override
-    public MatterNetworkTaskQueue getTaskQueue(int queueID) {
+    public MatterNetworkTaskQueue<?> getTaskQueue(int queueID) {
         return taskProcessingComponent.getTaskQueue();
     }
 

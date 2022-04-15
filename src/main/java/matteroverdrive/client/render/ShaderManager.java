@@ -31,7 +31,6 @@ import java.util.*;
 @SideOnly(Side.CLIENT)
 public class ShaderManager {
 
-    @SuppressWarnings("unchecked")
     private static ShaderResourcePack shaderPack = new ShaderResourcePack();
     private static Field _listShaders;
 

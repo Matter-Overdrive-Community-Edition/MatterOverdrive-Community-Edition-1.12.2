@@ -2,7 +2,10 @@
 package matteroverdrive.api.exceptions;
 
 public class MOQuestParseException extends MORuntimeException {
-    public MOQuestParseException() {
+
+	private static final long serialVersionUID = -4603504590591203591L;
+
+	public MOQuestParseException() {
     }
 
     public MOQuestParseException(String message, Object... params) {

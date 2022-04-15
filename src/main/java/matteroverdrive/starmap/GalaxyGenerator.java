@@ -44,8 +44,8 @@ public class GalaxyGenerator implements IConfigSubscriber {
         starRandom = new Random();
         planetRandom = new Random();
         starNameRandom = new Random();
-        planetGen = new WeightedRandomSpaceGen(random);
-        starGen = new WeightedRandomSpaceGen(random);
+        planetGen = new WeightedRandomSpaceGen<Planet>(random);
+        starGen = new WeightedRandomSpaceGen<Star>(random);
         planetGen.addGen(new PlanetGasGiantGen());
         planetGen.addGen(new PlanetDwarfGen());
         planetGen.addGen(new PlanetNormalGen());

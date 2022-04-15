@@ -21,7 +21,6 @@ public class TransportLocation {
      */
     public String name;
 
-
     public TransportLocation(BlockPos pos, String name) {
         this.pos = pos;
         this.name = name;

@@ -116,7 +116,7 @@ public class MatterDatabaseListBox extends MOElementListBox {
 
         public void drawToolTop(MOElementListBox listBox, int x, int y) {
             ItemStack item = itemComp.toItemStack(false);
-            List tooltip = item.getTooltip(Minecraft.getMinecraft().player, ITooltipFlag.TooltipFlags.NORMAL);
+            List<String> tooltip = item.getTooltip(Minecraft.getMinecraft().player, ITooltipFlag.TooltipFlags.NORMAL);
             tooltip.add("Progress: " + itemComp.getProgress() + "%");
             tooltip.add("Matter: " + MatterHelper.getMatterAmountFromItem(item) + MatterHelper.MATTER_UNIT);
             ((MatterDatabaseListBox) listBox).getGui().setTooltip(tooltip);

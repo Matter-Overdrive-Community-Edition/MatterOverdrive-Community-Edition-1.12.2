@@ -169,7 +169,7 @@ public class TileEntityGravitationalAnomaly extends MOTileEntity implements ISca
 
         double range = getMaxRange() + 1;
         AxisAlignedBB bb = new AxisAlignedBB(getPos().getX() - range, getPos().getY() - range, getPos().getZ() - range, getPos().getX() + range, getPos().getY() + range, getPos().getZ() + range);
-        List entities = world.getEntitiesWithinAABB(Entity.class, bb);
+        List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, bb);
         Vec3d blockPos = new Vec3d(getPos()).add(0.5, 0.5, 0.5);
 
         for (Object entityObject : entities) {

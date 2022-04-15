@@ -19,9 +19,6 @@ import java.text.DecimalFormat;
 public class MOStringHelper {
     public static final String MORE_INFO = TextFormatting.RESET.toString() + TextFormatting.GRAY + "Hold " + TextFormatting.ITALIC + TextFormatting.YELLOW + "Shift" + TextFormatting.RESET.toString() + TextFormatting.GRAY + " for Details.";
 
-    private static String[] suffix = new String[]{"", "K", "M", "B", "T"};
-    private static int MAX_LENGTH = 4;
-
     public static String formatNumber(double number) {
         return formatNumber(number, "0.00");
     }

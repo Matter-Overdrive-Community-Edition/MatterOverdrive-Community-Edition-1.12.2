@@ -37,10 +37,10 @@ public class PacketMatterScannerGetDatabase extends TileEntityUpdatePacket {
     public void fromBytes(ByteBuf buf) {
         super.fromBytes(buf);
         int size = buf.readInt();
-        //for (int i = 0;i < size;i++)
-        //{
-        //list.add(new ItemPattern(buf));
-        //}
+        for (int i = 0;i < size;i++)
+        {
+        list.add(new ItemPattern(size));
+        }
     }
 
     @Override
