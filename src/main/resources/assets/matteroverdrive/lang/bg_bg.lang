@@ -12,3 +12,4 @@ item.upgrade.base.name=Надстройващ Корпус
 item.upgrade.speed.name=Скоростно Подобряване
 item.upgrade.power.name=Електрическо Подобряване
 item.upgrade.failsafe.name=Провало-Подобряване
+gui.tooltip.slot.foodfurnace=Храна

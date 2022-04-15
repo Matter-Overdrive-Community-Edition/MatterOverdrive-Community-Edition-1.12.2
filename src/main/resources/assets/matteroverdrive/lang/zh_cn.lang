@@ -404,6 +404,7 @@ gui.tooltip.slot.shielding=防护
 gui.tooltip.slot.upgrade=升级
 gui.tooltip.slot.recycle=可循环
 gui.tooltip.slot.weapon=武器
+gui.tooltip.slot.foodfurnace=食物
 gui.tooltip.quest.abandon=放弃选中任务
 gui.tooltip.quest.active_quests=当前任务
 gui.tooltip.quest.accept=已接受任务

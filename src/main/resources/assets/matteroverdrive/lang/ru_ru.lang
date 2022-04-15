@@ -403,6 +403,7 @@ gui.tooltip.slot.shielding=Защита
 gui.tooltip.slot.upgrade=Улучшения
 gui.tooltip.slot.recycle=Утилизируемое
 gui.tooltip.slot.weapon=Оружие
+gui.tooltip.slot.foodfurnace=Еда
 gui.tooltip.quest.abandon=Отказаться от текущего квеста
 gui.tooltip.quest.active_quests=Текущие квесты
 gui.tooltip.quest.accept=Принять квест

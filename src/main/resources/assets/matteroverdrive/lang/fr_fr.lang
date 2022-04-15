@@ -347,6 +347,7 @@ gui.tooltip.slot.shielding=Protégé
 gui.tooltip.slot.upgrade=Améliorable
 gui.tooltip.slot.recycle=Recyclable
 gui.tooltip.slot.weapon=Armement
+gui.tooltip.slot.foodfurnace=Aliments
 gui.redstone_mode.high=Haut
 gui.redstone_mode.low=Bas
 gui.redstone_mode.disabled=Désactivé

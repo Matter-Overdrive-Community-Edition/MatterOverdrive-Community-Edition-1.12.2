@@ -423,6 +423,7 @@ gui.tooltip.slot.shielding=Shielding
 gui.tooltip.slot.upgrade=Upgrade
 gui.tooltip.slot.recycle=Recyclable
 gui.tooltip.slot.weapon=Weapon
+gui.tooltip.slot.foodfurnace=Food
 gui.tooltip.quest.abandon=Abandon Selected Quest
 gui.tooltip.quest.active_quests=Current Quests
 gui.tooltip.quest.accept=Accept Quest
