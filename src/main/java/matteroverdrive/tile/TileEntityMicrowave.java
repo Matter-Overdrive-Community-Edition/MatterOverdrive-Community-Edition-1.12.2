@@ -36,7 +36,7 @@ public class TileEntityMicrowave extends MOTileEntityMachineEnergy {
     public TileEntityMicrowave() {
         super(4);
         energyStorage.setCapacity(ENERGY_CAPACITY);
-        energyStorage.setMaxExtract(0);
+        energyStorage.setMaxExtract(ENERGY_CAPACITY);
         energyStorage.setMaxReceive(ENERGY_CAPACITY);
         playerSlotsHotbar = true;
         playerSlotsMain = true;

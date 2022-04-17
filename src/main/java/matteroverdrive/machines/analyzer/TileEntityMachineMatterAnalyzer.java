@@ -27,7 +27,6 @@ import java.util.EnumSet;
 
 public class TileEntityMachineMatterAnalyzer extends MOTileEntityMachineEnergy implements ISidedInventory, IMatterNetworkClient, IMatterNetworkConnection, IMatterNetworkDispatcher {
     public static final int ENERGY_CAPACITY = 512000;
-    public static final int ENERGY_TRANSFER = 1024;
     private static final EnumSet<UpgradeTypes> upgradeTypes = EnumSet.of(UpgradeTypes.PowerUsage, UpgradeTypes.PowerStorage, UpgradeTypes.Speed, UpgradeTypes.PowerStorage, UpgradeTypes.Muffler);
     public int input_slot = 0;
     private ComponentMatterNetworkAnalyzer networkComponent;
@@ -37,7 +36,7 @@ public class TileEntityMachineMatterAnalyzer extends MOTileEntityMachineEnergy i
     public TileEntityMachineMatterAnalyzer() {
         super(4);
         this.energyStorage.setCapacity(ENERGY_CAPACITY);
-        this.energyStorage.setMaxExtract(ENERGY_TRANSFER);
+        this.energyStorage.setMaxExtract(ENERGY_CAPACITY);
         this.energyStorage.setMaxReceive(ENERGY_CAPACITY);
         playerSlotsHotbar = true;
         playerSlotsMain = true;
