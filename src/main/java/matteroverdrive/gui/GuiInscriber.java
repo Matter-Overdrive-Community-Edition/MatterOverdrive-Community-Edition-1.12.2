@@ -43,12 +43,12 @@ public class GuiInscriber extends MOGuiMachine<TileEntityInscriber> {
     protected void drawGuiContainerBackgroundLayer(float p_146976_1_,
                                                    int p_146976_2_, int p_146976_3_) {
         super.drawGuiContainerBackgroundLayer(p_146976_1_, p_146976_2_, p_146976_3_);
-        inscribe_progress.setQuantity(Math.round((((ContainerMachine) getContainer()).getProgress() * 24)));
+        inscribe_progress.setQuantity(Math.round((((ContainerMachine<?>) getContainer()).getProgress() * 24)));
         manageRequirementsTooltips();
     }
 
     void manageRequirementsTooltips() {
-        if (machine.getStackInSlot(machine.MAIN_INPUT_SLOT_ID) != null) {
+        if (machine.getStackInSlot(TileEntityInscriber.MAIN_INPUT_SLOT_ID) != null) {
             energyElement.setEnergyRequired(-(machine.getEnergyDrainMax()));
             energyElement.setEnergyRequiredPerTick(-machine.getEnergyDrainPerTick());
         } else {
