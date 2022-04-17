@@ -47,7 +47,7 @@ public class GuiMicrowave extends MOGuiMachine<TileEntityMicrowave> {
     protected void drawGuiContainerBackgroundLayer(float p_146976_1_,
                                                    int p_146976_2_, int p_146976_3_) {
         super.drawGuiContainerBackgroundLayer(p_146976_1_, p_146976_2_, p_146976_3_);
-        cook_progress.setQuantity(Math.round(((ContainerMachine) getContainer()).getProgress() * 24));
+        cook_progress.setQuantity(Math.round(((ContainerMachine<?>) getContainer()).getProgress() * 24));
         manageRequirementsTooltips();
     }
 

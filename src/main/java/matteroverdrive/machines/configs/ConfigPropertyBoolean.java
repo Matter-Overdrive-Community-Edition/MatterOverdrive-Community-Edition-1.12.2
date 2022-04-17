@@ -37,7 +37,7 @@ public class ConfigPropertyBoolean extends ConfigPropertyAbstract {
     }
 
     @Override
-    public Class getType() {
+    public Class<Boolean> getType() {
         return Boolean.class;
     }
 }

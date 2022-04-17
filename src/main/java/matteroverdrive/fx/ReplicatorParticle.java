@@ -20,13 +20,9 @@ public class ReplicatorParticle extends Particle {
         this.motionX = this.motionX * 0.009999999776482582D + xSpeed;
         this.motionY = this.motionY * 0.009999999776482582D + ySpeed;
         this.motionZ = this.motionZ * 0.009999999776482582D + zSpeed;
-        double d6 = posX + (double) ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.05F);
-        d6 = posY + (double) ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.05F);
-        d6 = posZ + (double) ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.05F);
         this.flameScale = this.particleScale;
         this.particleRed = this.particleGreen = this.particleBlue = 1.0F;
         this.particleMaxAge = (int) (8.0D / (Math.random() * 0.8D + 0.2D)) + 4;
-        //this.noClip = true;
         this.setParticleTextureIndex(1);
     }
 

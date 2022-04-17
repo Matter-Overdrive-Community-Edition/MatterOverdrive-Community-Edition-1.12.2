@@ -36,7 +36,7 @@ public class ConfigPropertyString extends ConfigPropertyAbstract {
     }
 
     @Override
-    public Class getType() {
+    public Class<String> getType() {
         return String.class;
     }
 

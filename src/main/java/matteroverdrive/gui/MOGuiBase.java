@@ -73,8 +73,8 @@ public abstract class MOGuiBase extends GuiContainer implements IButtonHandler, 
 
         pages = new ArrayList<>(3);
         pageButtons = new ArrayList<>(3);
-        tooltip = new LinkedList();
-        elements = new ArrayList();
+        tooltip = new LinkedList<String>();
+        elements = new ArrayList<MOElementBase>();
 
         registerPages(container);
     }
@@ -181,8 +181,7 @@ public abstract class MOGuiBase extends GuiContainer implements IButtonHandler, 
     }
 
 
-    @SuppressWarnings("rawtypes")
-    protected void drawTooltipHoveringText(List list, int x, int y, FontRenderer font) {
+    protected void drawTooltipHoveringText(List<String> list, int x, int y, FontRenderer font) {
 
         if (list == null || list.isEmpty()) {
             return;

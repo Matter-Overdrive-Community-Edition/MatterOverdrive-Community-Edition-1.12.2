@@ -124,8 +124,6 @@ public class BlockTritaniumCrate extends MOBlockMachine<TileEntityTritaniumCrate
     public ArrayList<ItemStack> dismantleBlock(EntityPlayer player, World world, BlockPos pos, boolean returnDrops) {
         TileEntity tile = world.getTileEntity(pos);
 
-        ItemStack s = new ItemStack(this);
-
         if (tile instanceof TileEntityTritaniumCrate) {
             IBlockState state = world.getBlockState(pos);
 

@@ -7,6 +7,7 @@ import matteroverdrive.util.IConfigSubscriber;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraftforge.common.config.Property;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class EntityRogueAndroid implements IConfigSubscriber {
         while (biomes.hasNext()) {
             Biome biome = biomes.next();
             if (biome != null) {
-                List spawnList = biome.getSpawnableList(EnumCreatureType.MONSTER);
+                List<SpawnListEntry> spawnList = biome.getSpawnableList(EnumCreatureType.MONSTER);
                 for (Biome.SpawnListEntry entry : spawnListEntries) {
                     if (isBiomeValid(biome) && !spawnList.contains(entry) && entry.itemWeight > 0) {
                         spawnList.add(entry);

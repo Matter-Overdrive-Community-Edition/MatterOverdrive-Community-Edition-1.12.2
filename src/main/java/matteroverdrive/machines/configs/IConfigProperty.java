@@ -20,5 +20,5 @@ public interface IConfigProperty {
 
     void readFromNBT(NBTTagCompound nbt);
 
-    Class getType();
+    Class<?> getType();
 }

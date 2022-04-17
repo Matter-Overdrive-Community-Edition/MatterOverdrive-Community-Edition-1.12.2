@@ -15,7 +15,7 @@ public interface IMatterNetworkDispatcher {
      * @param queueID the ID of the Queue.
      * @return the task queue at the given ID.
      */
-    MatterNetworkTaskQueue getTaskQueue(int queueID);
+    MatterNetworkTaskQueue<?> getTaskQueue(int queueID);
 
     /**
      * @return the number of task queues in the machine.

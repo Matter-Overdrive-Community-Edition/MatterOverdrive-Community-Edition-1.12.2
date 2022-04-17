@@ -46,7 +46,7 @@ public class GuiRecycler extends MOGuiMachine<TileEntityMachineMatterRecycler> {
     protected void drawGuiContainerBackgroundLayer(float p_146976_1_,
                                                    int p_146976_2_, int p_146976_3_) {
         super.drawGuiContainerBackgroundLayer(p_146976_1_, p_146976_2_, p_146976_3_);
-        recycle_progress.setQuantity(Math.round(((ContainerMachine) getContainer()).getProgress() * 24));
+        recycle_progress.setQuantity(Math.round(((ContainerMachine<?>) getContainer()).getProgress() * 24));
         manageRequirementsTooltips();
     }
 

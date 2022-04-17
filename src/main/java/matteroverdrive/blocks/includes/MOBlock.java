@@ -137,7 +137,7 @@ public class MOBlock extends Block implements ItemModelProvider {
     public boolean rotateBlock(World world, BlockPos pos, EnumFacing axis) {
         if (rotationType != RotationType.PREVENT) {
             IBlockState state = world.getBlockState(pos);
-            for (IProperty prop : state.getProperties().keySet()) {
+            for (IProperty<?> prop : state.getProperties().keySet()) {
                 if (prop.getName().equals(PROPERTY_DIRECTION)) {
                     EnumFacing facing = state.getValue(PROPERTY_DIRECTION);
 

@@ -36,7 +36,7 @@ public class ConfigPropertyInteger extends ConfigPropertyAbstract {
     }
 
     @Override
-    public Class getType() {
+    public Class<Integer> getType() {
         return Integer.class;
     }
 

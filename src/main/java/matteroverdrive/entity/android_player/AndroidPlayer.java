@@ -558,7 +558,7 @@ public class AndroidPlayer implements IEnergyStorage, IAndroid {
             ItemStack itemstack1 = this.inventory.getStackInSlot(j);
 
             if (!itemstack1.isEmpty() && itemstack1.getItem() instanceof IBionicPart) {
-                Multimap multimap = ((IBionicPart) itemstack1.getItem()).getModifiers(this, itemstack1);
+                Multimap<String, AttributeModifier> multimap = ((IBionicPart) itemstack1.getItem()).getModifiers(this, itemstack1);
                 if (multimap != null) {
                     player.getAttributeMap().removeAttributeModifiers(multimap);
                 }
@@ -577,14 +577,14 @@ public class AndroidPlayer implements IEnergyStorage, IAndroid {
                 //((WorldServer)player.world).getEntityTracker().func_151247_a(player, new S04PacketEntityEquipment(player.getEntityId(), j, itemstack1));
 
                 if (!itemstack.isEmpty() && itemstack.getItem() instanceof IBionicPart) {
-                    Multimap multimap = ((IBionicPart) itemstack.getItem()).getModifiers(this, itemstack);
+                    Multimap<String, AttributeModifier> multimap = ((IBionicPart) itemstack.getItem()).getModifiers(this, itemstack);
                     if (multimap != null) {
                         player.getAttributeMap().removeAttributeModifiers(multimap);
                     }
                 }
 
                 if (!itemstack1.isEmpty() && itemstack1.getItem() instanceof IBionicPart) {
-                    Multimap multimap = ((IBionicPart) itemstack1.getItem()).getModifiers(this, itemstack1);
+                    Multimap<String, AttributeModifier> multimap = ((IBionicPart) itemstack1.getItem()).getModifiers(this, itemstack1);
                     if (multimap != null) {
                         player.getAttributeMap().applyAttributeModifiers(multimap);
                     }

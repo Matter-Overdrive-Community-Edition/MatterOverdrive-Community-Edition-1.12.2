@@ -35,7 +35,7 @@ public interface IMatterRegistry {
      * @param handler the handler.
      * @return the Matter Entry associated with that item. It holds all the Handlers.
      */
-    IMatterEntry register(Item item, IMatterEntryHandler handler);
+    IMatterEntry<?, ?> register(Item item, IMatterEntryHandler<?> handler);
 
     /**
      * Acts the same way as {@link #register(Item, IMatterEntryHandler)} but for ores.
@@ -44,7 +44,7 @@ public interface IMatterRegistry {
      * @param handler the handler.
      * @return the Matter Entry associated with that ore. It holds all the Handlers.
      */
-    IMatterEntry registerOre(String ore, IMatterEntryHandler handler);
+    IMatterEntry<?, ?> registerOre(String ore, IMatterEntryHandler<?> handler);
 
     /**
      * Calculates the matter contained in an item based on it's recipe.

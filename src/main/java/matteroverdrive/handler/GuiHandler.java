@@ -103,7 +103,7 @@ public class GuiHandler implements IGuiHandler {
                     try {
                         Class<? extends MOBaseContainer> containerClass = tileEntityContainerList.get(entity.getClass());
                         Constructor[] constructors = containerClass.getDeclaredConstructors();
-                        for (Constructor constructor : constructors) {
+                        for (Constructor<?> constructor : constructors) {
                             Class[] parameterTypes = constructor.getParameterTypes();
                             if (parameterTypes.length == 2) {
                                 if (parameterTypes[0].isInstance(player.inventory) && parameterTypes[1].isInstance(entity)) {
@@ -145,7 +145,7 @@ public class GuiHandler implements IGuiHandler {
 
                         Class<? extends MOGuiBase> containerClass = tileEntityGuiList.get(entity.getClass());
                         Constructor[] constructors = containerClass.getDeclaredConstructors();
-                        for (Constructor constructor : constructors) {
+                        for (Constructor<?> constructor : constructors) {
                             Class[] parameterTypes = constructor.getParameterTypes();
                             if (parameterTypes.length == 2) {
                                 if (parameterTypes[0].isInstance(player.inventory) && parameterTypes[1].isInstance(entity)) {
@@ -162,7 +162,7 @@ public class GuiHandler implements IGuiHandler {
                         MOLog.log(Level.WARN, e, "Could not access TileEntity constructor in client GUI handler");
                     }
                 } else if (entity instanceof MOTileEntityMachine) {
-                    return new MOGuiMachine(ContainerFactory.createMachineContainer((MOTileEntityMachine) entity, player.inventory), (MOTileEntityMachine) entity);
+                    return new MOGuiMachine<MOTileEntityMachine>(ContainerFactory.createMachineContainer((MOTileEntityMachine) entity, player.inventory), (MOTileEntityMachine) entity);
                 }
         }
         return null;

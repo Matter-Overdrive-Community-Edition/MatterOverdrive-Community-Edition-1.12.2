@@ -97,7 +97,7 @@ public class GuiReplicator extends MOGuiNetworkMachine<TileEntityMachineReplicat
 
         super.drawGuiContainerBackgroundLayer(partialTick, x, y);
 
-        replicate_progress.setQuantity(Math.round(((ContainerMachine) getContainer()).getProgress() * 24));
+        replicate_progress.setQuantity(Math.round(((ContainerMachine<?>) getContainer()).getProgress() * 24));
     }
 
     @Override

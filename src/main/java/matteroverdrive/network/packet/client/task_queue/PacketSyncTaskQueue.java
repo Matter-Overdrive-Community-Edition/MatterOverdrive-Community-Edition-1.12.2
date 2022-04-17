@@ -15,7 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class PacketSyncTaskQueue extends TileEntityUpdatePacket {
     int queueID;
     ByteBuf byteBuf;
-    MatterNetworkTaskQueue taskQueue;
+    MatterNetworkTaskQueue<?> taskQueue;
 
     public PacketSyncTaskQueue() {
     }

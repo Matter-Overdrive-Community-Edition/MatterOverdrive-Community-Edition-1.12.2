@@ -14,9 +14,9 @@ public class MOEventRegisterMatterEntry extends Event {
     /**
      * The matter entry being registered.
      */
-    public final IMatterEntry entry;
+    public final IMatterEntry<?, ?> entry;
 
-    public MOEventRegisterMatterEntry(IMatterEntry entry) {
+    public MOEventRegisterMatterEntry(IMatterEntry<?, ?> entry) {
         this.entry = entry;
     }
 

@@ -22,7 +22,7 @@ public class MatterEntryOre extends MatterEntryAbstract<String, ItemStack> {
     @Override
     public void writeTo(DataOutput output) throws IOException {
         int cachedCount = 0;
-        for (IMatterEntryHandler handler : handlers) {
+        for (IMatterEntryHandler<?> handler : handlers) {
             if (handler instanceof ItemStackHandlerCachable) {
                 cachedCount++;
             }
@@ -30,7 +30,7 @@ public class MatterEntryOre extends MatterEntryAbstract<String, ItemStack> {
 
         output.writeInt(cachedCount);
 
-        for (IMatterEntryHandler handler : handlers) {
+        for (IMatterEntryHandler<?> handler : handlers) {
             if (handler instanceof ItemStackHandlerCachable) {
                 ((ItemStackHandlerCachable) handler).writeTo(output);
             }
@@ -40,7 +40,7 @@ public class MatterEntryOre extends MatterEntryAbstract<String, ItemStack> {
     @Override
     public void writeTo(NBTTagCompound tagCompound) {
         NBTTagList handlers = new NBTTagList();
-        for (IMatterEntryHandler handler : this.handlers) {
+        for (IMatterEntryHandler<?> handler : this.handlers) {
             if (handler instanceof ItemStackHandlerCachable) {
                 NBTTagCompound handlerTag = new NBTTagCompound();
                 ((ItemStackHandlerCachable) handler).writeTo(handlerTag);
@@ -85,7 +85,7 @@ public class MatterEntryOre extends MatterEntryAbstract<String, ItemStack> {
     @Override
     public boolean hasCached() {
         int cachedCount = 0;
-        for (IMatterEntryHandler handler : handlers) {
+        for (IMatterEntryHandler<?> handler : handlers) {
             if (handler instanceof ItemStackHandlerCachable) {
                 cachedCount++;
             }
