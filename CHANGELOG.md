@@ -3,6 +3,7 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Cargo ship lights,energy fix.- (infiniteblock)
 * Block Energy Update. - (infiniteblock)
 * Updates. - (infiniteblock)
 * changelog fix?. - (infiniteblock)
