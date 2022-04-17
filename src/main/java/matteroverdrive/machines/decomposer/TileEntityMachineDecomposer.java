@@ -29,7 +29,7 @@ public class TileEntityMachineDecomposer extends MOTileEntityMachineMatter imple
     public static final float FAIL_CHANGE = 0.005f;
     private static final Random random = new Random();
     public static int MATTER_STORAGE = 1024;
-    public static int ENERGY_STORAGE = 512000;
+    public static int ENERGY_CAPACITY = 512000;
     public static int DECEOPOSE_SPEED_PER_MATTER = 80;
     public static int DECOMPOSE_ENERGY_PER_MATTER = 6000;
     private static EnumSet<UpgradeTypes> upgradeTypes = EnumSet.of(UpgradeTypes.Fail, UpgradeTypes.MatterStorage, UpgradeTypes.MatterTransfer, UpgradeTypes.PowerStorage, UpgradeTypes.PowerUsage, UpgradeTypes.Speed, UpgradeTypes.Muffler);
@@ -40,9 +40,9 @@ public class TileEntityMachineDecomposer extends MOTileEntityMachineMatter imple
 	private long worldTickLast = 0;
     public TileEntityMachineDecomposer() {
         super(4);
-        this.energyStorage.setCapacity(ENERGY_STORAGE);
-        this.energyStorage.setMaxExtract(ENERGY_STORAGE);
-        this.energyStorage.setMaxReceive(ENERGY_STORAGE);
+        this.energyStorage.setCapacity(ENERGY_CAPACITY);
+        this.energyStorage.setMaxExtract(ENERGY_CAPACITY);
+        this.energyStorage.setMaxReceive(ENERGY_CAPACITY);
 
         this.matterStorage.setCapacity(MATTER_STORAGE);
         this.matterStorage.setMaxReceive(0);

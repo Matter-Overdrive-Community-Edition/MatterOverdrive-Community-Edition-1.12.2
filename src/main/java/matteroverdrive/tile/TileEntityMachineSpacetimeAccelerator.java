@@ -27,16 +27,16 @@ public class TileEntityMachineSpacetimeAccelerator extends MOTileEntityMachineMa
     private static EnumSet<UpgradeTypes> upgradeTypes = EnumSet.of(UpgradeTypes.PowerStorage, UpgradeTypes.PowerUsage, UpgradeTypes.Range, UpgradeTypes.MatterStorage, UpgradeTypes.MatterTransfer, UpgradeTypes.Speed, UpgradeTypes.MatterUsage);
     private TimeTracker timeTracker;
     private double matterUseCache;
-
+    public static final int ENERGY_CAPACITY = 512000;
     public TileEntityMachineSpacetimeAccelerator() {
         super(4);
         timeTracker = new TimeTracker();
         matterStorage.setCapacity(1024);
         matterStorage.setMaxReceive(16);
         matterStorage.setMaxExtract(0);
-        energyStorage.setCapacity(512000);
+        energyStorage.setCapacity(ENERGY_CAPACITY);
         energyStorage.setMaxExtract(0);
-        energyStorage.setMaxReceive(512);
+        energyStorage.setMaxReceive(ENERGY_CAPACITY);
         playerSlotsHotbar = true;
         playerSlotsMain = true;
     }

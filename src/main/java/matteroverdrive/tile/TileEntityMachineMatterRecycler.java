@@ -19,7 +19,7 @@ import java.util.EnumSet;
 
 public class TileEntityMachineMatterRecycler extends MOTileEntityMachineEnergy {
 
-    public static final int ENERGY_STORAGE = 512000;
+    public static final int ENERGY_CAPACITY = 512000;
     public static final int RECYCLE_SPEED_PER_MATTER = 80;
     public static final int RECYCLE_ENERGY_PER_MATTER = 1000;
     public int OUTPUT_SLOT_ID;
@@ -28,9 +28,9 @@ public class TileEntityMachineMatterRecycler extends MOTileEntityMachineEnergy {
 
     public TileEntityMachineMatterRecycler() {
         super(4);
-        this.energyStorage.setCapacity(ENERGY_STORAGE);
-        this.energyStorage.setMaxExtract(ENERGY_STORAGE);
-        this.energyStorage.setMaxReceive(ENERGY_STORAGE);
+        this.energyStorage.setCapacity(ENERGY_CAPACITY);
+        this.energyStorage.setMaxExtract(ENERGY_CAPACITY);
+        this.energyStorage.setMaxReceive(ENERGY_CAPACITY);
         playerSlotsHotbar = true;
         playerSlotsMain = true;
     }

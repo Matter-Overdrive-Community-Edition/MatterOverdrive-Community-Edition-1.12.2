@@ -16,14 +16,14 @@ import javax.annotation.Nullable;
 
 public class TileEntityMachineSolarPanel extends MOTileEntityMachineEnergy {
     public static final int CHARGE_AMOUNT = 8;
-    public static final int ENERGY_STORAGE = 64000;
+    public static final int ENERGY_CAPACITY = 64000;
     public static final int MAX_ENERGY_EXTRACT = 512;
 
     private byte chargeAmount;
 
     public TileEntityMachineSolarPanel() {
         super(2);
-        energyStorage.setCapacity(ENERGY_STORAGE);
+        energyStorage.setCapacity(ENERGY_CAPACITY);
         energyStorage.setMaxExtract(MAX_ENERGY_EXTRACT);
         energyStorage.setMaxReceive(0);
     }

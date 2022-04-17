@@ -70,7 +70,7 @@ public class BlockFusionReactorController extends MOBlockMachine<TileEntityMachi
     @Override
     public void onConfigChanged(ConfigurationHandler config) {
         super.onConfigChanged(config);
-        TileEntityMachineFusionReactorController.ENERGY_STORAGE = config.getMachineInt(getTranslationKey(), "storage.energy", 100000000, String.format("How much energy can the %s hold", getLocalizedName()));
+        TileEntityMachineFusionReactorController.ENERGY_CAPACITY = config.getMachineInt(getTranslationKey(), "storage.energy", 100000000, String.format("How much energy can the %s hold", getLocalizedName()));
         TileEntityMachineFusionReactorController.MATTER_STORAGE = config.getMachineInt(getTranslationKey(), "storage.matter", 2048, String.format("How much matter can the %s hold", getLocalizedName()));
         TileEntityMachineFusionReactorController.ENERGY_PER_TICK = config.getMachineInt(getTranslationKey(), "output.energy", 2048, "The Energy Output per tick. Dependant on the size of the anomaly as well");
         TileEntityMachineFusionReactorController.MATTER_DRAIN_PER_TICK = (float) config.getMachineDouble(getTranslationKey(), "drain.matter", 1D / 80D, "How much matter is drained per tick. Dependant on the size of the anomaly as well");

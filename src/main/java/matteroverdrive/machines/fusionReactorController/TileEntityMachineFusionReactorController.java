@@ -52,7 +52,7 @@ public class TileEntityMachineFusionReactorController extends MOTileEntityMachin
     public static final int positionsCount = positions.length / 2;
     public static int STRUCTURE_CHECK_DELAY = 40;
     public static int MAX_GRAVITATIONAL_ANOMALY_DISTANCE = 3;
-    public static int ENERGY_STORAGE = 100000000;
+    public static int ENERGY_CAPACITY = 100000000;
     public static int MATTER_STORAGE = 2048;
     public static int ENERGY_PER_TICK = 2048;
     public static double MATTER_DRAIN_PER_TICK = 1.0D / 80.0D;
@@ -72,9 +72,9 @@ public class TileEntityMachineFusionReactorController extends MOTileEntityMachin
         super(4);
 
         structureCheckTimer = new TimeTracker();
-        energyStorage.setCapacity(ENERGY_STORAGE);
-        energyStorage.setMaxExtract(ENERGY_STORAGE);
-        energyStorage.setMaxReceive(ENERGY_STORAGE);
+        energyStorage.setCapacity(ENERGY_CAPACITY);
+        energyStorage.setMaxExtract(ENERGY_CAPACITY);
+        energyStorage.setMaxReceive(ENERGY_CAPACITY);
 
         matterStorage.setCapacity(MATTER_STORAGE);
         matterStorage.setMaxExtract(0);
@@ -304,7 +304,7 @@ public class TileEntityMachineFusionReactorController extends MOTileEntityMachin
         int startDir = random.nextInt(6);
 
         for (int i = 0; i < 6; i++) {
-            energy = Math.min(energyStorage.getEnergyStored(), ENERGY_STORAGE);
+            energy = Math.min(energyStorage.getEnergyStored(), ENERGY_CAPACITY);
             EnumFacing dir = EnumFacing.VALUES[(i + startDir) % 6];
             entity = world.getTileEntity(source.getPos().offset(dir));
 

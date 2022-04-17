@@ -37,7 +37,7 @@ public class TileEntityInscriber extends MOTileEntityMachineEnergy {
         super(4);
         energyStorage.setCapacity(512000);
         energyStorage.setMaxExtract(256);
-        energyStorage.setMaxReceive(256);
+        energyStorage.setMaxReceive(512000);
         playerSlotsHotbar = true;
         playerSlotsMain = true;
     }

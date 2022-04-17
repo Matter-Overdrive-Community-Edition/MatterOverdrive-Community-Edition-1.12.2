@@ -51,7 +51,7 @@ public class TileEntityMachineReplicator extends MOTileEntityMachineMatter imple
     public static final int RADIATION_RANGE = 8;
     private static final EnumSet<UpgradeTypes> upgradeTypes = EnumSet.of(UpgradeTypes.PowerStorage, UpgradeTypes.Speed, UpgradeTypes.Fail, UpgradeTypes.PowerUsage, UpgradeTypes.MatterStorage, UpgradeTypes.Muffler);
     public static int MATTER_STORAGE = 1024;
-    public static int ENERGY_STORAGE = 512000;
+    public static int ENERGY_CAPACITY = 512000;
     public int OUTPUT_SLOT_ID = 0;
     public int SECOND_OUTPUT_SLOT_ID = 1;
     public int DATABASE_SLOT_ID = 2;
@@ -67,9 +67,9 @@ public class TileEntityMachineReplicator extends MOTileEntityMachineMatter imple
 
     public TileEntityMachineReplicator() {
         super(4);
-        this.energyStorage.setCapacity(ENERGY_STORAGE);
-        this.energyStorage.setMaxExtract(ENERGY_STORAGE);
-        this.energyStorage.setMaxReceive(ENERGY_STORAGE);
+        this.energyStorage.setCapacity(ENERGY_CAPACITY);
+        this.energyStorage.setMaxExtract(ENERGY_CAPACITY);
+        this.energyStorage.setMaxReceive(ENERGY_CAPACITY);
         this.matterStorage.setCapacity(MATTER_STORAGE);
         this.matterStorage.setMaxExtract(MATTER_TRANSFER);
         this.matterStorage.setMaxExtract(0);

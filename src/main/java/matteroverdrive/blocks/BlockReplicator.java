@@ -62,7 +62,7 @@ public class BlockReplicator extends MOMatterEnergyStorageBlock<TileEntityMachin
         replication_volume = (float) config.getMachineDouble(getTranslationKey(), "volume.replicate", 1, "The volume of the replication animation");
         hasVentParticles = config.getMachineBool(getTranslationKey(), "particles.vent", true, "Should vent particles be displayed");
         TileEntityMachineReplicator.MATTER_STORAGE = config.getMachineInt(getTranslationKey(), "storage.matter", 1024, "How much matter can the replicator hold");
-        TileEntityMachineReplicator.ENERGY_STORAGE = config.getMachineInt(getTranslationKey(), "storage.energy", 512000, "How much energy can the replicator hold");
+        TileEntityMachineReplicator.ENERGY_CAPACITY = config.getMachineInt(getTranslationKey(), "storage.energy", 512000, "How much energy can the replicator hold");
         ComponentTaskProcessingReplicator.REPLICATE_ENERGY_PER_MATTER = config.getMachineInt(getTranslationKey(), "cost.replication.energy", 16000, "The total replication cost of each matter value. The energy cost is calculated like so: (matterAmount*EnergyCost)");
         ComponentTaskProcessingReplicator.REPLICATE_SPEED_PER_MATTER = config.getMachineInt(getTranslationKey(), "speed.replication", 120, "The replication speed in ticks per matter value");
     }
