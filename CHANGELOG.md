@@ -3,6 +3,9 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Block Energy Update. - (infiniteblock)
+* Updates. - (infiniteblock)
+* changelog fix?. - (infiniteblock)
 * Added Microwave slot to Lang files. (infiniteblock)
 * Update ModuleHoloSightsRender.java (infiniteblock)
 * Make or Break? (infiniteblock)
