@@ -12,14 +12,14 @@ public class MOEventScan extends PlayerEvent {
     public final RayTraceResult position;
     private final Side side;
 
-    public MOEventScan(EntityPlayer player, ItemStack scannetStack, RayTraceResult position) {
+    public MOEventScan(EntityPlayer player, ItemStack scannedStack, RayTraceResult position) {
         super(player);
         if (player.world.isRemote) {
             side = Side.CLIENT;
         } else {
             side = Side.SERVER;
         }
-        this.scannerStack = scannetStack;
+        this.scannerStack = scannedStack;
         this.position = position;
     }
 
