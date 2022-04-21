@@ -48,6 +48,12 @@ public class TileEntityMachineMatterAnalyzer extends MOTileEntityMachineEnergy i
     }
 
     @Override
+    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState)
+    {
+    	return (oldState.getBlock() != newState.getBlock());
+    }
+
+    @Override
     public void RegisterSlots(Inventory inventory) {
         input_slot = inventory.AddSlot(new MatterSlot(true));
         super.RegisterSlots(inventory);
@@ -158,7 +164,7 @@ public class TileEntityMachineMatterAnalyzer extends MOTileEntityMachineEnergy i
     public float soundVolume() {
         ItemStack stack = this.getStackInSlot(input_slot);
 
-        if (getUpgradeMultiply(UpgradeTypes.Muffler) == 2d || stack.isEmpty()) {
+        if (getUpgradeMultiply(UpgradeTypes.Muffler) >= 2d) {
             return 0.0f;
         }
 

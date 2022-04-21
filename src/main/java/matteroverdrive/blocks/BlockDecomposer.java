@@ -1,4 +1,3 @@
-
 package matteroverdrive.blocks;
 
 import matteroverdrive.MatterOverdrive;
@@ -47,21 +46,29 @@ public class BlockDecomposer extends MOMatterEnergyStorageBlock<TileEntityMachin
         worldIn.setBlockState(pos, blockState.withProperty(RUNNING, false));
     }
 
-    public static void setState(boolean running, World worldIn, BlockPos pos) {
+    public static void setState(boolean active, World worldIn, BlockPos pos) {
         IBlockState state = worldIn.getBlockState(pos);
         TileEntity tileEntity = worldIn.getTileEntity(pos);
 
-        worldIn.setBlockState(
-            pos,
-            MatterOverdrive.BLOCKS.decomposer.getDefaultState()
+        if (active) {
+            worldIn.setBlockState(
+                pos,
+                MatterOverdrive.BLOCKS.decomposer.getDefaultState()
                     .withProperty(PROPERTY_DIRECTION, state.getValue(PROPERTY_DIRECTION))
-                    .withProperty(RUNNING, running),
-            3
-        );
-
+                    .withProperty(RUNNING, true),
+                3
+            );
+        } else {
+            worldIn.setBlockState(
+                    pos,
+                    MatterOverdrive.BLOCKS.decomposer.getDefaultState()
+                        .withProperty(PROPERTY_DIRECTION, state.getValue(PROPERTY_DIRECTION))
+                        .withProperty(RUNNING, false),
+                    3
+            );
+        }
         if (tileEntity != null) {
             tileEntity.validate();
-
             worldIn.setTileEntity(pos, tileEntity);
         }
     }

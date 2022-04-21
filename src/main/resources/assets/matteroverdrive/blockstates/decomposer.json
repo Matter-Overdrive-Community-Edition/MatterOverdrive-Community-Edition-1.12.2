@@ -14,7 +14,6 @@
   },
   "variants": {
     "normal": {"model": "matteroverdrive:base/orientable"},
-
     "facing=north,running=false": { "model": "matteroverdrive:base/orientable"},
     "facing=south,running=false": { "model": "matteroverdrive:base/orientable","y": 180 },
     "facing=west,running=false":  { "model": "matteroverdrive:base/orientable","y": 270 },

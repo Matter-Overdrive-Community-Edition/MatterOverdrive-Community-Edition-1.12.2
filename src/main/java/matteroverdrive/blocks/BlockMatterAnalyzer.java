@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 
 public class BlockMatterAnalyzer extends MOMatterEnergyStorageBlock<TileEntityMachineMatterAnalyzer> {
-
+    public static final PropertyBool RUNNING = PropertyBool.create("running");
 	
 
     public BlockMatterAnalyzer(Material material, String name) {
@@ -29,7 +29,50 @@ public class BlockMatterAnalyzer extends MOMatterEnergyStorageBlock<TileEntityMa
         setLightOpacity(2);
         this.setResistance(5.0f);
         this.setHarvestLevel("pickaxe", 2);
+        this.setDefaultState(getBlockState().getBaseState().withProperty(RUNNING, false).withProperty(PROPERTY_DIRECTION, EnumFacing.NORTH));
         setHasGui(true);
+    }
+
+    @Nonnull
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, PROPERTY_DIRECTION, RUNNING);
+    }
+
+    @Override
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+
+        IBlockState blockState = worldIn.getBlockState(pos);
+
+        worldIn.setBlockState(pos, blockState.withProperty(RUNNING, false));
+    }
+
+    public static void setState(boolean active, World worldIn, BlockPos pos) {
+        IBlockState state = worldIn.getBlockState(pos);
+        TileEntity tileEntity = worldIn.getTileEntity(pos);
+
+        if (active) {
+            worldIn.setBlockState(
+                pos,
+                MatterOverdrive.BLOCKS.matter_analyzer.getDefaultState()
+                    .withProperty(PROPERTY_DIRECTION, state.getValue(PROPERTY_DIRECTION))
+                    .withProperty(RUNNING, true),
+                3
+            );
+        } else {
+            worldIn.setBlockState(
+                    pos,
+                    MatterOverdrive.BLOCKS.matter_analyzer.getDefaultState()
+                        .withProperty(PROPERTY_DIRECTION, state.getValue(PROPERTY_DIRECTION))
+                        .withProperty(RUNNING, false),
+                    3
+            );
+        }
+        if (tileEntity != null) {
+            tileEntity.validate();
+            worldIn.setTileEntity(pos, tileEntity);
+        }
     }
 
     @Override

@@ -1,4 +1,3 @@
-
 package matteroverdrive.blocks;
 
 import matteroverdrive.MatterOverdrive;
@@ -45,11 +44,11 @@ public class BlockMatterRecycler extends MOMatterEnergyStorageBlock<TileEntityMa
         worldIn.setBlockState(pos, blockState.withProperty(RUNNING, false));
     }
 
-    public static void setState(boolean running, World worldIn, BlockPos pos) {
+    public static void setState(boolean active, World worldIn, BlockPos pos) {
         IBlockState state = worldIn.getBlockState(pos);
         TileEntity tileEntity = worldIn.getTileEntity(pos);
 
-        if (running) {
+        if (active) {
             worldIn.setBlockState(
                     pos,
                     MatterOverdrive.BLOCKS.recycler.getDefaultState()

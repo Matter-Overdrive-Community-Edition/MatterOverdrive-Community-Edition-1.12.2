@@ -65,6 +65,7 @@ public class ComponentTaskProcessingAnalyzer extends TaskQueueComponent<MatterNe
         }
 
         // Update the machine's state with the running state.
+        BlockMatterAnalyzer.setState(isAnalyzing, this.getWorld(), this.getPos());
     }
 
     public void analyzeItem() {

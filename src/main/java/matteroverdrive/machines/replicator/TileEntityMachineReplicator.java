@@ -82,6 +82,12 @@ public class TileEntityMachineReplicator extends MOTileEntityMachineMatter imple
         return getPos();
     }
 
+    @Override
+    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState)
+    {
+    	return (oldState.getBlock() != newState.getBlock());
+    }
+
     protected void RegisterSlots(Inventory inventory) {
         OUTPUT_SLOT_ID = inventory.AddSlot(new RemoveOnlySlot(false).setSendToClient(true));
         SECOND_OUTPUT_SLOT_ID = inventory.AddSlot(new RemoveOnlySlot(false));
@@ -350,7 +356,7 @@ public class TileEntityMachineReplicator extends MOTileEntityMachineMatter imple
 
     @Override
     public float soundVolume() {
-        if (getUpgradeMultiply(UpgradeTypes.Muffler) == 2d) {
+        if (getUpgradeMultiply(UpgradeTypes.Muffler) >= 2d) {
             return 0.0f;
         }
 

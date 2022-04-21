@@ -154,7 +154,7 @@ public class TileEntityInscriber extends MOTileEntityMachineEnergy {
     public float soundVolume() {
         ItemStack stack = this.getStackInSlot(MAIN_INPUT_SLOT_ID);
 
-        if (getUpgradeMultiply(UpgradeTypes.Muffler) == 2d || stack.isEmpty()) {
+        if (getUpgradeMultiply(UpgradeTypes.Muffler) >= 2d) {
             return 0.0f;
         }
 

@@ -85,7 +85,7 @@ public class TileEntityMachineDimensionalPylon extends MOTileEntityMachineMatter
 
     @Override
     public float soundVolume() {
-        if (getUpgradeMultiply(UpgradeTypes.Muffler) == 2d) {
+        if (getUpgradeMultiply(UpgradeTypes.Muffler) >= 2d) {
             return 0.0f;
         }
 

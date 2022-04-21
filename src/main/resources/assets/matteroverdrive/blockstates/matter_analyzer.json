@@ -1,7 +1,7 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "matteroverdrive:matter_analyzer",
+    "model": "matteroverdrive:base/orientable",
     "textures": {
       "bottom": "matteroverdrive:blocks/base",
       "top": "matteroverdrive:blocks/analyzer_top",
@@ -13,15 +13,23 @@
     }
   },
   "variants": {
-    "normal":       { "model": "matteroverdrive:matter_analyzer" },
-    "facing=north": { "model": "matteroverdrive:matter_analyzer" },
-    "facing=south": { "model": "matteroverdrive:matter_analyzer","y": 180 },
-    "facing=west":  { "model": "matteroverdrive:matter_analyzer","y": 270 },
-    "facing=east":  { "model": "matteroverdrive:matter_analyzer","y": 90 },
-	"facing=up":    { "model": "matteroverdrive:matter_analyzer" },
-	"facing=down":  { "model": "matteroverdrive:matter_analyzer" },
+    "normal": {"model": "matteroverdrive:base/orientable"},
+    "facing=north,running=false": { "model": "matteroverdrive:base/orientable"},
+    "facing=south,running=false": { "model": "matteroverdrive:base/orientable","y": 180 },
+    "facing=west,running=false":  { "model": "matteroverdrive:base/orientable","y": 270 },
+    "facing=east,running=false":  { "model": "matteroverdrive:base/orientable","y": 90 },
+    "facing=up,running=false":    { "model": "matteroverdrive:base/orientable"},
+    "facing=down,running=false":  { "model": "matteroverdrive:base/orientable"},
+
+    "facing=north,running=true":  { "model": "matteroverdrive:base/orientable_on"},
+    "facing=south,running=true":  { "model": "matteroverdrive:base/orientable_on","y": 180 },
+    "facing=west,running=true":   { "model": "matteroverdrive:base/orientable_on","y": 270 },
+    "facing=east,running=true":   { "model": "matteroverdrive:base/orientable_on","y": 90 },
+    "facing=up,running=true":     { "model": "matteroverdrive:base/orientable_on"},
+    "facing=down,running=true":   { "model": "matteroverdrive:base/orientable_on"},
+
     "inventory": {
-      "model": "matteroverdrive:matter_analyzer",
+      "model": "matteroverdrive:base/orientable",
       "transform": "forge:default-block"
     }
   }

@@ -1,4 +1,3 @@
-
 package matteroverdrive.machines.decomposer;
 
 import matteroverdrive.MatterOverdrive;
@@ -14,12 +13,15 @@ import matteroverdrive.machines.events.MachineEvent;
 import matteroverdrive.tile.MOTileEntityMachineMatter;
 import matteroverdrive.util.MatterHelper;
 import matteroverdrive.util.TimeTracker;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 import java.util.EnumSet;
 import java.util.Random;
@@ -74,7 +76,6 @@ public class TileEntityMachineDecomposer extends MOTileEntityMachineMatter imple
         return MatterOverdriveSounds.decomposer;
     }
 
-    // If we have the muffler upgrade, say we don't have sound.
     @Override
     public boolean hasSound() {
         return true;
@@ -82,12 +83,9 @@ public class TileEntityMachineDecomposer extends MOTileEntityMachineMatter imple
 
     @Override
     public float soundVolume() {
-        ItemStack stack = this.getStackInSlot(INPUT_SLOT_ID);
-
-        if (getUpgradeMultiply(UpgradeTypes.Muffler) == 2d || stack.isEmpty()) {
+        if (getUpgradeMultiply(UpgradeTypes.Muffler) >= 2d) {
             return 0.0f;
         }
-
         return 0.3f;
     }
 
@@ -109,6 +107,12 @@ public class TileEntityMachineDecomposer extends MOTileEntityMachineMatter imple
         }
     }
 
+    @Override
+    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState)
+    {
+    	return (oldState.getBlock() != newState.getBlock());
+    }
+
     protected void manageDecompose() {
         if (!world.isRemote) {
             if (this.isDecomposing()) {
@@ -122,9 +126,7 @@ public class TileEntityMachineDecomposer extends MOTileEntityMachineMatter imple
                     }
                 }
             }
-
-            BlockDecomposer.setState(isDecomposing(), getWorld(), this.getPos());
-
+            BlockDecomposer.setState(isDecomposing(), this.getWorld(), this.getPos());
             this.markDirty();
         }
 
@@ -151,7 +153,7 @@ public class TileEntityMachineDecomposer extends MOTileEntityMachineMatter imple
 
     public double getFailChance() {
         double upgradeMultiply = getUpgradeMultiply(UpgradeTypes.Fail);
-        //this does not nagate all fail chance if item is not fully scanned
+        //this does not negate all fail chance if item is not fully scanned
         return FAIL_CHANGE * upgradeMultiply * upgradeMultiply;
     }
 

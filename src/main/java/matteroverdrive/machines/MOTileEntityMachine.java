@@ -111,7 +111,10 @@ public abstract class MOTileEntityMachine extends MOTileEntity implements IMOTil
 
     @Override
     public void update() {
-		super.update();
+        if (!awoken) {
+            awoken = true;
+            onAwake(world.isRemote ? Side.CLIENT : Side.SERVER);
+        }
 
         if (world.isRemote) {
             manageSound();

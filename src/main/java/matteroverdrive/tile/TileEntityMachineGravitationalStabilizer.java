@@ -131,7 +131,7 @@ public class TileEntityMachineGravitationalStabilizer extends MOTileEntityMachin
 
     @Override
     public float soundVolume() {
-        if (getUpgradeMultiply(UpgradeTypes.Muffler) == 2d) {
+        if (getUpgradeMultiply(UpgradeTypes.Muffler) >= 2d) {
             return 0.0f;
         }
 

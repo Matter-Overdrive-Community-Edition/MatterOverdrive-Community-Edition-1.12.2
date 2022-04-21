@@ -1,19 +1,22 @@
-
 package matteroverdrive.tile;
 
 import matteroverdrive.api.inventory.UpgradeTypes;
 import matteroverdrive.api.matter.IRecyclable;
 import matteroverdrive.blocks.BlockMatterRecycler;
+
 import matteroverdrive.data.Inventory;
 import matteroverdrive.data.inventory.RemoveOnlySlot;
 import matteroverdrive.data.inventory.SlotRecycler;
 import matteroverdrive.init.MatterOverdriveSounds;
 import matteroverdrive.machines.MachineNBTCategory;
 import matteroverdrive.machines.events.MachineEvent;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 import java.util.EnumSet;
 
@@ -22,6 +25,7 @@ public class TileEntityMachineMatterRecycler extends MOTileEntityMachineEnergy {
     public static final int ENERGY_CAPACITY = 512000;
     public static final int RECYCLE_SPEED_PER_MATTER = 80;
     public static final int RECYCLE_ENERGY_PER_MATTER = 1000;
+    private static EnumSet<UpgradeTypes> upgradeTypes = EnumSet.of(UpgradeTypes.PowerStorage, UpgradeTypes.PowerUsage, UpgradeTypes.Speed, UpgradeTypes.Muffler);
     public int OUTPUT_SLOT_ID;
     public int INPUT_SLOT_ID;
     public int recycleTime;
@@ -58,9 +62,12 @@ public class TileEntityMachineMatterRecycler extends MOTileEntityMachineEnergy {
 
     @Override
     protected void onMachineEvent(MachineEvent event) {
-        if (event instanceof MachineEvent.ActiveChange) {
-            forceSync();
-        }
+    }
+
+    @Override
+    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState)
+    {
+    	return (oldState.getBlock() != newState.getBlock());
     }
 
     @Override
@@ -96,11 +103,12 @@ public class TileEntityMachineMatterRecycler extends MOTileEntityMachineEnergy {
     }
 
     public boolean isRecycling() {
-        return !getStackInSlot(INPUT_SLOT_ID).isEmpty()
+        return getRedstoneActive()
+        		&& !this.getStackInSlot(INPUT_SLOT_ID).isEmpty()
                 && getStackInSlot(INPUT_SLOT_ID).getItem() instanceof IRecyclable
                 && ((IRecyclable) getStackInSlot(INPUT_SLOT_ID).getItem()).canRecycle(getStackInSlot(INPUT_SLOT_ID))
                 && canPutInOutput()
-                && ((IRecyclable) getStackInSlot(INPUT_SLOT_ID).getItem()).getRecycleMatter(getStackInSlot(INPUT_SLOT_ID)) > 0;
+                && this.energyStorage.getEnergyStored() > 0;
     }
 
     public int getEnergyDrainPerTick() {
@@ -109,18 +117,15 @@ public class TileEntityMachineMatterRecycler extends MOTileEntityMachineEnergy {
     }
 
     public int getEnergyDrainMax() {
-        int matter = ((IRecyclable) getStackInSlot(INPUT_SLOT_ID).getItem()).getRecycleMatter(getStackInSlot(INPUT_SLOT_ID));
+
         double upgradeMultiply = getUpgradeMultiply(UpgradeTypes.PowerUsage);
-        return (int) Math.round((matter * RECYCLE_ENERGY_PER_MATTER) * upgradeMultiply);
+        return (int) Math.round((RECYCLE_ENERGY_PER_MATTER) * upgradeMultiply);
     }
 
     public int getSpeed() {
         if (!getStackInSlot(INPUT_SLOT_ID).isEmpty()) {
-            double matter = Math.log1p(((IRecyclable) getStackInSlot(INPUT_SLOT_ID).getItem()).getRecycleMatter(getStackInSlot(INPUT_SLOT_ID)));
-            matter *= matter;
-            if (matter > 0) {
-                return (int) Math.round(RECYCLE_SPEED_PER_MATTER * matter * getUpgradeMultiply(UpgradeTypes.Speed));
-            }
+                return (int) Math.round(RECYCLE_SPEED_PER_MATTER * getUpgradeMultiply(UpgradeTypes.Speed));
+            } else {
         }
         return 1;
     }
@@ -133,11 +138,11 @@ public class TileEntityMachineMatterRecycler extends MOTileEntityMachineEnergy {
             return true;
         } else if (!inputStack.isEmpty() && inputStack.getItem() instanceof IRecyclable) {
             ItemStack outputStack = ((IRecyclable) inputStack.getItem()).getOutput(inputStack);
-            if (!outputStack.isEmpty() && stack.isItemEqual(outputStack) && stack.getCount() + outputStack.getCount() < stack.getMaxStackSize()) {
-                return true;
+            if (!outputStack.isEmpty() && outputStack.getCount() < stack.getMaxStackSize()) {
+               return true;
+                
             }
         }
-
         return false;
     }
 
@@ -152,7 +157,7 @@ public class TileEntityMachineMatterRecycler extends MOTileEntityMachineEnergy {
                 stackInOutput.grow(1);
             }
 
-            decrStackSize(INPUT_SLOT_ID, 1);
+            this.decrStackSize(INPUT_SLOT_ID, 1);
             forceSync();
         }
     }
@@ -174,13 +179,11 @@ public class TileEntityMachineMatterRecycler extends MOTileEntityMachineEnergy {
 
     @Override
     public float soundVolume() {
-        ItemStack stack = this.getStackInSlot(INPUT_SLOT_ID);
-
-        if (getUpgradeMultiply(UpgradeTypes.Muffler) == 2d || stack.isEmpty()) {
+        if (getUpgradeMultiply(UpgradeTypes.Muffler) >= 2d) {
             return 0.0f;
         }
 
-        return 1;
+        return 0.3f;
     }
 
     @Override
@@ -200,7 +203,7 @@ public class TileEntityMachineMatterRecycler extends MOTileEntityMachineEnergy {
 
     @Override
     public boolean isAffectedByUpgrade(UpgradeTypes type) {
-        return type == UpgradeTypes.Speed || type == UpgradeTypes.PowerStorage || type == UpgradeTypes.PowerUsage;
+        return upgradeTypes.contains(type);
     }
 
     public float getProgress() {
