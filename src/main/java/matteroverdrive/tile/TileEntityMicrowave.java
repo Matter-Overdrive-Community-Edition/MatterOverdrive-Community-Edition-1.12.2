@@ -121,7 +121,7 @@ public class TileEntityMicrowave extends MOTileEntityMachineEnergy {
     public boolean isCooking() {
         ItemStack input = inventory.getStackInSlot(INPUT_SLOT_ID);
         ItemStack res = FurnaceRecipes.instance().getSmeltingResult(input);
-        return res != null && canPutInOutput();
+        return res != null && canPutInOutput() && getRedstoneActive();
     }
 
     @Override
@@ -136,9 +136,7 @@ public class TileEntityMicrowave extends MOTileEntityMachineEnergy {
 
     @Override
     public float soundVolume() {
-        ItemStack stack = this.getStackInSlot(INPUT_SLOT_ID);
-
-        if (getUpgradeMultiply(UpgradeTypes.Muffler) == 2d || stack.isEmpty()) {
+        if (getUpgradeMultiply(UpgradeTypes.Muffler) >= 2d) {
             return 0.0f;
         }
         return 1;
