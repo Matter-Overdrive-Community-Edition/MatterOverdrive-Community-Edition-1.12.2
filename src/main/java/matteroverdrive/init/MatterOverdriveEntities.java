@@ -72,7 +72,7 @@ public class MatterOverdriveEntities {
 			.addTrade(1, new EntityVillager.ListItemForEmeralds(new ItemStack(MatterOverdrive.ITEMS.androidPill, 1, 1), new EntityVillager.PriceInfo(20, 30)))
 			.addTrade(1, new EntityVillager.ListItemForEmeralds(new ItemStack(MatterOverdrive.ITEMS.androidPill, 2, 2), new EntityVillager.PriceInfo(20, 30)))
 			.addTrade(1, new EntityVillager.ListItemForEmeralds(MatterOverdrive.ITEMS.h_compensator, new EntityVillager.PriceInfo(20, 30)))
-			.addTrade(1, new EntityVillager.ListItemForEmeralds(MatterOverdrive.ITEMS.dilithium_crystal, new EntityVillager.PriceInfo(-5, -7)))
+			.addTrade(1, new EntityVillager.ListItemForEmeralds(MatterOverdrive.ITEMS.dilithium_crystal, new EntityVillager.PriceInfo(-7, -5)))
 			.addTrade(1, new EntityVillager.ListItemForEmeralds(MatterOverdrive.ITEMS.weapon_module_barrel, new EntityVillager.PriceInfo(20, 30)))
 			.addTrade(1, new EntityVillager.ListItemForEmeralds(new ItemStack(MatterOverdrive.ITEMS.weapon_module_barrel, 1, 1), new EntityVillager.PriceInfo(20, 30)))
 			.addTrade(1, new EntityVillager.ListItemForEmeralds(new ItemStack(MatterOverdrive.ITEMS.weapon_module_barrel, 1, 2), new EntityVillager.PriceInfo(20, 30)))
