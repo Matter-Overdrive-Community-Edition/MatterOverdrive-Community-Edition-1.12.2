@@ -210,8 +210,7 @@ public class MatterOverdriveBlocks {
         // Register test crates.
         new_tritanium_crate_base = register(new BlockNewTritaniumCrate(TRITANIUM, "new_tritanium_crate", 0));
 
-        MOLog.info("Finished registering blocks");
-        MOLog.info("Registered %d blocks", registeredCount);
+        MOLog.info("Finished registering %d blocks", registeredCount);
 
     }
 
