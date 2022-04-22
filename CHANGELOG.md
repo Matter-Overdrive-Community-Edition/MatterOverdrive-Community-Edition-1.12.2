@@ -3,7 +3,19 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
-* Cargo ship lights,energy fix.- (infiniteblock)
+* Update MatterOverdriveMatter.java - (infiniteblock)
+* Update MatterOverdriveItems.java - (infiniteblock)
+* Update MatterOverdriveBlocks.java - (infiniteblock)
+* Update MatterOverdriveEntities.java - (infiniteblock)
+* Update ItemBase.java - (infiniteblock)
+* Update Reference.java - (infiniteblock)
+* Update TileEntityMicrowave.java - (infiniteblock)
+* Big update - (infiniteblock)
+* Update MOEventScan.java (#32) - (Layarion)
+* Cleanup - (infiniteblock)
+* Update CHANGELOG.md - (infiniteblock)
+* Update CHANGELOG.md - (infiniteblock)
+* Cargo ship lights,energy fix. - (infiniteblock)
 * Block Energy Update. - (infiniteblock)
 * Updates. - (infiniteblock)
 * changelog fix?. - (infiniteblock)
