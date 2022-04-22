@@ -27,14 +27,14 @@ public class ItemBase extends Item implements ItemModelProvider {
             for (int i = 0; i < subNames.length; i++) {
                 String sub = subNames[i];
 
-                MOLog.info("Adding resource location for: '" + getRegistryName() + "_" + sub + "'");
+                MOLog.debug("Adding resource location for: '" + getRegistryName() + "_" + sub + "'");
 
                 ModelLoader.setCustomModelResourceLocation(this, i, new ModelResourceLocation(getRegistryName() + "_" + sub, "inventory"));
             }
             return;
         }
 
-        MOLog.info(getRegistryName()+ " has subtypes: " + getHasSubtypes());
+        MOLog.debug(getRegistryName()+ " has subtypes: " + getHasSubtypes());
 
         if (!getHasSubtypes())
             ClientUtil.registerModel(this, getRegistryName().toString());
