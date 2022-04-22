@@ -16,7 +16,7 @@ public final class Reference {
     public static final String CHANNEL_NAME = "mo_channel";
     public static final String CHANNEL_WEAPONS_NAME = CHANNEL_NAME + ":weapons";
     public static final String CHANNEL_GUI_NAME = CHANNEL_NAME + ":gui";
-    public static final String VERSIONS_CHECK_URL = "https://api.cfwidget.com/mc-mods/minecraft/229694-matter-overdrive";
+    public static final String VERSIONS_CHECK_URL = "https://api.cfwidget.com/557428";
     public static final String BETA_CHECK_URL = "http://maven.k-4u.nl/matteroverdrive/MatterOverdrive/maven-metadata.xml";
     public static final String DOWNLOAD_URL = "https://www.curseforge.com/minecraft/mc-mods/matter-overdrive-community-edition";
     public static final String PATH_GFX = MOD_ID + ":textures/";
