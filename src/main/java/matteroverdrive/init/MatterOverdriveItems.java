@@ -218,8 +218,7 @@ public class MatterOverdriveItems {
         quantumFoldManipulator = register(new MOBaseItem("quantum_fold_manipulator"));
         Preconditions.checkNotNull(TOOL_MATERIAL_TRITANIUM).setRepairItem(new ItemStack(tritanium_ingot));
         Preconditions.checkNotNull(ARMOR_MATERIAL_TRITANIUM).setRepairItem(new ItemStack(tritanium_ingot));
-        MOLog.info("Finished registering items");
-        MOLog.info("Registered %d items", registeredCount);
+        MOLog.info("Finished registering %d items", registeredCount);
     }
 
     protected <T extends Item> T register(T item) {
