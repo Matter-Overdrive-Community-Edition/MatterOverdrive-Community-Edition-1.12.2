@@ -97,7 +97,21 @@ public class MatterOverdriveMatter {
         reg(c, Blocks.STONEBRICK, 2, 4);
         reg(c, Blocks.COBBLESTONE_WALL, 1);
         reg(c, Blocks.WEB, 1);
-
+        reg(c, Blocks.WHITE_SHULKER_BOX, 40);
+        reg(c, Blocks.ORANGE_SHULKER_BOX, 40);
+        reg(c, Blocks.MAGENTA_SHULKER_BOX, 40);
+        reg(c, Blocks.LIGHT_BLUE_SHULKER_BOX, 40);
+        reg(c, Blocks.YELLOW_SHULKER_BOX, 40);
+        reg(c, Blocks.LIME_SHULKER_BOX, 40);
+        reg(c, Blocks.PINK_SHULKER_BOX, 40);
+        reg(c, Blocks.GRAY_SHULKER_BOX, 40);
+        reg(c, Blocks.SILVER_SHULKER_BOX, 40);
+        reg(c, Blocks.CYAN_SHULKER_BOX, 40);
+        reg(c, Blocks.BLUE_SHULKER_BOX, 40);
+        reg(c, Blocks.BROWN_SHULKER_BOX, 40);
+        reg(c, Blocks.GREEN_SHULKER_BOX, 40);
+        reg(c, Blocks.RED_SHULKER_BOX, 40);
+        reg(c, Blocks.BLACK_SHULKER_BOX, 40);
 
         reg(c, Blocks.RED_FLOWER, 1, 9);
         reg(c, Blocks.YELLOW_FLOWER, 1);
@@ -106,20 +120,20 @@ public class MatterOverdriveMatter {
         reg(c, Blocks.RED_MUSHROOM, 1);
         reg(c, Blocks.RED_MUSHROOM_BLOCK, 1);
         reg(c, Blocks.DEADBUSH, 1);
+        reg(c, Blocks.DISPENSER, 11);
         reg(c, Blocks.WATERLILY, 1);
         reg(c, "treeSapling", 2);
         reg(c, Blocks.DOUBLE_PLANT, 1, 6);
-
+        reg(c, Blocks.GRASS_PATH, 1, 3);
+        reg(c, Blocks.TALLGRASS, 1, 6);
     }
 
     public static void registerBasicItems(ConfigurationHandler c) {
         reg(c, new ItemStack(Items.APPLE), 1);
         reg(c, Items.ARROW, 1);
         reg(c, Items.BAKED_POTATO, 1);
-        reg(c, Items.BEEF, 2);
         reg(c, Items.BLAZE_ROD, 4);
         reg(c, Items.BONE, 2);
-        reg(c, "cropCarrot", 1);
         reg(c, Items.CLAY_BALL, 1);
         reg(c, Items.COAL, 8);
         reg(c, new ItemStack(Items.COAL, 1, 1), 5);
@@ -132,53 +146,71 @@ public class MatterOverdriveMatter {
         reg(c, Items.FLINT, 1);
         reg(c, Items.FISH, 1, 4);
         reg(c, Items.GHAST_TEAR, 8);
-        reg(c, "nuggetGold", 4);
         reg(c, Items.GUNPOWDER, 2);
         reg(c, Items.MELON, 1);
-        reg(c, "cropWheat", 1);
         reg(c, Items.WHEAT_SEEDS, 1);
         reg(c, Items.SUGAR, 1);
         reg(c, Items.STRING, 1);
-        reg(c, "stickWood", 1);
-        reg(c, "dustRedstone", 4);
-        reg(c, "dustGlowstone", 2);
         reg(c, Items.SPIDER_EYE, 1);
         reg(c, Items.SADDLE, 18);
         reg(c, Items.REEDS, 1);
-        reg(c, "cropPotato", 1);
         reg(c, Items.LEATHER, 3);
         reg(c, Items.PUMPKIN_SEEDS, 1);
-        reg(c, Items.PORKCHOP, 2);
-        reg(c, Items.COOKED_PORKCHOP, 4);
         reg(c, Items.PAPER, 1);
         reg(c, Items.LAVA_BUCKET, 24 + 96);
         reg(c, Items.WATER_BUCKET, 12 + 96);
         reg(c, Items.MILK_BUCKET, 12 + 96);
-        reg(c, "ingotBrickNether", 1);
         reg(c, Items.NETHER_WART, 3);
         reg(c, Items.NETHER_STAR, 1024);
         reg(c, Items.IRON_HORSE_ARMOR, 32 * 5);
         reg(c, Items.GOLDEN_HORSE_ARMOR, 42 * 5);
         reg(c, Items.DIAMOND_HORSE_ARMOR, 256 * 5);
         reg(c, Items.EXPERIENCE_BOTTLE, 32);
-        reg(c, "slimeball", 2);
-        reg(c, "record", 4);
         reg(c, Items.CHICKEN, 2);
+        reg(c, Items.COOKED_CHICKEN, 4);
+        reg(c, Items.BEEF, 2);
+        reg(c, Items.COOKED_BEEF, 4);
         reg(c, Items.RABBIT, 2);
+        reg(c, Items.COOKED_RABBIT, 4);
         reg(c, Items.MUTTON, 2);
-        reg(c, Items.COOKED_CHICKEN, 3);
+        reg(c, Items.COOKED_MUTTON, 4);
+        reg(c, Items.PORKCHOP, 2);
+        reg(c, Items.COOKED_PORKCHOP, 4);
+        reg(c, Items.COOKIE, 2);
         reg(c, Items.ROTTEN_FLESH, 1);
-        reg(c, "dustSaltpeter", 2);
-        reg(c, "dustSulfur", 2);
         reg(c, Items.NAME_TAG, 32);
+        reg(c, Items.CHORUS_FRUIT, 1);
+        reg(c, Items.SHULKER_SHELL, 3);
+        reg(c, Items.PRISMARINE_SHARD, 2);
+        reg(c, Items.BEETROOT, 1);
+        reg(c, Items.BEETROOT_SEEDS, 1);
+        reg(c, Items.CHORUS_FRUIT_POPPED, 2);
+        reg(c, Items.PRISMARINE_CRYSTALS, 3);
+        reg(c, Items.RABBIT_HIDE, 2);
+        reg(c, Items.RABBIT_FOOT, 2);
+        reg(c, Items.POISONOUS_POTATO, 1);
+        reg(c, Items.SNOWBALL, 2);
+        reg(c, Items.REPEATER, 8);
+        reg(c, Items.COMPARATOR, 10);
+        reg(c, Items.GLASS_BOTTLE, 3);
+        reg(c, Items.REEDS, 1);
         reg(c, new ItemStack(Items.SKULL, 1, 0), 16); //skeleton
         reg(c, new ItemStack(Items.SKULL, 1, 1), 64); //wither
         reg(c, new ItemStack(Items.SKULL, 1, 2), 12); //zombie
         reg(c, new ItemStack(Items.SKULL, 1, 4), 19); //creeper
-        reg(c, Items.GLASS_BOTTLE, 3);
+        reg(c, "cropCarrot", 1);
+        reg(c, "nuggetGold", 4);
+        reg(c, "cropWheat", 1);
+        reg(c, "stickWood", 1);
+        reg(c, "dustRedstone", 4);
+        reg(c, "dustGlowstone", 2);
+        reg(c, "cropPotato", 1);
         reg(c, "silicon", 2);
-
-
+        reg(c, "ingotBrickNether", 1);
+        reg(c, "dustSaltpeter", 2);
+        reg(c, "dustSulfur", 2);
+        reg(c, "slimeball", 2);
+        reg(c, "record", 4);
         reg(c, "gemDiamond", 256);
         reg(c, "gemDilithium", 512);
         reg(c, "gemQuartz", 3);
@@ -187,8 +219,6 @@ public class MatterOverdriveMatter {
         reg(c, "gemRuby", 64);
         reg(c, "gemRupee", 64);
         reg(c, "gemSapphire", 64);
-
-
         reg(c, "ingotBrick", 2);
         reg(c, "ingotIron", 32);
         reg(c, "ingotGold", 42);
@@ -208,23 +238,20 @@ public class MatterOverdriveMatter {
         reg(c, "ingotSteel", 38);
         reg(c, "ingotTritanium", 128);
 
-
-        reg(c, Items.REEDS, 1);
-
-
         reg(c, new ItemStack(Items.DYE, 1, 2), 1);
         reg(c, new ItemStack(Items.DYE, 1, 3), 1);
-
+		reg(c, new ItemStack(Items.DYE, 1, 4), 1);
+        reg(c, new ItemStack(Items.DYE, 1, 5), 1);
+        reg(c, new ItemStack(Items.DYE, 1, 6), 1);
 
         reg(c, new ItemStack(MatterOverdrive.ITEMS.androidParts, 1, Reference.BIONIC_HEAD), 64 * 5);
         reg(c, new ItemStack(MatterOverdrive.ITEMS.androidParts, 1, Reference.BIONIC_ARMS), 64 * 6);
         reg(c, new ItemStack(MatterOverdrive.ITEMS.androidParts, 1, Reference.BIONIC_LEGS), 64 * 6);
         reg(c, new ItemStack(MatterOverdrive.ITEMS.androidParts, 1, Reference.BIONIC_CHEST), 64 * 9);
-
-
+        reg(c, MatterOverdrive.ITEMS.matter_dust, 2222);
         reg(c, MatterOverdrive.ITEMS.emergency_ration, 3);
         reg(c, MatterOverdrive.ITEMS.earl_gray_tea, 2);
-        reg(c, MatterOverdrive.ITEMS.romulan_ale, 2);
+        reg(c, MatterOverdrive.ITEMS.romulan_ale, 2222);
         reg(c, new ItemStack(MatterOverdrive.ITEMS.androidPill, 1, 1), 64);
         reg(c, new ItemStack(MatterOverdrive.ITEMS.androidPill, 1, 2), 32);
 
