@@ -3,7 +3,6 @@ package matteroverdrive.tile;
 import matteroverdrive.api.inventory.UpgradeTypes;
 import matteroverdrive.api.matter.IRecyclable;
 import matteroverdrive.blocks.BlockMatterRecycler;
-
 import matteroverdrive.data.Inventory;
 import matteroverdrive.data.inventory.RemoveOnlySlot;
 import matteroverdrive.data.inventory.SlotRecycler;
@@ -104,11 +103,11 @@ public class TileEntityMachineMatterRecycler extends MOTileEntityMachineEnergy {
 
     public boolean isRecycling() {
         return getRedstoneActive()
-        		&& !this.getStackInSlot(INPUT_SLOT_ID).isEmpty()
+                && !getStackInSlot(INPUT_SLOT_ID).isEmpty()
                 && getStackInSlot(INPUT_SLOT_ID).getItem() instanceof IRecyclable
                 && ((IRecyclable) getStackInSlot(INPUT_SLOT_ID).getItem()).canRecycle(getStackInSlot(INPUT_SLOT_ID))
                 && canPutInOutput()
-                && this.energyStorage.getEnergyStored() > 0;
+                && ((IRecyclable) getStackInSlot(INPUT_SLOT_ID).getItem()).getRecycleMatter(getStackInSlot(INPUT_SLOT_ID)) > 0;
     }
 
     public int getEnergyDrainPerTick() {
@@ -117,15 +116,18 @@ public class TileEntityMachineMatterRecycler extends MOTileEntityMachineEnergy {
     }
 
     public int getEnergyDrainMax() {
-
+        int matter = ((IRecyclable) getStackInSlot(INPUT_SLOT_ID).getItem()).getRecycleMatter(getStackInSlot(INPUT_SLOT_ID));
         double upgradeMultiply = getUpgradeMultiply(UpgradeTypes.PowerUsage);
-        return (int) Math.round((RECYCLE_ENERGY_PER_MATTER) * upgradeMultiply);
+        return (int) Math.round((matter * RECYCLE_ENERGY_PER_MATTER) * upgradeMultiply);
     }
 
     public int getSpeed() {
         if (!getStackInSlot(INPUT_SLOT_ID).isEmpty()) {
-                return (int) Math.round(RECYCLE_SPEED_PER_MATTER * getUpgradeMultiply(UpgradeTypes.Speed));
-            } else {
+            double matter = Math.log1p(((IRecyclable) getStackInSlot(INPUT_SLOT_ID).getItem()).getRecycleMatter(getStackInSlot(INPUT_SLOT_ID)));
+            matter *= matter;
+            if (matter > 0) {
+                return (int) Math.round(RECYCLE_SPEED_PER_MATTER * matter * getUpgradeMultiply(UpgradeTypes.Speed));
+            }
         }
         return 1;
     }
@@ -139,10 +141,10 @@ public class TileEntityMachineMatterRecycler extends MOTileEntityMachineEnergy {
         } else if (!inputStack.isEmpty() && inputStack.getItem() instanceof IRecyclable) {
             ItemStack outputStack = ((IRecyclable) inputStack.getItem()).getOutput(inputStack);
             if (!outputStack.isEmpty() && outputStack.getCount() < stack.getMaxStackSize()) {
-               return true;
-                
+                return true;
             }
         }
+
         return false;
     }
 
@@ -157,7 +159,7 @@ public class TileEntityMachineMatterRecycler extends MOTileEntityMachineEnergy {
                 stackInOutput.grow(1);
             }
 
-            this.decrStackSize(INPUT_SLOT_ID, 1);
+            decrStackSize(INPUT_SLOT_ID, 1);
             forceSync();
         }
     }
@@ -183,7 +185,7 @@ public class TileEntityMachineMatterRecycler extends MOTileEntityMachineEnergy {
             return 0.0f;
         }
 
-        return 0.3f;
+        return 1;
     }
 
     @Override
@@ -203,7 +205,7 @@ public class TileEntityMachineMatterRecycler extends MOTileEntityMachineEnergy {
 
     @Override
     public boolean isAffectedByUpgrade(UpgradeTypes type) {
-        return upgradeTypes.contains(type);
+    	return upgradeTypes.contains(type);
     }
 
     public float getProgress() {
