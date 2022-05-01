@@ -3,6 +3,9 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Update build.gradle (infiniteblock)
+* fix (infiniteblock)
+* Update CHANGELOG.md (infiniteblock)
 * Shield work... (infiniteblock)
 * Fix OBJ Error's (infiniteblock)
 * Update charging_station.obj (infiniteblock)
