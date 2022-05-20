@@ -3,6 +3,9 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Fix #26 , #9, #41 Implemented #27 (infiniteblock)
+* Update MOWorldGen.java (infiniteblock)
+* changes. (infiniteblock)
 * Update build.gradle (infiniteblock)
 * fix (infiniteblock)
 * Update CHANGELOG.md (infiniteblock)
