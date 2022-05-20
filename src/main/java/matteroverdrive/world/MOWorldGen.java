@@ -35,6 +35,12 @@ public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
     boolean generateDilithium;
     boolean generateAnomalies;
     boolean generateBuildings = true;
+    private int MOAndroidHouseBuildingchance = 20;
+    private int MOSandPitchance = 100;
+    private int MOWorldGenCrashedSpaceShipchance = 60;
+    private int MOWorldGenUnderwaterBasechance = 20;
+    private int MOWorldGenCargoShipchance = 5;
+    
     private WorldGenMinable dilithiumGen;
     private WorldGenMinable tritaniumGen;
     private WorldGenGravitationalAnomaly anomalyGen;
@@ -63,11 +69,11 @@ public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
         tritaniumGen = new WorldGenMinable(MatterOverdrive.BLOCKS.tritaniumOre.getDefaultState(), TRITANIUM_VEIN_SIZE);
         dilithiumGen = new WorldGenMinable(MatterOverdrive.BLOCKS.dilithium_ore.getDefaultState(), DILITHIUM_VEIN_SIZE);
 
-        buildings.add(new WeightedRandomMOWorldGenBuilding(new MOAndroidHouseBuilding("android_house"), 20));
-        buildings.add(new WeightedRandomMOWorldGenBuilding(new MOSandPit("sand_pit_house", 3), 100));
-        buildings.add(new WeightedRandomMOWorldGenBuilding(new MOWorldGenCrashedSpaceShip("crashed_ship"), 60));
-        buildings.add(new WeightedRandomMOWorldGenBuilding(new MOWorldGenUnderwaterBase("underwater_base"), 20));
-        buildings.add(new WeightedRandomMOWorldGenBuilding(new MOWorldGenCargoShip("cargo_ship"), 5));
+        buildings.add(new WeightedRandomMOWorldGenBuilding(new MOAndroidHouseBuilding("android_house"), MOAndroidHouseBuildingchance));
+        buildings.add(new WeightedRandomMOWorldGenBuilding(new MOSandPit("sand_pit_house", 3), MOSandPitchance));
+        buildings.add(new WeightedRandomMOWorldGenBuilding(new MOWorldGenCrashedSpaceShip("crashed_ship"), MOWorldGenCrashedSpaceShipchance));
+        buildings.add(new WeightedRandomMOWorldGenBuilding(new MOWorldGenUnderwaterBase("underwater_base"), MOWorldGenUnderwaterBasechance));
+        buildings.add(new WeightedRandomMOWorldGenBuilding(new MOWorldGenCargoShip("cargo_ship"), MOWorldGenCargoShipchance));
 		buildings.add(new WeightedRandomMOWorldGenBuilding(new MOAdvFusion("advfusion"), 0));
 		buildings.add(new WeightedRandomMOWorldGenBuilding(new MOFusion("fusion"), 0));
 
@@ -203,6 +209,12 @@ public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
         generateDilithium = shouldGenerate(MatterOverdrive.BLOCKS.dilithium_ore, config) && shouldGenerateOres.getBoolean(true);
         Property shouldGenerateOthers = config.config.get(ConfigurationHandler.CATEGORY_WORLD_GEN, ConfigurationHandler.CATEGORY_WORLD_SPAWN_OTHER, true);
         shouldGenerateOthers.setComment("Should other Matter Overdrive World Blocks be Generated?");
+        generateBuildings = config.getBool("generate buildings", ConfigurationHandler.CATEGORY_WORLD_GEN, true, "Should Matter Overdrive Buildings Generate aka ImageGen");
+        MOAndroidHouseBuildingchance = (int) config.config.getInt(ConfigurationHandler.KEY_ANDROID_HOUSE_SPAWN_CHANCE, ConfigurationHandler.CATEGORY_WORLD_GEN, 20, 0, 100, "Spawn Weight of Android house");
+        MOSandPitchance = (int) config.config.getInt(ConfigurationHandler.KEY_SAND_PIT_SPAWN_CHANCE, ConfigurationHandler.CATEGORY_WORLD_GEN, 100, 0, 100, "Spawn Weight of Sand pit");
+        MOWorldGenCrashedSpaceShipchance = (int) config.config.getInt(ConfigurationHandler.KEY_CRASHED_SHIP_SPAWN_CHANCE, ConfigurationHandler.CATEGORY_WORLD_GEN, 60, 0, 100, "Spawn Weight of Crashed ship");
+        MOWorldGenUnderwaterBasechance = (int) config.config.getInt(ConfigurationHandler.KEY_UNDERWATER_BASE_SPAWN_CHANCE, ConfigurationHandler.CATEGORY_WORLD_GEN, 20, 0, 100, "Spawn Weight of Underwater base");
+        MOWorldGenCargoShipchance = (int) config.config.getInt(ConfigurationHandler.KEY_CARGO_SHIP_SPAWN_CHANCE, ConfigurationHandler.CATEGORY_WORLD_GEN, 5, 0, 100, "Spawn Weight of Cargo ship");
         generateAnomalies = shouldGenerate(MatterOverdrive.BLOCKS.gravitational_anomaly, config) && shouldGenerateOthers.getBoolean(true);
         this.oreDimentionsBlacklist.clear();
         Property oreDimentionBlacklistProp = config.config.get(ConfigurationHandler.CATEGORY_WORLD_GEN, "ore_gen_blacklist", new int[]{-1, 2});
@@ -212,6 +224,5 @@ public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
         for (int anOreDimentionBlacklist : oreDimentionBlacklist) {
             this.oreDimentionsBlacklist.add(anOreDimentionBlacklist);
         }
-        generateBuildings = config.getBool("generate buildings", ConfigurationHandler.CATEGORY_WORLD_GEN, true, "Should Matter Overdrive Buildings Generate aka ImageGen");
     }
 }

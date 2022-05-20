@@ -105,7 +105,7 @@ public class MOWorldGenCrashedSpaceShip extends MOWorldGenBuilding {
 
     @Override
     public boolean shouldGenerate(Random random, World world, BlockPos pos) {
-        return world.provider.getDimension() == 0 && world.getBiome(pos) != Biome.REGISTRY.getObject(new ResourceLocation("minecraft", "ocean")) && world.getBiome(pos) != Biome.REGISTRY.getObject(new ResourceLocation("minecraft", "frozen_ocean")) && world.getBiome(pos) != Biome.REGISTRY.getObject(new ResourceLocation("minecraft", "deep_ocean")) &&  isFarEnoughFromOthers(world, pos.getX(), pos.getZ(), MIN_DISTANCE_APART);
+        return world.provider.getDimension() == 0 && world.getBiome(pos) != Biome.REGISTRY.getObject(new ResourceLocation("minecraft", "ocean")) && world.getBiome(pos) != Biome.REGISTRY.getObject(new ResourceLocation("minecraft", "frozen_ocean")) && world.getBiome(pos) != Biome.REGISTRY.getObject(new ResourceLocation("minecraft", "deep_ocean")) && isFarEnoughFromOthers(world, pos.getX(), pos.getZ(), MIN_DISTANCE_APART);
 		
     }
 }

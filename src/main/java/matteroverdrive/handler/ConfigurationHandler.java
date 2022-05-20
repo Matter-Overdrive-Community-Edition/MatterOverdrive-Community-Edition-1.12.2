@@ -50,6 +50,11 @@ public class ConfigurationHandler {
     public static final String KEY_GRAVITATIONAL_ANOMALY_SPAWN_LEVEL = "gravitational anomaly spawn y level";
     public static final String KEY_GRAVITATIONAL_ANOMALY_VANILLA_FLUIDS = "gravitational anomaly vanilla fluids";
     public static final String KEY_GRAVITATIONAL_ANOMALY_FORGE_FLUIDS = "gravitational anomaly forge fluids";
+    public static final String KEY_ANDROID_HOUSE_SPAWN_CHANCE = "android house spawn chance";
+    public static final String KEY_SAND_PIT_SPAWN_CHANCE = "sand pit spawn chance";
+    public static final String KEY_CRASHED_SHIP_SPAWN_CHANCE = "crashed ship spawn chance";
+    public static final String KEY_UNDERWATER_BASE_SPAWN_CHANCE = "underwater base spawn chance";
+    public static final String KEY_CARGO_SHIP_SPAWN_CHANCE = "cargo ship spawn chance";
     public static final String KEY_ANDROID_ENERGY_WATCH_ID = "android energy watch id";
     public static final String KEY_MATTER_REGISTRATION_DEBUG = "matter registration";
 	public static final String KEY_STRUCTURE_REGISTRATION_DEBUG = "structure worldgen registration";
