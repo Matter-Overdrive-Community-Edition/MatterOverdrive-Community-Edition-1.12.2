@@ -13,7 +13,7 @@ import net.minecraft.util.math.MathHelper;
 import javax.annotation.Nonnull;
 
 public class WeaponModuleHoloSights extends WeaponModuleBase implements IWeaponScope, IAdvancedModelProvider {
-    public static final String[] subItemNames = {"normal", "wide", "small"};
+    public static final String[] subItemNames = {"normal", "wide", "small", "dot"};
 
     public WeaponModuleHoloSights(String name) {
         super(name);

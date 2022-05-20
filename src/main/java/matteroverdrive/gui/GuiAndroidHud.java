@@ -139,8 +139,13 @@ public class GuiAndroidHud extends Gui implements IConfigSubscriber {
         if ((android.isAndroid() || (!mc.player.getHeldItem(EnumHand.MAIN_HAND).isEmpty() && mc.player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof IWeapon)) && event.isCancelable() && event.getType() == RenderGameOverlayEvent.ElementType.CROSSHAIRS) {
             event.setCanceled(true);
 
-            if (!showRadial) {
-                renderCrosshair(event);
+            if ((!showRadial)) {
+                if (mc.player.getHeldItem(EnumHand.MAIN_HAND) != null) {
+                    if (mc.player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof IWeapon && ((IWeapon) mc.player.getHeldItem(EnumHand.MAIN_HAND).getItem()).isWeaponZoomed(mc.player, mc.player.getHeldItem(EnumHand.MAIN_HAND))) {
+                    } else {
+                    	renderCrosshair(event);
+                    }
+                }
             }
 
             mc.getTextureManager().bindTexture(Gui.ICONS);
@@ -175,12 +180,16 @@ public class GuiAndroidHud extends Gui implements IConfigSubscriber {
         crosshairIcon = ClientProxy.holoIcons.getIcon("crosshair");
         GlStateManager.translate(event.getResolution().getScaledWidth() / 2, event.getResolution().getScaledHeight() / 2, 0);
         ClientProxy.holoIcons.bindSheet();
+        //Right
         GlStateManager.rotate(90, 0, 0, 1);
         ClientProxy.holoIcons.renderIcon(crosshairIcon, -1, -scale);
+        //Bottom
         GlStateManager.rotate(90, 0, 0, 1);
         ClientProxy.holoIcons.renderIcon(crosshairIcon, -2, -scale);
+        //Left
         GlStateManager.rotate(90, 0, 0, 1);
         ClientProxy.holoIcons.renderIcon(crosshairIcon, -1.8, -scale + 1);
+        //Top
         GlStateManager.rotate(90, 0, 0, 1);
         ClientProxy.holoIcons.renderIcon(crosshairIcon, -1, -scale + 1);
         GlStateManager.popMatrix();

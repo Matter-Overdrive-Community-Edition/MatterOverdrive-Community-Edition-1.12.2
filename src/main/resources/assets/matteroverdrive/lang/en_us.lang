@@ -116,6 +116,7 @@ item.matteroverdrive.weapon_module_holo_sights.name=Holo Sight
 item.matteroverdrive.weapon_module_holo_sights.normal.name=Holo Sight
 item.matteroverdrive.weapon_module_holo_sights.wide.name=Holo Sight - Wide
 item.matteroverdrive.weapon_module_holo_sights.small.name=Holo Sight - Small
+item.matteroverdrive.weapon_module_holo_sights.dot.name=Holo Sight - Dot
 item.matteroverdrive.holo_sights_base.name=Holo Sights Base
 
 item.matteroverdrive.sniper_scope.name=Sniper Scope
@@ -267,6 +268,7 @@ entity.failed_cow.name=Failed Cow
 entity.failed_sheep.name=Failed Sheep
 entity.mad_scientist.name=Mad Scientist
 entity.Villager.matteroverdrive.mad_scientist.name=Mad Scientist
+entity.matteroverdrive.mad_scientist.name=Mad Scientist
 entity.matteroverdrive.mad_scientist.junkie.name=Mad Scientist Junkie
 entity.ranged_rogue_android.name=Ranged Rogue Android
 entity.mutant_scientist.name=Mutant Scientist

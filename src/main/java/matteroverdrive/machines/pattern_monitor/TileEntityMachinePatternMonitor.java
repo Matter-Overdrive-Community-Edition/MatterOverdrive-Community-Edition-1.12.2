@@ -78,8 +78,7 @@ public class TileEntityMachinePatternMonitor extends MOTileEntityMachine impleme
 
     @Override
     public boolean canConnectFromSide(IBlockState blockState, EnumFacing side) {
-        EnumFacing facing = blockState.getValue(MOBlock.PROPERTY_DIRECTION);
-        return facing.getOpposite() == side;
+        return true;
     }
 
     @Override
