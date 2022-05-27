@@ -9,6 +9,7 @@ import matteroverdrive.api.quest.QuestState;
 import matteroverdrive.data.quest.QuestBlock;
 import matteroverdrive.data.quest.QuestItem;
 import matteroverdrive.util.MOJsonHelper;
+import matteroverdrive.util.MOLog;
 import matteroverdrive.util.MOQuestHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -93,9 +94,9 @@ public class QuestLogicPlaceBlock extends AbstractQuestLogicBlock {
         if (event instanceof BlockEvent.PlaceEvent) {
             BlockEvent.PlaceEvent placeEvent = (BlockEvent.PlaceEvent) event;
             boolean isTheSameBlockFlag = false;
-            if (blockStack != null && !placeEvent.getItemInHand().isEmpty()) {
-                isTheSameBlockFlag = areBlockStackTheSame(placeEvent.getItemInHand());
-            } else {
+            if (blockStack != null) {
+                isTheSameBlockFlag = !placeEvent.getItemInHand().isEmpty() && areBlockStackTheSame(placeEvent.getItemInHand());
+            } else if(block != null) {
                 if (areBlocksTheSame(placeEvent.getPlacedBlock())) {
                     if (namePattern != null && !placeEvent.getItemInHand().isEmpty()) {
                         isTheSameBlockFlag = placeEvent.getItemInHand().getDisplayName().matches(namePattern);
@@ -103,6 +104,8 @@ public class QuestLogicPlaceBlock extends AbstractQuestLogicBlock {
                         isTheSameBlockFlag = true;
                     }
                 }
+            } else {
+                MOLog.error("QuestLogicPlaceBlock had neither a blockStack or block, this shouldn't be possible: " + this);
             }
 
             BlockPos pos = MOQuestHelper.getPosition(questStack);
