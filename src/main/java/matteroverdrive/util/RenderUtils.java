@@ -495,14 +495,14 @@ public class RenderUtils {
         if (maxWidth > 0) {
             scaleFactor = MathHelper.clamp((float) sizeX / (float) maxWidth, 0.02f, maxScaleFactor);
         }
-//TODO
-       /* for (String anInfo : info) {
+
+        for (String anInfo : info) {
             int scaledHeight = (int) (fontRenderer.FONT_HEIGHT * scaleFactor);
 
             if (height + scaledHeight < sizeY) {
                 height += scaledHeight;
             }
-        }*/
+        }
 
         height = MathHelper.clamp(height, 0, sizeY);
 
