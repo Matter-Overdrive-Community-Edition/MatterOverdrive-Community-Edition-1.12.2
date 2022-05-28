@@ -3,6 +3,11 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Update PlasmaShotgun.java (infiniteblock)
+* Update mcmod.info (infiniteblock)
+* Fix builders wand (#44) (Francesco Macagno)
+* Implemented #38 (infiniteblock)
+* Update CHANGELOG.md (infiniteblock)
 * Fix #26 , #9, #41 Implemented #27 (infiniteblock)
 * Update MOWorldGen.java (infiniteblock)
 * changes. (infiniteblock)
