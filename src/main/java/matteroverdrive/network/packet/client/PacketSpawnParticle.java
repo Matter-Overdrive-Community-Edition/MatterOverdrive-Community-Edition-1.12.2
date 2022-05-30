@@ -82,7 +82,7 @@ public class PacketSpawnParticle extends PacketAbstract {
             if (message.particleType.equalsIgnoreCase("teleport")) {
                 particle = new AndroidTeleportParticle(world, message.inates[0], message.inates[1], message.inates[2]);
             } else if (message.particleType.equalsIgnoreCase("shockwave")) {
-                particle = new ShockwaveParticle(world, message.inates[0], message.inates[1], message.inates[2], message.size);
+                particle = new ShockwaveParticle(world, message.inates[0], message.inates[1], message.inates[2], 10);
             } else if (message.particleType.equalsIgnoreCase("lightning")) {
                 if (message.inates.length > 7) {
                     particle = new Lightning(world, new Vec3d(message.inates[0], message.inates[1], message.inates[2]), new Vec3d(message.inates[3], message.inates[4], message.inates[5]), (float) message.inates[6], (float) message.inates[7]);
