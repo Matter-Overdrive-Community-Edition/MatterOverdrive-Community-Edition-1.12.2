@@ -4,15 +4,17 @@
 
 ## Table of Contents
 * [About](#about)
+* [Mod-Links](#mod-links)
 * [Features](#features)
-* [Contacts](#contacts)
 * [Issues](#issues)
 
 ## About
 Matter Overdrive is a Minecraft mod inspired by the popular Sci-fi TV series Star Trek. It dwells in the concept of replicating and transforming one type matter into another.
 Although it may seem overpowered, Matter Overdrive takes a more realistic approach and requires the player to build a complex system before even the simplest replication can be achieved.
 
-## Contacts
+## Mod-Links
+* [Modrinth](https://modrinth.com/mod/moce)
+* [Curseforge](https://www.curseforge.com/minecraft/mc-mods/matter-overdrive-community-edition)
 * [Discord](https://discord.gg/hQyAEZV)
 
 ## Features
@@ -26,23 +28,8 @@ Although it may seem overpowered, Matter Overdrive takes a more realistic approa
 * Star Maps, with Galaxies, Stars, and Planets.
 * [Androids](https://mo.simeonradivoev.com/android-guide/), become an Android and learn powerful RPG like abilities, such as Teleportation and Forcefields.
 
-
 ![Matter Overdrive Blocks and Items](https://mo.simeonradivoev.com/wp-content/uploads/2015/05/main_screenshot.png)
-
-Mini-Changelog (from InfiniteBlock):
-
-1. Fixed all weapon cooldown issues.
-2. Fixed Villager trades.
-3. Fixed Emergencyshield/Shield no more single shot kill's for Skeleton's/TechGun's
-4. Fixed cloak white screen of death.
-5. Microwave can now cook food like furnaces do.
-6. Fixed structure worldgen.
 
 ## Issues:
 
 https://github.com/Matter-Overdrive-Community-Edition/MatterOverdrive-Community-Edition-1.12.2/issues
-
-Todo:
-
-1. Allow energy transfer across matter network cables. That way connectivity and power go over one set of cables.
-2. Fix network flash drives to properly filter destinations.
