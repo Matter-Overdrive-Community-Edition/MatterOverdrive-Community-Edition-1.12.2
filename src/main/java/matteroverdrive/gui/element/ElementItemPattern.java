@@ -1,18 +1,22 @@
-
 package matteroverdrive.gui.element;
+
+import java.util.List;
+
+import org.lwjgl.input.Keyboard;
 
 import matteroverdrive.data.ScaleTexture;
 import matteroverdrive.data.matter_network.ItemPatternMapping;
 import matteroverdrive.gui.MOGuiBase;
+import matteroverdrive.util.MOStringHelper;
 import matteroverdrive.util.MatterDatabaseHelper;
+import matteroverdrive.util.MatterHelper;
 import matteroverdrive.util.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
-
-import java.util.List;
+import net.minecraft.util.text.TextFormatting;
 
 public class ElementItemPattern extends ElementSlot {
     protected ScaleTexture texture;
@@ -53,9 +57,16 @@ public class ElementItemPattern extends ElementSlot {
             if (itemStack != null) {
                 list.addAll(itemStack.getTooltip(Minecraft.getMinecraft().player, ITooltipFlag.TooltipFlags.NORMAL));
                 String name = list.get(0);
+                int matterValue = MatterHelper.getMatterAmountFromItem(itemStack);
+                String matter = TextFormatting.BLUE + MOStringHelper.translateToLocal("gui.tooltip.matter") + ": " + TextFormatting.GOLD + MatterHelper.formatMatter(matterValue);
                 int progress = patternMapping.getItemPattern().getProgress();
                 name = MatterDatabaseHelper.getPatternInfoColor(progress) + name + " [" + progress + "%]";
                 list.set(0, name);
+                if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+                	
+                } else {
+                list.set(1, matter);
+                }
             }
         }
     }
