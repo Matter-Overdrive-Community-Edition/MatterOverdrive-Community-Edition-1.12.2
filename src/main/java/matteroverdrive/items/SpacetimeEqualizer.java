@@ -31,7 +31,7 @@ public class SpacetimeEqualizer extends ItemArmor implements ItemModelProvider {
         ClientUtil.registerModel(this, this.getRegistryName().toString());
     }
 
-    public void addInformation(ItemStack itemstack, EntityPlayer player, List infos, boolean p_77624_4_) {
+    public void addInformation(ItemStack itemstack, EntityPlayer player, List<String> infos, boolean p_77624_4_) {
         if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
             addDetails(itemstack, player, infos);
         } else {
@@ -39,7 +39,7 @@ public class SpacetimeEqualizer extends ItemArmor implements ItemModelProvider {
         }
     }
 
-    public void addDetails(ItemStack itemstack, EntityPlayer player, List infos) {
+    public void addDetails(ItemStack itemstack, EntityPlayer player, List<String> infos) {
         if (MOStringHelper.hasTranslation(getTranslationKey() + ".details")) {
             infos.add(TextFormatting.GRAY + MOStringHelper.translateToLocal(getTranslationKey() + ".details"));
         }
