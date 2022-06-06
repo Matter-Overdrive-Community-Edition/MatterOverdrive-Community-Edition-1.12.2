@@ -147,7 +147,7 @@ public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
         }
     }
 
-    public MOImageGen.ImageGenWorker startBuildingGeneration(MOWorldGenBuilding building, BlockPos pos, Random random, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider, boolean forceGeneration) {
+    public MOImageGen.ImageGenWorker startBuildingGeneration(MOWorldGenBuilding<?> building, BlockPos pos, Random random, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider, boolean forceGeneration) {
         if (building == null)
             return null;
         if ((forceGeneration || (building.shouldGenerate(random, world, pos)))) {
@@ -171,11 +171,11 @@ public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
         return getBuilding(random, world, pos, buildings, random.nextInt(getTotalBuildingsWeight(random, world, pos, buildings)));
     }
 
-    public int getTotalBuildingsWeight(Random random, World world, BlockPos pos, Collection collection) {
+    public int getTotalBuildingsWeight(Random random, World world, BlockPos pos, Collection<WeightedRandomMOWorldGenBuilding> collection) {
         int i = 0;
         WeightedRandomMOWorldGenBuilding building;
 
-        for (Iterator iterator = collection.iterator(); iterator.hasNext(); i += building.getWeight(random, world, pos)) {
+        for (Iterator<WeightedRandomMOWorldGenBuilding> iterator = collection.iterator(); iterator.hasNext(); i += building.getWeight(random, world, pos)) {
             building = (WeightedRandomMOWorldGenBuilding) iterator.next();
 			
         }
@@ -183,9 +183,9 @@ public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
         return i;
     }
 
-    public WeightedRandomMOWorldGenBuilding getBuilding(Random random, World world, BlockPos pos, Collection par1Collection, int weight) {
+    public WeightedRandomMOWorldGenBuilding getBuilding(Random random, World world, BlockPos pos, Collection<WeightedRandomMOWorldGenBuilding> par1Collection, int weight) {
         int j = weight;
-        Iterator iterator = par1Collection.iterator();
+        Iterator<WeightedRandomMOWorldGenBuilding> iterator = par1Collection.iterator();
         WeightedRandomMOWorldGenBuilding building;
 
         do {
