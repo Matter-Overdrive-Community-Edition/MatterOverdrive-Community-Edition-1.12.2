@@ -63,9 +63,8 @@ public class ElementItemPattern extends ElementSlot {
                 name = MatterDatabaseHelper.getPatternInfoColor(progress) + name + " [" + progress + "%]";
                 list.set(0, name);
                 if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
-                	
                 } else {
-                list.set(1, matter);
+                list.add(matter);
                 }
             }
         }
