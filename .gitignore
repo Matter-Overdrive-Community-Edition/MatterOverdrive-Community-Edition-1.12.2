@@ -20,7 +20,8 @@ hs_err_pid*
 /.gradle
 /build
 !gradlew.bat
- 
+*.gradle
+
 # eclipse
 /eclipse
 /.settings
@@ -38,4 +39,3 @@ hs_err_pid*
 /*.iws
 classes/
 *.gradle
-build.gradle
