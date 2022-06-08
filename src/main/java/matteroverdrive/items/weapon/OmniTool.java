@@ -55,6 +55,11 @@ public class OmniTool extends EnergyWeapon {
     }
 
     @Override
+    public boolean canHarvestBlock(IBlockState i) {
+        return true;
+    }
+
+    @Override
     protected int getCapacity() {
         return 32000;
     }
