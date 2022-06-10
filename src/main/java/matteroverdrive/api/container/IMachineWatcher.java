@@ -5,9 +5,9 @@ import matteroverdrive.machines.MOTileEntityMachine;
 import net.minecraft.entity.player.EntityPlayer;
 
 public interface IMachineWatcher {
-    EntityPlayer getPlayer();
+	EntityPlayer getPlayer();
 
-    void onWatcherAdded(MOTileEntityMachine machine);
+	void onWatcherAdded(MOTileEntityMachine machine);
 
-    boolean isWatcherValid();
+	boolean isWatcherValid();
 }

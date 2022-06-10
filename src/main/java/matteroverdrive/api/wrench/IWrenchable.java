@@ -8,5 +8,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public interface IWrenchable {
-    boolean onWrenchHit(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ);
+	boolean onWrenchHit(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX,
+			float hitY, float hitZ);
 }

@@ -3,6 +3,6 @@ package matteroverdrive.api.internal;
 
 public interface ItemModelProvider {
 
-    void initItemModel();
+	void initItemModel();
 
 }
