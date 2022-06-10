@@ -12,74 +12,77 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ElementTransportList extends MOElementListBox {
-    TileEntityMachineTransporter transporter;
+	TileEntityMachineTransporter transporter;
 
-    public ElementTransportList(MOGuiBase containerScreen, IListHandler listHandler, int x, int y, int width, int height, TileEntityMachineTransporter transporter) {
-        super(containerScreen, listHandler, x, y, width, height);
-        this.transporter = transporter;
-    }
+	public ElementTransportList(MOGuiBase containerScreen, IListHandler listHandler, int x, int y, int width,
+			int height, TileEntityMachineTransporter transporter) {
+		super(containerScreen, listHandler, x, y, width, height);
+		this.transporter = transporter;
+	}
 
-    @Override
-    public void DrawElement(int i, int x, int y, int selectedLineColor, int selectedTextColor, boolean selected, boolean BG) {
-        TransportLocation position = transporter.getPositions().get(i);
+	@Override
+	public void DrawElement(int i, int x, int y, int selectedLineColor, int selectedTextColor, boolean selected,
+			boolean BG) {
+		TransportLocation position = transporter.getPositions().get(i);
 
-        if (BG) {
+		if (BG) {
 //            if (selected && transporter.isLocationValid(position)) {
-            if (selected) {
-                MOElementButton.HOVER_TEXTURE_DARK.render(x, y, getElementWidth(i), getElementHeight(i));
-            } else {
-                MOElementButton.NORMAL_TEXTURE.render(x, y, getElementWidth(i), getElementHeight(i));
-            }
-        } else {
+			if (selected) {
+				MOElementButton.HOVER_TEXTURE_DARK.render(x, y, getElementWidth(i), getElementHeight(i));
+			} else {
+				MOElementButton.NORMAL_TEXTURE.render(x, y, getElementWidth(i), getElementHeight(i));
+			}
+		} else {
 
-            gui.drawCenteredString(getFontRenderer(), position.name, x + getElementWidth(i) / 2, y + getElementHeight(i) / 2 - 4, transporter.isLocationValid(position) ? selectedTextColor : Reference.COLOR_HOLO_RED.getColor());
-        }
-    }
+			gui.drawCenteredString(getFontRenderer(), position.name, x + getElementWidth(i) / 2,
+					y + getElementHeight(i) / 2 - 4,
+					transporter.isLocationValid(position) ? selectedTextColor : Reference.COLOR_HOLO_RED.getColor());
+		}
+	}
 
-    @Override
-    public void drawElementTooltip(int index, int mouseX, int mouseY) {
-        TransportLocation position = transporter.getPositions().get(index);
+	@Override
+	public void drawElementTooltip(int index, int mouseX, int mouseY) {
+		TransportLocation position = transporter.getPositions().get(index);
 
-        GlStateManager.pushMatrix();
-        GlStateManager.translate(-posX, 0, 0);
-        List<String> tooltip = new ArrayList<>();
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(-posX, 0, 0);
+		List<String> tooltip = new ArrayList<>();
 
-        if (! transporter.isLocationValid(position)) {
-            tooltip.add("Invalid destination.");
-        } else {
-            tooltip.add(String.format("[%s, %s, %s]", position.pos.getX(), position.pos.getY(), position.pos.getZ()));
-        }
+		if (!transporter.isLocationValid(position)) {
+			tooltip.add("Invalid destination.");
+		} else {
+			tooltip.add(String.format("[%s, %s, %s]", position.pos.getX(), position.pos.getY(), position.pos.getZ()));
+		}
 
-        gui.setTooltip(tooltip);
-        GlStateManager.popMatrix();
-    }
+		gui.setTooltip(tooltip);
+		GlStateManager.popMatrix();
+	}
 
-    @Override
-    public int getElementHeight(int id) {
-        return 20;
-    }
+	@Override
+	public int getElementHeight(int id) {
+		return 20;
+	}
 
-    @Override
-    public int getElementWidth(int id) {
-        return sizeX - 4;
-    }
+	@Override
+	public int getElementWidth(int id) {
+		return sizeX - 4;
+	}
 
-    @Override
-    protected boolean shouldBeDisplayed(IMOListBoxElement element) {
-        return true;
-    }
+	@Override
+	protected boolean shouldBeDisplayed(IMOListBoxElement element) {
+		return true;
+	}
 
-    @Override
-    public IMOListBoxElement getElement(int index) {
+	@Override
+	public IMOListBoxElement getElement(int index) {
 
-        return null;
-    }
+		return null;
+	}
 
-    public int getElementCount() {
+	public int getElementCount() {
 
-        return transporter.getPositions().size();
-    }
-
+		return transporter.getPositions().size();
+	}
 
 //    @Override
 //    public boolean onMousePressed(int mouseX, int mouseY, int mouseButton) {

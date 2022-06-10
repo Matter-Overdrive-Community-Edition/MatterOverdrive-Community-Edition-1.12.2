@@ -24,80 +24,82 @@ import java.util.ArrayList;
 
 public class BlockHoloSign extends BlockMonitor<TileEntityHoloSign> implements IDismantleable {
 
-    public BlockHoloSign(Material material, String name) {
-        super(material, name);
+	public BlockHoloSign(Material material, String name) {
+		super(material, name);
 		setHasRotation();
-        setHardness(20.0F);
-        this.setResistance(9.0f);
-        this.setHarvestLevel("pickaxe", 2);
-        setBoundingBox(new AxisAlignedBB(0, 1, 0, 1, 14 / 16d, 1));
-    }
+		setHardness(20.0F);
+		this.setResistance(9.0f);
+		this.setHarvestLevel("pickaxe", 2);
+		setBoundingBox(new AxisAlignedBB(0, 1, 0, 1, 14 / 16d, 1));
+	}
 
-    @Override
-    public Class<TileEntityHoloSign> getTileEntityClass() {
-        return TileEntityHoloSign.class;
-    }
+	@Override
+	public Class<TileEntityHoloSign> getTileEntityClass() {
+		return TileEntityHoloSign.class;
+	}
 
-    @Nonnull
-    @Override
-    public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
-        return new TileEntityHoloSign();
-    }
+	@Nonnull
+	@Override
+	public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
+		return new TileEntityHoloSign();
+	}
 
-    @Override
-    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos neighbor) {
-        boolean flag;
-        EnumFacing l = world.getBlockState(pos).getValue(MOBlock.PROPERTY_DIRECTION);
-        flag = false;
+	@Override
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos neighbor) {
+		boolean flag;
+		EnumFacing l = world.getBlockState(pos).getValue(MOBlock.PROPERTY_DIRECTION);
+		flag = false;
 
-        IBlockState nState = world.getBlockState(pos.offset(l));
-        if (nState.getBlockFaceShape(world, pos.offset(l), l.getOpposite()) == BlockFaceShape.SOLID) {
-            flag = true;
-        }
+		IBlockState nState = world.getBlockState(pos.offset(l));
+		if (nState.getBlockFaceShape(world, pos.offset(l), l.getOpposite()) == BlockFaceShape.SOLID) {
+			flag = true;
+		}
 
-        if (flag) {
-            this.dropBlockAsItem(world, pos, world.getBlockState(pos), 0);
-            world.setBlockToAir(pos);
-        }
+		if (flag) {
+			this.dropBlockAsItem(world, pos, world.getBlockState(pos), 0);
+			world.setBlockToAir(pos);
+		}
 
-        super.neighborChanged(state, world, pos, blockIn, neighbor);
-    }
+		super.neighborChanged(state, world, pos, blockIn, neighbor);
+	}
 
-    @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        return MachineHelper.canOpenMachine(worldIn, pos, playerIn, true, "alert.no_rights");
-    }
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		return MachineHelper.canOpenMachine(worldIn, pos, playerIn, true, "alert.no_rights");
+	}
 
-    @Override
-    public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
-        return MachineHelper.canRemoveMachine(world, player, pos, willHarvest) && world.setBlockToAir(pos);
-    }
+	@Override
+	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player,
+			boolean willHarvest) {
+		return MachineHelper.canRemoveMachine(world, player, pos, willHarvest) && world.setBlockToAir(pos);
+	}
 
-    @Override
-    public ArrayList<ItemStack> dismantleBlock(EntityPlayer player, World world, BlockPos pos, boolean returnDrops) {
-        IBlockState blockState = world.getBlockState(pos);
-        ItemStack blockItem = new ItemStack(getItemDropped(blockState, world.rand, 1));
+	@Override
+	public ArrayList<ItemStack> dismantleBlock(EntityPlayer player, World world, BlockPos pos, boolean returnDrops) {
+		IBlockState blockState = world.getBlockState(pos);
+		ItemStack blockItem = new ItemStack(getItemDropped(blockState, world.rand, 1));
 
-        boolean flag = blockState.getBlock().removedByPlayer(blockState, world, pos, player, true);
-        super.breakBlock(world, pos, blockState);
+		boolean flag = blockState.getBlock().removedByPlayer(blockState, world, pos, player, true);
+		super.breakBlock(world, pos, blockState);
 
-        if (flag) {
-            blockState.getBlock().onPlayerDestroy(world, pos, blockState);
-        }
+		if (flag) {
+			blockState.getBlock().onPlayerDestroy(world, pos, blockState);
+		}
 
-        if (!returnDrops) {
-            dropBlockAsItem(world, pos, blockState, 0);
-        } else {
-            MOInventoryHelper.insertItemStackIntoInventory(player.inventory, blockItem, EnumFacing.DOWN);
-        }
+		if (!returnDrops) {
+			dropBlockAsItem(world, pos, blockState, 0);
+		} else {
+			MOInventoryHelper.insertItemStackIntoInventory(player.inventory, blockItem, EnumFacing.DOWN);
+		}
 
-        ArrayList<ItemStack> list = new ArrayList<>();
-        list.add(blockItem);
-        return list;
-    }
+		ArrayList<ItemStack> list = new ArrayList<>();
+		list.add(blockItem);
+		return list;
+	}
 
-    @Override
-    public boolean canDismantle(EntityPlayer entityPlayer, World world, BlockPos pos) {
-        return true;
-    }
+	@Override
+	public boolean canDismantle(EntityPlayer entityPlayer, World world, BlockPos pos) {
+		return true;
+	}
 }

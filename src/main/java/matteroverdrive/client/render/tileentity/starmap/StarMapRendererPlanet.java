@@ -24,125 +24,131 @@ import static org.lwjgl.opengl.GL11.*;
 @SideOnly(Side.CLIENT)
 public class StarMapRendererPlanet extends StarMapRendererAbstract {
 
-    @Override
-    public void renderBody(Galaxy galaxy, SpaceBody spaceBody, TileEntityMachineStarMap starMap, float partialTicks, float viewerDistance) {
-        if (spaceBody instanceof Planet) {
-            glLineWidth(1);
+	@Override
+	public void renderBody(Galaxy galaxy, SpaceBody spaceBody, TileEntityMachineStarMap starMap, float partialTicks,
+			float viewerDistance) {
+		if (spaceBody instanceof Planet) {
+			glLineWidth(1);
 
-            Planet planet = (Planet) spaceBody;
-            GlStateManager.pushMatrix();
-            renderPlanet(planet, viewerDistance);
-            GlStateManager.popMatrix();
+			Planet planet = (Planet) spaceBody;
+			GlStateManager.pushMatrix();
+			renderPlanet(planet, viewerDistance);
+			GlStateManager.popMatrix();
 
-            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-            GlStateManager.enableTexture2D();
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			GlStateManager.enableTexture2D();
 
-        }
-    }
+		}
+	}
 
-    protected void renderPlanet(Planet planet, float viewerDistance) {
-        GlStateManager.pushMatrix();
-        float size = getClampedSize(planet);
-        GlStateManager.rotate(10, 1, 0, 0);
+	protected void renderPlanet(Planet planet, float viewerDistance) {
+		GlStateManager.pushMatrix();
+		float size = getClampedSize(planet);
+		GlStateManager.rotate(10, 1, 0, 0);
 
-        GlStateManager.rotate(Minecraft.getMinecraft().world.getWorldTime() * 0.1f, 0, 1, 0);
-        glPolygonMode(GL_FRONT, GL_LINE);
+		GlStateManager.rotate(Minecraft.getMinecraft().world.getWorldTime() * 0.1f, 0, 1, 0);
+		glPolygonMode(GL_FRONT, GL_LINE);
 
-        GlStateManager.enableCull();
-        //region Sphere rotated
-        GlStateManager.pushMatrix();
-        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-        GlStateManager.disableTexture2D();
-        GlStateManager.depthMask(true);
-        GlStateManager.color(0, 0, 0);
-        sphere.draw(size * 0.99f, 64, 32);
-        GlStateManager.depthMask(false);
+		GlStateManager.enableCull();
+		// region Sphere rotated
+		GlStateManager.pushMatrix();
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		GlStateManager.disableTexture2D();
+		GlStateManager.depthMask(true);
+		GlStateManager.color(0, 0, 0);
+		sphere.draw(size * 0.99f, 64, 32);
+		GlStateManager.depthMask(false);
 
-        //region Planet
-        GlStateManager.pushMatrix();
-        GlStateManager.rotate(90, 1, 0, 0);
+		// region Planet
+		GlStateManager.pushMatrix();
+		GlStateManager.rotate(90, 1, 0, 0);
 
-        RenderUtils.applyColorWithMultipy(Planet.getGuiColor(planet), 0.2f * (1f / viewerDistance));
-        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        sphere.draw(size, 64, 32);
-        GlStateManager.popMatrix();
-        //endregion
-        GlStateManager.popMatrix();
-        //endregion
+		RenderUtils.applyColorWithMultipy(Planet.getGuiColor(planet), 0.2f * (1f / viewerDistance));
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		sphere.draw(size, 64, 32);
+		GlStateManager.popMatrix();
+		// endregion
+		GlStateManager.popMatrix();
+		// endregion
 
-        GlStateManager.disableCull();
-        GlStateManager.popMatrix();
+		GlStateManager.disableCull();
+		GlStateManager.popMatrix();
 
-        drawPlanetInfoClose(planet);
+		drawPlanetInfoClose(planet);
 
-        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-        GlStateManager.enableTexture2D();
-    }
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		GlStateManager.enableTexture2D();
+	}
 
-    protected float getClampedSize(Planet planet) {
-        return Math.min(Math.max(planet.getSize(), 1f), 2.2f) * 0.5f;
-    }
+	protected float getClampedSize(Planet planet) {
+		return Math.min(Math.max(planet.getSize(), 1f), 2.2f) * 0.5f;
+	}
 
-    protected void drawPlanetInfoClose(Planet planet) {
-        GlStateManager.pushMatrix();
-        GlStateManager.popMatrix();
-    }
+	protected void drawPlanetInfoClose(Planet planet) {
+		GlStateManager.pushMatrix();
+		GlStateManager.popMatrix();
+	}
 
-    @Override
-    public void renderGUIInfo(Galaxy galaxy, SpaceBody spaceBody, TileEntityMachineStarMap starMap, float partialTicks, float opacity) {
-        if (spaceBody instanceof Planet) {
-            GlStateManager.enableBlend();
-            GlStateManager.blendFunc(GL_ONE, GL_ONE);
+	@Override
+	public void renderGUIInfo(Galaxy galaxy, SpaceBody spaceBody, TileEntityMachineStarMap starMap, float partialTicks,
+			float opacity) {
+		if (spaceBody instanceof Planet) {
+			GlStateManager.enableBlend();
+			GlStateManager.blendFunc(GL_ONE, GL_ONE);
 
-            Color color = Reference.COLOR_HOLO;
-            Planet planet = (Planet) spaceBody;
-            int x = 0;
-            int y = -16;
+			Color color = Reference.COLOR_HOLO;
+			Planet planet = (Planet) spaceBody;
+			int x = 0;
+			int y = -16;
 
-            RenderUtils.applyColorWithMultipy(Reference.COLOR_HOLO, opacity);
-            ClientProxy.holoIcons.renderIcon("icon_size", x, y);
-            x += 18;
-            RenderUtils.drawString(DecimalFormat.getPercentInstance().format(planet.getSize()), x, y + 6, Reference.COLOR_HOLO, opacity);
+			RenderUtils.applyColorWithMultipy(Reference.COLOR_HOLO, opacity);
+			ClientProxy.holoIcons.renderIcon("icon_size", x, y);
+			x += 18;
+			RenderUtils.drawString(DecimalFormat.getPercentInstance().format(planet.getSize()), x, y + 6,
+					Reference.COLOR_HOLO, opacity);
 
-            if (GalaxyClient.getInstance().canSeePlanetInfo(planet, Minecraft.getMinecraft().player)) {
-                x = -2;
-                y -= 20;
+			if (GalaxyClient.getInstance().canSeePlanetInfo(planet, Minecraft.getMinecraft().player)) {
+				x = -2;
+				y -= 20;
 
-                float happines = planet.getHappiness();
-                color = RenderUtils.lerp(Reference.COLOR_HOLO_RED, Reference.COLOR_HOLO, MathHelper.clamp(happines, 0, 1));
-                RenderUtils.applyColorWithMultipy(color, opacity);
-                ClientProxy.holoIcons.renderIcon("smile", x, y);
-                x += 18;
-                String info = DecimalFormat.getPercentInstance().format(happines);
-                RenderUtils.drawString(info, x, y + 6, color, opacity);
-                x += fontRenderer.getStringWidth(DecimalFormat.getPercentInstance().format(happines)) + 4;
-                int population = planet.getPopulation();
-                RenderUtils.applyColorWithMultipy(Reference.COLOR_HOLO, opacity);
-                ClientProxy.holoIcons.renderIcon("sort_random", x, y);
-                x += 18;
-                info = String.format("%,d", population);
-                RenderUtils.drawString(info, x, y + 6, Reference.COLOR_HOLO, opacity);
+				float happines = planet.getHappiness();
+				color = RenderUtils.lerp(Reference.COLOR_HOLO_RED, Reference.COLOR_HOLO,
+						MathHelper.clamp(happines, 0, 1));
+				RenderUtils.applyColorWithMultipy(color, opacity);
+				ClientProxy.holoIcons.renderIcon("smile", x, y);
+				x += 18;
+				String info = DecimalFormat.getPercentInstance().format(happines);
+				RenderUtils.drawString(info, x, y + 6, color, opacity);
+				x += fontRenderer.getStringWidth(DecimalFormat.getPercentInstance().format(happines)) + 4;
+				int population = planet.getPopulation();
+				RenderUtils.applyColorWithMultipy(Reference.COLOR_HOLO, opacity);
+				ClientProxy.holoIcons.renderIcon("sort_random", x, y);
+				x += 18;
+				info = String.format("%,d", population);
+				RenderUtils.drawString(info, x, y + 6, Reference.COLOR_HOLO, opacity);
 
-                x = -3;
-                y -= 20;
+				x = -3;
+				y -= 20;
 
-                int powerProduction = planet.getPowerProduction();
-                RenderUtils.applyColorWithMultipy(powerProduction < 0 ? Reference.COLOR_HOLO_RED : Reference.COLOR_HOLO, opacity);
-                ClientProxy.holoIcons.renderIcon("battery", x, y);
-                x += 18;
-                info = Integer.toString(powerProduction) + "m" + MOEnergyHelper.ENERGY_UNIT;
-                RenderUtils.drawString(info, x, y + 6, powerProduction < 0 ? Reference.COLOR_HOLO_RED : Reference.COLOR_HOLO, opacity);
-            }
-        }
-    }
+				int powerProduction = planet.getPowerProduction();
+				RenderUtils.applyColorWithMultipy(powerProduction < 0 ? Reference.COLOR_HOLO_RED : Reference.COLOR_HOLO,
+						opacity);
+				ClientProxy.holoIcons.renderIcon("battery", x, y);
+				x += 18;
+				info = Integer.toString(powerProduction) + "m" + MOEnergyHelper.ENERGY_UNIT;
+				RenderUtils.drawString(info, x, y + 6,
+						powerProduction < 0 ? Reference.COLOR_HOLO_RED : Reference.COLOR_HOLO, opacity);
+			}
+		}
+	}
 
-    @Override
-    public boolean displayOnZoom(int zoom, SpaceBody spaceBody) {
-        return zoom == 3;
-    }
+	@Override
+	public boolean displayOnZoom(int zoom, SpaceBody spaceBody) {
+		return zoom == 3;
+	}
 
-    @Override
-    public double getHologramHeight(SpaceBody spaceBody) {
-        return 1.5;
-    }
+	@Override
+	public double getHologramHeight(SpaceBody spaceBody) {
+		return 1.5;
+	}
 }

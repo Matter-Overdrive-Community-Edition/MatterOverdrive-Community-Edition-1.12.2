@@ -13,15 +13,15 @@ import net.minecraft.util.ResourceLocation;
  */
 public class TritaniumShovel extends ItemSpade implements ItemModelProvider {
 
-    public TritaniumShovel(String name) {
-        super(MatterOverdriveItems.TOOL_MATERIAL_TRITANIUM);
-        setTranslationKey(Reference.MOD_ID + "." + name);
-        setRegistryName(new ResourceLocation(Reference.MOD_ID, name));
-    }
+	public TritaniumShovel(String name) {
+		super(MatterOverdriveItems.TOOL_MATERIAL_TRITANIUM);
+		setTranslationKey(Reference.MOD_ID + "." + name);
+		setRegistryName(new ResourceLocation(Reference.MOD_ID, name));
+	}
 
-    @Override
-    public void initItemModel() {
-        ClientUtil.registerModel(this, this.getRegistryName().toString());
-    }
+	@Override
+	public void initItemModel() {
+		ClientUtil.registerModel(this, this.getRegistryName().toString());
+	}
 
 }

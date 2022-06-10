@@ -10,15 +10,15 @@ import net.minecraft.util.ResourceLocation;
 
 public class EntityRendererMutantScientist extends RenderBiped<EntityMutantScientist> {
 
-    private final ResourceLocation texture = new ResourceLocation(Reference.PATH_ENTITIES + "hulking_scinetist.png");
+	private final ResourceLocation texture = new ResourceLocation(Reference.PATH_ENTITIES + "hulking_scinetist.png");
 
-    public EntityRendererMutantScientist(RenderManager renderManager) {
-        super(renderManager, new ModelHulkingScientist(), 0);
-    }
+	public EntityRendererMutantScientist(RenderManager renderManager) {
+		super(renderManager, new ModelHulkingScientist(), 0);
+	}
 
-    @Override
-    protected ResourceLocation getEntityTexture(EntityMutantScientist entity) {
-        return texture;
-    }
+	@Override
+	protected ResourceLocation getEntityTexture(EntityMutantScientist entity) {
+		return texture;
+	}
 
 }

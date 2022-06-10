@@ -24,16 +24,16 @@ import net.minecraft.item.ItemStack;
  * Created by Simeon on 5/15/2015.
  */
 public class SlotMicrowave extends Slot {
-    public SlotMicrowave(boolean isMainSlot) {
-        super(isMainSlot);
-    }
+	public SlotMicrowave(boolean isMainSlot) {
+		super(isMainSlot);
+	}
 
-    public boolean isValidForSlot(ItemStack item) {
-        return item.getItem() instanceof IRecyclable && ((IRecyclable) item.getItem()).canRecycle(item);
-    }
+	public boolean isValidForSlot(ItemStack item) {
+		return item.getItem() instanceof IRecyclable && ((IRecyclable) item.getItem()).canRecycle(item);
+	}
 
-    @Override
-    public String getUnlocalizedTooltip() {
-        return "gui.tooltip.slot.microwave";
-    }
+	@Override
+	public String getUnlocalizedTooltip() {
+		return "gui.tooltip.slot.microwave";
+	}
 }

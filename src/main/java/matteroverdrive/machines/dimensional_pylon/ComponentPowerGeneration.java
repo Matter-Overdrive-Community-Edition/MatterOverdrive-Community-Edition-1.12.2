@@ -38,185 +38,189 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Random;
 
-public class ComponentPowerGeneration extends MachineComponentAbstract<TileEntityMachineDimensionalPylon> implements ITickable {
-    public static int CHARGE_DECREASE_ON_HIT = 16;
-    public static int CHARGE_INCREASE_RATE = 64;
-    public static int CHARGE_ENERGY_INCREASE = 128;
-    public static int CHARGE_MATTER_INCREASE = 5;
-    public static int MAX_POWER_GEN_PER_TICK = 256;
-    private Random random;
-    private int energyGenPerTick;
-    private int matterDrainPerSec;
+public class ComponentPowerGeneration extends MachineComponentAbstract<TileEntityMachineDimensionalPylon>
+		implements ITickable {
+	public static int CHARGE_DECREASE_ON_HIT = 16;
+	public static int CHARGE_INCREASE_RATE = 64;
+	public static int CHARGE_ENERGY_INCREASE = 128;
+	public static int CHARGE_MATTER_INCREASE = 5;
+	public static int MAX_POWER_GEN_PER_TICK = 256;
+	private Random random;
+	private int energyGenPerTick;
+	private int matterDrainPerSec;
 
-    public ComponentPowerGeneration(TileEntityMachineDimensionalPylon machine) {
-        super(machine);
-        this.random = new Random();
-    }
+	public ComponentPowerGeneration(TileEntityMachineDimensionalPylon machine) {
+		super(machine);
+		this.random = new Random();
+	}
 
-    @Override
-    public void readFromNBT(NBTTagCompound nbt, EnumSet<MachineNBTCategory> categories) {
+	@Override
+	public void readFromNBT(NBTTagCompound nbt, EnumSet<MachineNBTCategory> categories) {
 
-    }
+	}
 
-    @Override
-    public void writeToNBT(NBTTagCompound nbt, EnumSet<MachineNBTCategory> categories, boolean toDisk) {
+	@Override
+	public void writeToNBT(NBTTagCompound nbt, EnumSet<MachineNBTCategory> categories, boolean toDisk) {
 
-    }
+	}
 
-    @Override
-    public void registerSlots(Inventory inventory) {
+	@Override
+	public void registerSlots(Inventory inventory) {
 
-    }
+	}
 
-    @Override
-    public void update() {
-        if (!getWorld().isRemote) {
-            manageServerLightning();
-            manageCharge();
-            managePowerGeneration();
-        }
-    }
+	@Override
+	public void update() {
+		if (!getWorld().isRemote) {
+			manageServerLightning();
+			manageCharge();
+			managePowerGeneration();
+		}
+	}
 
+	public void managePowerGeneration() {
+		float dimValue = machine.getDimensionalValue();
+		float chargePercent = (float) machine.charge / (float) TileEntityMachineDimensionalPylon.MAX_CHARGE;
+		energyGenPerTick = (int) (dimValue * MAX_POWER_GEN_PER_TICK) + (int) (CHARGE_ENERGY_INCREASE * chargePercent);
+		matterDrainPerSec = MathHelper.ceil(dimValue * 20) + (int) (CHARGE_MATTER_INCREASE * chargePercent);
 
-    public void managePowerGeneration() {
-        float dimValue = machine.getDimensionalValue();
-        float chargePercent = (float) machine.charge / (float) TileEntityMachineDimensionalPylon.MAX_CHARGE;
-        energyGenPerTick = (int) (dimValue * MAX_POWER_GEN_PER_TICK) + (int) (CHARGE_ENERGY_INCREASE * chargePercent);
-        matterDrainPerSec = MathHelper.ceil(dimValue * 20) + (int) (CHARGE_MATTER_INCREASE * chargePercent);
+		IMatterHandler storage = machine.getCapability(MatterOverdriveCapabilities.MATTER_HANDLER, null);
+		if (storage.getMatterStored() >= matterDrainPerSec
+				&& machine.getEnergyStorage().getEnergyStored() < machine.getEnergyStorage().getMaxEnergyStored()) {
+			machine.getEnergyStorage().modifyEnergyStored(energyGenPerTick);
+			storage.modifyMatterStored(matterDrainPerSec);
+			machine.UpdateClientPower();
+		}
+	}
 
-        IMatterHandler storage = machine.getCapability(MatterOverdriveCapabilities.MATTER_HANDLER, null);
-        if (storage.getMatterStored() >= matterDrainPerSec && machine.getEnergyStorage().getEnergyStored() < machine.getEnergyStorage().getMaxEnergyStored()) {
-            machine.getEnergyStorage().modifyEnergyStored(energyGenPerTick);
-            storage.modifyMatterStored(matterDrainPerSec);
-            machine.UpdateClientPower();
-        }
-    }
+	public void manageServerLightning() {
+		if (machine.isMainStructureBlock() && machine.isActive()) {
+			double y, dirX, dirZ;
+			Color color = Reference.COLOR_MATTER.multiplyWithoutAlpha(0.5f);
+			float dimValue = machine.getDimensionalValue();
 
+			if (getWorld().getWorldTime() % 10 == 0) {
+				if (random.nextFloat() < (0.2f * dimValue)) {
+					List<Entity> entities = getWorld().getEntitiesWithinAABB(EntityLivingBase.class,
+							new AxisAlignedBB(getPos(), getPos()).expand(4, 4, 4));
+					for (Entity entity : entities) {
+						boolean hasFullIron = false;
+						if (entity instanceof EntityPlayer) {
+							EntityPlayer entityPlayer = ((EntityPlayer) entity);
+							if (entityPlayer.capabilities.disableDamage) {
+								continue;
+							}
+						}
+						if (entity instanceof EntityLivingBase) {
+							hasFullIron = true;
+							for (ItemStack armor : entity.getArmorInventoryList()) {
+								if (!isIronMaterial(armor)) {
+									hasFullIron = false;
+								}
+							}
+						}
 
-    public void manageServerLightning() {
-        if (machine.isMainStructureBlock() && machine.isActive()) {
-            double y, dirX, dirZ;
-            Color color = Reference.COLOR_MATTER.multiplyWithoutAlpha(0.5f);
-            float dimValue = machine.getDimensionalValue();
+						y = getPos().getY() + random.nextDouble() * 2;
+						dirX = random.nextGaussian() * 0.2;
+						dirZ = random.nextGaussian() * 0.2;
+						Vec3d start = new Vec3d(getPos().getX() + dirX, y, getPos().getZ() + dirZ);
+						Vec3d destination = entity.getPositionEyes(1);
+						spawnSpark(color, start, destination);
+						if (!hasFullIron) {
+							DamageSource damageSource = new DamageSource("pylon_lightning");
+							entity.attackEntityFrom(damageSource, dimValue * 2);
+						}
 
-            if (getWorld().getWorldTime() % 10 == 0) {
-                if (random.nextFloat() < (0.2f * dimValue)) {
-                    List<Entity> entities = getWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(getPos(), getPos()).expand(4, 4, 4));
-                    for (Entity entity : entities) {
-                        boolean hasFullIron = false;
-                        if (entity instanceof EntityPlayer) {
-                            EntityPlayer entityPlayer = ((EntityPlayer) entity);
-                            if (entityPlayer.capabilities.disableDamage) {
-                                continue;
-                            }
-                        }
-                        if (entity instanceof EntityLivingBase) {
-                            hasFullIron = true;
-                            for (ItemStack armor : entity.getArmorInventoryList()) {
-                                if (!isIronMaterial(armor)) {
-                                    hasFullIron = false;
-                                }
-                            }
-                        }
+						if (entity instanceof EntityCreeper) {
+							((EntityCreeper) entity).setCreeperState(1);
+						} else if (entity instanceof EntityPig) {
+							entity.onStruckByLightning(null);
+						}
+					}
+				}
+			}
 
-                        y = getPos().getY() + random.nextDouble() * 2;
-                        dirX = random.nextGaussian() * 0.2;
-                        dirZ = random.nextGaussian() * 0.2;
-                        Vec3d start = new Vec3d(getPos().getX() + dirX, y, getPos().getZ() + dirZ);
-                        Vec3d destination = entity.getPositionEyes(1);
-                        spawnSpark(color, start, destination);
-                        if (!hasFullIron) {
-                            DamageSource damageSource = new DamageSource("pylon_lightning");
-                            entity.attackEntityFrom(damageSource, dimValue * 2);
-                        }
+			BlockPos destPos = machine.mainBlock.add((int) (random.nextGaussian() * 7),
+					(int) (random.nextGaussian() * 6), (int) (random.nextGaussian() * 7));
+			IBlockState state = getWorld().getBlockState(destPos);
+			if (state.getBlock() == MatterOverdrive.BLOCKS.pylon) {
+				TileEntity tileEntity = getWorld().getTileEntity(destPos);
+				if (tileEntity instanceof TileEntityMachineDimensionalPylon) {
+					TileEntityMachineDimensionalPylon dimensionalPylon = (TileEntityMachineDimensionalPylon) tileEntity;
+					if (dimensionalPylon.mainBlock != null && !dimensionalPylon.mainBlock.equals(machine.mainBlock)) {
+						float otherDimValue = dimensionalPylon.getDimensionalValue();
+						if (random.nextFloat() < dimValue + otherDimValue) {
+							y = getPos().getY() + random.nextDouble() * 2;
+							dirX = random.nextGaussian() * 0.2;
+							dirZ = random.nextGaussian() * 0.2;
+							Vec3d start = new Vec3d(getPos().getX() + dirX, y, getPos().getZ() + dirZ);
+							Vec3d destination = new Vec3d(((TileEntityMachineDimensionalPylon) tileEntity).mainBlock)
+									.add(0, 1, 0);
+							spawnSpark(color, start, destination);
+							machine.removeCharge(MathHelper.ceil(CHARGE_DECREASE_ON_HIT * dimValue));
+							dimensionalPylon.addCharge(MathHelper.ceil(CHARGE_INCREASE_RATE * dimValue));
+						}
+					}
+				}
+			} else if (state.getMaterial().equals(Material.IRON) || state.getMaterial().equals(Material.IRON)) {
+				y = getPos().getY() + random.nextDouble() * 2;
+				dirX = random.nextGaussian() * 0.2;
+				dirZ = random.nextGaussian() * 0.2;
+				Vec3d start = new Vec3d(getPos().getX() + dirX, y, getPos().getZ() + dirZ);
+				Vec3d destination = new Vec3d(destPos).add(0.5, 0.5, 0.5);
+				spawnSpark(color, start, destination);
+			}
+		}
+	}
 
-                        if (entity instanceof EntityCreeper) {
-                            ((EntityCreeper) entity).setCreeperState(1);
-                        } else if (entity instanceof EntityPig) {
-                            entity.onStruckByLightning(null);
-                        }
-                    }
-                }
-            }
+	private void spawnSpark(Color color, Vec3d from, Vec3d to) {
+		Lightning lightning = new Lightning(getWorld(), from, to, 1, 1f);
+		lightning.setColorRGBA(color);
+		MatterOverdrive.NETWORK.sendToAllAround(
+				new PacketSpawnParticle("lightning", new double[] { from.x, from.y, from.z, to.x, to.y, to.z }, 1,
+						RenderParticlesHandler.Blending.LinesAdditive, 0),
+				machine, 64);
+		getWorld().playSound(null, to.x, to.y, to.z, MatterOverdriveSounds.fxElectricArc, SoundCategory.BLOCKS,
+				0.8f + random.nextFloat() * 0.2f, 0.8f + random.nextFloat() * 0.4f);
+	}
 
-            BlockPos destPos = machine.mainBlock.add((int) (random.nextGaussian() * 7), (int) (random.nextGaussian() * 6), (int) (random.nextGaussian() * 7));
-            IBlockState state = getWorld().getBlockState(destPos);
-            if (state.getBlock() == MatterOverdrive.BLOCKS.pylon) {
-                TileEntity tileEntity = getWorld().getTileEntity(destPos);
-                if (tileEntity instanceof TileEntityMachineDimensionalPylon) {
-                    TileEntityMachineDimensionalPylon dimensionalPylon = (TileEntityMachineDimensionalPylon) tileEntity;
-                    if (dimensionalPylon.mainBlock != null && !dimensionalPylon.mainBlock.equals(machine.mainBlock)) {
-                        float otherDimValue = dimensionalPylon.getDimensionalValue();
-                        if (random.nextFloat() < dimValue + otherDimValue) {
-                            y = getPos().getY() + random.nextDouble() * 2;
-                            dirX = random.nextGaussian() * 0.2;
-                            dirZ = random.nextGaussian() * 0.2;
-                            Vec3d start = new Vec3d(getPos().getX() + dirX, y, getPos().getZ() + dirZ);
-                            Vec3d destination = new Vec3d(((TileEntityMachineDimensionalPylon) tileEntity).mainBlock).add(0, 1, 0);
-                            spawnSpark(color, start, destination);
-                            machine.removeCharge(MathHelper.ceil(CHARGE_DECREASE_ON_HIT * dimValue));
-                            dimensionalPylon.addCharge(MathHelper.ceil(CHARGE_INCREASE_RATE * dimValue));
-                        }
-                    }
-                }
-            } else if (state.getMaterial().equals(Material.IRON) || state.getMaterial().equals(Material.IRON)) {
-                y = getPos().getY() + random.nextDouble() * 2;
-                dirX = random.nextGaussian() * 0.2;
-                dirZ = random.nextGaussian() * 0.2;
-                Vec3d start = new Vec3d(getPos().getX() + dirX, y, getPos().getZ() + dirZ);
-                Vec3d destination = new Vec3d(destPos).add(0.5, 0.5, 0.5);
-                spawnSpark(color, start, destination);
-            }
-        }
-    }
+	private boolean isIronMaterial(ItemStack itemStack) {
+		if (itemStack != null && itemStack.getItem() instanceof ItemArmor) {
+			String materialName = ((ItemArmor) itemStack.getItem()).getArmorMaterial().getName();
+			return materialName.matches("(?i)(iron|chainmail|tritanium)");
+		}
+		return false;
+	}
 
-    private void spawnSpark(Color color, Vec3d from, Vec3d to) {
-        Lightning lightning = new Lightning(getWorld(), from, to, 1, 1f);
-        lightning.setColorRGBA(color);
-        MatterOverdrive.NETWORK.sendToAllAround(new PacketSpawnParticle("lightning", new double[]{from.x, from.y, from.z, to.x, to.y, to.z}, 1, RenderParticlesHandler.Blending.LinesAdditive, 0), machine, 64);
-        getWorld().playSound(null, to.x, to.y, to.z, MatterOverdriveSounds.fxElectricArc, SoundCategory.BLOCKS, 0.8f + random.nextFloat() * 0.2f, 0.8f + random.nextFloat() * 0.4f);
-    }
+	public void manageCharge() {
+		if (machine.charge > 0) {
+			if (getWorld().getWorldTime() % 40 == 0) {
+				machine.charge -= 1 + Math.round(machine.charge * 0.005f);
+				machine.forceSync();
+			}
+		}
+	}
 
-    private boolean isIronMaterial(ItemStack itemStack) {
-        if (itemStack != null && itemStack.getItem() instanceof ItemArmor) {
-            String materialName = ((ItemArmor) itemStack.getItem()).getArmorMaterial().getName();
-            return materialName.matches("(?i)(iron|chainmail|tritanium)");
-        }
-        return false;
-    }
+	public int getEnergyGenPerTick() {
+		return energyGenPerTick;
+	}
 
+	public int getMatterDrainPerSec() {
+		return matterDrainPerSec;
+	}
 
-    public void manageCharge() {
-        if (machine.charge > 0) {
-            if (getWorld().getWorldTime() % 40 == 0) {
-                machine.charge -= 1 + Math.round(machine.charge * 0.005f);
-                machine.forceSync();
-            }
-        }
-    }
+	@Override
+	public boolean isAffectedByUpgrade(UpgradeTypes type) {
+		return false;
+	}
 
+	@Override
+	public boolean isActive() {
+		return false;
+	}
 
-    public int getEnergyGenPerTick() {
-        return energyGenPerTick;
-    }
+	@Override
+	public void onMachineEvent(MachineEvent event) {
 
-    public int getMatterDrainPerSec() {
-        return matterDrainPerSec;
-    }
-
-
-    @Override
-    public boolean isAffectedByUpgrade(UpgradeTypes type) {
-        return false;
-    }
-
-    @Override
-    public boolean isActive() {
-        return false;
-    }
-
-    @Override
-    public void onMachineEvent(MachineEvent event) {
-
-    }
+	}
 }

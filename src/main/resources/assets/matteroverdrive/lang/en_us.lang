@@ -1,6 +1,12 @@
 ##########################################################################################################
 # Items
+item.selector.name=Selector
+item.debugger.name=Teleporter Debugger
 
+tile.area_teleporter.name=Area Teleporter
+tile.creative_generator.name=Creative Generator
+
+itemGroup.structuralrelocation=Structural Relocation
 item.matteroverdrive.matter_scanner.name=Matter Scanner
 item.matteroverdrive.emergency_ration.name=Emergency Ration
 item.matteroverdrive.phaser.name=Phaser

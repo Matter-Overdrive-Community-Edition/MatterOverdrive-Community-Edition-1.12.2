@@ -35,130 +35,137 @@ import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_
 
 public class MatterContainer extends MOBaseItem {
 
-    private final int CONTAINER_CAPACITY = 1000;
+	private final int CONTAINER_CAPACITY = 1000;
 
-    public MatterContainer(String name) {
-        super(name);
-        setMaxStackSize(8);
-    }
+	public MatterContainer(String name) {
+		super(name);
+		setMaxStackSize(8);
+	}
 
-    @Override
-    public void InitTagCompount(ItemStack stack) {
-        NBTTagCompound tagCompound = new NBTTagCompound();
-        tagCompound.setBoolean("fillMode", true);
-        stack.setTagCompound(tagCompound);
-    }
+	@Override
+	public void InitTagCompount(ItemStack stack) {
+		NBTTagCompound tagCompound = new NBTTagCompound();
+		tagCompound.setBoolean("fillMode", true);
+		stack.setTagCompound(tagCompound);
+	}
 
-    public ItemStack getFullStack() {
-        ItemStack full = new ItemStack(this);
-        full.getCapability(FLUID_HANDLER_CAPABILITY, null).fill(new FluidStack(OverdriveFluids.matterPlasma, 1000), true);
-        return full;
-    }
+	public ItemStack getFullStack() {
+		ItemStack full = new ItemStack(this);
+		full.getCapability(FLUID_HANDLER_CAPABILITY, null).fill(new FluidStack(OverdriveFluids.matterPlasma, 1000),
+				true);
+		return full;
+	}
 
-    private void sendToPlayer(World world, EntityPlayer player, String str) {
-        if (!world.isRemote) { player.sendMessage(new TextComponentString(str)); }
-    }
+	private void sendToPlayer(World world, EntityPlayer player, String str) {
+		if (!world.isRemote) {
+			player.sendMessage(new TextComponentString(str));
+		}
+	}
 
-    @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        ItemStack stack = player.getHeldItem(hand);
+	@Override
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing,
+			float hitX, float hitY, float hitZ) {
+		ItemStack stack = player.getHeldItem(hand);
 
-        this.TagCompountCheck(stack);
+		this.TagCompountCheck(stack);
 
-        NBTTagCompound nbt = stack.getTagCompound();
+		NBTTagCompound nbt = stack.getTagCompound();
 
-        if (nbt == null) {
-            return EnumActionResult.FAIL;
-        }
+		if (nbt == null) {
+			return EnumActionResult.FAIL;
+		}
 
-        if (nbt.getBoolean("fillMode")) {
-            return fillContainer(player, world, pos, hand, facing);
-        } else {
-            return emptyContainer(player, world, pos, hand, facing);
-        }
-    }
+		if (nbt.getBoolean("fillMode")) {
+			return fillContainer(player, world, pos, hand, facing);
+		} else {
+			return emptyContainer(player, world, pos, hand, facing);
+		}
+	}
 
-    private EnumActionResult fillContainer(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing) {
-        // Stack is container, tile is destination.
+	private EnumActionResult fillContainer(EntityPlayer player, World world, BlockPos pos, EnumHand hand,
+			EnumFacing facing) {
+		// Stack is container, tile is destination.
 
-        ItemStack stack = player.getHeldItem(hand);
+		ItemStack stack = player.getHeldItem(hand);
 
-        ItemStack workingStack;
+		ItemStack workingStack;
 
-        if (stack.getCount() > 1) {
-            if (!world.isRemote) {
-                player.sendMessage(new TextComponentString("Please only have one container in your hand when attempting to fill or switch modes."));
-            }
+		if (stack.getCount() > 1) {
+			if (!world.isRemote) {
+				player.sendMessage(new TextComponentString(
+						"Please only have one container in your hand when attempting to fill or switch modes."));
+			}
 
-            return EnumActionResult.FAIL;
-        }
+			return EnumActionResult.FAIL;
+		}
 
-        boolean stackSplit = false;
+		boolean stackSplit = false;
 
-        if (stack.getCount() == 1) {
-            workingStack = stack;
-        } else {
-            workingStack = stack.splitStack(1);
+		if (stack.getCount() == 1) {
+			workingStack = stack;
+		} else {
+			workingStack = stack.splitStack(1);
 
-            stackSplit = true;
-        }
+			stackSplit = true;
+		}
 
-        TileEntity tile = world.getTileEntity(pos);
+		TileEntity tile = world.getTileEntity(pos);
 
-        if (tile == null) {
-            return EnumActionResult.FAIL;
-        }
+		if (tile == null) {
+			return EnumActionResult.FAIL;
+		}
 
-        if (!stack.hasCapability(FLUID_HANDLER_CAPABILITY, null)) {
-            return EnumActionResult.FAIL;
-        }
+		if (!stack.hasCapability(FLUID_HANDLER_CAPABILITY, null)) {
+			return EnumActionResult.FAIL;
+		}
 
-        IFluidHandler container = workingStack.getCapability(FLUID_HANDLER_CAPABILITY, null);
+		IFluidHandler container = workingStack.getCapability(FLUID_HANDLER_CAPABILITY, null);
 
-        if (container == null) {
-            return EnumActionResult.FAIL;
-        }
+		if (container == null) {
+			return EnumActionResult.FAIL;
+		}
 
-        if (!tile.hasCapability(FLUID_HANDLER_CAPABILITY, facing)) {
-            return EnumActionResult.PASS;
-        }
+		if (!tile.hasCapability(FLUID_HANDLER_CAPABILITY, facing)) {
+			return EnumActionResult.PASS;
+		}
 
-        IFluidHandler handler = tile.getCapability(FLUID_HANDLER_CAPABILITY, facing);
+		IFluidHandler handler = tile.getCapability(FLUID_HANDLER_CAPABILITY, facing);
 
-        if (handler == null) {
-            return EnumActionResult.PASS;
-        }
+		if (handler == null) {
+			return EnumActionResult.PASS;
+		}
 
-        IMatterHandler matterStorage = tile.getCapability(MatterOverdriveCapabilities.MATTER_HANDLER, facing);
+		IMatterHandler matterStorage = tile.getCapability(MatterOverdriveCapabilities.MATTER_HANDLER, facing);
 
-        if (matterStorage == null) {
-            return EnumActionResult.PASS;
-        }
+		if (matterStorage == null) {
+			return EnumActionResult.PASS;
+		}
 
-        FluidStack amountInSource = handler.drain(matterStorage.getCapacity(), false);
+		FluidStack amountInSource = handler.drain(matterStorage.getCapacity(), false);
 
-        int availableAmount = 0;
+		int availableAmount = 0;
 
-        if (amountInSource != null) {
-            FluidStack available = handler.drain(amountInSource.amount, false);
+		if (amountInSource != null) {
+			FluidStack available = handler.drain(amountInSource.amount, false);
 
-            availableAmount = available != null ? available.amount : 0;
-        }
+			availableAmount = available != null ? available.amount : 0;
+		}
 
-        FluidStack amount = stack.getCapability(FLUID_HANDLER_CAPABILITY, null).drain(CONTAINER_CAPACITY, false);
+		FluidStack amount = stack.getCapability(FLUID_HANDLER_CAPABILITY, null).drain(CONTAINER_CAPACITY, false);
 
-        int hasAmount = amount != null ? amount.amount : 0;
+		int hasAmount = amount != null ? amount.amount : 0;
 
-        int freeSpace = 1000 - hasAmount;
+		int freeSpace = 1000 - hasAmount;
 
-        // Only drain the amount that's either the free space in the container, or what's left in the tile entity.
-        int drainAmount = Math.min(availableAmount, freeSpace);
+		// Only drain the amount that's either the free space in the container, or
+		// what's left in the tile entity.
+		int drainAmount = Math.min(availableAmount, freeSpace);
 
-        FluidStack result = handler.drain(drainAmount, true);
+		FluidStack result = handler.drain(drainAmount, true);
 
-        container.fill(result, true);
+		container.fill(result, true);
 
-        // This code is bugged.
+		// This code is bugged.
 
 //        if (stackSplit) {
 //            if (!player.addItemStackToInventory(workingStack)) {
@@ -166,179 +173,182 @@ public class MatterContainer extends MOBaseItem {
 //            }
 //        }
 
-        return EnumActionResult.SUCCESS;
-    }
+		return EnumActionResult.SUCCESS;
+	}
 
-    private EnumActionResult emptyContainer(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing) {
-        // Stack is container, tile is destination.
+	private EnumActionResult emptyContainer(EntityPlayer player, World world, BlockPos pos, EnumHand hand,
+			EnumFacing facing) {
+		// Stack is container, tile is destination.
 
-        ItemStack stack = player.getHeldItem(hand);
-        TileEntity tile = world.getTileEntity(pos);
+		ItemStack stack = player.getHeldItem(hand);
+		TileEntity tile = world.getTileEntity(pos);
 
-        if (tile == null) {
-            return EnumActionResult.FAIL;
-        }
+		if (tile == null) {
+			return EnumActionResult.FAIL;
+		}
 
-        if (!stack.hasCapability(FLUID_HANDLER_CAPABILITY, null)) {
-            return EnumActionResult.FAIL;
-        }
+		if (!stack.hasCapability(FLUID_HANDLER_CAPABILITY, null)) {
+			return EnumActionResult.FAIL;
+		}
 
-        IFluidHandler container = stack.getCapability(FLUID_HANDLER_CAPABILITY, null);
+		IFluidHandler container = stack.getCapability(FLUID_HANDLER_CAPABILITY, null);
 
-        if (container == null) {
-            return EnumActionResult.FAIL;
-        }
+		if (container == null) {
+			return EnumActionResult.FAIL;
+		}
 
-        FluidStack amountInContainer = container.drain(CONTAINER_CAPACITY, false);
+		FluidStack amountInContainer = container.drain(CONTAINER_CAPACITY, false);
 
-        int amountInContainerInt = amountInContainer != null ? amountInContainer.amount : 0;
+		int amountInContainerInt = amountInContainer != null ? amountInContainer.amount : 0;
 
-        if (!tile.hasCapability(FLUID_HANDLER_CAPABILITY, facing)) {
-            return EnumActionResult.PASS;
-        }
+		if (!tile.hasCapability(FLUID_HANDLER_CAPABILITY, facing)) {
+			return EnumActionResult.PASS;
+		}
 
-        IFluidHandler handler = tile.getCapability(FLUID_HANDLER_CAPABILITY, facing);
+		IFluidHandler handler = tile.getCapability(FLUID_HANDLER_CAPABILITY, facing);
 
-        if (handler == null) {
-            return EnumActionResult.PASS;
-        }
+		if (handler == null) {
+			return EnumActionResult.PASS;
+		}
 
-        IMatterHandler matterStorage = tile.getCapability(MatterOverdriveCapabilities.MATTER_HANDLER, facing);
+		IMatterHandler matterStorage = tile.getCapability(MatterOverdriveCapabilities.MATTER_HANDLER, facing);
 
-        if (matterStorage == null) {
-            return EnumActionResult.PASS;
-        }
+		if (matterStorage == null) {
+			return EnumActionResult.PASS;
+		}
 
-        FluidStack amountInDest = handler.drain(matterStorage.getCapacity(), false);
+		FluidStack amountInDest = handler.drain(matterStorage.getCapacity(), false);
 
-        int amountInDestInt = amountInDest != null ? amountInDest.amount : 0;
+		int amountInDestInt = amountInDest != null ? amountInDest.amount : 0;
 
-        int freeSpace = matterStorage.getCapacity() - amountInDestInt;
+		int freeSpace = matterStorage.getCapacity() - amountInDestInt;
 
-        sendToPlayer(world, player, "Amount of space free in destination: " + freeSpace);
+		sendToPlayer(world, player, "Amount of space free in destination: " + freeSpace);
 
-        // Only drain the amount that's either the free space in the container, or what's left in the tile entity.
-        int drainAmount = Math.min(amountInContainerInt, freeSpace);
+		// Only drain the amount that's either the free space in the container, or
+		// what's left in the tile entity.
+		int drainAmount = Math.min(amountInContainerInt, freeSpace);
 
-        FluidStack result = container.drain(drainAmount, true);
+		FluidStack result = container.drain(drainAmount, true);
 
-        handler.fill(result, true);
+		handler.fill(result, true);
 
-        return EnumActionResult.SUCCESS;
-    }
+		return EnumActionResult.SUCCESS;
+	}
 
-    @Nonnull
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand hand) {
-        ItemStack stack = playerIn.getHeldItem(hand);
+	@Nonnull
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand hand) {
+		ItemStack stack = playerIn.getHeldItem(hand);
 
-        // Don't apply commands to stacks of items.
-        if (stack.getCount() > 1) {
-            return ActionResult.newResult(EnumActionResult.FAIL, stack);
-        }
+		// Don't apply commands to stacks of items.
+		if (stack.getCount() > 1) {
+			return ActionResult.newResult(EnumActionResult.FAIL, stack);
+		}
 
-        this.TagCompountCheck(stack);
+		this.TagCompountCheck(stack);
 
-        if (hand == EnumHand.OFF_HAND) {
-            return ActionResult.newResult(EnumActionResult.PASS, stack);
-        }
+		if (hand == EnumHand.OFF_HAND) {
+			return ActionResult.newResult(EnumActionResult.PASS, stack);
+		}
 
-        playerIn.setActiveHand(hand);
+		playerIn.setActiveHand(hand);
 
-        NBTTagCompound nbt = stack.getTagCompound();
+		NBTTagCompound nbt = stack.getTagCompound();
 
-        if (nbt == null) {
-            return ActionResult.newResult(EnumActionResult.FAIL, stack);
-        }
+		if (nbt == null) {
+			return ActionResult.newResult(EnumActionResult.FAIL, stack);
+		}
 
-        boolean modeFill = nbt.getBoolean("fillMode");
+		boolean modeFill = nbt.getBoolean("fillMode");
 
-        modeFill = !modeFill;
+		modeFill = !modeFill;
 
-        if (modeFill) {
-            sendToPlayer(worldIn, playerIn, "Switched to fill mode.");
-        } else {
-            sendToPlayer(worldIn, playerIn, "Switched to empty mode.");
-        }
+		if (modeFill) {
+			sendToPlayer(worldIn, playerIn, "Switched to fill mode.");
+		} else {
+			sendToPlayer(worldIn, playerIn, "Switched to empty mode.");
+		}
 
-        nbt.setBoolean("fillMode", modeFill);
+		nbt.setBoolean("fillMode", modeFill);
 
-        return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
-    }
+		return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
+	}
 
-    @Override
-    public String getTranslationKey(ItemStack stack) {
-        FluidStack result = stack.getCapability(FLUID_HANDLER_CAPABILITY, null).drain(1000, false);
-        return super.getTranslationKey(stack) + (result == null ? "_empty" : "_full");
-    }
+	@Override
+	public String getTranslationKey(ItemStack stack) {
+		FluidStack result = stack.getCapability(FLUID_HANDLER_CAPABILITY, null).drain(1000, false);
+		return super.getTranslationKey(stack) + (result == null ? "_empty" : "_full");
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        FluidStack result = stack.getCapability(FLUID_HANDLER_CAPABILITY, null).drain(1000, false);
-        int amount = result == null ? 0 : result.amount;
-        tooltip.add("Amount: " + amount);
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		FluidStack result = stack.getCapability(FLUID_HANDLER_CAPABILITY, null).drain(1000, false);
+		int amount = result == null ? 0 : result.amount;
+		tooltip.add("Amount: " + amount);
+	}
 
-    @Override
-    public void initItemModel() {
-        ModelLoader.setCustomMeshDefinition(this, stack -> {
-            FluidStack result = stack.getCapability(FLUID_HANDLER_CAPABILITY, null).drain(1000, false);
-            int amount = result == null ? 0 : result.amount;
-            float percent = amount / 1000f;
-            return new ModelResourceLocation(getRegistryName(), percent == 1 ? "level=full" : percent > 0 ? "level=partial" : "level=empty");
-        });
-        ModelBakery.registerItemVariants(this, new ModelResourceLocation(getRegistryName(), "level=full"),
-                new ModelResourceLocation(getRegistryName(), "level=partial"),
-                new ModelResourceLocation(getRegistryName(), "level=empty"));
-    }
+	@Override
+	public void initItemModel() {
+		ModelLoader.setCustomMeshDefinition(this, stack -> {
+			FluidStack result = stack.getCapability(FLUID_HANDLER_CAPABILITY, null).drain(1000, false);
+			int amount = result == null ? 0 : result.amount;
+			float percent = amount / 1000f;
+			return new ModelResourceLocation(getRegistryName(),
+					percent == 1 ? "level=full" : percent > 0 ? "level=partial" : "level=empty");
+		});
+		ModelBakery.registerItemVariants(this, new ModelResourceLocation(getRegistryName(), "level=full"),
+				new ModelResourceLocation(getRegistryName(), "level=partial"),
+				new ModelResourceLocation(getRegistryName(), "level=empty"));
+	}
 
-    @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
-        if (isInCreativeTab(tab)) {
-            subItems.add(new ItemStack(this));
-            subItems.add(getFullStack());
-        }
-    }
+	@Override
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
+		if (isInCreativeTab(tab)) {
+			subItems.add(new ItemStack(this));
+			subItems.add(getFullStack());
+		}
+	}
 
-    @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt) {
-        return new MatterContainerCapabilityProvider();
-    }
+	@Override
+	public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt) {
+		return new MatterContainerCapabilityProvider();
+	}
 
-    public static class MatterContainerCapabilityProvider implements ICapabilitySerializable<NBTTagCompound> {
+	public static class MatterContainerCapabilityProvider implements ICapabilitySerializable<NBTTagCompound> {
 
-        private FluidTank tank = new FluidTank(1000) {
-            @Override
-            public boolean canFillFluidType(FluidStack fluid) {
-                if (fluid == null) {
-                    return false;
-                }
+		private FluidTank tank = new FluidTank(1000) {
+			@Override
+			public boolean canFillFluidType(FluidStack fluid) {
+				if (fluid == null) {
+					return false;
+				}
 
-                return fluid.getFluid() == OverdriveFluids.matterPlasma;
-            }
-        };
+				return fluid.getFluid() == OverdriveFluids.matterPlasma;
+			}
+		};
 
-        @Override
-        public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-            return capability == FLUID_HANDLER_CAPABILITY;
-        }
+		@Override
+		public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+			return capability == FLUID_HANDLER_CAPABILITY;
+		}
 
-        @Override
-        public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-            return capability == FLUID_HANDLER_CAPABILITY ? (T) tank : null;
-        }
+		@Override
+		public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+			return capability == FLUID_HANDLER_CAPABILITY ? (T) tank : null;
+		}
 
-        @Override
-        public NBTTagCompound serializeNBT() {
-            return tank.writeToNBT(new NBTTagCompound());
-        }
+		@Override
+		public NBTTagCompound serializeNBT() {
+			return tank.writeToNBT(new NBTTagCompound());
+		}
 
-        @Override
-        public void deserializeNBT(NBTTagCompound tag) {
-            tank.readFromNBT(tag);
-        }
+		@Override
+		public void deserializeNBT(NBTTagCompound tag) {
+			tank.readFromNBT(tag);
+		}
 
-    }
+	}
 
 }

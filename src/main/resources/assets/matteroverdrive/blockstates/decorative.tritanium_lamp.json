@@ -12,9 +12,9 @@
     }
   },
   "variants": {
-    "normal": {"model": "matteroverdrive:base/orientable"},
-    "rotated=false": { "model": "matteroverdrive:base/orientable"},
-    "rotated=true": { "model": "matteroverdrive:base/orientable","y": 90 },
+    "axis=x": { "model": "matteroverdrive:base/orientable","y": 90 },
+    "axis=y": { "model": "matteroverdrive:base/orientable"},
+    "axis=z": { "model": "matteroverdrive:base/orientable"},
     "inventory": {
       "model": "matteroverdrive:base/orientable",
       "transform": "forge:default-block"

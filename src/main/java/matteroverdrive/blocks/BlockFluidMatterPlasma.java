@@ -12,33 +12,33 @@ import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
 
 public class BlockFluidMatterPlasma extends BlockFluidClassic {
-    public BlockFluidMatterPlasma(Fluid fluid, Material material) {
-        super(fluid, material);
-        setTranslationKey("matter_plasma");
-        setRegistryName(new ResourceLocation(Reference.MOD_ID, "matter_plasma"));
-    }
+	public BlockFluidMatterPlasma(Fluid fluid, Material material) {
+		super(fluid, material);
+		setTranslationKey("matter_plasma");
+		setRegistryName(new ResourceLocation(Reference.MOD_ID, "matter_plasma"));
+	}
 
-    /*@Override
-	public IIcon getIcon(int side, int meta) {
-        return (side == 0 || side == 1) ? this.getFluid().getStillIcon() : this.getFluid().getFlowingIcon();
-    }
+	/*
+	 * @Override public IIcon getIcon(int side, int meta) { return (side == 0 ||
+	 * side == 1) ? this.getFluid().getStillIcon() :
+	 * this.getFluid().getFlowingIcon(); }
+	 * 
+	 * @SideOnly(Side.CLIENT)
+	 * 
+	 * @Override public void registerBlockIcons(IIconRegister register) {
+	 * 
+	 * }
+	 */
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void registerBlockIcons(IIconRegister register)
-    {
+	@Override
+	public boolean canDisplace(IBlockAccess world, BlockPos pos) {
+		IBlockState state = world.getBlockState(pos);
+		return !state.getMaterial().isLiquid() && super.canDisplace(world, pos);
+	}
 
-    }*/
-
-    @Override
-    public boolean canDisplace(IBlockAccess world, BlockPos pos) {
-        IBlockState state = world.getBlockState(pos);
-        return !state.getMaterial().isLiquid() && super.canDisplace(world, pos);
-    }
-
-    @Override
-    public boolean displaceIfPossible(World world, BlockPos pos) {
-        IBlockState state = world.getBlockState(pos);
-        return !state.getMaterial().isLiquid() && super.displaceIfPossible(world, pos);
-    }
+	@Override
+	public boolean displaceIfPossible(World world, BlockPos pos) {
+		IBlockState state = world.getBlockState(pos);
+		return !state.getMaterial().isLiquid() && super.displaceIfPossible(world, pos);
+	}
 }

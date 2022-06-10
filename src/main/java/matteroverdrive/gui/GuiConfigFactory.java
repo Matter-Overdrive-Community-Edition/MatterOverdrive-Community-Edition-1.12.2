@@ -11,23 +11,23 @@ import java.util.Set;
 
 @SideOnly(Side.CLIENT)
 public class GuiConfigFactory implements IModGuiFactory {
-    @Override
-    public void initialize(Minecraft minecraftInstance) {
+	@Override
+	public void initialize(Minecraft minecraftInstance) {
 
-    }
+	}
 
-    @Override
-    public boolean hasConfigGui() {
-        return true;
-    }
+	@Override
+	public boolean hasConfigGui() {
+		return true;
+	}
 
-    @Override
-    public GuiScreen createConfigGui(GuiScreen parentScreen) {
-        return new GuiConfig(parentScreen);
-    }
+	@Override
+	public GuiScreen createConfigGui(GuiScreen parentScreen) {
+		return new GuiConfig(parentScreen);
+	}
 
-    @Override
-    public Set<RuntimeOptionCategoryElement> runtimeGuiCategories() {
-        return null;
-    }
+	@Override
+	public Set<RuntimeOptionCategoryElement> runtimeGuiCategories() {
+		return null;
+	}
 }

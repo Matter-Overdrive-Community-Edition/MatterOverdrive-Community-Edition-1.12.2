@@ -13,21 +13,21 @@ import net.minecraft.util.SoundEvent;
  */
 public class ItemRecordTransformation extends ItemRecord implements ItemModelProvider {
 
-    public ItemRecordTransformation() {
-        super("matteroverdrive.transformation", MatterOverdriveSounds.musicTransformation);
-        setTranslationKey("record");
-        setRegistryName("record_transformation");
-        setCreativeTab(MatterOverdrive.TAB_OVERDRIVE);
-    }
+	public ItemRecordTransformation() {
+		super("matteroverdrive.transformation", MatterOverdriveSounds.musicTransformation);
+		setTranslationKey("record");
+		setRegistryName("record_transformation");
+		setCreativeTab(MatterOverdrive.TAB_OVERDRIVE);
+	}
 
-    @Override
-    public SoundEvent getSound() {
-        return super.getSound();
-    }
+	@Override
+	public SoundEvent getSound() {
+		return super.getSound();
+	}
 
-    @Override
-    public void initItemModel() {
-        ClientUtil.registerModel(this, this.getRegistryName().toString());
-    }
+	@Override
+	public void initItemModel() {
+		ClientUtil.registerModel(this, this.getRegistryName().toString());
+	}
 
 }

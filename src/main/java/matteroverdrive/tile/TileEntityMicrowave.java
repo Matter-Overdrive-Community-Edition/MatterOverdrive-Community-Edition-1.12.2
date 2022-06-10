@@ -21,230 +21,231 @@ import javax.annotation.Nonnull;
 import java.util.EnumSet;
 
 public class TileEntityMicrowave extends MOTileEntityMachineEnergy {
-    private static final EnumSet<UpgradeTypes> upgradeTypes = EnumSet.of(UpgradeTypes.PowerUsage, UpgradeTypes.Speed, UpgradeTypes.PowerStorage, UpgradeTypes.PowerTransfer, UpgradeTypes.Muffler);
-    public static final int ENERGY_CAPACITY = 512000;
-    public int INPUT_SLOT_ID, OUTPUT_SLOT_ID;
-    @SideOnly(Side.CLIENT)
-    private float nextHeadX, nextHeadY;
-    @SideOnly(Side.CLIENT)
-    private float lastHeadX, lastHeadY;
-    @SideOnly(Side.CLIENT)
-    public int currentItemBurnTime;
-    private float headAnimationTime;
-    private int cookTime;
+	private static final EnumSet<UpgradeTypes> upgradeTypes = EnumSet.of(UpgradeTypes.PowerUsage, UpgradeTypes.Speed,
+			UpgradeTypes.PowerStorage, UpgradeTypes.PowerTransfer, UpgradeTypes.Muffler);
+	public static final int ENERGY_CAPACITY = 512000;
+	public int INPUT_SLOT_ID, OUTPUT_SLOT_ID;
+	@SideOnly(Side.CLIENT)
+	private float nextHeadX, nextHeadY;
+	@SideOnly(Side.CLIENT)
+	private float lastHeadX, lastHeadY;
+	@SideOnly(Side.CLIENT)
+	public int currentItemBurnTime;
+	private float headAnimationTime;
+	private int cookTime;
 
-    public TileEntityMicrowave() {
-        super(4);
-        energyStorage.setCapacity(ENERGY_CAPACITY);
-        energyStorage.setMaxExtract(ENERGY_CAPACITY);
-        energyStorage.setMaxReceive(ENERGY_CAPACITY);
-        playerSlotsHotbar = true;
-        playerSlotsMain = true;
-    }
+	public TileEntityMicrowave() {
+		super(4);
+		energyStorage.setCapacity(ENERGY_CAPACITY);
+		energyStorage.setMaxExtract(ENERGY_CAPACITY);
+		energyStorage.setMaxReceive(ENERGY_CAPACITY);
+		playerSlotsHotbar = true;
+		playerSlotsMain = true;
+	}
 
-    @Override
-    protected void RegisterSlots(Inventory inventory) {
-        INPUT_SLOT_ID = inventory.AddSlot(new FoodFurnaceSlot(true).setSendToClient(true));
-        OUTPUT_SLOT_ID = inventory.AddSlot(new RemoveOnlySlot(false).setSendToClient(true));
-        super.RegisterSlots(inventory);
-    }
+	@Override
+	protected void RegisterSlots(Inventory inventory) {
+		INPUT_SLOT_ID = inventory.AddSlot(new FoodFurnaceSlot(true).setSendToClient(true));
+		OUTPUT_SLOT_ID = inventory.AddSlot(new RemoveOnlySlot(false).setSendToClient(true));
+		super.RegisterSlots(inventory);
+	}
 
-    public boolean canPutInOutput() {
-        ItemStack input = inventory.getStackInSlot(INPUT_SLOT_ID);
-        ItemStack output = inventory.getStackInSlot(OUTPUT_SLOT_ID);
+	public boolean canPutInOutput() {
+		ItemStack input = inventory.getStackInSlot(INPUT_SLOT_ID);
+		ItemStack output = inventory.getStackInSlot(OUTPUT_SLOT_ID);
 
-        if (input.isEmpty()) {
-            return false;
-        } else {
-            ItemStack res = FurnaceRecipes.instance().getSmeltingResult(input);
-            if (res.isEmpty())
-                return false;
-            if (output.isEmpty())
-                return true;
-            if (!output.isItemEqual(res))
-                return false;
-            int result = output.getCount() + res.getCount();
-            return result <= res.getMaxStackSize();
-        }
-    }
+		if (input.isEmpty()) {
+			return false;
+		} else {
+			ItemStack res = FurnaceRecipes.instance().getSmeltingResult(input);
+			if (res.isEmpty())
+				return false;
+			if (output.isEmpty())
+				return true;
+			if (!output.isItemEqual(res))
+				return false;
+			int result = output.getCount() + res.getCount();
+			return result <= res.getMaxStackSize();
+		}
+	}
 
-    @Override
-    public void writeCustomNBT(NBTTagCompound nbt, EnumSet<MachineNBTCategory> categories, boolean toDisk) {
-        super.writeCustomNBT(nbt, categories, toDisk);
+	@Override
+	public void writeCustomNBT(NBTTagCompound nbt, EnumSet<MachineNBTCategory> categories, boolean toDisk) {
+		super.writeCustomNBT(nbt, categories, toDisk);
 
-        if (categories.contains(MachineNBTCategory.DATA)) {
-            nbt.setInteger("cookTime", cookTime);
-        }
-    }
+		if (categories.contains(MachineNBTCategory.DATA)) {
+			nbt.setInteger("cookTime", cookTime);
+		}
+	}
 
-    @Override
-    public void readCustomNBT(NBTTagCompound nbt, EnumSet<MachineNBTCategory> categories) {
-        super.readCustomNBT(nbt, categories);
+	@Override
+	public void readCustomNBT(NBTTagCompound nbt, EnumSet<MachineNBTCategory> categories) {
+		super.readCustomNBT(nbt, categories);
 
-        if (categories.contains(MachineNBTCategory.DATA)) {
-            cookTime = nbt.getInteger("cookTime");
-        }
-    }
+		if (categories.contains(MachineNBTCategory.DATA)) {
+			cookTime = nbt.getInteger("cookTime");
+		}
+	}
 
-    @Override
-    public boolean getServerActive() {
-        return isCooking() && this.energyStorage.getEnergyStored() >= getEnergyDrainPerTick();
-    }
+	@Override
+	public boolean getServerActive() {
+		return isCooking() && this.energyStorage.getEnergyStored() >= getEnergyDrainPerTick();
+	}
 
-    public int getEnergyDrainPerTick() {
-        int maxEnergy = getEnergyDrainMax();
-        int speed = getSpeed();
-        if (speed > 0) {
-            return maxEnergy / speed;
-        }
-        return 0;
-    }
+	public int getEnergyDrainPerTick() {
+		int maxEnergy = getEnergyDrainMax();
+		int speed = getSpeed();
+		if (speed > 0) {
+			return maxEnergy / speed;
+		}
+		return 0;
+	}
 
-    public int getEnergyDrainMax() {
-        ItemStack input = inventory.getStackInSlot(INPUT_SLOT_ID);
-        ItemStack res = FurnaceRecipes.instance().getSmeltingResult(input);
-        if (res != null) {
-           return (int) (1000 * getUpgradeMultiply(UpgradeTypes.PowerUsage));
-        }
-        return 0;
-    }
+	public int getEnergyDrainMax() {
+		ItemStack input = inventory.getStackInSlot(INPUT_SLOT_ID);
+		ItemStack res = FurnaceRecipes.instance().getSmeltingResult(input);
+		if (res != null) {
+			return (int) (1000 * getUpgradeMultiply(UpgradeTypes.PowerUsage));
+		}
+		return 0;
+	}
 
-    public int getSpeed() {
-        ItemStack input = inventory.getStackInSlot(INPUT_SLOT_ID);
-        ItemStack res = FurnaceRecipes.instance().getSmeltingResult(input);
-        if (res != null) {
-            return (int) (1 * getUpgradeMultiply(UpgradeTypes.Speed));
-        }
-        return 0;
-    }
+	public int getSpeed() {
+		ItemStack input = inventory.getStackInSlot(INPUT_SLOT_ID);
+		ItemStack res = FurnaceRecipes.instance().getSmeltingResult(input);
+		if (res != null) {
+			return (int) (1 * getUpgradeMultiply(UpgradeTypes.Speed));
+		}
+		return 0;
+	}
 
-    public boolean isCooking() {
-        ItemStack input = inventory.getStackInSlot(INPUT_SLOT_ID);
-        ItemStack res = FurnaceRecipes.instance().getSmeltingResult(input);
-        return res != null && canPutInOutput() && getRedstoneActive();
-    }
+	public boolean isCooking() {
+		ItemStack input = inventory.getStackInSlot(INPUT_SLOT_ID);
+		ItemStack res = FurnaceRecipes.instance().getSmeltingResult(input);
+		return res != null && canPutInOutput() && getRedstoneActive();
+	}
 
-    @Override
-    public SoundEvent getSound() {
-        return MatterOverdriveSounds.machine;
-    }
+	@Override
+	public SoundEvent getSound() {
+		return MatterOverdriveSounds.machine;
+	}
 
-    @Override
-    public boolean hasSound() {
-        return true;
-    }
+	@Override
+	public boolean hasSound() {
+		return true;
+	}
 
-    @Override
-    public float soundVolume() {
-        if (getUpgradeMultiply(UpgradeTypes.Muffler) >= 2d) {
-            return 0.0f;
-        }
-        return 1;
-    }
+	@Override
+	public float soundVolume() {
+		if (getUpgradeMultiply(UpgradeTypes.Muffler) >= 2d) {
+			return 0.0f;
+		}
+		return 1;
+	}
 
-    @Override
-    public void update() {
-        super.update();
-        if (world.isRemote && isActive()) {
-            handleHeadAnimation();
-        }
-        manageCooking();
-    }
+	@Override
+	public void update() {
+		super.update();
+		if (world.isRemote && isActive()) {
+			handleHeadAnimation();
+		}
+		manageCooking();
+	}
 
-    @Override
-    public boolean canExtractItem(int slot, ItemStack item, EnumFacing side) {
-        return slot == OUTPUT_SLOT_ID;
-    }
+	@Override
+	public boolean canExtractItem(int slot, ItemStack item, EnumFacing side) {
+		return slot == OUTPUT_SLOT_ID;
+	}
 
-    @Override
-    public boolean isAffectedByUpgrade(UpgradeTypes type) {
-        return upgradeTypes.contains(type);
-    }
+	@Override
+	public boolean isAffectedByUpgrade(UpgradeTypes type) {
+		return upgradeTypes.contains(type);
+	}
 
-    @Override
-    protected void onMachineEvent(MachineEvent event) {
-    }
+	@Override
+	protected void onMachineEvent(MachineEvent event) {
+	}
 
-    @Override
-    public float getProgress() {
-        float speed = (float) getSpeed();
-        if (speed > 0) {
-            return (float) (cookTime) / speed;
-        }
-        return 0;
-    }
+	@Override
+	public float getProgress() {
+		float speed = (float) getSpeed();
+		if (speed > 0) {
+			return (float) (cookTime) / speed;
+		}
+		return 0;
+	}
 
-    @SideOnly(Side.CLIENT)
-    protected void handleHeadAnimation() {
-        if (headAnimationTime >= 1) {
-            lastHeadX = nextHeadX;
-            lastHeadY = nextHeadY;
-            nextHeadX = MathHelper.clamp((float) random.nextGaussian(), -1, 1);
-            nextHeadY = MathHelper.clamp((float) random.nextGaussian(), -1, 1);
-            headAnimationTime = 0;
-        }
+	@SideOnly(Side.CLIENT)
+	protected void handleHeadAnimation() {
+		if (headAnimationTime >= 1) {
+			lastHeadX = nextHeadX;
+			lastHeadY = nextHeadY;
+			nextHeadX = MathHelper.clamp((float) random.nextGaussian(), -1, 1);
+			nextHeadY = MathHelper.clamp((float) random.nextGaussian(), -1, 1);
+			headAnimationTime = 0;
+		}
 
-        headAnimationTime += 0.05f;
-    }
+		headAnimationTime += 0.05f;
+	}
 
-    @SideOnly(Side.CLIENT)
-    public float geatHeadX() {
-        return MOMathHelper.Lerp(lastHeadX, nextHeadX, headAnimationTime);
-    }
+	@SideOnly(Side.CLIENT)
+	public float geatHeadX() {
+		return MOMathHelper.Lerp(lastHeadX, nextHeadX, headAnimationTime);
+	}
 
-    @SideOnly(Side.CLIENT)
-    public float geatHeadY() {
-        return MOMathHelper.Lerp(lastHeadY, nextHeadY, headAnimationTime);
-    }
+	@SideOnly(Side.CLIENT)
+	public float geatHeadY() {
+		return MOMathHelper.Lerp(lastHeadY, nextHeadY, headAnimationTime);
+	}
 
-    @Override
-    public ItemStack decrStackSize(int slot, int size) {
-        return super.decrStackSize(slot, size);
-    }
+	@Override
+	public ItemStack decrStackSize(int slot, int size) {
+		return super.decrStackSize(slot, size);
+	}
 
-    public void setInventorySlotContents(int slot, ItemStack itemStack) {
-        super.setInventorySlotContents(slot, itemStack);
-    }
+	public void setInventorySlotContents(int slot, ItemStack itemStack) {
+		super.setInventorySlotContents(slot, itemStack);
+	}
 
-    @Nonnull
-    @Override
-    public int[] getSlotsForFace(@Nonnull EnumFacing side) {
-        return new int[] { INPUT_SLOT_ID, OUTPUT_SLOT_ID };
-    }
+	@Nonnull
+	@Override
+	public int[] getSlotsForFace(@Nonnull EnumFacing side) {
+		return new int[] { INPUT_SLOT_ID, OUTPUT_SLOT_ID };
+	}
 
-    protected void manageCooking() {
-        if (!world.isRemote) {
-            if (this.isCooking()) {
-                if (this.energyStorage.getEnergyStored() >= getEnergyDrainPerTick()) {
-                    this.cookTime++;
-                    energyStorage.modifyEnergyStored(-getEnergyDrainPerTick());
-                    UpdateClientPower();
+	protected void manageCooking() {
+		if (!world.isRemote) {
+			if (this.isCooking()) {
+				if (this.energyStorage.getEnergyStored() >= getEnergyDrainPerTick()) {
+					this.cookTime++;
+					energyStorage.modifyEnergyStored(-getEnergyDrainPerTick());
+					UpdateClientPower();
 
-                    if (this.cookTime >= getSpeed()) {
-                        this.cookTime = 0;
-                        this.cookItem();
-                    }
-                }
-            }
-        }
-
-        if (!this.isCooking()) {
-            this.cookTime = 0;
-        }
-    }
-
-    public void cookItem() {
-        if (canPutInOutput()){
-            ItemStack input = inventory.getStackInSlot(INPUT_SLOT_ID);
-            ItemStack outputSlot = inventory.getStackInSlot(OUTPUT_SLOT_ID);
-            ItemStack result = FurnaceRecipes.instance().getSmeltingResult(input);
-            if (!outputSlot.isEmpty()) {
-				input.shrink(1);
-                outputSlot.grow(1);
-            } else {
-			input.shrink(1);
-            inventory.setInventorySlotContents(OUTPUT_SLOT_ID, result.copy());
+					if (this.cookTime >= getSpeed()) {
+						this.cookTime = 0;
+						this.cookItem();
+					}
+				}
 			}
 		}
-}
+
+		if (!this.isCooking()) {
+			this.cookTime = 0;
+		}
+	}
+
+	public void cookItem() {
+		if (canPutInOutput()) {
+			ItemStack input = inventory.getStackInSlot(INPUT_SLOT_ID);
+			ItemStack outputSlot = inventory.getStackInSlot(OUTPUT_SLOT_ID);
+			ItemStack result = FurnaceRecipes.instance().getSmeltingResult(input);
+			if (!outputSlot.isEmpty()) {
+				input.shrink(1);
+				outputSlot.grow(1);
+			} else {
+				input.shrink(1);
+				inventory.setInventorySlotContents(OUTPUT_SLOT_ID, result.copy());
+			}
+		}
+	}
 }

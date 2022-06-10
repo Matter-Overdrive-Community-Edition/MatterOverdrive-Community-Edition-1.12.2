@@ -17,55 +17,53 @@ import net.minecraftforge.fml.common.Loader;
 import javax.annotation.Nonnull;
 
 public class BlockInscriber extends MOBlockMachine<TileEntityInscriber> {
-    public static final PropertyBool CTM = PropertyBool.create("ctm");
-    public BlockInscriber(Material material, String name) {
-        super(material, name);
+	public static final PropertyBool CTM = PropertyBool.create("ctm");
+
+	public BlockInscriber(Material material, String name) {
+		super(material, name);
 		setHasRotation();
 		setBoundingBox(new AxisAlignedBB(0, 0, 0, 1, 12 / 16d, 1));
-        setHardness(20.0F);
-        this.setResistance(9.0f);
-        this.setHarvestLevel("pickaxe", 2);
-        setHasGui(true);
-    }
+		setHardness(20.0F);
+		this.setResistance(9.0f);
+		this.setHarvestLevel("pickaxe", 2);
+		setHasGui(true);
+	}
 
-    @Override
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        return super.getActualState(state, worldIn, pos).withProperty(CTM, Loader.isModLoaded("ctm"));
-    }
+	@Override
+	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+		return super.getActualState(state, worldIn, pos).withProperty(CTM, Loader.isModLoaded("ctm"));
+	}
 
-    @Nonnull
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, PROPERTY_DIRECTION, CTM);
-    }
+	@Nonnull
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, PROPERTY_DIRECTION, CTM);
+	}
 
-    @Override
-    public Class<TileEntityInscriber> getTileEntityClass() {
-        return TileEntityInscriber.class;
-    }
+	@Override
+	public Class<TileEntityInscriber> getTileEntityClass() {
+		return TileEntityInscriber.class;
+	}
 
-    @Nonnull
-    @Override
-    public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
-        return new TileEntityInscriber();
-    }
+	@Nonnull
+	@Override
+	public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
+		return new TileEntityInscriber();
+	}
 
-    /*@Override
-	@SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister p_149651_1_)
-    {
-        return;
-    }
+	/*
+	 * @Override
+	 * 
+	 * @SideOnly(Side.CLIENT) public void registerBlockIcons(IIconRegister
+	 * p_149651_1_) { return; }
+	 * 
+	 * @Override public int getRenderType() { return
+	 * RendererBlockInscriber.renderID; }
+	 */
 
-    @Override
-    public int getRenderType()
-    {
-        return RendererBlockInscriber.renderID;
-    }*/
-
-    @Override
-    @Deprecated
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
+	@Override
+	@Deprecated
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
 }

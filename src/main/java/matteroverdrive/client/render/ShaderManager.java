@@ -31,95 +31,98 @@ import java.util.*;
 @SideOnly(Side.CLIENT)
 public class ShaderManager {
 
-    private static ShaderResourcePack shaderPack = new ShaderResourcePack();
-    private static Field _listShaders;
+	private static ShaderResourcePack shaderPack = new ShaderResourcePack();
+	private static Field _listShaders;
 
-    public static void initPack() {
-        ((List<IResourcePack>) ReflectionHelper.getPrivateValue(Minecraft.class, Minecraft.getMinecraft(), "field_110449_ao", "defaultResourcePacks")).add(shaderPack);
-    }
+	public static void initPack() {
+		((List<IResourcePack>) ReflectionHelper.getPrivateValue(Minecraft.class, Minecraft.getMinecraft(),
+				"field_110449_ao", "defaultResourcePacks")).add(shaderPack);
+	}
 
-    public static void preInit() {
-        ((SimpleReloadableResourceManager) Minecraft.getMinecraft().getResourceManager()).registerReloadListener(shaderPack);
-    }
+	public static void preInit() {
+		((SimpleReloadableResourceManager) Minecraft.getMinecraft().getResourceManager())
+				.registerReloadListener(shaderPack);
+	}
 
-    public static void checkList() {
-        if (_listShaders == null) {
-            _listShaders = ReflectionHelper.findField(ShaderGroup.class, "field_148031_d", "listShaders");
-        }
-    }
+	public static void checkList() {
+		if (_listShaders == null) {
+			_listShaders = ReflectionHelper.findField(ShaderGroup.class, "field_148031_d", "listShaders");
+		}
+	}
 
-    public static void loadBlackholeAndRunRender(Runnable runnable) {
-        checkList();
-        if (Minecraft.getMinecraft().world != null) {
-            EntityRenderer er = Minecraft.getMinecraft().entityRenderer;
+	public static void loadBlackholeAndRunRender(Runnable runnable) {
+		checkList();
+		if (Minecraft.getMinecraft().world != null) {
+			EntityRenderer er = Minecraft.getMinecraft().entityRenderer;
 
-            if (!er.isShaderActive()) {
-                er.loadShader(new ResourceLocation(Reference.MOD_ID, "shaders/blackhole.json"));
-            } else {
-                er.stopUseShader();
-            }
-        }
-    }
+			if (!er.isShaderActive()) {
+				er.loadShader(new ResourceLocation(Reference.MOD_ID, "shaders/blackhole.json"));
+			} else {
+				er.stopUseShader();
+			}
+		}
+	}
 
-    public static class ShaderResourcePack implements IResourcePack, IResourceManagerReloadListener {
+	public static class ShaderResourcePack implements IResourcePack, IResourceManagerReloadListener {
 
-        private final Map<ResourceLocation, String> loadedData = new HashMap<>();
+		private final Map<ResourceLocation, String> loadedData = new HashMap<>();
 
-        protected boolean validPath(ResourceLocation location) {
-            return location.getNamespace().equals(Reference.MOD_ID) && location.getPath().startsWith("shaders/");
-        }
+		protected boolean validPath(ResourceLocation location) {
+			return location.getNamespace().equals(Reference.MOD_ID) && location.getPath().startsWith("shaders/");
+		}
 
-        @Override
-        public void onResourceManagerReload(IResourceManager resourceManager) {
-            loadedData.clear();
-        }
+		@Override
+		public void onResourceManagerReload(IResourceManager resourceManager) {
+			loadedData.clear();
+		}
 
-        @Override
-        public InputStream getInputStream(ResourceLocation location) throws IOException {
-            if (validPath(location)) {
-                String s = loadedData.computeIfAbsent(location, loc -> {
-                    InputStream in = ShaderManager.class.getResourceAsStream("/" + location.getPath());
-                    StringBuilder data = new StringBuilder();
-                    try (Scanner scan = new Scanner(in)) {
-                        while (scan.hasNextLine()) {
-                            data.append(scan.nextLine()).append('\n');
-                        }
-                    }
-                    return data.toString();
-                });
+		@Override
+		public InputStream getInputStream(ResourceLocation location) throws IOException {
+			if (validPath(location)) {
+				String s = loadedData.computeIfAbsent(location, loc -> {
+					InputStream in = ShaderManager.class.getResourceAsStream("/" + location.getPath());
+					StringBuilder data = new StringBuilder();
+					try (Scanner scan = new Scanner(in)) {
+						while (scan.hasNextLine()) {
+							data.append(scan.nextLine()).append('\n');
+						}
+					}
+					return data.toString();
+				});
 
-                return new ByteArrayInputStream(s.getBytes());
-            }
-            throw new FileNotFoundException(location.toString());
-        }
+				return new ByteArrayInputStream(s.getBytes());
+			}
+			throw new FileNotFoundException(location.toString());
+		}
 
-        @Override
-        public boolean resourceExists(ResourceLocation location) {
-            return validPath(location) && ShaderManager.class.getResource("/" + location.getPath()) != null;
-        }
+		@Override
+		public boolean resourceExists(ResourceLocation location) {
+			return validPath(location) && ShaderManager.class.getResource("/" + location.getPath()) != null;
+		}
 
-        @Override
-        public Set<String> getResourceDomains() {
-            return ImmutableSet.of(Reference.MOD_ID);
-        }
+		@Override
+		public Set<String> getResourceDomains() {
+			return ImmutableSet.of(Reference.MOD_ID);
+		}
 
-        @Nullable
-        @Override
-        public <T extends IMetadataSection> T getPackMetadata(MetadataSerializer metadataSerializer, String metadataSectionName) throws IOException {
-            if ("pack".equals(metadataSectionName)) {
-                return (T) new PackMetadataSection(new TextComponentString("MatterOverdrive shaders"), 3);
-            }
-            return null;
-        }
+		@Nullable
+		@Override
+		public <T extends IMetadataSection> T getPackMetadata(MetadataSerializer metadataSerializer,
+				String metadataSectionName) throws IOException {
+			if ("pack".equals(metadataSectionName)) {
+				return (T) new PackMetadataSection(new TextComponentString("MatterOverdrive shaders"), 3);
+			}
+			return null;
+		}
 
-        @Override
-        public BufferedImage getPackImage() throws IOException {
-            throw new FileNotFoundException("pack.png");
-        }
+		@Override
+		public BufferedImage getPackImage() throws IOException {
+			throw new FileNotFoundException("pack.png");
+		}
 
-        @Override
-        public String getPackName() {
-            return "MatterOverdrive Shaders Pack";
-        }
-    }
+		@Override
+		public String getPackName() {
+			return "MatterOverdrive Shaders Pack";
+		}
+	}
 }

@@ -10,22 +10,22 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class DialogMessageBackTo extends DialogMessageBack {
-    IDialogMessage destination;
+	IDialogMessage destination;
 
-    public DialogMessageBackTo() {
-        super();
-    }
+	public DialogMessageBackTo() {
+		super();
+	}
 
-    public DialogMessageBackTo(String message, IDialogMessage destination) {
-        super(message);
-        this.destination = destination;
-    }
+	public DialogMessageBackTo(String message, IDialogMessage destination) {
+		super(message);
+		this.destination = destination;
+	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    protected void setAsGuiActiveMessage(IDialogNpc npc, EntityPlayer player) {
-        if (Minecraft.getMinecraft().currentScreen instanceof GuiDialog) {
-            ((GuiDialog) Minecraft.getMinecraft().currentScreen).setCurrentMessage(destination);
-        }
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	protected void setAsGuiActiveMessage(IDialogNpc npc, EntityPlayer player) {
+		if (Minecraft.getMinecraft().currentScreen instanceof GuiDialog) {
+			((GuiDialog) Minecraft.getMinecraft().currentScreen).setCurrentMessage(destination);
+		}
+	}
 }

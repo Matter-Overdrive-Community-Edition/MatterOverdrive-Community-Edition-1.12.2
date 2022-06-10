@@ -9,20 +9,16 @@ import net.minecraft.item.ItemStack;
  */
 public class InscriberRecipeManager extends RecipeManager<TileEntityInscriber, InscriberRecipe> {
 
-    public InscriberRecipeManager() {
-        super(InscriberRecipe.class);
-    }
+	public InscriberRecipeManager() {
+		super(InscriberRecipe.class);
+	}
 
-    public boolean isPrimaryInput(ItemStack stack) {
-        return recipes.stream()
-                .map(InscriberRecipe::getMain)
-                .anyMatch(s -> ItemStack.areItemsEqual(s, stack));
-    }
+	public boolean isPrimaryInput(ItemStack stack) {
+		return recipes.stream().map(InscriberRecipe::getMain).anyMatch(s -> ItemStack.areItemsEqual(s, stack));
+	}
 
-    public boolean isSecondaryInput(ItemStack stack) {
-        return recipes.stream()
-                .map(InscriberRecipe::getSec)
-                .anyMatch(s -> ItemStack.areItemsEqual(s, stack));
-    }
+	public boolean isSecondaryInput(ItemStack stack) {
+		return recipes.stream().map(InscriberRecipe::getSec).anyMatch(s -> ItemStack.areItemsEqual(s, stack));
+	}
 
 }

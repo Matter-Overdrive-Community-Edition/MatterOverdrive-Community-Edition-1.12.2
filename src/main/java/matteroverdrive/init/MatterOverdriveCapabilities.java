@@ -13,12 +13,12 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
  */
 public class MatterOverdriveCapabilities {
 
-    //	MO
-    @CapabilityInject(IMatterHandler.class)
-    public static Capability<IMatterHandler> MATTER_HANDLER;
+	// MO
+	@CapabilityInject(IMatterHandler.class)
+	public static Capability<IMatterHandler> MATTER_HANDLER;
 
-    public static void init() {
-        CapabilityManager.INSTANCE.register(IMatterHandler.class, new Storage<>(), () -> new MatterStorage(2000));
-    }
+	public static void init() {
+		CapabilityManager.INSTANCE.register(IMatterHandler.class, new Storage<>(), () -> new MatterStorage(2000));
+	}
 
 }

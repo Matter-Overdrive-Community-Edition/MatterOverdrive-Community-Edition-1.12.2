@@ -20,48 +20,49 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 
 public abstract class BlockMonitor<TE extends TileEntity> extends MOBlockMachine<TE> {
-    public BlockMonitor(Material material, String name) {
-        super(material, name);
-        setHasRotation();
-        setHardness(20.0F);
-        this.setResistance(9.0f);
-        this.setHarvestLevel("pickaxe", 2);
-        lightValue = 10;
-    }
+	public BlockMonitor(Material material, String name) {
+		super(material, name);
+		setHasRotation();
+		setHardness(20.0F);
+		this.setResistance(9.0f);
+		this.setHarvestLevel("pickaxe", 2);
+		lightValue = 10;
+	}
 
-    @Nonnull
-    @Override
-    @Deprecated
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        EnumFacing dir = state.getValue(MOBlock.PROPERTY_DIRECTION);
-        return AABBUtils.rotateFace(boundingBox, dir);
-    }
+	@Nonnull
+	@Override
+	@Deprecated
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		EnumFacing dir = state.getValue(MOBlock.PROPERTY_DIRECTION);
+		return AABBUtils.rotateFace(boundingBox, dir);
+	}
 
-    @Nonnull
-    @Override
-    @Deprecated
-    @SideOnly(Side.CLIENT)
-    public AxisAlignedBB getSelectedBoundingBox(IBlockState state, @Nonnull World world, @Nonnull BlockPos pos) {
-        //this.setBlockBoundsBasedOnState(worldIn,pos);
-        return super.getSelectedBoundingBox(state, world, pos);
-    }
+	@Nonnull
+	@Override
+	@Deprecated
+	@SideOnly(Side.CLIENT)
+	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, @Nonnull World world, @Nonnull BlockPos pos) {
+		// this.setBlockBoundsBasedOnState(worldIn,pos);
+		return super.getSelectedBoundingBox(state, world, pos);
+	}
 
-    @Override
-    @Deprecated
-    public RayTraceResult collisionRayTrace(IBlockState state, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull Vec3d start, @Nonnull Vec3d end) {
-        //this.setBlockBoundsBasedOnState(worldIn,pos);
-        return super.collisionRayTrace(state, world, pos, start, end);
-    }
+	@Override
+	@Deprecated
+	public RayTraceResult collisionRayTrace(IBlockState state, @Nonnull World world, @Nonnull BlockPos pos,
+			@Nonnull Vec3d start, @Nonnull Vec3d end) {
+		// this.setBlockBoundsBasedOnState(worldIn,pos);
+		return super.collisionRayTrace(state, world, pos, start, end);
+	}
 
-    @Override
-    @Deprecated
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
+	@Override
+	@Deprecated
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
 
-    @Override
-    @Deprecated
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
+	@Override
+	@Deprecated
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
 }

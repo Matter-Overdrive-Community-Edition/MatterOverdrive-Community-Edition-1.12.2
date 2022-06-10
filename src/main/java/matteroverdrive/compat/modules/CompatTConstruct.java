@@ -10,16 +10,16 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 @Compat(CompatTConstruct.ID)
 public class CompatTConstruct {
 
-    public static final String ID = "tconstruct";
+	public static final String ID = "tconstruct";
 
-    @Compat.PreInit
-    public static void preInit(FMLPreInitializationEvent event) {
-        NBTTagCompound tag = new NBTTagCompound();
-        tag.setString("fluid", OverdriveFluids.moltenTritanium.getName());
-        tag.setString("ore", "Tritanium");
-        tag.setBoolean("toolforge", true);
+	@Compat.PreInit
+	public static void preInit(FMLPreInitializationEvent event) {
+		NBTTagCompound tag = new NBTTagCompound();
+		tag.setString("fluid", OverdriveFluids.moltenTritanium.getName());
+		tag.setString("ore", "Tritanium");
+		tag.setBoolean("toolforge", true);
 
-        FMLInterModComms.sendMessage(ID, "integrateSmeltery", tag);
-    }
+		FMLInterModComms.sendMessage(ID, "integrateSmeltery", tag);
+	}
 
 }

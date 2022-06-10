@@ -6,5 +6,5 @@ import matteroverdrive.api.matter.IMatterDatabase;
 import java.util.List;
 
 public interface IMatterDatabaseMonitor {
-    List<IMatterDatabase> getConnectedDatabases();
+	List<IMatterDatabase> getConnectedDatabases();
 }

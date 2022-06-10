@@ -19,28 +19,32 @@ import java.util.List;
  */
 @Optional.Interface(modid = "waila", iface = "mcp.mobius.waila.api.IWailaDataProvider")
 public interface IWailaBodyProvider extends IWailaDataProvider {
-    @Override
-    @Optional.Method(modid = "waila")
-    default ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config) {
-        return accessor.getStack();
-    }
+	@Override
+	@Optional.Method(modid = "waila")
+	default ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config) {
+		return accessor.getStack();
+	}
 
-    @Override
-    @Optional.Method(modid = "waila")
-    default List<String> getWailaHead(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
-        return currenttip;
-    }
+	@Override
+	@Optional.Method(modid = "waila")
+	default List<String> getWailaHead(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor,
+			IWailaConfigHandler config) {
+		return currenttip;
+	}
 
-    @Override
-    @Optional.Method(modid = "waila")
-    default List<String> getWailaTail(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
-        return currenttip;
-    }
+	@Override
+	@Optional.Method(modid = "waila")
+	default List<String> getWailaTail(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor,
+			IWailaConfigHandler config) {
+		return currenttip;
+	}
 
-    @Override
-    default NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, BlockPos pos) {
-        if (te != null) te.writeToNBT(tag);
-        return tag;
-    }
+	@Override
+	default NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world,
+			BlockPos pos) {
+		if (te != null)
+			te.writeToNBT(tag);
+		return tag;
+	}
 
 }

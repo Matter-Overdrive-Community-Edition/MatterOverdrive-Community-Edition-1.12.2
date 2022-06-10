@@ -13,31 +13,31 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.Map;
 
 public class PacketUpdateMatterRegistry extends PacketAbstract {
-    public static Map<String, MatterEntryItem> entries;
+	public static Map<String, MatterEntryItem> entries;
 
-    public PacketUpdateMatterRegistry() {
-        super();
-    }
+	public PacketUpdateMatterRegistry() {
+		super();
+	}
 
-    public PacketUpdateMatterRegistry(MatterRegistry matterRegistry) {
-        super();
-    }
+	public PacketUpdateMatterRegistry(MatterRegistry matterRegistry) {
+		super();
+	}
 
-    @Override
-    public void fromBytes(ByteBuf buf) {
+	@Override
+	public void fromBytes(ByteBuf buf) {
 
-    }
+	}
 
-    @Override
-    public void toBytes(ByteBuf buf) {
+	@Override
+	public void toBytes(ByteBuf buf) {
 
-    }
+	}
 
-    public static class ClientHandler extends AbstractClientPacketHandler<PacketUpdateMatterRegistry> {
-        @SideOnly(Side.CLIENT)
-        @Override
-        public void handleClientMessage(EntityPlayerSP player, PacketUpdateMatterRegistry message, MessageContext ctx) {
-            //MatterOverdrive.MATTER_REGISTRY.hasComplitedRegistration = true;
-        }
-    }
+	public static class ClientHandler extends AbstractClientPacketHandler<PacketUpdateMatterRegistry> {
+		@SideOnly(Side.CLIENT)
+		@Override
+		public void handleClientMessage(EntityPlayerSP player, PacketUpdateMatterRegistry message, MessageContext ctx) {
+			// MatterOverdrive.MATTER_REGISTRY.hasComplitedRegistration = true;
+		}
+	}
 }

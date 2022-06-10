@@ -9,7 +9,8 @@ import net.minecraft.world.gen.IChunkGenerator;
 import java.util.Random;
 
 public interface IMOWorldGenBuilding<T extends MOWorldGenBuilding.ImageGenWorker> {
-    String getName();
+	String getName();
 
-    void generate(Random random, BlockPos pos, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider, int layer, int placeNotify, T worker);
+	void generate(Random random, BlockPos pos, World world, IChunkGenerator chunkGenerator,
+			IChunkProvider chunkProvider, int layer, int placeNotify, T worker);
 }

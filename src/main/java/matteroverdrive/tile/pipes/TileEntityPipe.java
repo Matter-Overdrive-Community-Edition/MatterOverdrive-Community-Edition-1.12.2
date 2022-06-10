@@ -18,108 +18,108 @@ import java.util.EnumSet;
 import java.util.List;
 
 public abstract class TileEntityPipe extends MOTileEntity implements ITickable {
-    public static List<BlockPos> UPDATING_POS = new ArrayList<>();
-    protected boolean needsUpdate = true;
-    protected boolean awoken;
-    private int connections = 0;
+	public static List<BlockPos> UPDATING_POS = new ArrayList<>();
+	protected boolean needsUpdate = true;
+	protected boolean awoken;
+	private int connections = 0;
 
-    @Override
-    public void writeCustomNBT(NBTTagCompound nbt, EnumSet<MachineNBTCategory> categories, boolean toDisk) {
-        if (categories.contains(MachineNBTCategory.DATA)) {
-            nbt.setInteger("connections", (byte) getConnectionsMask());
-        }
-    }
+	@Override
+	public void writeCustomNBT(NBTTagCompound nbt, EnumSet<MachineNBTCategory> categories, boolean toDisk) {
+		if (categories.contains(MachineNBTCategory.DATA)) {
+			nbt.setInteger("connections", (byte) getConnectionsMask());
+		}
+	}
 
-    @Override
-    public void readCustomNBT(NBTTagCompound nbt, EnumSet<MachineNBTCategory> categories) {
-        if (categories.contains(MachineNBTCategory.DATA)) {
-            setConnections(nbt.getInteger("connections"), false);
-            needsUpdate = false;
-            if (world != null)
-                world.markBlockRangeForRenderUpdate(pos, pos);
-        }
-    }
+	@Override
+	public void readCustomNBT(NBTTagCompound nbt, EnumSet<MachineNBTCategory> categories) {
+		if (categories.contains(MachineNBTCategory.DATA)) {
+			setConnections(nbt.getInteger("connections"), false);
+			needsUpdate = false;
+			if (world != null)
+				world.markBlockRangeForRenderUpdate(pos, pos);
+		}
+	}
 
-    @Override
-    public void update() {
-        if (needsUpdate) {
-            updateSides(true);
-            needsUpdate = false;
-        }
+	@Override
+	public void update() {
+		if (needsUpdate) {
+			updateSides(true);
+			needsUpdate = false;
+		}
 
-        UPDATING_POS.clear();
+		UPDATING_POS.clear();
 
-        if (!awoken) {
-            onAwake(world.isRemote ? Side.CLIENT : Side.SERVER);
-            awoken = true;
-        }
-    }
+		if (!awoken) {
+			onAwake(world.isRemote ? Side.CLIENT : Side.SERVER);
+			awoken = true;
+		}
+	}
 
-    public void updateSides(boolean notify) {
-        int connections = 0;
+	public void updateSides(boolean notify) {
+		int connections = 0;
 
-        for (EnumFacing direction : EnumFacing.VALUES) {
-            TileEntity t = this.world.getTileEntity(getPos().offset(direction));
+		for (EnumFacing direction : EnumFacing.VALUES) {
+			TileEntity t = this.world.getTileEntity(getPos().offset(direction));
 
-            if (canConnectToPipe(t, direction)) {
-                connections |= 1 << direction.ordinal();
-            }
-        }
+			if (canConnectToPipe(t, direction)) {
+				connections |= 1 << direction.ordinal();
+			}
+		}
 
-        this.setConnections(connections, notify);
-    }
+		this.setConnections(connections, notify);
+	}
 
-    public int getConnectionsMask() {
-        return connections;
-    }
+	public int getConnectionsMask() {
+		return connections;
+	}
 
-    public int getConnectionsCount() {
-        int tot = 0;
-        int con = connections;
-        while (con > 0) {
-            ++tot;
-            con &= con - 1;
-        }
+	public int getConnectionsCount() {
+		int tot = 0;
+		int con = connections;
+		while (con > 0) {
+			++tot;
+			con &= con - 1;
+		}
 
-        return tot;
-    }
+		return tot;
+	}
 
-    public void setConnections(int connections, boolean notify) {
-        this.connections = connections;
-        if (notify) {
-            UPDATING_POS.add(getPos());
-            world.markBlockRangeForRenderUpdate(pos, pos);
-            for (EnumFacing facing : EnumFacing.VALUES) {
-                if (isConnectedFromSide(facing)) {
-                    if (!UPDATING_POS.contains(getPos().offset(facing)))
-                        world.neighborChanged(getPos().offset(facing), getBlockType(), getPos());
-                }
-            }
-            markDirty();
-        }
-    }
+	public void setConnections(int connections, boolean notify) {
+		this.connections = connections;
+		if (notify) {
+			UPDATING_POS.add(getPos());
+			world.markBlockRangeForRenderUpdate(pos, pos);
+			for (EnumFacing facing : EnumFacing.VALUES) {
+				if (isConnectedFromSide(facing)) {
+					if (!UPDATING_POS.contains(getPos().offset(facing)))
+						world.neighborChanged(getPos().offset(facing), getBlockType(), getPos());
+				}
+			}
+			markDirty();
+		}
+	}
 
-    public void setConnection(EnumFacing connection, boolean value) {
-        this.connections = MOMathHelper.setBoolean(connections, connection.ordinal(), value);
-        markDirty();
-    }
+	public void setConnection(EnumFacing connection, boolean value) {
+		this.connections = MOMathHelper.setBoolean(connections, connection.ordinal(), value);
+		markDirty();
+	}
 
-    public boolean isConnectedFromSide(EnumFacing enumFacing) {
-        return MOMathHelper.getBoolean(connections, enumFacing.ordinal());
-    }
+	public boolean isConnectedFromSide(EnumFacing enumFacing) {
+		return MOMathHelper.getBoolean(connections, enumFacing.ordinal());
+	}
 
-    public abstract boolean canConnectToPipe(TileEntity entity, EnumFacing direction);
+	public abstract boolean canConnectToPipe(TileEntity entity, EnumFacing direction);
 
-    public void queueUpdate() {
-        needsUpdate = true;
-    }
+	public void queueUpdate() {
+		needsUpdate = true;
+	}
 
-    public boolean isConnectableSide(EnumFacing dir) {
-        return MOMathHelper.getBoolean(connections, dir.ordinal());
-    }
+	public boolean isConnectableSide(EnumFacing dir) {
+		return MOMathHelper.getBoolean(connections, dir.ordinal());
+	}
 
-    @SideOnly(Side.CLIENT)
-    public AxisAlignedBB getRenderBoundingBox() {
-        return new AxisAlignedBB(getPos(), getPos().add(1, 1, 1));
-    }
+	@SideOnly(Side.CLIENT)
+	public AxisAlignedBB getRenderBoundingBox() {
+		return new AxisAlignedBB(getPos(), getPos().add(1, 1, 1));
+	}
 }

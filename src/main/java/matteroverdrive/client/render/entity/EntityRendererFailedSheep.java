@@ -9,13 +9,14 @@ import net.minecraft.util.ResourceLocation;
 
 public class EntityRendererFailedSheep extends RenderSheep {
 
-    private static final ResourceLocation shearedSheepTextures = new ResourceLocation(Reference.PATH_ENTITIES + "failed_sheep.png");
+	private static final ResourceLocation shearedSheepTextures = new ResourceLocation(
+			Reference.PATH_ENTITIES + "failed_sheep.png");
 
-    public EntityRendererFailedSheep(RenderManager renderManager) {
-        super(renderManager);
-    }
+	public EntityRendererFailedSheep(RenderManager renderManager) {
+		super(renderManager);
+	}
 
-    protected ResourceLocation getEntityTexture(EntitySheep entity) {
-        return shearedSheepTextures;
-    }
+	protected ResourceLocation getEntityTexture(EntitySheep entity) {
+		return shearedSheepTextures;
+	}
 }

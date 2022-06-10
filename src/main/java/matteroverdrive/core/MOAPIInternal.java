@@ -14,38 +14,38 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MOAPIInternal implements MatterOverdriveAPI {
-    public static final MOAPIInternal INSTANCE = new MOAPIInternal();
+	public static final MOAPIInternal INSTANCE = new MOAPIInternal();
 
-    @Override
-    public IMatterRegistry getMatterRegistry() {
-        return MatterOverdrive.MATTER_REGISTRY;
-    }
+	@Override
+	public IMatterRegistry getMatterRegistry() {
+		return MatterOverdrive.MATTER_REGISTRY;
+	}
 
-    @Override
-    public IAndroidStatRegistry getAndroidStatRegistry() {
-        return MatterOverdrive.STAT_REGISTRY;
-    }
+	@Override
+	public IAndroidStatRegistry getAndroidStatRegistry() {
+		return MatterOverdrive.STAT_REGISTRY;
+	}
 
-    @Override
-    public IDialogRegistry getDialogRegistry() {
-        return MatterOverdrive.DIALOG_REGISTRY;
-    }
+	@Override
+	public IDialogRegistry getDialogRegistry() {
+		return MatterOverdrive.DIALOG_REGISTRY;
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IAndroidStatRenderRegistry getAndroidStatRenderRegistry() {
-        return ClientProxy.renderHandler.getStatRenderRegistry();
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IAndroidStatRenderRegistry getAndroidStatRenderRegistry() {
+		return ClientProxy.renderHandler.getStatRenderRegistry();
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IBionicPartRenderRegistry getBionicStatRenderRegistry() {
-        return ClientProxy.renderHandler.getBionicPartRenderRegistry();
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IBionicPartRenderRegistry getBionicStatRenderRegistry() {
+		return ClientProxy.renderHandler.getBionicPartRenderRegistry();
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IStarmapRenderRegistry getStarmapRenderRegistry() {
-        return ClientProxy.renderHandler.getStarmapRenderRegistry();
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IStarmapRenderRegistry getStarmapRenderRegistry() {
+		return ClientProxy.renderHandler.getStarmapRenderRegistry();
+	}
 }

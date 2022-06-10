@@ -8,33 +8,33 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class DestinationFilterSlot extends Slot {
-    public DestinationFilterSlot(boolean isMainSlot) {
-        super(isMainSlot);
-    }
+	public DestinationFilterSlot(boolean isMainSlot) {
+		super(isMainSlot);
+	}
 
-    @Override
-    public boolean isValidForSlot(ItemStack item) {
-        return true;
-    }
+	@Override
+	public boolean isValidForSlot(ItemStack item) {
+		return true;
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public HoloIcon getHoloIcon() {
-        return ClientProxy.holoIcons.getIcon("connections");
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public HoloIcon getHoloIcon() {
+		return ClientProxy.holoIcons.getIcon("connections");
+	}
 
-    @Override
-    public int getMaxStackSize() {
-        return 1;
-    }
+	@Override
+	public int getMaxStackSize() {
+		return 1;
+	}
 
-    @Override
-    public boolean keepOnDismantle() {
-        return true;
-    }
+	@Override
+	public boolean keepOnDismantle() {
+		return true;
+	}
 
-    @Override
-    public String getUnlocalizedTooltip() {
-        return "gui.tooltip.slot.filter";
-    }
+	@Override
+	public String getUnlocalizedTooltip() {
+		return "gui.tooltip.slot.filter";
+	}
 }

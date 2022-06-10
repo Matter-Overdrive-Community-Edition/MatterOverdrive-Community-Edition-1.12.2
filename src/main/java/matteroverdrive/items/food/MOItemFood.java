@@ -17,29 +17,30 @@ import net.minecraftforge.client.model.ModelLoader;
  */
 public class MOItemFood extends ItemFood implements ItemModelProvider {
 
-    public String name;
+	public String name;
 
-    public MOItemFood(String name, int amount, float saturation, boolean isWolfFood) {
-        super(amount, saturation, isWolfFood);
-        this.name = name;
+	public MOItemFood(String name, int amount, float saturation, boolean isWolfFood) {
+		super(amount, saturation, isWolfFood);
+		this.name = name;
 
-        setTranslationKey(Reference.MOD_ID + "." + name);
-        setRegistryName(name);
+		setTranslationKey(Reference.MOD_ID + "." + name);
+		setRegistryName(name);
 
-        setCreativeTab(MatterOverdrive.TAB_OVERDRIVE);
-    }
+		setCreativeTab(MatterOverdrive.TAB_OVERDRIVE);
+	}
 
-    @Override
-    public void initItemModel() {
-        if (!getHasSubtypes())
-            ClientUtil.registerModel(this, getRegistryName().toString());
-        else {
-            NonNullList<ItemStack> sub = NonNullList.create();
-            getSubItems(CreativeTabs.SEARCH, sub);
-            for (ItemStack stack : sub) {
-                ModelLoader.setCustomModelResourceLocation(stack.getItem(), stack.getMetadata(), new ModelResourceLocation(getRegistryName(), "inventory"));
-            }
-        }
-    }
+	@Override
+	public void initItemModel() {
+		if (!getHasSubtypes())
+			ClientUtil.registerModel(this, getRegistryName().toString());
+		else {
+			NonNullList<ItemStack> sub = NonNullList.create();
+			getSubItems(CreativeTabs.SEARCH, sub);
+			for (ItemStack stack : sub) {
+				ModelLoader.setCustomModelResourceLocation(stack.getItem(), stack.getMetadata(),
+						new ModelResourceLocation(getRegistryName(), "inventory"));
+			}
+		}
+	}
 
 }

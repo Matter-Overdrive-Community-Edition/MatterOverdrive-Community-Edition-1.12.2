@@ -20,30 +20,31 @@ import javax.annotation.Nonnull;
  */
 @JEIPlugin
 public class MOJEIPlugin implements IModPlugin {
-    @Override
-    public void registerCategories(IRecipeCategoryRegistration registry) {
-        registry.addRecipeCategories(new InscriberRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
-    }
+	@Override
+	public void registerCategories(IRecipeCategoryRegistration registry) {
+		registry.addRecipeCategories(new InscriberRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
+	}
 
-    @Override
-    public void registerIngredients(IModIngredientRegistration registry) {
+	@Override
+	public void registerIngredients(IModIngredientRegistration registry) {
 
-    }
+	}
 
-    @Override
-    public void register(@Nonnull IModRegistry registry) {
-        registry.handleRecipes(InscriberRecipe.class, new InscriberRecipeHandler(), InscriberRecipeCategory.UID);
+	@Override
+	public void register(@Nonnull IModRegistry registry) {
+		registry.handleRecipes(InscriberRecipe.class, new InscriberRecipeHandler(), InscriberRecipeCategory.UID);
 
-        registry.addRecipes(MatterOverdriveRecipes.INSCRIBER.getRecipes(), InscriberRecipeCategory.UID);
+		registry.addRecipes(MatterOverdriveRecipes.INSCRIBER.getRecipes(), InscriberRecipeCategory.UID);
 
-        registry.addRecipeCatalyst(new ItemStack(MatterOverdrive.BLOCKS.inscriber), InscriberRecipeCategory.UID);
+		registry.addRecipeCatalyst(new ItemStack(MatterOverdrive.BLOCKS.inscriber), InscriberRecipeCategory.UID);
 
-        registry.getRecipeTransferRegistry().addRecipeTransferHandler(ContainerInscriber.class, InscriberRecipeCategory.UID, 0, 2, 8, 36);
+		registry.getRecipeTransferRegistry().addRecipeTransferHandler(ContainerInscriber.class,
+				InscriberRecipeCategory.UID, 0, 2, 8, 36);
 
-        registry.addRecipeClickArea(GuiInscriber.class, 32, 55, 24, 16, InscriberRecipeCategory.UID);
+		registry.addRecipeClickArea(GuiInscriber.class, 32, 55, 24, 16, InscriberRecipeCategory.UID);
 
-        registry.addAdvancedGuiHandlers(new MOAdvancedGuiHandler());
+		registry.addAdvancedGuiHandlers(new MOAdvancedGuiHandler());
 
-    }
+	}
 
 }

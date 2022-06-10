@@ -14,20 +14,21 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class MOLootTableManager {
 	public static ResourceLocation MO_CRASHED_SHIP = new ResourceLocation(Reference.MOD_ID + ":" + "crashed_ship");
-		
-@SubscribeEvent
-public void onLootTablesLoaded(LootTableLoadEvent event) {
- 
-    if (event.getName().equals(LootTableList.CHESTS_SIMPLE_DUNGEON)) {
- 
-        final LootPool pool2 = event.getTable().getPool("pool2");
- 
-        if (pool2 != null) {
- 
-            // pool2.addEntry(new LootEntryItem(ITEM, WEIGHT, QUALITY, FUNCTIONS, CONDITIONS, NAME));
-            pool2.addEntry(new LootEntryItem(MatterOverdrive.ITEMS.androidPill, 10, 0, new LootFunction[0], new LootCondition[0], "loottable:redPill"));
-        }
-    }
-}
-}
 
+	@SubscribeEvent
+	public void onLootTablesLoaded(LootTableLoadEvent event) {
+
+		if (event.getName().equals(LootTableList.CHESTS_SIMPLE_DUNGEON)) {
+
+			final LootPool pool2 = event.getTable().getPool("pool2");
+
+			if (pool2 != null) {
+
+				// pool2.addEntry(new LootEntryItem(ITEM, WEIGHT, QUALITY, FUNCTIONS,
+				// CONDITIONS, NAME));
+				pool2.addEntry(new LootEntryItem(MatterOverdrive.ITEMS.androidPill, 10, 0, new LootFunction[0],
+						new LootCondition[0], "loottable:redPill"));
+			}
+		}
+	}
+}

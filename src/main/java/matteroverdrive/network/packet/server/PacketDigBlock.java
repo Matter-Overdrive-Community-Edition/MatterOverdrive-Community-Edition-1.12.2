@@ -14,73 +14,71 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class PacketDigBlock extends PacketAbstract {
-    Type type;
-    BlockPos pos;
-    EnumFacing side;
+	Type type;
+	BlockPos pos;
+	EnumFacing side;
 
-    public PacketDigBlock() {
-        pos = new BlockPos(0, 0, 0);
-    }
+	public PacketDigBlock() {
+		pos = new BlockPos(0, 0, 0);
+	}
 
-    public PacketDigBlock(BlockPos pos, Type type, EnumFacing side) {
-        if (pos == null) {
-            MOLog.error("Empty Pos");
-        }
-        this.pos = pos;
-        this.side = side;
-        this.type = type;
-    }
+	public PacketDigBlock(BlockPos pos, Type type, EnumFacing side) {
+		if (pos == null) {
+			MOLog.error("Empty Pos");
+		}
+		this.pos = pos;
+		this.side = side;
+		this.type = type;
+	}
 
-    @Override
-    public void fromBytes(ByteBuf buf) {
-        pos = BlockPos.fromLong(buf.readLong());
-        side = EnumFacing.VALUES[buf.readByte()];
-        type = Type.values()[buf.readByte()];
-    }
+	@Override
+	public void fromBytes(ByteBuf buf) {
+		pos = BlockPos.fromLong(buf.readLong());
+		side = EnumFacing.VALUES[buf.readByte()];
+		type = Type.values()[buf.readByte()];
+	}
 
-    @Override
-    public void toBytes(ByteBuf buf) {
-        buf.writeLong(pos.toLong());
-        buf.writeByte(side.ordinal());
-        buf.writeByte(type.ordinal());
-    }
+	@Override
+	public void toBytes(ByteBuf buf) {
+		buf.writeLong(pos.toLong());
+		buf.writeByte(side.ordinal());
+		buf.writeByte(type.ordinal());
+	}
 
-    public enum Type {
-        CLICK,
-        CANCEL,
-        HARVEST
-    }
+	public enum Type {
+		CLICK, CANCEL, HARVEST
+	}
 
-    public static class ServerHandler extends AbstractServerPacketHandler<PacketDigBlock> {
-        @Override
-        public void handleServerMessage(EntityPlayerMP player, PacketDigBlock message, MessageContext ctx) {
-            WorldServer world = player.getServer().getWorld(player.dimension);
-            IBlockState state = world.getBlockState(message.pos);
+	public static class ServerHandler extends AbstractServerPacketHandler<PacketDigBlock> {
+		@Override
+		public void handleServerMessage(EntityPlayerMP player, PacketDigBlock message, MessageContext ctx) {
+			WorldServer world = player.getServer().getWorld(player.dimension);
+			IBlockState state = world.getBlockState(message.pos);
 
-            switch (message.type) {
-                case CLICK:
-                    if (!player.getServer().isBlockProtected(world, message.pos, player)) {
-                        player.interactionManager.onBlockClicked(message.pos, message.side);
-                    } else {
-                        player.connection.sendPacket(new SPacketBlockChange(world, message.pos));
-                    }
-                    break;
-                case HARVEST:
-                    player.interactionManager.tryHarvestBlock(message.pos);
+			switch (message.type) {
+			case CLICK:
+				if (!player.getServer().isBlockProtected(world, message.pos, player)) {
+					player.interactionManager.onBlockClicked(message.pos, message.side);
+				} else {
+					player.connection.sendPacket(new SPacketBlockChange(world, message.pos));
+				}
+				break;
+			case HARVEST:
+				player.interactionManager.tryHarvestBlock(message.pos);
 
-                    if (state.getMaterial() != Material.AIR) {
-                        player.connection.sendPacket(new SPacketBlockChange(world, message.pos));
-                    }
-                    break;
-                case CANCEL:
-                    player.interactionManager.cancelDestroyingBlock();
+				if (state.getMaterial() != Material.AIR) {
+					player.connection.sendPacket(new SPacketBlockChange(world, message.pos));
+				}
+				break;
+			case CANCEL:
+				player.interactionManager.cancelDestroyingBlock();
 
-                    if (state.getMaterial() != Material.AIR) {
-                        player.connection.sendPacket(new SPacketBlockChange(world, message.pos));
-                    }
-                    break;
-            }
-        }
-    }
+				if (state.getMaterial() != Material.AIR) {
+					player.connection.sendPacket(new SPacketBlockChange(world, message.pos));
+				}
+				break;
+			}
+		}
+	}
 
 }

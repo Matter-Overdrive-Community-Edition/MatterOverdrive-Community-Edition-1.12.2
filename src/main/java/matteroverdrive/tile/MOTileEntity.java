@@ -1,6 +1,11 @@
 
 package matteroverdrive.tile;
 
+import java.util.EnumSet;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import matteroverdrive.MatterOverdrive;
 import matteroverdrive.api.IMOTileEntity;
 import matteroverdrive.machines.MachineNBTCategory;
@@ -15,76 +20,73 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.EnumSet;
-
 public abstract class MOTileEntity extends TileEntity implements IMOTileEntity {
 	private boolean awoken = false;
-    public MOTileEntity() {
-        super();
-    }
 
-    public MOTileEntity(World world, int meta) {
-        super();
-    }
+	public MOTileEntity() {
+		super();
+	}
 
-    @Override
-    public void readFromNBT(NBTTagCompound nbt) {
-        super.readFromNBT(nbt);
-        readCustomNBT(nbt, MachineNBTCategory.ALL_OPTS);
-    }
+	public MOTileEntity(World world, int meta) {
+		super();
+	}
 
-    public boolean shouldRender() {
-        return world.getBlockState(getPos()).getBlock() == getBlockType();
-    }
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		readCustomNBT(nbt, MachineNBTCategory.ALL_OPTS);
+	}
 
-    @Override
-    @Nonnull
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-        super.writeToNBT(nbt);
-        writeCustomNBT(nbt, MachineNBTCategory.ALL_OPTS, true);
-        return nbt;
-    }
+	public boolean shouldRender() {
+		return world.getBlockState(getPos()).getBlock() == getBlockType();
+	}
 
-    @Override
-    @Nonnull
-    public NBTTagCompound getUpdateTag() {
-        return this.writeToNBT(new NBTTagCompound());
-    }
+	@Override
+	@Nonnull
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
+		writeCustomNBT(nbt, MachineNBTCategory.ALL_OPTS, true);
+		return nbt;
+	}
 
-    @Nullable
-    @Override
-    public SPacketUpdateTileEntity getUpdatePacket() {
-        return new SPacketUpdateTileEntity(this.getPos(), 0, this.getUpdateTag());
-    }
+	@Override
+	@Nonnull
+	public NBTTagCompound getUpdateTag() {
+		return this.writeToNBT(new NBTTagCompound());
+	}
 
-    @Override
-    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
-        return oldState != newSate;
-    }
+	@Nullable
+	@Override
+	public SPacketUpdateTileEntity getUpdatePacket() {
+		return new SPacketUpdateTileEntity(this.getPos(), 0, this.getUpdateTag());
+	}
 
-    @Override
-    public void markDirty() {
-        super.markDirty();
-        PacketDispatcher.dispatchTEToNearbyPlayers(this);
-    }
+	@Override
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
+		return oldState != newSate;
+	}
 
-    @Override
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-        this.readFromNBT(pkt.getNbtCompound());
-    }
+	@Override
+	public void markDirty() {
+		super.markDirty();
+		PacketDispatcher.dispatchTEToNearbyPlayers(this);
+	}
 
-    public abstract void writeCustomNBT(NBTTagCompound nbt, EnumSet<MachineNBTCategory> categories, boolean toDisk);
+	@Override
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+		this.readFromNBT(pkt.getNbtCompound());
+	}
 
-    public abstract void readCustomNBT(NBTTagCompound nbt, EnumSet<MachineNBTCategory> categories);
+	public abstract void writeCustomNBT(NBTTagCompound nbt, EnumSet<MachineNBTCategory> categories, boolean toDisk);
 
-    @SideOnly(Side.CLIENT)
-    public void sendNBTToServer(EnumSet<MachineNBTCategory> categories, boolean forceUpdate, boolean sendDisk) {
-        if (world.isRemote) {
-            MatterOverdrive.NETWORK.sendToServer(new PacketSendMachineNBT(categories, this, forceUpdate, sendDisk));
-        }
-    }
+	public abstract void readCustomNBT(NBTTagCompound nbt, EnumSet<MachineNBTCategory> categories);
 
-    protected abstract void onAwake(Side side);
+	@SideOnly(Side.CLIENT)
+	public void sendNBTToServer(EnumSet<MachineNBTCategory> categories, boolean forceUpdate, boolean sendDisk) {
+		if (world.isRemote) {
+			MatterOverdrive.NETWORK.sendToServer(new PacketSendMachineNBT(categories, this, forceUpdate, sendDisk));
+		}
+	}
+
+	protected abstract void onAwake(Side side);
 }
