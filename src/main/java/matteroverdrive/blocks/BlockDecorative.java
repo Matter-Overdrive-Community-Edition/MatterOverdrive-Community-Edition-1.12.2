@@ -14,7 +14,7 @@ import java.util.List;
 public class BlockDecorative extends MOBlock implements IImageGenBlock {
 
 	public static final List<BlockDecorative> decorativeBlocks = new ArrayList<>();
-	protected static int mapColor;
+	private int mapColor;
 
 	public BlockDecorative(Material material, String name, float hardness, int harvestLevel, float resistance,
 			int mapColor) {
