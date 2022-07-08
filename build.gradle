@@ -22,16 +22,10 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'com.selesse.git.changelog'
 apply plugin: 'java'
 
-//defaultTasks 'licenseFormat'
-
-//def BUILD_NUMBER = System.getenv("BUILD_NUMBER") ?: "0"
-//def mod_version = "0.7.1.$BUILD_NUMBER"
-def mod_version = "0.8.1";
-
-version = "1.12.2-$mod_version"
+version = "$mc_version-$mod_version"
 
 group= "matteroverdrive"
-archivesBaseName = "MatterOverdrive";
+archivesBaseName = "MatterOverdrive"
 
 static def getCurrentYear() {
     def date = new Date()
@@ -40,10 +34,10 @@ static def getCurrentYear() {
 
 //license {
 //    ext {
-//        name = "MatterOverdrive: Fixed Horizon Edition"
-//        organization = "Horizon Studio"
+//        name = "Matter Overdrive: Community Edition"
+//        organization = "Matter Overdrive: Community Edition"
 //        email = "contact@hrznstudio.com"
-//        url = "https://hrznstudio.com"
+//        url = "https://www.curseforge.com/minecraft/mc-mods/matter-overdrive-community-edition"
 //        year = getCurrentYear()
 //    }
 //
@@ -83,7 +77,7 @@ compileJava {
 }
 
 minecraft {
-    version = "1.12.2-14.23.5.2847"
+    version = "$mc_version-$forge_version"
     runDir = "run"
     mappings = "stable_39"
 
@@ -107,12 +101,11 @@ repositories {
 
 dependencies {
     provided "team.chisel.ctm:CTM:MC1.12-0.2.3.12"
-    deobfProvided "mezz.jei:jei_1.12.2:4.14.1.234:api"
-    runtime "mezz.jei:jei_1.12.2:4.14.1.234"
+    deobfProvided "mezz.jei:jei_${mc_version}:${jei_version}:api"
+    runtime "mezz.jei:jei_${mc_version}:${jei_version}"
     compile group: 'org.projectlombok', name: 'lombok', version: '1.16.20'
 
     deobfCompile group: 'mcp.mobius.waila', name: 'Hwyla', version: '1.8.26-B41_1.12.2'
-	deobfCompile 'CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.11.494'
 }
 
 processResources {
@@ -133,6 +126,10 @@ processResources {
 jar {
     classifier = "universal"
     manifest.mainAttributes(
+            "Implementation-Title": project.name,
+            "Implementation-Version": "${version}",
+            "Implementation-Vendor" :"Matter Overdrive: Community Edition",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
             "Built-By": System.properties['user.name'],
             "Created-By": "${System.properties['java.vm.version']} (${System.properties['java.vm.vendor']})",
             'Maven-Artifact': "$group:$archivesBaseName:$version",
@@ -172,12 +169,12 @@ curseforge {
         apiKey = "NONE"
     project {
         apiUrl="https://minecraft.curseforge.com"
-        id = '308192'
+        id = '557428'
         changelog = file('CHANGELOG.md')
         releaseType = 'release'
         mainArtifact jar
         addArtifact apiJar
-        addGameVersion '1.12.2'
+        addGameVersion "$mc_version"
     }
 }
 
