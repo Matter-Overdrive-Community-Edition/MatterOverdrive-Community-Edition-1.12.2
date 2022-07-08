@@ -637,8 +637,6 @@ public abstract class MOTileEntityMachine extends MOTileEntity
 				multiply = getUpgradeHandler().affectUpgrade(type, multiply);
 			}
 		}
-		if (multiply == 0)
-			return 1;
 
 		return multiply;
 	}
