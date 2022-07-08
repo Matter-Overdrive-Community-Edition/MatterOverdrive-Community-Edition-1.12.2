@@ -22,7 +22,7 @@ public class MachineMatterStorage<T extends MOTileEntityMachineMatter> extends M
 
 	@Override
 	public int getCapacity() {
-		return Math.max(0, (int) (super.getCapacity() * machine.getUpgradeMultiply(UpgradeTypes.MatterStorage)));
+		return (int) Math.round(super.getCapacity() * machine.getUpgradeMultiply(UpgradeTypes.MatterStorage) / machine.getUpgradeMultiply(UpgradeTypes.MatterStorage));
 	}
 
 	@Override
