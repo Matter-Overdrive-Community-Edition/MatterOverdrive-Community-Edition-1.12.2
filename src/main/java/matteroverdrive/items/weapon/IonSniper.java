@@ -249,10 +249,14 @@ public class IonSniper extends EnergyWeapon {
 	@Override
 	public boolean onServerFire(ItemStack weapon, EntityLivingBase shooter, WeaponShot shot, Vec3d position, Vec3d dir,
 			int delay) {
-		DrainEnergy(weapon, getShootCooldown(weapon), false);
-		float newHeat = getHeat(weapon) + getMaxHeat(weapon) * 0.8f;
-		setHeat(weapon, newHeat);
-		manageOverheat(weapon, shooter.world, shooter);
+		if (shooter instanceof EntityPlayer) {
+		if (!((EntityPlayer) shooter).capabilities.isCreativeMode) {
+			DrainEnergy(weapon, getShootCooldown(weapon), false);
+			float newHeat = getHeat(weapon) + getMaxHeat(weapon) * 0.8f;
+			setHeat(weapon, newHeat);
+			manageOverheat(weapon, shooter.world, shooter);
+		}
+		}
 		PlasmaBolt fire = spawnProjectile(weapon, shooter, position, dir, shot);
 		fire.simulateDelay(delay);
 		return true;

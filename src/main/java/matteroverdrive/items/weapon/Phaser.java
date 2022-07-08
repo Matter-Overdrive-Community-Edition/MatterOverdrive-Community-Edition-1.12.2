@@ -234,12 +234,16 @@ public class Phaser extends EnergyWeapon implements IWeapon {
 			return;
 		}
 		if (canFire(stack, player.world, player)) {
+			if (player instanceof EntityPlayer) {
+			if (!((EntityPlayer) player).capabilities.isCreativeMode) {
 			DrainEnergy(stack, 1, false);
 			int powerLevelMultiply = (getPowerLevel(stack) + 1) / MAX_LEVEL;
 			float newHeat = (getHeat(stack) + 1) * (1.1f + (0.05f * powerLevelMultiply));
 			setHeat(stack, newHeat);
 			ManageShooting(stack, player.world, (EntityPlayer) player, count);
 			manageOverheat(stack, player.world, player);
+			}
+			}
 		} else {
 			player.resetActiveHand();
 		}

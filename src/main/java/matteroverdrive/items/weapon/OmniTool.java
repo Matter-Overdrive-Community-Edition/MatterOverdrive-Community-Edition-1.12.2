@@ -151,7 +151,11 @@ public class OmniTool extends EnergyWeapon {
 				player.stopActiveHand();
 			}
 		} else {
+			if (player instanceof EntityPlayer) {
+			if (!((EntityPlayer) player).capabilities.isCreativeMode) {
 			DrainEnergy(stack, DIG_POWER_MULTIPLY, false);
+			}
+			}
 		}
 	}
 
@@ -172,7 +176,11 @@ public class OmniTool extends EnergyWeapon {
 			stopMiningLastBlock((EntityPlayer) entity, world);
 		} else {
 			int ticks = getMaxItemUseDuration(stack) - timeLeft;
+			if (entity instanceof EntityPlayer) {
+			if (!((EntityPlayer) entity).capabilities.isCreativeMode) {
 			DrainEnergy(stack, ticks, false);
+			}
+			}
 		}
 	}
 
@@ -357,10 +365,14 @@ public class OmniTool extends EnergyWeapon {
 	@Override
 	public boolean onServerFire(ItemStack weapon, EntityLivingBase shooter, WeaponShot shot, Vec3d position, Vec3d dir,
 			int delay) {
+		if (shooter instanceof EntityPlayer) {
+		if (!((EntityPlayer) shooter).capabilities.isCreativeMode) {
 		DrainEnergy(weapon, getShootCooldown(weapon), false);
 		float newHeat = (getHeat(weapon) + 4) * 2.7f;
 		setHeat(weapon, newHeat);
 		manageOverheat(weapon, shooter.world, shooter);
+		}
+		}
 		PlasmaBolt fire = spawnProjectile(weapon, shooter, position, dir, shot);
 		fire.simulateDelay(delay);
 		weapon.getTagCompound().setLong("LastShot", shooter.world.getTotalWorldTime());

@@ -213,10 +213,14 @@ public class PhaserRifle extends EnergyWeapon {
 	@Override
 	public boolean onServerFire(ItemStack weapon, EntityLivingBase shooter, WeaponShot shot, Vec3d position, Vec3d dir,
 			int delay) {
+		if (shooter instanceof EntityPlayer) {
+		if (!((EntityPlayer) shooter).capabilities.isCreativeMode) {
 		DrainEnergy(weapon, getShootCooldown(weapon), false);
 		float newHeat = (getHeat(weapon) + 4) * 2.2f;
 		setHeat(weapon, newHeat);
 		manageOverheat(weapon, shooter.world, shooter);
+		}
+		}
 		if (!isOverheated(weapon)) {
 			PlasmaBolt fire = spawnProjectile(weapon, shooter, position, dir, shot);
 			fire.simulateDelay(delay);
