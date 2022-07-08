@@ -34,7 +34,7 @@ public class MatterOverdriveItems {
 	public final static Item.ToolMaterial TOOL_MATERIAL_TRITANIUM = EnumHelper.addToolMaterial("TRITANIUM", 2, 3122, 6f,
 			2f, 14);
 	public final static ItemArmor.ArmorMaterial ARMOR_MATERIAL_TRITANIUM = EnumHelper.addArmorMaterial("TRITANIUM",
-			"tritanium", 66, new int[] { 4, 9, 7, 4 }, 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0.0f);
+			"tritanium", 66, new int[] { 4, 9, 7, 4 }, 20, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0f);
 	public static List<Item> items = new ArrayList<>();
 	// Materials
 	public MOItemOre dilithium_crystal;

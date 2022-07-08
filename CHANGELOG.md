@@ -3,6 +3,20 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Spelling Fix's found by freopt (infiniteblock)
+* Update PlasmaShotgun.java (infiniteblock)
+* weapon tweaks (infiniteblock)
+* Update MOTileEntityMachine.java (infiniteblock)
+* Update MatterOverdrive.java (infiniteblock)
+* Revert "Update CHANGELOG.md" (infiniteblock)
+* Update android player skins (infiniteblock)
+* Update shield.png (infiniteblock)
+* Update CHANGELOG.md (infiniteblock)
+* Update BlockDecorative.java (infiniteblock)
+* Block Rotation, Reformat. (infiniteblock)
+* API Reformat. (infiniteblock)
+* Allow omnitool to harvest any block (#46) (Francesco Macagno)
+* Crash fix... (infiniteblock)
 * Update SpacetimeEqualizer.java (infiniteblock)
 * Update TileEntityMatterPipe.java (infiniteblock)
 * Update ElementItemPattern.java (infiniteblock)
