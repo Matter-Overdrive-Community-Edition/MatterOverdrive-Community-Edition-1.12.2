@@ -368,10 +368,14 @@ public class PlasmaShotgun extends EnergyWeapon {
 	@Override
 	public boolean onServerFire(ItemStack weapon, EntityLivingBase shooter, WeaponShot shot, Vec3d position, Vec3d dir,
 			int delay) {
+		if (shooter instanceof EntityPlayer) {
+		if (!((EntityPlayer) shooter).capabilities.isCreativeMode) {
 		DrainEnergy(weapon, getShootCooldown(weapon), false);
 		float newHeat = (getHeat(weapon) + 4) * 2.7f;
 		setHeat(weapon, newHeat);
 		manageOverheat(weapon, shooter.world, shooter);
+		}
+		}
 		PlasmaBolt[] fire = spawnProjectiles(weapon, shooter, position, dir, shot);
 		for (PlasmaBolt bolt : fire) {
 			bolt.simulateDelay(delay);
