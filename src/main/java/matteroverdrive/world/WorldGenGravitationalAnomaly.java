@@ -72,7 +72,7 @@ public class WorldGenGravitationalAnomaly extends WorldGenerator implements ICon
 	public void onConfigChanged(ConfigurationHandler config) {
 		chance = config.config.getFloat(ConfigurationHandler.KEY_GRAVITATIONAL_ANOMALY_SPAWN_CHANCE,
 				String.format("%s.gravitational_anomaly", ConfigurationHandler.CATEGORY_WORLD_GEN), defaultChance, 0, 1,
-				"Spawn Chance of Gravity Anomaly pre chunk");
+				"Spawn Chance of Gravity Anomaly per chunk");
 		yLevelMap.clear();
 		String[] strings = config.config.getStringList(ConfigurationHandler.KEY_GRAVITATIONAL_ANOMALY_SPAWN_LEVEL,
 				String.format("%s.gravitational_anomaly", ConfigurationHandler.CATEGORY_WORLD_GEN), new String[0],

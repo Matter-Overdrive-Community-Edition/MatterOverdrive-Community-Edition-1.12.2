@@ -90,7 +90,7 @@ public class ConfigurationHandler {
 		category.setComment("Options for the Matter overdrive client");
 		category = config.getCategory(CATEGORY_SERVER);
 		updateCategoryLang(category);
-		category.setComment("Options form the Matter Overdrive server");
+		category.setComment("Options for the Matter Overdrive server");
 		category = config.getCategory(CATEGORY_ENTITIES);
 		updateCategoryLang(category);
 		category.setComment("Options for Matter Overdrive Entities. Such as their Entity IDs.");
