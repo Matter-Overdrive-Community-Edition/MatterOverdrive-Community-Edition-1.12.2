@@ -24,7 +24,6 @@ import matteroverdrive.matter_network.MatterNetworkRegistry;
 import matteroverdrive.network.PacketPipeline;
 import matteroverdrive.proxy.CommonProxy;
 import matteroverdrive.util.AndroidPartsFactory;
-import matteroverdrive.util.CommonUtils;
 import matteroverdrive.util.DialogFactory;
 import matteroverdrive.util.QuestFactory;
 import matteroverdrive.util.WeaponFactory;
@@ -151,7 +150,6 @@ public class MatterOverdrive {
 
 		MatterOverdriveCompat.preInit(event);
 		LOGGER = event.getModLog();
-		CommonUtils.regNetwork(event.getSide());
 	}
 
 	@EventHandler
@@ -174,8 +172,6 @@ public class MatterOverdrive {
 		WEAPON_FACTORY.initModules();
 		WEAPON_FACTORY.initWeapons();
 		ANDROID_PARTS_FACTORY.initParts();
-		RegistrationHandler.regTileEntities();
-		// NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
 	}
 
