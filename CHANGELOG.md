@@ -3,6 +3,12 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Power Tweaks. (infiniteblock)
+* Update PatternDrive.java (infiniteblock)
+* Update MachineMatterStorage.java (infiniteblock)
+* Update GuiHandler.java (infiniteblock)
+* Revert back to original sound. (infiniteblock)
+* TheNumenorean's Gradle tidy up. (infiniteblock)
 * Spelling Fix's found by freopt (infiniteblock)
 * Update PlasmaShotgun.java (infiniteblock)
 * weapon tweaks (infiniteblock)
