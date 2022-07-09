@@ -32,6 +32,7 @@ public class TileEntityMachineDecomposer extends MOTileEntityMachineMatter imple
 	private static final Random random = new Random();
 	public static int MATTER_STORAGE = 1024;
 	public static int ENERGY_CAPACITY = 512000;
+	public static int ENERGY_TRANSFER = 512000;
 	public static int DECEOPOSE_SPEED_PER_MATTER = 80;
 	public static int DECOMPOSE_ENERGY_PER_MATTER = 6000;
 	private static EnumSet<UpgradeTypes> upgradeTypes = EnumSet.of(UpgradeTypes.Fail, UpgradeTypes.MatterStorage,
@@ -46,8 +47,8 @@ public class TileEntityMachineDecomposer extends MOTileEntityMachineMatter imple
 	public TileEntityMachineDecomposer() {
 		super(4);
 		this.energyStorage.setCapacity(ENERGY_CAPACITY);
-		this.energyStorage.setMaxExtract(ENERGY_CAPACITY);
-		this.energyStorage.setMaxReceive(ENERGY_CAPACITY);
+		this.energyStorage.setMaxExtract(0);
+		this.energyStorage.setMaxReceive(ENERGY_TRANSFER);
 
 		this.matterStorage.setCapacity(MATTER_STORAGE);
 		this.matterStorage.setMaxReceive(0);
@@ -71,6 +72,7 @@ public class TileEntityMachineDecomposer extends MOTileEntityMachineMatter imple
 			super.update();
 			this.manageDecompose();
 			this.manageExtract();
+			this.manageUpgrades();
 		}
 	}
 
@@ -90,6 +92,11 @@ public class TileEntityMachineDecomposer extends MOTileEntityMachineMatter imple
 			return 0.0f;
 		}
 		return 0.3f;
+	}
+
+	private void manageUpgrades() {
+			this.matterStorage.setCapacity((int) Math.round(MATTER_STORAGE * getUpgradeMultiply(UpgradeTypes.MatterStorage)));
+			updateClientMatter();
 	}
 
 	private void manageExtract() {
