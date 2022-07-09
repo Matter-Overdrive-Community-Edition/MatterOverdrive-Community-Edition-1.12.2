@@ -3,6 +3,8 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Update CHANGELOG.md (infiniteblock)
+* Update TileEntityMachineDecomposer.java (infiniteblock)
 * Power Tweaks. (infiniteblock)
 * Update PatternDrive.java (infiniteblock)
 * Update MachineMatterStorage.java (infiniteblock)
