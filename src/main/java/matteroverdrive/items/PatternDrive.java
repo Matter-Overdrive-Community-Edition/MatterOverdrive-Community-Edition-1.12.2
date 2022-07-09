@@ -1,6 +1,7 @@
 
 package matteroverdrive.items;
 
+import matteroverdrive.MatterOverdrive;
 import matteroverdrive.api.matter.IMatterPatternStorage;
 import matteroverdrive.data.matter_network.ItemPattern;
 import matteroverdrive.handler.ConfigurationHandler;
@@ -15,6 +16,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
@@ -36,20 +40,6 @@ public class PatternDrive extends MOBaseItem implements IMatterPatternStorage, I
 		this.capacity = capacity;
 		this.setMaxStackSize(driveStackSize);
 	}
-
-	/*
-	 * @Override
-	 * 
-	 * @SideOnly(Side.CLIENT) public void registerIcons(IIconRegister p_94581_1_) {
-	 * this.itemIcon = p_94581_1_.registerIcon(this.getIconString());
-	 * this.storageFull = p_94581_1_.registerIcon(this.getIconString() + "_full");
-	 * this.storagePartiallyFull = p_94581_1_.registerIcon(this.getIconString() +
-	 * "_partially_full"); }
-	 * 
-	 * @SideOnly(Side.CLIENT) public IIcon getIconFromDamage(int damage) { switch
-	 * (damage) { case 2: return storageFull; case 1: return storagePartiallyFull;
-	 * default: return itemIcon; } }
-	 */
 
 	@Override
 	public int getDamage(ItemStack stack) {
@@ -149,11 +139,14 @@ public class PatternDrive extends MOBaseItem implements IMatterPatternStorage, I
 		}
 	}
 
-	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
-		if (player.isSneaking()) {
-			clearStorage(itemStack);
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+		ItemStack stack = playerIn.getHeldItem(handIn);
+		if (playerIn.isSneaking()) {
+			return new ActionResult<>(EnumActionResult.SUCCESS,
+					new ItemStack(MatterOverdrive.ITEMS.pattern_drive, 1, 0));
 		}
-		return itemStack;
+		return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
 	}
 
 	@Override
@@ -183,16 +176,6 @@ public class PatternDrive extends MOBaseItem implements IMatterPatternStorage, I
 
 		return total;
 	}
-
-//    @Nonnull
-//    @Override
-//    public String getTranslationKey(ItemStack stack) {
-//        switch(getPatternsStored(stack)) {
-//            case 2: return super.getTranslationKey() + "_full";
-//            case 1: return super.getTranslationKey() + "_partial";
-//            default: return super.getTranslationKey();
-//        }
-//    }
 
 	@Override
 	public void initItemModel() {
