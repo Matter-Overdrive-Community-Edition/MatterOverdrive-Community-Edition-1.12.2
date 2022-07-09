@@ -23,9 +23,9 @@ public class TileEntityMachineSolarPanel extends MOTileEntityMachineEnergy {
 
 	public TileEntityMachineSolarPanel() {
 		super(2);
-		energyStorage.setCapacity(ENERGY_CAPACITY);
-		energyStorage.setMaxExtract(MAX_ENERGY_EXTRACT);
-		energyStorage.setMaxReceive(0);
+		this.energyStorage.setCapacity(ENERGY_CAPACITY);
+		this.energyStorage.setMaxExtract(MAX_ENERGY_EXTRACT);
+		this.energyStorage.setMaxReceive(0);
 	}
 
 	@Override

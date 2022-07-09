@@ -46,7 +46,6 @@ import static matteroverdrive.util.MOBlockHelper.getLeftSide;
 
 public class TileEntityMachineReplicator extends MOTileEntityMachineMatter
 		implements IMatterNetworkClient, IMatterNetworkConnection, IMatterNetworkDispatcher {
-	public static final int MATTER_TRANSFER = 128;
 	public static final int REPLICATION_ANIMATION_TIME = 60;
 	public static final int RADIATION_DAMAGE_DELAY = 5;
 	public static final int RADIATION_RANGE = 8;
@@ -54,6 +53,7 @@ public class TileEntityMachineReplicator extends MOTileEntityMachineMatter
 			UpgradeTypes.Fail, UpgradeTypes.PowerUsage, UpgradeTypes.MatterStorage, UpgradeTypes.Muffler);
 	public static int MATTER_STORAGE = 1024;
 	public static int ENERGY_CAPACITY = 512000;
+	public static int ENERGY_TRANSFER = 512000;
 	public int OUTPUT_SLOT_ID = 0;
 	public int SECOND_OUTPUT_SLOT_ID = 1;
 	public int DATABASE_SLOT_ID = 2;
@@ -70,10 +70,10 @@ public class TileEntityMachineReplicator extends MOTileEntityMachineMatter
 	public TileEntityMachineReplicator() {
 		super(4);
 		this.energyStorage.setCapacity(ENERGY_CAPACITY);
-		this.energyStorage.setMaxExtract(ENERGY_CAPACITY);
-		this.energyStorage.setMaxReceive(ENERGY_CAPACITY);
+		this.energyStorage.setMaxExtract(0);
+		this.energyStorage.setMaxReceive(ENERGY_TRANSFER);
 		this.matterStorage.setCapacity(MATTER_STORAGE);
-		this.matterStorage.setMaxExtract(MATTER_TRANSFER);
+		this.matterStorage.setMaxReceive(MATTER_STORAGE);
 		this.matterStorage.setMaxExtract(0);
 		playerSlotsMain = true;
 		playerSlotsHotbar = true;
@@ -111,9 +111,15 @@ public class TileEntityMachineReplicator extends MOTileEntityMachineMatter
 	@Override
 	public void update() {
 		super.update();
+		manageUpgrades();
 		if (world.isRemote) {
 			manageSpawnParticles();
 		}
+	}
+
+	private void manageUpgrades() {
+			this.matterStorage.setCapacity((int) Math.round(MATTER_STORAGE * getUpgradeMultiply(UpgradeTypes.MatterStorage)));
+			updateClientMatter();
 	}
 
 	@SideOnly(Side.CLIENT)

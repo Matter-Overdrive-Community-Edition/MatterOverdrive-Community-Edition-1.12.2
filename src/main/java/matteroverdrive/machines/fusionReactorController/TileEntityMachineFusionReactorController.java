@@ -76,13 +76,13 @@ public class TileEntityMachineFusionReactorController extends MOTileEntityMachin
 		super(4);
 
 		structureCheckTimer = new TimeTracker();
-		energyStorage.setCapacity(ENERGY_CAPACITY);
-		energyStorage.setMaxExtract(ENERGY_CAPACITY);
-		energyStorage.setMaxReceive(ENERGY_CAPACITY);
+		this.energyStorage.setCapacity(ENERGY_CAPACITY);
+		this.energyStorage.setMaxExtract(ENERGY_CAPACITY);
+		this.energyStorage.setMaxReceive(ENERGY_CAPACITY);
 
-		matterStorage.setCapacity(MATTER_STORAGE);
-		matterStorage.setMaxExtract(0);
-		matterStorage.setMaxReceive(MATTER_STORAGE);
+		this.matterStorage.setCapacity(MATTER_STORAGE);
+		this.matterStorage.setMaxExtract(0);
+		this.matterStorage.setMaxReceive(MATTER_STORAGE);
 
 		multiBlock = new MultiBlockTileStructureMachine(this);
 	}

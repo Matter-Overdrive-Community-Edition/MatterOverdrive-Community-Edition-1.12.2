@@ -48,8 +48,8 @@ public class TileEntityMachinePatternStorage extends MOTileEntityMachineEnergy i
 	public static final int TASK_PROCESS_DELAY = 40;
 	private static final EnumSet<UpgradeTypes> upgradeTypes = EnumSet.of(UpgradeTypes.PowerStorage,
 			UpgradeTypes.PowerUsage);
-	public static int ENERGY_CAPACITY = 64000;
-	public static int ENERGY_TRANSFER = 128;
+	public static int ENERGY_CAPACITY = 512000;
+	public static int ENERGY_TRANSFER = 512000;
 	public int input_slot;
 	public int[] pattern_storage_slots;
 	private ComponentMatterNetworkPatternStorage networkComponent;
@@ -59,8 +59,8 @@ public class TileEntityMachinePatternStorage extends MOTileEntityMachineEnergy i
 	public TileEntityMachinePatternStorage() {
 		super(4);
 		this.energyStorage.setCapacity(ENERGY_CAPACITY);
-		this.energyStorage.setMaxExtract(ENERGY_TRANSFER);
-		this.energyStorage.setMaxReceive(ENERGY_CAPACITY);
+		this.energyStorage.setMaxExtract(0);
+		this.energyStorage.setMaxReceive(ENERGY_TRANSFER);
 		playerSlotsHotbar = true;
 		playerSlotsMain = true;
 	}

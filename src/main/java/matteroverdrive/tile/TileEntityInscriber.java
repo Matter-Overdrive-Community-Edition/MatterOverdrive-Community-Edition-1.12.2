@@ -22,6 +22,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityInscriber extends MOTileEntityMachineEnergy {
+	public static final int ENERGY_CAPACITY = 512000;
+	public static final int ENERGY_TRANSFER = 512000;
 	private static final EnumSet<UpgradeTypes> upgradeTypes = EnumSet.of(UpgradeTypes.PowerUsage, UpgradeTypes.Speed,
 			UpgradeTypes.PowerStorage, UpgradeTypes.PowerTransfer, UpgradeTypes.Muffler);
 	public static int MAIN_INPUT_SLOT_ID, SEC_INPUT_SLOT_ID, OUTPUT_SLOT_ID;
@@ -36,9 +38,9 @@ public class TileEntityInscriber extends MOTileEntityMachineEnergy {
 
 	public TileEntityInscriber() {
 		super(4);
-		energyStorage.setCapacity(512000);
-		energyStorage.setMaxExtract(256);
-		energyStorage.setMaxReceive(512000);
+		this.energyStorage.setCapacity(ENERGY_CAPACITY);
+		this.energyStorage.setMaxExtract(0);
+		this.energyStorage.setMaxReceive(ENERGY_TRANSFER);
 		playerSlotsHotbar = true;
 		playerSlotsMain = true;
 	}

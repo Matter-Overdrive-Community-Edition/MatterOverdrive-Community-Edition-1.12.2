@@ -27,9 +27,9 @@ public class TileEntityFusionReactorPart extends MOTileEntityMachineMatter imple
 
 	public TileEntityFusionReactorPart() {
 		super(0);
-		energyStorage.setCapacity(0);
-		energyStorage.setMaxExtract(0);
-		energyStorage.setMaxReceive(0);
+		this.energyStorage.setCapacity(0);
+		this.energyStorage.setMaxExtract(0);
+		this.energyStorage.setMaxReceive(0);
 	}
 
 	@Override

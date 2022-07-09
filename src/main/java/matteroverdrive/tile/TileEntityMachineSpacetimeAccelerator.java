@@ -30,17 +30,20 @@ public class TileEntityMachineSpacetimeAccelerator extends MOTileEntityMachineMa
 			UpgradeTypes.MatterUsage);
 	private TimeTracker timeTracker;
 	private double matterUseCache;
-	public static final int ENERGY_CAPACITY = 512000;
+	public static int MATTER_STORAGE = 1024;
+	public static int ENERGY_CAPACITY = 512000;
+	public static int ENERGY_TRANSFER = 512000;
+	
 
 	public TileEntityMachineSpacetimeAccelerator() {
 		super(4);
 		timeTracker = new TimeTracker();
-		matterStorage.setCapacity(1024);
-		matterStorage.setMaxReceive(16);
-		matterStorage.setMaxExtract(0);
-		energyStorage.setCapacity(ENERGY_CAPACITY);
-		energyStorage.setMaxExtract(ENERGY_CAPACITY);
-		energyStorage.setMaxReceive(ENERGY_CAPACITY);
+		this.matterStorage.setCapacity(MATTER_STORAGE);
+		this.matterStorage.setMaxReceive(MATTER_STORAGE);
+		this.matterStorage.setMaxExtract(0);
+		this.energyStorage.setCapacity(ENERGY_CAPACITY);
+		this.energyStorage.setMaxExtract(0);
+		this.energyStorage.setMaxReceive(ENERGY_TRANSFER);
 		playerSlotsHotbar = true;
 		playerSlotsMain = true;
 	}
@@ -54,6 +57,7 @@ public class TileEntityMachineSpacetimeAccelerator extends MOTileEntityMachineMa
 				UpdateClientPower();
 				if (timeTracker.hasDelayPassed(world, getSpeed())) {
 					manageAccelerations();
+					manageUpgrades();
 				}
 			} else {
 				if (timeTracker.hasDelayPassed(world, Math.max(getSpeed(), 20))) {
@@ -67,6 +71,11 @@ public class TileEntityMachineSpacetimeAccelerator extends MOTileEntityMachineMa
 				}
 			}
 		}
+	}
+
+	private void manageUpgrades() {
+			this.matterStorage.setCapacity((int) Math.round(MATTER_STORAGE * getUpgradeMultiply(UpgradeTypes.MatterStorage)));
+			updateClientMatter();
 	}
 
 	@SideOnly(Side.CLIENT)
