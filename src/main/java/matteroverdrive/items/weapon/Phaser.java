@@ -142,8 +142,6 @@ public class Phaser extends EnergyWeapon implements IWeapon {
 
 				el.addPotionEffect(
 						new PotionEffect(Potion.getPotionFromResourceLocation("slowness"), GetSleepTime(item), 100));
-				// el.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, GetSleepTime(item),
-				// -10));
 				el.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("mining_fatigue"),
 						GetSleepTime(item), 100));
 				el.addPotionEffect(
@@ -241,9 +239,9 @@ public class Phaser extends EnergyWeapon implements IWeapon {
 			int powerLevelMultiply = (getPowerLevel(stack) + 1) / MAX_LEVEL;
 			float newHeat = (getHeat(stack) + 1) * (1.1f + (0.05f * powerLevelMultiply));
 			setHeat(stack, newHeat);
-			ManageShooting(stack, player.world, (EntityPlayer) player, count);
 			manageOverheat(stack, player.world, player);
 			}
+			ManageShooting(stack, player.world, (EntityPlayer) player, count);
 			}
 		} else {
 			player.resetActiveHand();
