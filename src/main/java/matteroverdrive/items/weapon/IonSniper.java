@@ -243,7 +243,7 @@ public class IonSniper extends EnergyWeapon {
 	public boolean supportsModule(ItemStack weapon, ItemStack module) {
 		return module.isEmpty() || !(module.getItem() instanceof IWeaponModule)
 				|| ((IWeaponModule) module.getItem()).getSlot(module) != Reference.MODULE_BARREL
-				|| module.getItemDamage() != WeaponModuleBarrel.HEAL_BARREL_ID;
+				&& module.getItemDamage() != WeaponModuleBarrel.HEAL_BARREL_ID;
 	}
 
 	@Override

@@ -289,7 +289,7 @@ public class PlasmaShotgun extends EnergyWeapon {
 	public boolean supportsModule(ItemStack weapon, ItemStack module) {
 		return !module.isEmpty() && (module.getItem() == MatterOverdrive.ITEMS.weapon_module_color
 				|| (module.getItem() == MatterOverdrive.ITEMS.weapon_module_barrel
-						&& module.getItemDamage() != WeaponModuleBarrel.HEAL_BARREL_ID));
+						&& module.getItemDamage() != WeaponModuleBarrel.HEAL_BARREL_ID && module.getItemDamage() != WeaponModuleBarrel.BLOCK_BARREL_ID ));
 	}
 
 	@Override

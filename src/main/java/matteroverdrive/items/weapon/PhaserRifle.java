@@ -110,7 +110,7 @@ public class PhaserRifle extends EnergyWeapon {
 	public boolean supportsModule(ItemStack weapon, ItemStack module) {
 		if (module != null && module.getItem() instanceof IWeaponModule
 				&& ((IWeaponModule) module.getItem()).getSlot(module) == Reference.MODULE_BARREL) {
-			return module.getItemDamage() != WeaponModuleBarrel.HEAL_BARREL_ID;
+			return module.getItemDamage() != WeaponModuleBarrel.HEAL_BARREL_ID && module.getItemDamage() != WeaponModuleBarrel.BLOCK_BARREL_ID;
 		}
 		return true;
 	}

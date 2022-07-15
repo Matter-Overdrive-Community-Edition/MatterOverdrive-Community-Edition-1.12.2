@@ -9,6 +9,7 @@ import matteroverdrive.api.weapon.WeaponStats;
 import matteroverdrive.client.sound.WeaponSound;
 import matteroverdrive.handler.SoundHandler;
 import matteroverdrive.init.MatterOverdriveSounds;
+import matteroverdrive.items.weapon.module.WeaponModuleBarrel;
 import matteroverdrive.util.MOPhysicsHelper;
 import matteroverdrive.util.WeaponHelper;
 import matteroverdrive.util.animation.MOEasing;
@@ -368,7 +369,7 @@ public class Phaser extends EnergyWeapon implements IWeapon {
 
 	@Override
 	public boolean supportsModule(ItemStack weapon, ItemStack module) {
-		return !module.isEmpty() && (module.getItem() == MatterOverdrive.ITEMS.weapon_module_barrel
+		return !module.isEmpty() && (module.getItem() == MatterOverdrive.ITEMS.weapon_module_barrel && module.getItemDamage() != WeaponModuleBarrel.BLOCK_BARREL_ID
 				|| module.getItem() == MatterOverdrive.ITEMS.weapon_module_color);
 	}
 
