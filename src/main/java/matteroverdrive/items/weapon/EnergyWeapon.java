@@ -111,7 +111,7 @@ public abstract class EnergyWeapon extends MOItemEnergyContainer implements IWea
 		infos.add("");
 
 		infos.add(addStatWithMultiplyInfo("Damage", damageFormater.format(getWeaponScaledDamage(weapon, player)),
-				getWeaponScaledDamage(weapon, player) / getWeaponBaseDamage(weapon), ""));
+				getWeaponScaledDamage(weapon, player) / getWeaponBaseDamage(weapon) - 1, ""));
 		infos.add(addStatWithMultiplyInfo("DPS",
 				damageFormater.format((getWeaponScaledDamage(weapon, player) / getShootCooldown(weapon)) * 20), 1, ""));
 		infos.add(addStatWithMultiplyInfo("Speed", (int) (20d / getShootCooldown(weapon) * 60),
@@ -138,11 +138,12 @@ public abstract class EnergyWeapon extends MOItemEnergyContainer implements IWea
 
 	private String addStatWithMultiplyInfo(String statName, Object value, double multiply, String units) {
 		String info = String.format("%s: %s%s", statName, TextFormatting.DARK_AQUA, value);
+		System.out.println("Multiply: " + multiply);
 		if (!units.isEmpty()) {
 			info += " " + units;
 		}
 		if (multiply != 1) {
-			if (multiply > 1) {
+			if (multiply > 0.010) {
 				info += TextFormatting.DARK_GREEN;
 			} else {
 				info += TextFormatting.DARK_RED;
