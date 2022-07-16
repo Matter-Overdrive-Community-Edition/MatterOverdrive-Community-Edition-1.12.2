@@ -92,7 +92,11 @@ public class Phaser extends EnergyWeapon implements IWeapon {
 	@Override
 	@SideOnly(Side.CLIENT)
 	protected void addCustomDetails(ItemStack weapon, EntityPlayer player, List infos) {
+		if (isKillMode(weapon)) {
+		infos.add(TextFormatting.RED + "Kill Mode: " + (getPowerLevel(weapon) - 2f));
+		} else {
 		infos.add(TextFormatting.BLUE + "Stun: " + (GetSleepTime(weapon) / 20f) + "s");
+		}
 	}
 
 	/**
