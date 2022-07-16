@@ -26,7 +26,9 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.Style;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -218,6 +220,19 @@ public class Phaser extends EnergyWeapon implements IWeapon {
 
 		if (playerIn.isSneaking()) {
 			SwitchModes(worldIn, playerIn, itemStackIn);
+			if (worldIn.isRemote) {
+			if (isKillMode(itemStackIn)) {
+				TextComponentString message = new TextComponentString(
+						TextFormatting.GOLD + "Mode: " + TextFormatting.RED + "Kill - " + (getPowerLevel(itemStackIn) - 2f));
+						message.setStyle(new Style().setColor(TextFormatting.RED));
+						playerIn.sendMessage(message);
+				} else {
+				TextComponentString message = new TextComponentString(
+						TextFormatting.GOLD + "Mode: " + TextFormatting.GREEN + "Stun - " + (GetSleepTime(itemStackIn) / 20f) + "s");
+						message.setStyle(new Style().setColor(TextFormatting.RED));
+						playerIn.sendMessage(message);
+				}
+			}
 		} else {
 			if (canFire(itemStackIn, worldIn, playerIn)) {
 				playerIn.setActiveHand(hand);
