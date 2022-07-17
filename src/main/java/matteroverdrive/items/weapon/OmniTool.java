@@ -319,7 +319,7 @@ public class OmniTool extends EnergyWeapon {
 		return !StackUtils.isNullOrEmpty(module) && !StackUtils.isNullOrEmpty(weapon)
 				&& (module.getItem() == MatterOverdrive.ITEMS.weapon_module_color
 						|| (module.getItem() == MatterOverdrive.ITEMS.weapon_module_barrel
-								&& module.getItemDamage() == WeaponModuleBarrel.BLOCK_BARREL_ID));
+								&& module.getItemDamage() == WeaponModuleBarrel.BLOCK_BARREL_ID  && module.getItemDamage() != WeaponModuleBarrel.EXPLOSION_BARREL_ID));
 	}
 
 	@Override
