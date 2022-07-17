@@ -115,7 +115,7 @@ public class ClientWeaponHandler extends CommonWeaponHandler {
 	public void onFovUpdate(FOVUpdateEvent event) {
 		if (Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND) != null
 				&& Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof IWeapon) {
-			event.setNewfov(event.getFov() - event.getFov() * ZOOM_TIME
+			event.setNewfov(event.getNewfov() - event.getFov() * ZOOM_TIME
 					* ((IWeapon) Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND).getItem())
 							.getZoomMultiply(Minecraft.getMinecraft().player,
 									Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND)));
