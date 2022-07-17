@@ -66,7 +66,7 @@ public abstract class WeaponModuleBase extends MOBaseItem implements IWeaponModu
 		Map<IWeaponStat, Float> statMap = metaStatMap.get(module.getMetadata());
 		if (statMap == null || statMap.isEmpty())
 			return originalStat;
-		return statMap.getOrDefault(stat, originalStat);
+		return originalStat * statMap.getOrDefault(stat, 1f);
 	}
 
 	@Override
