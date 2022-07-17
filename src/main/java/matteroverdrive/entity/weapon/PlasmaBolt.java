@@ -582,8 +582,8 @@ public class PlasmaBolt extends Entity implements IProjectile, IGravityEntity, I
 
 	}
 
-	public void setFireDamageMultiply(float fiery) {
-		this.fireDamageMultiply = fiery;
+	public void setFireDamageMultiply(float firey) {
+		this.fireDamageMultiply = firey;
 	}
 
 	@Override
