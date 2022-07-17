@@ -243,7 +243,7 @@ public class IonSniper extends EnergyWeapon {
 	public boolean supportsModule(ItemStack weapon, ItemStack module) {
 		return module.isEmpty() || !(module.getItem() instanceof IWeaponModule)
 				|| ((IWeaponModule) module.getItem()).getSlot(module) != Reference.MODULE_BARREL
-				&& module.getItemDamage() != WeaponModuleBarrel.HEAL_BARREL_ID;
+				&& module.getItemDamage() != WeaponModuleBarrel.HEAL_BARREL_ID && module.getItemDamage() != WeaponModuleBarrel.EXPLOSION_BARREL_ID;
 	}
 
 	@Override
@@ -270,7 +270,11 @@ public class IonSniper extends EnergyWeapon {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean isWeaponZoomed(EntityLivingBase entityPlayer, ItemStack weapon) {
+		// Fix the requirement to have the button down for a "right click".
+		if (Minecraft.getMinecraft().gameSettings.thirdPersonView == 0) {
 		return entityPlayer.isHandActive() && entityPlayer.getActiveHand() == EnumHand.MAIN_HAND;
+		}
+		return false;
 	}
 
 	@Override
