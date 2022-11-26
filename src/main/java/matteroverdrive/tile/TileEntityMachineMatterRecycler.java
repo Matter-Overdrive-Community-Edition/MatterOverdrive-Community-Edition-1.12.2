@@ -34,7 +34,7 @@ public class TileEntityMachineMatterRecycler extends MOTileEntityMachineEnergy {
 	public TileEntityMachineMatterRecycler() {
 		super(4);
 		this.energyStorage.setCapacity(ENERGY_CAPACITY);
-		this.energyStorage.setMaxExtract(0);
+		this.energyStorage.setMaxExtract(ENERGY_TRANSFER);
 		this.energyStorage.setMaxReceive(ENERGY_TRANSFER);
 		playerSlotsHotbar = true;
 		playerSlotsMain = true;

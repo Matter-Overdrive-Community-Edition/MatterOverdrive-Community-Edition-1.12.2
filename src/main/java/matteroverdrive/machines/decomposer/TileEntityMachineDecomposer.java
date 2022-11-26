@@ -47,7 +47,7 @@ public class TileEntityMachineDecomposer extends MOTileEntityMachineMatter imple
 	public TileEntityMachineDecomposer() {
 		super(4);
 		this.energyStorage.setCapacity(ENERGY_CAPACITY);
-		this.energyStorage.setMaxExtract(0);
+		this.energyStorage.setMaxExtract(ENERGY_TRANSFER);
 		this.energyStorage.setMaxReceive(ENERGY_TRANSFER);
 
 		this.matterStorage.setCapacity(MATTER_STORAGE);

@@ -61,7 +61,7 @@ public class TileEntityMachineDimensionalPylon extends MOTileEntityMachineMatter
 	public TileEntityMachineDimensionalPylon() {
 		super(4);
 		this.matterStorage.setCapacity(2048);
-		this.matterStorage.setMaxExtract(0);
+		this.matterStorage.setMaxExtract(128);
 		this.matterStorage.setMaxReceive(128);
 		this.energyStorage.setCapacity(1000000);
 		this.energyStorage.setMaxExtract(2048);

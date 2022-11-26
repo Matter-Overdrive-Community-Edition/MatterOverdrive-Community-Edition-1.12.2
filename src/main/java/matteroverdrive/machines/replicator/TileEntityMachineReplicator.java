@@ -70,7 +70,7 @@ public class TileEntityMachineReplicator extends MOTileEntityMachineMatter
 	public TileEntityMachineReplicator() {
 		super(4);
 		this.energyStorage.setCapacity(ENERGY_CAPACITY);
-		this.energyStorage.setMaxExtract(0);
+		this.energyStorage.setMaxExtract(ENERGY_TRANSFER);
 		this.energyStorage.setMaxReceive(ENERGY_TRANSFER);
 		this.matterStorage.setCapacity(MATTER_STORAGE);
 		this.matterStorage.setMaxReceive(MATTER_STORAGE);
