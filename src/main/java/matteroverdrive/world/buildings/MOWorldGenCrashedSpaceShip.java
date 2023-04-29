@@ -109,7 +109,6 @@ public class MOWorldGenCrashedSpaceShip extends MOWorldGenBuilding {
 
 	@Override
 	public boolean isLocationValid(World world, BlockPos pos) {
-		System.out.println("test");
 		pos = new BlockPos(pos.getX(), Math.min(pos.getY(), world.getHeight()), pos.getZ());
 		return world.getBlockState(pos).getBlock() == Blocks.GRASS
 				&& world.getBlockState(pos.add(layerWidth, 0, 0)) == Blocks.GRASS

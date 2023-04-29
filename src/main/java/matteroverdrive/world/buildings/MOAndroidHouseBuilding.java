@@ -45,9 +45,7 @@ public class MOAndroidHouseBuilding extends MOWorldGenBuilding {
 		holoTexts = new String[] { "Critical\nError", "Contacting\nSection 9", "System\nFailure",
 				"Emergency\nPower\nOffline", "System\nReboot\nFailure", "Help Me", "I Need\nWater" };
 		setMaxDistanceToAir(airLeeway);
-		validSpawnBlocks = new Block[] { Blocks.GRASS };
-		this.airLeeway = airLeeway;
-		setyOffset(-2);
+		setyOffset(-4);
 		addMapping(0x00fffc, MatterOverdrive.BLOCKS.decorative_beams,
 				MatterOverdrive.BLOCKS.decorative_carbon_fiber_plate, MatterOverdrive.BLOCKS.decorative_white_plate);
 		addMapping(0x623200, Blocks.DIRT);
@@ -97,17 +95,26 @@ public class MOAndroidHouseBuilding extends MOWorldGenBuilding {
 		}
 		return false;
 	}
-
-	private boolean isPointOnSurface(World world, BlockPos pos) {
-		return world.getBlockState(pos.add(0, 1, 0)).getBlock() == Blocks.AIR;
+	
+	@Override
+	public boolean isLocationValid(World world, BlockPos pos) {
+		pos = new BlockPos(pos.getX(), Math.min(pos.getY(), world.getHeight()), pos.getZ());
+		return world.getBlockState(pos).getBlock() == Blocks.GRASS
+				&& world.getBlockState(pos.add(layerWidth, 0, 0)) == Blocks.GRASS
+				&& world.getBlockState(pos.add(0, 0, layerHeight)) == Blocks.GRASS
+				&& world.getBlockState(pos.add(layerWidth, 0, layerHeight)) == Blocks.GRASS
+				&& world.getBlockState(pos.add(0, 16, 0)) == Blocks.GRASS
+				&& world.getBlockState(pos.add(layerWidth, 16, 0)) == Blocks.GRASS
+				&& world.getBlockState(pos.add(0, 16, layerHeight)) == Blocks.GRASS
+				&& world.getBlockState(pos.add(layerWidth, 16, layerHeight)) == Blocks.GRASS;
 	}
-
+	
 	@Override
 	protected void onGeneration(Random random, World world, BlockPos pos, WorldGenBuildingWorker worker) {
+		spawnLegendary(world, random, pos.add(12, 4, 10));
 		for (int i = 0; i < random.nextInt(3) + 3; i++) {
 			spawnAndroid(world, random, pos.add(7, i, 8));
 		}
-		spawnLegendary(world, random, pos.add(12, 4, 10));
 	}
 
 	@Override

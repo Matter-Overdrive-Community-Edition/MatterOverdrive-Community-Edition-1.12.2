@@ -43,7 +43,6 @@ public class MatterDatabaseListBox extends MOElementListBox {
 	}
 
 	public void updateList(List<ItemPattern> patternList) {
-		// System.out.println("List Updated");
 		this.clear();
 		ItemPattern selected = MatterScanner.getSelectedAsPattern(scanner);
 

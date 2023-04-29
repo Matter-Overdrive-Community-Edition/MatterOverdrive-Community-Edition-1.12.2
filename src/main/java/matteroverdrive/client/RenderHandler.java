@@ -344,7 +344,6 @@ public class RenderHandler {
 					IBionicPartRenderer renderer = bionicPartRenderRegistry
 							.getRenderer(((IBionicPart) part.getItem()).getClass());
 					if (renderer != null) {
-						System.out.println("trying to render2");
 						renderer.affectPlayerRenderer(part, androidPlayer, event.getRenderer(),
 								event.getPartialRenderTick());
 					}
