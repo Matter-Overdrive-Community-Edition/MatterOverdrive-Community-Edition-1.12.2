@@ -11,7 +11,6 @@ import matteroverdrive.client.resources.data.WeaponMetadataSectionSerializer;
 import matteroverdrive.compat.MatterOverdriveCompat;
 import matteroverdrive.gui.GuiAndroidHud;
 import matteroverdrive.gui.GuiQuestHud;
-import matteroverdrive.handler.HandleSkinClient;
 import matteroverdrive.handler.KeyHandler;
 import matteroverdrive.handler.MouseHandler;
 import matteroverdrive.handler.TooltipHandler;
