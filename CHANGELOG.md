@@ -3,6 +3,28 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Bug fix (infiniteblock)
+* Update ClientProxy.java (infiniteblock)
+* Fix for #57 (infiniteblock)
+* Update gradle.properties (infiniteblock)
+* Update PlasmaShotgun.java (infiniteblock)
+* Update PhaserRifle.java (infiniteblock)
+* Update IonSniper.java (infiniteblock)
+* Update PlasmaBolt.java (infiniteblock)
+* Update WeaponModuleBase.java (infiniteblock)
+* Update OmniTool.java (infiniteblock)
+* Update WeaponHelper.java (infiniteblock)
+* Update ClientWeaponHandler.java (infiniteblock)
+* Update build.gradle (infiniteblock)
+* Update EnergyWeapon.java (infiniteblock)
+* Update Phaser.java (infiniteblock)
+* Update Phaser.java (infiniteblock)
+* Update Phaser.java (infiniteblock)
+* Fix for #49 (infiniteblock)
+
+0.8.1r (2022-07-09 15:21:42 +1200)
+----------------------------------
+* Update CHANGELOG.md (infiniteblock)
 * Update CHANGELOG.md (infiniteblock)
 * Update TileEntityMachineDecomposer.java (infiniteblock)
 * Power Tweaks. (infiniteblock)
