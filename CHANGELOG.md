@@ -3,6 +3,7 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* update (infiniteblock)
 * Bug fix (infiniteblock)
 * Update ClientProxy.java (infiniteblock)
 * Fix for #57 (infiniteblock)
