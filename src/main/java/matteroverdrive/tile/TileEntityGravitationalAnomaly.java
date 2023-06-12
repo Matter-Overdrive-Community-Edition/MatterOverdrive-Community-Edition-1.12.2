@@ -87,7 +87,9 @@ public class TileEntityGravitationalAnomaly extends MOTileEntity
 	private GravitationalAnomalySound sound;
 	private long mass;
 	private float suppression;
-
+	public int tickCounter = 0;
+	public int index = 0;
+	
 	public TileEntityGravitationalAnomaly() {
 		this(2048 + Math.round(Math.random() * 8192));
 	}
@@ -129,7 +131,12 @@ public class TileEntityGravitationalAnomaly extends MOTileEntity
 			}
 
 			manageEntityGravitation(world, 0);
-			manageBlockDestory(world);
+			tickCounter++;
+			if (tickCounter==40) {
+				manageBlockDestory(world);
+				index++;
+				tickCounter = 0;
+			}
 		}
 	}
 
