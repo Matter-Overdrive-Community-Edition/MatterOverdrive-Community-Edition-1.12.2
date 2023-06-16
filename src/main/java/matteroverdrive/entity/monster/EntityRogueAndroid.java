@@ -77,7 +77,7 @@ public class EntityRogueAndroid implements IConfigSubscriber {
 				ConfigurationHandler.CATEGORY_ENTITIES + "." + "rogue_android", new String[0],
 				"Rogue Android biome whitelist");
 		for (String aWhitelist : whitelist) {
-			biomesBlacklist.add(aWhitelist.toLowerCase());
+			biomesWhitelist.add(aWhitelist.toLowerCase());
 		}
 	}
 
@@ -98,9 +98,8 @@ public class EntityRogueAndroid implements IConfigSubscriber {
 				.get(ConfigurationHandler.CATEGORY_ENTITIES + ".rogue_android", "dimension.whitelist", new int[0]);
 		whitelistProp.setComment("Rogue Android Dimension ID whitelist");
 		int[] whitelist = whitelistProp.getIntList();
-
-		for (int item : whitelist) {
-			dimensionWhitelist.add(item);
+		for (int aWhitelist : whitelist) {
+			dimensionWhitelist.add(aWhitelist);
 		}
 	}
 
