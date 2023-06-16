@@ -33,12 +33,12 @@ public abstract class WeaponModuleBase extends MOBaseItem implements IWeaponModu
 		this.slot = slot;
 	}
 
-	public void applyWeaponStat(int meta, IWeaponStat stat, float value) {
+	public void applyWeaponStat(int meta, IWeaponStat stat, double d) {
 		if (!metaStatMap.containsKey(meta)) {
 			metaStatMap.put(meta, new HashMap<>());
 		}
 		Map<IWeaponStat, Float> statMap = metaStatMap.get(meta);
-		statMap.put(stat, value);
+		statMap.put(stat, (float) d);
 	}
 
 	@Override
@@ -64,8 +64,9 @@ public abstract class WeaponModuleBase extends MOBaseItem implements IWeaponModu
 	@Override
 	public float modifyWeaponStat(IWeaponStat stat, ItemStack module, ItemStack weapon, float originalStat) {
 		Map<IWeaponStat, Float> statMap = metaStatMap.get(module.getMetadata());
-		if (statMap == null || statMap.isEmpty())
+		if (statMap == null || statMap.isEmpty()) {
 			return originalStat;
+		}
 		return originalStat * statMap.getOrDefault(stat, 1f);
 	}
 

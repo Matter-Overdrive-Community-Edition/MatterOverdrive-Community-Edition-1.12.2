@@ -138,12 +138,12 @@ public abstract class EnergyWeapon extends MOItemEnergyContainer implements IWea
 
 	private String addStatWithMultiplyInfo(String statName, Object value, double multiply, String units) {
 		String info = String.format("%s: %s%s", statName, TextFormatting.DARK_AQUA, value);
-		System.out.println("Multiply: " + multiply);
+//		System.out.println("statName: "+ statName + " Multiply: " + multiply);
 		if (!units.isEmpty()) {
 			info += " " + units;
 		}
 		if (multiply != 1) {
-			if (multiply > 0.010) {
+			if (multiply > 0.002) {
 				info += TextFormatting.DARK_GREEN;
 			} else {
 				info += TextFormatting.DARK_RED;
@@ -369,12 +369,14 @@ public abstract class EnergyWeapon extends MOItemEnergyContainer implements IWea
 			WeaponShot shot) {
 		PlasmaBolt fire = new PlasmaBolt(shooter.world, shooter, position, dir, shot, getShotSpeed(weapon, shooter));
 		fire.setWeapon(weapon);
-		fire.setFireDamageMultiply(WeaponHelper.modifyStat(WeaponStats.FIRE_DAMAGE, weapon, 0));
+		if (WeaponHelper.hasStat(WeaponStats.FIRE_DAMAGE, weapon)) {
+		fire.setFireDamageMultiply(1f);
+		}
 		float explosionAmount = WeaponHelper.modifyStat(WeaponStats.EXPLOSION_DAMAGE, weapon, 0);
 		if (explosionAmount > 0) {
 			fire.setExplodeMultiply(getWeaponBaseDamage(weapon) * 0.3f * explosionAmount);
 		}
-		if (WeaponHelper.modifyStat(WeaponStats.RICOCHET, weapon, 0) == 1) {
+		if (WeaponHelper.hasStat(WeaponStats.RICOCHET, weapon)) {
 			fire.markRicochetable();
 		}
 

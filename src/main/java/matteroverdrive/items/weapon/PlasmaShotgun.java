@@ -143,32 +143,35 @@ public class PlasmaShotgun extends EnergyWeapon {
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityLivingBase entity, int timeLeft) {
 		super.onPlayerStoppedUsing(stack, world, entity, timeLeft);
-		if (canFire(stack, entity.world, entity)) {
-			int maxCount = getShotCount(stack, entity);
-			int timeElapsed = (getMaxItemUseDuration(stack) - timeLeft);
-			int count = Math.max(1, (int) ((1f - (timeElapsed / (float) MAX_CHARGE_TIME)) * maxCount));
-			float shotPercent = count / (float) getShotCount(stack, entity);
-			int ticks = getMaxItemUseDuration(stack) - timeLeft;
-			DrainEnergy(stack, ticks, false);
-			ClientProxy.instance().getClientWeaponHandler()
-					.setCameraRecoil(0.3f + getAccuracy(stack, entity, true) * 0.1f, 1);
-			Vec3d dir = entity.getLook(1);
-			Vec3d pos = getFirePosition(entity, dir, Mouse.isButtonDown(1));
-			WeaponShot shot = createShot(stack, entity, Mouse.isButtonDown(1));
-			shot.setCount(count);
-			shot.setDamage(15 + ticks);
-			shot.setAccuracy(shot.getAccuracy() * shotPercent);
-			shot.setRange(shot.getRange() + (int) (shot.getRange() * (1 - shotPercent)));
-			onClientShot(stack, entity, pos, dir, shot);
-			MatterOverdrive.NETWORK.sendToServer(new PacketFirePlasmaShot(entity.getEntityId(), pos, dir, shot));
-			addShootDelay(stack);
-			ClientProxy.instance().getClientWeaponHandler().setRecoil(
-					15 + (maxCount - count) * 2 + getAccuracy(stack, entity, isWeaponZoomed(entity, stack)) * 2,
-					1f + (maxCount - count) * 0.03f, 0.3f);
-			stopChargingSound();
-			shot.setDamage(15);
-		} else {
-			entity.stopActiveHand();
+		if (world.isRemote) {
+			if (canFire(stack, entity.world, entity)) {
+				int maxCount = getShotCount(stack, entity);
+				int timeElapsed = (getMaxItemUseDuration(stack) - timeLeft);
+				int count = Math.max(1, (int) ((1f - (timeElapsed / (float) MAX_CHARGE_TIME)) * maxCount));
+				float shotPercent = count / (float) getShotCount(stack, entity);
+				int ticks = getMaxItemUseDuration(stack) - timeLeft;
+				DrainEnergy(stack, ticks, false);
+				ClientProxy.instance().getClientWeaponHandler()
+						.setCameraRecoil(0.3f + getAccuracy(stack, entity, true) * 0.1f, 1);
+				Vec3d dir = entity.getLook(1);
+				Vec3d pos = getFirePosition(entity, dir, Mouse.isButtonDown(1));
+				WeaponShot shot = createShot(stack, entity, Mouse.isButtonDown(1));
+				shot.setCount(count);
+				shot.setDamage(15 + ticks);
+				shot.setAccuracy(shot.getAccuracy() * shotPercent);
+				shot.setRange(shot.getRange() + (int) (shot.getRange() * (1 - shotPercent)));
+				onClientShot(stack, entity, pos, dir, shot);
+				MatterOverdrive.NETWORK.sendToServer(new PacketFirePlasmaShot(entity.getEntityId(), pos, dir, shot));
+				addShootDelay(stack);
+
+				ClientProxy.instance().getClientWeaponHandler().setRecoil(
+						15 + (maxCount - count) * 2 + getAccuracy(stack, entity, isWeaponZoomed(entity, stack)) * 2,
+						1f + (maxCount - count) * 0.03f, 0.3f);
+				stopChargingSound();
+				shot.setDamage(15);
+			} else {
+				entity.stopActiveHand();
+			}
 		}
 
 	}

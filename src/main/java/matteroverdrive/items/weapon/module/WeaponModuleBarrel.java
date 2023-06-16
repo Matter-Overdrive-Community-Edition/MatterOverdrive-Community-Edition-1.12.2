@@ -27,18 +27,18 @@ public class WeaponModuleBarrel extends WeaponModuleBase implements IAdvancedMod
 		applyWeaponStat(DAMAGE_BARREL_ID, WeaponStats.AMMO, 0.5f);
 		applyWeaponStat(DAMAGE_BARREL_ID, WeaponStats.EFFECT, 0.5f);
 
-		applyWeaponStat(FIRE_BARREL_ID, WeaponStats.DAMAGE, 0.75f);
-		applyWeaponStat(FIRE_BARREL_ID, WeaponStats.FIRE_DAMAGE, 1f);
+		applyWeaponStat(FIRE_BARREL_ID, WeaponStats.DAMAGE, 0.5f);
+		applyWeaponStat(FIRE_BARREL_ID, WeaponStats.FIRE_DAMAGE, 10);
 		applyWeaponStat(FIRE_BARREL_ID, WeaponStats.AMMO, 0.5f);
 
-		applyWeaponStat(EXPLOSION_BARREL_ID, WeaponStats.EXPLOSION_DAMAGE, 1f);
-		applyWeaponStat(EXPLOSION_BARREL_ID, WeaponStats.AMMO, 0.2f);
-		applyWeaponStat(EXPLOSION_BARREL_ID, WeaponStats.EFFECT, 0.5f);
-		applyWeaponStat(EXPLOSION_BARREL_ID, WeaponStats.FIRE_RATE, 0.15f);
+		applyWeaponStat(EXPLOSION_BARREL_ID, WeaponStats.EXPLOSION_DAMAGE, 1);
+		applyWeaponStat(EXPLOSION_BARREL_ID, WeaponStats.AMMO, 0.2);
+		applyWeaponStat(EXPLOSION_BARREL_ID, WeaponStats.EFFECT, 0.5);
+		applyWeaponStat(EXPLOSION_BARREL_ID, WeaponStats.FIRE_RATE, 0.15);
 
-		applyWeaponStat(HEAL_BARREL_ID, WeaponStats.DAMAGE, 0f);
-		applyWeaponStat(HEAL_BARREL_ID, WeaponStats.AMMO, 0.5f);
-		applyWeaponStat(HEAL_BARREL_ID, WeaponStats.HEAL, 0.2f);
+		applyWeaponStat(HEAL_BARREL_ID, WeaponStats.DAMAGE, 0);
+		applyWeaponStat(HEAL_BARREL_ID, WeaponStats.AMMO, 0.5);
+		applyWeaponStat(HEAL_BARREL_ID, WeaponStats.HEAL, 0.1);
 
 		applyWeaponStat(DOOMSDAY_BARREL_ID, WeaponStats.EXPLOSION_DAMAGE, 3f);
 		applyWeaponStat(DOOMSDAY_BARREL_ID, WeaponStats.AMMO, 0.2f);
