@@ -3,6 +3,8 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* weapon stuff i havent published but has been in last few releases (infiniteblock)
+* Update CHANGELOG.md (infiniteblock)
 * Update EntityRogueAndroid.java (infiniteblock)
 * Update TileEntityMachineDecomposer.java (infiniteblock)
 * Update TileEntityMatterPipe.java (infiniteblock)
