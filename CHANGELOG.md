@@ -3,6 +3,11 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* Update EntityRogueAndroid.java (infiniteblock)
+* Update TileEntityMachineDecomposer.java (infiniteblock)
+* Update TileEntityMatterPipe.java (infiniteblock)
+* Update TileEntityGravitationalAnomaly.java (infiniteblock)
+* Matterpipe fix (infiniteblock)
 * update (infiniteblock)
 * Bug fix (infiniteblock)
 * Update ClientProxy.java (infiniteblock)
