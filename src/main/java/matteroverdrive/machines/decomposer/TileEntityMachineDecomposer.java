@@ -6,6 +6,7 @@ import matteroverdrive.blocks.BlockDecomposer;
 import matteroverdrive.data.Inventory;
 import matteroverdrive.data.inventory.MatterSlot;
 import matteroverdrive.data.inventory.RemoveOnlySlot;
+import matteroverdrive.data.transport.IFluidPipe;
 import matteroverdrive.init.MatterOverdriveCapabilities;
 import matteroverdrive.init.MatterOverdriveSounds;
 import matteroverdrive.machines.MachineNBTCategory;
@@ -22,9 +23,14 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
 import java.util.EnumSet;
 import java.util.Random;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class TileEntityMachineDecomposer extends MOTileEntityMachineMatter implements ISidedInventory {
 	public static final int MATTER_EXTRACT_SPEED = 32;
@@ -105,7 +111,7 @@ public class TileEntityMachineDecomposer extends MOTileEntityMachineMatter imple
 				for (EnumFacing dir : EnumFacing.VALUES) {
 					TileEntity e = world.getTileEntity(getPos().offset(dir));
 					EnumFacing opposite = dir.getOpposite();
-					if (e != null && e.hasCapability(MatterOverdriveCapabilities.MATTER_HANDLER, opposite)) {
+					if (e != null && !(e instanceof TileEntityMachineDecomposer) && e.hasCapability(MatterOverdriveCapabilities.MATTER_HANDLER, opposite)) {
 						int received = e.getCapability(MatterOverdriveCapabilities.MATTER_HANDLER, opposite)
 								.receiveMatter(matterStorage.getFluidAmount(), false);
 						if (received != 0) {
