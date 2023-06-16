@@ -9,6 +9,7 @@ import matteroverdrive.data.transport.IFluidPipe;
 import matteroverdrive.init.MatterOverdriveCapabilities;
 import matteroverdrive.init.OverdriveFluids;
 import matteroverdrive.machines.MachineNBTCategory;
+import matteroverdrive.machines.decomposer.TileEntityMachineDecomposer;
 import matteroverdrive.network.packet.client.PacketMatterUpdate;
 import matteroverdrive.util.TimeTracker;
 import matteroverdrive.util.math.MOMathHelper;
@@ -84,7 +85,7 @@ public class TileEntityMatterPipe extends TileEntityPipe implements IFluidPipe {
 					TileEntity handler = pipe.getTile().getWorld()
 							.getTileEntity(pipe.getTile().getPos().offset(direction));
 					if (handler != null && handler.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY,
-							direction.getOpposite()) && !(handler instanceof IFluidPipe)) {
+							direction.getOpposite()) && !(handler instanceof TileEntityMachineDecomposer) && !(handler instanceof IFluidPipe)) {
 						int amount = storage.extractMatter(handler
 								.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, direction.getOpposite())
 								.fill(new FluidStack(OverdriveFluids.matterPlasma, storage.getMatterStored()), true),
@@ -203,9 +204,6 @@ public class TileEntityMatterPipe extends TileEntityPipe implements IFluidPipe {
 
     @Override
     public void onDestroyed(World worldIn, BlockPos pos, IBlockState state) {
-        if (fluidPipeNetwork != null) {
-            fluidPipeNetwork.onNodeDestroy(state, this);
-        }
     }
 
 	public void breakConnection(IBlockState blockState, EnumFacing side) {
