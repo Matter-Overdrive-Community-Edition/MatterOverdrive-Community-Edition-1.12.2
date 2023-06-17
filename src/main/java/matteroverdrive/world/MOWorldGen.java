@@ -232,6 +232,9 @@ public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
 				&& shouldGenerateOres.getBoolean(true);
 		generateDilithium = shouldGenerate(MatterOverdrive.BLOCKS.dilithium_ore, config)
 				&& shouldGenerateOres.getBoolean(true);
+		Property shouldGenerateOthers = config.config.get(ConfigurationHandler.CATEGORY_WORLD_GEN,
+				ConfigurationHandler.CATEGORY_WORLD_SPAWN_OTHER, true);
+		shouldGenerateOthers.setComment("Should other Matter Overdrive World Blocks be Generated?");
 		generateBuildings = config.getBool("generate buildings", ConfigurationHandler.CATEGORY_WORLD_GEN, true,
 				"Should Matter Overdrive Structures Generate aka ImageGen");
 		MOAndroidHouseBuildingchance = (int) config.config.getInt(ConfigurationHandler.KEY_ANDROID_HOUSE_SPAWN_CHANCE,
