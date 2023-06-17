@@ -4,14 +4,11 @@ import matteroverdrive.MatterOverdrive;
 import matteroverdrive.Reference;
 import matteroverdrive.api.quest.QuestStack;
 import matteroverdrive.blocks.BlockTritaniumCrate;
-import matteroverdrive.blocks.BlockWeaponStation;
 import matteroverdrive.blocks.BlockDecorative;
 import matteroverdrive.data.quest.logic.QuestLogicBlockInteract;
 import matteroverdrive.blocks.includes.MOBlock;
 import matteroverdrive.tile.TileEntityHoloSign;
 import matteroverdrive.tile.TileEntityTritaniumCrate;
-import matteroverdrive.util.MOInventoryHelper;
-import matteroverdrive.world.MOImageGen;
 import matteroverdrive.world.MOLootTableManager;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -24,6 +21,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.NoiseGeneratorSimplex;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootTable;
@@ -97,7 +95,8 @@ public class MOWorldGenCargoShip extends MOWorldGenBuilding<MOWorldGenCargoShip.
 
 	@Override
 	public boolean shouldGenerate(Random random, World world, BlockPos pos) {
-		return (!(world.provider.getDimension() == -1) && isFarEnoughFromOthers(world, pos.getX(), pos.getZ(), MIN_DISTANCE_APART));
+		return world.getBiome(pos) != Biome.REGISTRY.getObject(new ResourceLocation("minecraft", "hell"))
+				&& isFarEnoughFromOthers(world, pos.getX(), pos.getZ(), MIN_DISTANCE_APART);
 	}
 
 	@Override
