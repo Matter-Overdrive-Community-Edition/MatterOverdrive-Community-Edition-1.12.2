@@ -9,6 +9,7 @@ import matteroverdrive.api.android.IBioticStat;
 import matteroverdrive.api.weapon.IWeapon;
 import matteroverdrive.client.data.Color;
 import matteroverdrive.client.render.HoloIcon;
+import matteroverdrive.client.render.RenderMatterScannerInfoHandler;
 import matteroverdrive.entity.android_player.AndroidPlayer;
 import matteroverdrive.entity.player.MOPlayerCapabilityProvider;
 import matteroverdrive.gui.android.*;
@@ -69,6 +70,7 @@ public class GuiAndroidHud extends Gui implements IConfigSubscriber {
 	public float opacity;
 	public float opacityBackground;
 	public boolean hideVanillaHudElements;
+	public boolean showEntityHudElements;
 	public boolean hudMovement;
 	private AnimationTextTyping textTyping;
 	private ShaderGroup hurtShader;
@@ -469,6 +471,11 @@ public class GuiAndroidHud extends Gui implements IConfigSubscriber {
 				"Should the health bar and food bar be hidden");
 		prop.setLanguageKey("config.android_hud.hide_vanilla");
 		hideVanillaHudElements = prop.getBoolean();
+		
+		prop = config.config.get(ConfigurationHandler.CATEGORY_ANDROID_HUD, "show_entity_info_hud_element", true,
+				"Show the entity info hud");
+		prop.setLanguageKey("config.android_hud.show_entity");
+		RenderMatterScannerInfoHandler.showEntityHudElements = prop.getBoolean();
 
 		prop = config.config.get(ConfigurationHandler.CATEGORY_ANDROID_HUD, "hud_movement", true,
 				"Should the Android HUD move when the player turns his head.");

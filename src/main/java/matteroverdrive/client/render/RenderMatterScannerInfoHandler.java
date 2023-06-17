@@ -39,6 +39,7 @@ import java.util.List;
 import static org.lwjgl.opengl.GL11.*;
 
 public class RenderMatterScannerInfoHandler implements IWorldLastRenderer {
+	public static boolean showEntityHudElements;
 	public final ResourceLocation spinnerTexture = new ResourceLocation(Reference.PATH_ELEMENTS + "spinner.png");
 	private final DecimalFormat healthFormater = new DecimalFormat("#.##");
 
@@ -130,6 +131,7 @@ public class RenderMatterScannerInfoHandler implements IWorldLastRenderer {
 				}
 			} else if (position.typeOfHit == RayTraceResult.Type.ENTITY) {
 				if (position.entityHit != null) {
+					if (showEntityHudElements) {
 					renderEntityInfo(position.entityHit, position, player, playerPos, ticks);
 				}
 			}
@@ -138,6 +140,7 @@ public class RenderMatterScannerInfoHandler implements IWorldLastRenderer {
 		GlStateManager.enableDepth();
 		GlStateManager.popAttrib();
 	}
+}
 
 	private void renderLinkInfo(RayTraceResult position, EntityPlayer player, Vec3d playerPos, ItemStack scanner) {
 		double offset = 0;
