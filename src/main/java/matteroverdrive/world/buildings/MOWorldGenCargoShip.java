@@ -97,8 +97,7 @@ public class MOWorldGenCargoShip extends MOWorldGenBuilding<MOWorldGenCargoShip.
 
 	@Override
 	public boolean shouldGenerate(Random random, World world, BlockPos pos) {
-		return (world.provider.getDimension() == 0 || world.provider.getDimension() == 1)
-				&& isFarEnoughFromOthers(world, pos.getX(), pos.getZ(), MIN_DISTANCE_APART);
+		return (!(world.provider.getDimension() == -1) && isFarEnoughFromOthers(world, pos.getX(), pos.getZ(), MIN_DISTANCE_APART));
 	}
 
 	@Override
