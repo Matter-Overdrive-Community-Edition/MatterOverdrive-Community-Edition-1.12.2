@@ -220,6 +220,11 @@ public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
 
 	@Override
 	public void onConfigChanged(ConfigurationHandler config) {
+		String comment = "Should Matter Overdrive Villager House be Generated ?";
+		MadScientistHouse.generateBuilding = config.getBool(ConfigurationHandler.KEY_HOUSE, ConfigurationHandler.CATEGORY_WORLD_GEN,
+				true, comment);
+		config.config.get(ConfigurationHandler.CATEGORY_WORLD_GEN, ConfigurationHandler.KEY_HOUSE, true)
+				.setComment(comment);
 		Property shouldGenerateOres = config.config.get(ConfigurationHandler.CATEGORY_WORLD_GEN,
 				ConfigurationHandler.CATEGORY_WORLD_SPAWN_ORES, true);
 		shouldGenerateOres.setComment("Should Matter Overdrive Ore Blocks be Generated ?");

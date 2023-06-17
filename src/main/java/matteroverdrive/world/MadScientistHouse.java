@@ -29,6 +29,7 @@ import java.util.Random;
 public class MadScientistHouse extends StructureVillagePieces.Village {
 	int villagersSpawned;
 	private boolean hasMadeChest;
+	public static boolean generateBuilding;
 
 	public MadScientistHouse() {
 	}
@@ -68,6 +69,7 @@ public class MadScientistHouse extends StructureVillagePieces.Village {
 	 * Spawners, it closes Mineshafts at the end, it adds Fences...
 	 */
 	public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn) {
+		if (generateBuilding) {
 		if (this.averageGroundLvl < 0) {
 			this.averageGroundLvl = this.getAverageGroundLevel(worldIn, structureBoundingBoxIn);
 
@@ -210,6 +212,7 @@ public class MadScientistHouse extends StructureVillagePieces.Village {
 
 		// spawnVillagers(world, boundingBox, 2, 3, 2, 1);
 		spawnVillagers(worldIn, structureBoundingBoxIn, 2, 1, 2, 1);
+		}
 		return true;
 	}
 

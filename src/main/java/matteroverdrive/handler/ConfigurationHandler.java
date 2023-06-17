@@ -50,6 +50,7 @@ public class ConfigurationHandler {
 	public static final String KEY_GRAVITATIONAL_ANOMALY_SPAWN_LEVEL = "gravitational anomaly spawn y level";
 	public static final String KEY_GRAVITATIONAL_ANOMALY_VANILLA_FLUIDS = "gravitational anomaly vanilla fluids";
 	public static final String KEY_GRAVITATIONAL_ANOMALY_FORGE_FLUIDS = "gravitational anomaly forge fluids";
+	public static final String KEY_HOUSE = "generate house";
 	public static final String KEY_ANDROID_HOUSE_SPAWN_CHANCE = "android house spawn chance";
 	public static final String KEY_SAND_PIT_SPAWN_CHANCE = "sand pit spawn chance";
 	public static final String KEY_CRASHED_SHIP_SPAWN_CHANCE = "crashed ship spawn chance";
@@ -120,6 +121,9 @@ public class ConfigurationHandler {
 		config.get(CATEGORY_WORLD_GEN, CATEGORY_WORLD_SPAWN_ORES, true,
 				"Should ores such as dilithium and tritanium ore spawn in the world. This applies for all ores !")
 				.setLanguageKey(String.format("config.%s.name", CATEGORY_WORLD_SPAWN_ORES.replace(' ', '_')));
+		config.get(CATEGORY_WORLD_GEN, CATEGORY_WORLD_SPAWN, true,
+				"Should the Matter Overdrive Villager house be Generated?")
+				.setLanguageKey(String.format("config.%s.name", CATEGORY_WORLD_SPAWN_OTHER.replace(' ', '_')));
 		config.get(CATEGORY_WORLD_GEN,
 				String.format("%s.%s", CATEGORY_WORLD_SPAWN, MatterOverdrive.BLOCKS.dilithium_ore.getTranslationKey()),
 				true)
