@@ -3,6 +3,17 @@ MatterOverdrive - Changelog
 
 Unreleased
 ----------
+* #60 Disable crate and inscriber generation in village. (infiniteblock)
+* #59 Mob info window config. (infiniteblock)
+* Update MOWorldGen.java (infiniteblock)
+* Update MOWorldGenCrashedSpaceShip.java (infiniteblock)
+* Update MOWorldGenCargoShip.java (infiniteblock)
+* Update MOSandPit.java (infiniteblock)
+* Disable fusion spawning... (infiniteblock)
+
+0.8.4 (2023-06-17 10:02:28 +1200)
+---------------------------------
+* Update CHANGELOG.md (infiniteblock)
 * weapon stuff i havent published but has been in last few releases (infiniteblock)
 * Update CHANGELOG.md (infiniteblock)
 * Update EntityRogueAndroid.java (infiniteblock)
