@@ -31,6 +31,7 @@ public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
 	private final Random anomaliesRandom;
 	private final Random buildingsRandom;
 	HashSet<Integer> oreDimentionsBlacklist;
+	HashSet<Integer> buildingsDimentionsBlacklist;
 	boolean generateTritanium;
 	boolean generateDilithium;
 	boolean generateAnomalies;
@@ -52,8 +53,8 @@ public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
 		buildingsRandom = new Random();
 		buildings = new ArrayList<>();
 		worldGenBuildingQueue = new ArrayDeque<>();
-
 		oreDimentionsBlacklist = new HashSet<>();
+		buildingsDimentionsBlacklist = new HashSet<>();
 	}
 
 	public static GenPositionWorldData getWorldPositionData(World world) {
@@ -99,7 +100,7 @@ public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
 		buildingsRandom.setSeed(chunkSeed);
 		generateGravitationalAnomalies(world, anomaliesRandom, chunkX * 16, chunkZ * 16);
 		generateOres(world, oreRandom, chunkX * 16, chunkZ * 16, world.provider.getDimension());
-		startGenerateBuildings(world, buildingsRandom, chunkX, chunkZ, chunkGenerator, chunkProvider);
+		startGenerateBuildings(world, buildingsRandom, chunkX, chunkZ, chunkGenerator, chunkProvider, world.provider.getDimension());
 	}
 
 	public void generateOres(World world, Random random, int chunkX, int chunkZ, int dimentionID) {
@@ -144,8 +145,8 @@ public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
 		return p.getBoolean(true);
 	}
 
-	public void startGenerateBuildings(World world, Random random, int chunkX, int chunkZ,
-			IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+	public void startGenerateBuildings(World world, Random random, int chunkX, int chunkZ, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider, int dimentionID) {
+		if (!buildingsDimentionsBlacklist.contains(dimentionID)) {
 		if (generateBuildings && random.nextDouble() <= BUILDING_SPAWN_CHANCE) {
 			BlockPos pos = world
 					.getHeight(new BlockPos(chunkX * 16 + random.nextInt(16), 0, chunkZ * 16 + random.nextInt(16)));
@@ -157,7 +158,7 @@ public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
 			}
 		}
 	}
-
+}
 	public MOImageGen.ImageGenWorker startBuildingGeneration(MOWorldGenBuilding<?> building, BlockPos pos,
 			Random random, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider,
 			boolean forceGeneration) {
@@ -226,11 +227,8 @@ public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
 				&& shouldGenerateOres.getBoolean(true);
 		generateDilithium = shouldGenerate(MatterOverdrive.BLOCKS.dilithium_ore, config)
 				&& shouldGenerateOres.getBoolean(true);
-		Property shouldGenerateOthers = config.config.get(ConfigurationHandler.CATEGORY_WORLD_GEN,
-				ConfigurationHandler.CATEGORY_WORLD_SPAWN_OTHER, true);
-		shouldGenerateOthers.setComment("Should other Matter Overdrive World Blocks be Generated?");
 		generateBuildings = config.getBool("generate buildings", ConfigurationHandler.CATEGORY_WORLD_GEN, true,
-				"Should Matter Overdrive Buildings Generate aka ImageGen");
+				"Should Matter Overdrive Structures Generate aka ImageGen");
 		MOAndroidHouseBuildingchance = (int) config.config.getInt(ConfigurationHandler.KEY_ANDROID_HOUSE_SPAWN_CHANCE,
 				ConfigurationHandler.CATEGORY_WORLD_GEN, 20, 0, 100, "Spawn Weight of Android house");
 		MOSandPitchance = (int) config.config.getInt(ConfigurationHandler.KEY_SAND_PIT_SPAWN_CHANCE,
@@ -243,8 +241,7 @@ public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
 				100, "Spawn Weight of Underwater base");
 		MOWorldGenCargoShipchance = (int) config.config.getInt(ConfigurationHandler.KEY_CARGO_SHIP_SPAWN_CHANCE,
 				ConfigurationHandler.CATEGORY_WORLD_GEN, 5, 0, 100, "Spawn Weight of Cargo ship");
-		generateAnomalies = shouldGenerate(MatterOverdrive.BLOCKS.gravitational_anomaly, config)
-				&& shouldGenerateOthers.getBoolean(true);
+		generateAnomalies = shouldGenerate(MatterOverdrive.BLOCKS.gravitational_anomaly, config);
 		this.oreDimentionsBlacklist.clear();
 		Property oreDimentionBlacklistProp = config.config.get(ConfigurationHandler.CATEGORY_WORLD_GEN,
 				"ore_gen_blacklist", new int[] { -1, 2 });
@@ -253,6 +250,15 @@ public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
 		int[] oreDimentionBlacklist = oreDimentionBlacklistProp.getIntList();
 		for (int anOreDimentionBlacklist : oreDimentionBlacklist) {
 			this.oreDimentionsBlacklist.add(anOreDimentionBlacklist);
+		}
+		this.buildingsDimentionsBlacklist.clear();
+		Property buildingsDimentionsBlacklistProp = config.config.get(ConfigurationHandler.CATEGORY_WORLD_GEN,
+				"structure_gen_blacklist", new int[] { -1, 2 });
+		buildingsDimentionsBlacklistProp.setComment("A blacklist of all the Dimensions structures shouldn't spawn in");
+		buildingsDimentionsBlacklistProp.setLanguageKey("config.structure_gen_blacklist.name");
+		int[] buildingsDimentionsBlacklist = buildingsDimentionsBlacklistProp.getIntList();
+		for (int anbuildingsDimentionsBlacklist : buildingsDimentionsBlacklist) {
+			this.buildingsDimentionsBlacklist.add(anbuildingsDimentionsBlacklist);
 		}
 	}
 }
