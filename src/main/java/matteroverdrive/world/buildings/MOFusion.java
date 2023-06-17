@@ -51,9 +51,7 @@ public class MOFusion extends MOWorldGenBuilding {
 
 	@Override
 	public boolean shouldGenerate(Random random, World world, BlockPos pos) {
-		return (world.provider.getDimension() != 0 || world.provider.getDimension() != 1)
-				&& world.getBiome(pos) == Biome.REGISTRY.getObject(new ResourceLocation("minecraft", "desert"))
-				&& isFarEnoughFromOthers(world, pos.getX(), pos.getZ(), MIN_DISTANCE_APART);
+		return false;
 	}
 
 	@Override
