@@ -41,7 +41,7 @@ public class MOWorldGenCrashedSpaceShip extends MOWorldGenBuilding {
 		addMapping(0x38c8df, MatterOverdrive.BLOCKS.decorative_clean);
 		addMapping(0x187b8b, MatterOverdrive.BLOCKS.decorative_vent_bright);
 		addMapping(0xaa38df, MatterOverdrive.BLOCKS.industrialGlass);
-		addMapping(0x00ff78, Blocks.GRASS);
+		//addMapping(0x00ff78, Blocks.GRASS);
 		addMapping(0xd8ff00, MatterOverdrive.BLOCKS.holoSign);
 		addMapping(0xaccb00, MatterOverdrive.BLOCKS.holoSign);
 		addMapping(0x3896df, MatterOverdrive.BLOCKS.decorative_tritanium_plate);
