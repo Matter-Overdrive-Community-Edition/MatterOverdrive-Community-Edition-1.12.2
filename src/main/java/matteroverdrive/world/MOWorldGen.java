@@ -249,7 +249,7 @@ public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
 		generateAnomalies = shouldGenerate(MatterOverdrive.BLOCKS.gravitational_anomaly, config);
 		this.oreDimentionsBlacklist.clear();
 		Property oreDimentionBlacklistProp = config.config.get(ConfigurationHandler.CATEGORY_WORLD_GEN,
-				"ore_gen_blacklist", new int[] { -1, 2 });
+				"ore_gen_blacklist", new int[] { -1 });
 		oreDimentionBlacklistProp.setComment("A blacklist of all the Dimensions ores shouldn't spawn in");
 		oreDimentionBlacklistProp.setLanguageKey("config.ore_gen_blacklist.name");
 		int[] oreDimentionBlacklist = oreDimentionBlacklistProp.getIntList();
@@ -258,7 +258,7 @@ public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
 		}
 		this.buildingsDimentionsBlacklist.clear();
 		Property buildingsDimentionsBlacklistProp = config.config.get(ConfigurationHandler.CATEGORY_WORLD_GEN,
-				"structure_gen_blacklist", new int[] { -1, 2 });
+				"structure_gen_blacklist", new int[] { -1 });
 		buildingsDimentionsBlacklistProp.setComment("A blacklist of all the Dimensions structures shouldn't spawn in");
 		buildingsDimentionsBlacklistProp.setLanguageKey("config.structure_gen_blacklist.name");
 		int[] buildingsDimentionsBlacklist = buildingsDimentionsBlacklistProp.getIntList();
