@@ -93,6 +93,6 @@ public class MOSandPit extends MOWorldGenBuilding {
 
 	@Override
 	public boolean shouldGenerate(Random random, World world, BlockPos pos) {
-		return world.getBiome(pos) == Biome.REGISTRY.getObject(new ResourceLocation("minecraft", "desert"));
+		return world.getBiome(pos) == Biome.REGISTRY.getObject(new ResourceLocation("minecraft", "desert")) && isFarEnoughFromOthers(world, pos.getX(), pos.getZ(), MIN_DISTANCE_APART);
 	}
 }
