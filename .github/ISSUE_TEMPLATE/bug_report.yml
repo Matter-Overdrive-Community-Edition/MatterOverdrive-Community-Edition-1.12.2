@@ -100,7 +100,7 @@ body:
         Please upload your log (latest.log and/or crash report) to [Github
         Gist](https://gist.github.com/) then paste the gist url here, you
         can paste as many links as needed
-      placeholder: ''
+      placeholder: 'http://'
   - type: textarea
     id: repro
     attributes:
