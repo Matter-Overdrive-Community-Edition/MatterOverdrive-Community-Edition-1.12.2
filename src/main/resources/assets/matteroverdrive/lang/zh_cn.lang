@@ -1,6 +1,12 @@
 ##########################################################################################################
 # Items
+item.selector.name=选择器
+item.debugger.name=传送机调试器
 
+tile.area_teleporter.name=区域传送机
+tile.creative_generator.name=创造模式发电机
+
+itemGroup.structuralrelocation=结构迁移
 item.matteroverdrive.matter_scanner.name=物质扫描仪
 item.matteroverdrive.emergency_ration.name=应急营养单元
 item.matteroverdrive.phaser.name=相位能量整流器
@@ -91,6 +97,7 @@ item.matteroverdrive.record.matteroverdrive.transformation.desc=BoxCat Games - T
 item.matteroverdrive.trilithium_crystal.name=纯净三锂晶体
 item.matteroverdrive.artifact.name=未知工艺品
 item.matteroverdrive.quantum_fold_manipulator.name=量子折叠操纵仪
+item.matteroverdrive.matter.name=物质
 
 #/#//////////// Upgrades ////////////
 item.matteroverdrive.upgrade.speed.name=速度升级
@@ -100,6 +107,7 @@ item.matteroverdrive.upgrade.range.name=范围升级
 item.matteroverdrive.upgrade.power_storage.name=储能升级
 item.matteroverdrive.upgrade.hyper_speed.name=超速升级
 item.matteroverdrive.upgrade.matter_storage.name=仓储升级
+item.matteroverdrive.upgrade.muffler.name=静音
 
 #/#//////////// Weapon Modules ///////
 item.matteroverdrive.weapon_module_color.name=颜色模块
@@ -110,6 +118,13 @@ item.matteroverdrive.weapon_module_barrel.heal.name=再生转换器
 item.matteroverdrive.weapon_module_barrel.doomsday.name=衰变聚爆矩阵（末日型）
 item.matteroverdrive.weapon_module_barrel.block.name=体素扩张失能湮灭矩阵（剧毒）
 item.matteroverdrive.weapon_module_ricochet.name=束流反射装置
+item.matteroverdrive.weapon_module_holo_sights.name=全息瞄准镜
+item.matteroverdrive.weapon_module_holo_sights.normal.name=全息瞄准镜
+item.matteroverdrive.weapon_module_holo_sights.wide.name=全息瞄准镜（宽型准星）
+item.matteroverdrive.weapon_module_holo_sights.small.name=全息瞄准镜（小型准星）
+item.matteroverdrive.weapon_module_holo_sights.dot.name=全息瞄准镜（点状准星）
+item.matteroverdrive.holo_sights_base.name=全息瞄准镜基座
+
 item.matteroverdrive.sniper_scope.name=狙击镜
 
 
@@ -187,12 +202,15 @@ tile.gravitational_anomaly.name=引力异常点
 tile.gravitational_stabilizer.name=引力稳定器
 tile.gravitational_stabilizer.details=用于减弱引力异常点的影响
 tile.matter_recycler.name=物质回收机
+tile.microwave.name=微波炉
 tile.matter_recycler.details=回收物质以便重新分解
 tile.android_spawner.name=机械人刷怪笼
 
 #/#//////////// Fluids ////////////
 tile.matter_plasma.name=等离子物质
+fluid.matter_plasma=等离子物质
 tile.molten_tritanium.name=熔融三钛合金
+fluid.molten_tritanium=熔融三钛合金
 
 
 #/#//////////// Fusion Reactor ////////////
@@ -243,17 +261,24 @@ tile.tritanium_crate_green.name=绿色三钛货箱
 tile.tritanium_crate_red.name=红色三钛货箱
 tile.tritanium_crate_black.name=黑色三钛货箱
 
+tile.new_tritanium_crate.name=新型三钛货箱
+tile.new_tritanium_crate_white.name=新型白色三钛货箱
+tile.new_tritanium_crate_purple.name=新型紫色三钛货箱
+
 #/#//////////// Entities /////////////////
+
 entity.matteroverdrive.rogue_android.name=混战机械人
 entity.matteroverdrive.failed_pig.name=失败品改造猪
 entity.matteroverdrive.failed_chicken.name=失败品改造鸡
 entity.matteroverdrive.failed_cow.name=失败品改造牛
 entity.matteroverdrive.failed_sheep.name=失败品改造羊
 entity.matteroverdrive.mad_scientist.name=疯狂科学家
+entity.Villager.matteroverdrive.mad_scientist.name=疯狂科学家
 entity.mad_scientist.name=疯狂科学家
 entity.matteroverdrive.mad_scientist.junkie.name=疯狂科学家（瘾君子）
 entity.matteroverdrive.ranged_rogue_android.name=枪战机械人
 entity.matteroverdrive.mutant_scientist.name=变异科学家
+entity.drone.name=无人机
 
 #/#//////////// Decorative ////////////////////
 tile.decorative.stripes.name=警戒纹板材
@@ -267,7 +292,6 @@ tile.decorative.carbon_fiber_plate.name=碳纤维板材
 tile.decorative.matter_tube.name=物质管道
 tile.decorative.beams.name=三钛格栅
 tile.decorative.floor_tiles.name=瓷地砖
-tile.decorative.floor_tiles_green.name=绿瓷地砖
 tile.decorative.floor_noise.name=油地毡
 tile.decorative.tritanium_plate_stripe.name=导向三钛板材
 tile.decorative.floor_tile_white.name=白瓷地砖
@@ -339,6 +363,7 @@ itemGroup.tabMO=超能物质
 itemGroup.tabMO_modules=超能物质 武器配件
 itemGroup.tabMO_androidParts=超能物质 机械人部件
 itemGroup.tabMO_contracts=超能物质 任务卡
+
 ##########################################################################################################
 # Upgrade Types
 upgradetype.Speed.name=时间
@@ -350,6 +375,8 @@ upgradetype.Range.name=范围
 upgradetype.PowerStorage.name=能量存储
 upgradetype.MatterStorage.name=物质存储
 upgradetype.MatterUsage.name=物质消耗
+upgradetype.Muffler.name=静音
+upgradetype.Muffler.description=消除机器的全部噪声
 
 ##########################################################################################################
 # Weapon Stats
@@ -434,11 +461,13 @@ gui.solar_panel.name=光伏板
 gui.pattern_monitor.name=网络终端
 gui.network_switch.name=物质网络转换器
 gui.recycler.name=物质回收机
+gui.microwave.name=微波炉
 gui.fusion_reactor.name=湮灭反应堆
 gui.charging_station.name=充能站
 gui.weapon_station.name=武器装配台
 gui.inscriber.name=分子刻录仪
 gui.contract_market.name=赏金公会
+gui.dimensional_pylon.name=维度反应器
 
 #//////////// Other ///////////////
 gui.redstone_mode.high=高频
@@ -447,6 +476,11 @@ gui.redstone_mode.disabled=禁用
 gui.config.redstone=红石
 gui.config.owner=拥有者
 gui.config.mnet.address=地址
+
+gui.config.spawn_amount=生成数量
+gui.config.spawn_range=生成半径
+gui.config.spawn_delay=生成延迟[20t=1s]
+item.transport_flash_drive.name=传送闪存驱动器槽
 
 gui.android_hud.transforming.line.0=启动系统
 gui.android_hud.transforming.line.1=构建神经网络
@@ -594,7 +628,7 @@ config.starmap.name=星图选项
 config.ore_gen_blacklist.name=矿物黑名单
 config.abilities.name=机械人能力
 config.entities.name=生物
-config.debug.name=Debug
+config.debug.name=调试
 config.android_hud.name=机械人HUD
 config.android_hud.stats.position=状态位置
 config.android_hud.bionicStats.position=仿生能力位置
@@ -602,6 +636,7 @@ config.android_hud.minimap.position=小地图位置
 config.android_hud.color=HUD颜色
 config.android_hud.opacity=HUD透明度
 config.android_hud.hide_vanilla=隐藏原版HUD
+config.android_hud.show_entity=显示实体信息HUD
 config.android_hud.opacity_background=HUD不透明度
 config.compatibility.name=兼容性
 
@@ -621,11 +656,6 @@ alert.new_update=有新版本可用！
 enchantment.matteroverdrive.weapon.damage=超频
 
 ###############################################################################################################
-# Fluids
-fluid.matter_plasma.name=等离子物质
-fluid.molten_tritanium=熔融三钛合金
-
-##########################################################################################################
 # Guides
 guide.category.general.name=基础
 guide.category.weapons.name=武器
@@ -689,6 +719,7 @@ color.white=白色
 
 material.tritanium=三钛合金
 container.tritanium_crate=三钛合金货箱
+container.new_tritanium_crate=新型三钛合金货箱
 rarity.legendary=传奇
 
 mo.jei.time=%d秒
