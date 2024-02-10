@@ -160,5 +160,8 @@ public class BlockGravitationalAnomaly extends MOBlockContainer<TileEntityGravit
 		TileEntityGravitationalAnomaly.GRAVITATION = config.getBool("gravitational pull",
 				ConfigurationHandler.CATEGORY_SERVER + "." + getTranslationKey().substring(5), true,
 				"Should the gravitational entity pull entities towards it");
+		TileEntityGravitationalAnomaly.SOUND = config.getBool("gravitational anomaly souund",
+				ConfigurationHandler.CATEGORY_CLIENT, true,
+				"Should the gravitational anomaly have sound?");
 	}
 }

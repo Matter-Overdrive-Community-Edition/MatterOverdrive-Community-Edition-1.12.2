@@ -81,6 +81,7 @@ public class TileEntityGravitationalAnomaly extends MOTileEntity
 	public static boolean FORGE_FLUIDS = true;
 	public static boolean BLOCK_DESTRUCTION = true;
 	public static boolean GRAVITATION = true;
+	public static boolean SOUND = true;
 	private final TimeTracker blockDestoryTimer;
 	PriorityQueue<BlockPos> blocks;
 	List<AnomalySuppressor> supressors;
@@ -270,11 +271,15 @@ public class TileEntityGravitationalAnomaly extends MOTileEntity
 
 	@SideOnly(Side.CLIENT)
 	public void manageSound() {
+		if(SOUND) {
 		if (sound == null) {
 			playSounds();
 		} else {
 			sound.setVolume(Math.min(MAX_VOLUME, getBreakStrength(0, (float) getMaxRange()) * 0.1f));
 			sound.setRange(getMaxRange());
+		}
+		} else {
+			stopSounds();
 		}
 	}
 
