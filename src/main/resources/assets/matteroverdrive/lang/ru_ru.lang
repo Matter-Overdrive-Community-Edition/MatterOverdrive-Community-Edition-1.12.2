@@ -1,124 +1,132 @@
 ##########################################################################################################
 # Предметы/Items #
+item.selector.name=Selector
+item.debugger.name=Teleporter Debugger
 
-item.matter_scanner.name=Сканер материи
-item.emergency_ration.name=Аварийный паёк
-item.phaser.name=Фазер
-item.battery.name=Батарейка
-item.creative_battery.name=Творческая батарейка
-item.me_conversion_matrix.name=Материально-энергетическая конвертирующая матрица
-item.isolinear_circuit.mk1.name=Изолинейная схема MK1
-item.isolinear_circuit.mk2.name=Изолинейная схема MK2
-item.isolinear_circuit.mk3.name=Изолинейная схема MK3
-item.isolinear_circuit.mk4.name=Изолинейная схема MK4
-item.upgrade.base.name=Оболочка улучшений
-item.h_compensator.name=Гейзенберговский компенсатор
-item.integration_matrix.name=Матрица интеграции
-item.s_magnet.name=Сверхпроводящий магнит
-item.matter_dust_refined.name=Очишенная материальная пыль
-item.matter_dust.name=Материальная пыль
-item.matter_dust.details=Положить в утилизатор, чтобы очистить
-item.machine_casing.name=Машинный корпус
-item.dilithium_crystal.name=Дилитиевый кристалл
-item.tritanium_ingot.name=Тритановый слиток
-item.tritanium_plate.name=Тритановая пластина
-item.tritanium_dust.name=Тритановая пыль
-item.pattern_drive.name=Шаблон привода
-item.pattern_drive.details=Хранит 2 шаблона предмета
-item.earl_gray_tea.name=Чай. Эрл Грей. Горячий.
-item.romulan_ale.name=Ромуланский эль
-item.romulan_ale.details=Высоко опьяняющий алкогольный напиток ромуланского происхождения
-item.security_protocol.empty.name=Протокол безопасности
-item.security_protocol.claim.name=Протокол безопасности [Запрос]
-item.security_protocol.claim.details=Защищает машины
-item.security_protocol.access.name=Протокол безопасности [Доступ]
-item.security_protocol.access.details=Позволяет получить доступ к защищенным машинам
-item.security_protocol.remove.name=Протокол безопасности [Удаление]
-item.security_protocol.remove.details=Убирает защиту у машин
-item.security_protocol.invalid=Неверный протокол безопасности
-item.tritanium_wrench.name=Тритановый ключ
-item.tritanium_wrench.details=Безопасно демонтирует и вращает машины
-item.spacetime_equalizer.name=Пространственно-временной эквалайзер
-item.spacetime_equalizer.details=Может быть одет в слот нагрудника, чтобы предотвратить влияние гравитационных сил
-item.rogue_android_part.head.name=Андроид-голова
-item.rogue_android_part.arms.name=Андроид-рука
-item.rogue_android_part.legs.name=Андроид-нога
-item.rogue_android_part.chest.name=Андроид-торс
-item.rogue_android_part.melee=Рукопашный Андроид
-item.rogue_android_part.range=Дальнобойный Андроид
-item.forcefield_emitter.name=Излучатель силового поля
-item.hc_battery.name=Высокоёмкостная батарейка
-item.ship_factory.name=Корабль-фабрика
-item.ship_factory.details=Позволяет строить корабли
-item.scout_ship.name=Разведывательный корабль
-item.scout_ship.details=Быстрый корабль, используется для разведки
-item.ship_colonizer.name=Поселенческий корабль
-item.ship_colonizer.details=Используется для защиты планет путем создания базы по прибытию
-item.building_base.name=Основа
-item.building_base.details=Главное здание, нужное всем
+tile.area_teleporter.name=Area Teleporter
+tile.creative_generator.name=Creative Generator
+
+itemGroup.structuralrelocation=Structural Relocation
+item.matteroverdrive.matter_scanner.name=Сканер материи
+item.matteroverdrive.emergency_ration.name=Аварийный паёк
+item.matteroverdrive.phaser.name=Фазер
+item.matteroverdrive.battery.name=Батарейка
+item.matteroverdrive.creative_battery.name=Творческая батарейка
+item.matteroverdrive.me_conversion_matrix.name=Материально-энергетическая конвертирующая матрица
+item.matteroverdrive.isolinear_circuit.mk1.name=Изолинейная схема MK1
+item.matteroverdrive.isolinear_circuit.mk2.name=Изолинейная схема MK2
+item.matteroverdrive.isolinear_circuit.mk3.name=Изолинейная схема MK3
+item.matteroverdrive.isolinear_circuit.mk4.name=Изолинейная схема MK4
+item.matteroverdrive.upgrade.base.name=Оболочка улучшений
+item.matteroverdrive.h_compensator.name=Гейзенберговский компенсатор
+item.matteroverdrive.integration_matrix.name=Матрица интеграции
+item.matteroverdrive.s_magnet.name=Сверхпроводящий магнит
+item.matteroverdrive.matter_dust_refined.name=Очишенная материальная пыль
+item.matteroverdrive.matter_dust.name=Материальная пыль
+item.matteroverdrive.matter_dust.details=Положить в утилизатор, чтобы очистить
+item.matteroverdrive.machine_casing.name=Машинный корпус
+item.matteroverdrive.dilithium_crystal.name=Дилитиевый кристалл
+item.matteroverdrive.tritanium_ingot.name=Тритановый слиток
+item.matteroverdrive.tritanium_plate.name=Тритановая пластина
+item.matteroverdrive.tritanium_dust.name=Тритановая пыль
+item.matteroverdrive.pattern_drive.name=Шаблон привода
+item.matteroverdrive.pattern_drive.details=Хранит 2 шаблона предмета
+item.matteroverdrive.earl_gray_tea.name=Чай. Эрл Грей. Горячий.
+item.matteroverdrive.romulan_ale.name=Ромуланский эль
+item.matteroverdrive.romulan_ale.details=Высоко опьяняющий алкогольный напиток ромуланского происхождения
+item.matteroverdrive.security_protocol.empty.name=Протокол безопасности
+item.matteroverdrive.security_protocol.claim.name=Протокол безопасности [Запрос]
+item.matteroverdrive.security_protocol.claim.details=Защищает машины
+item.matteroverdrive.security_protocol.access.name=Протокол безопасности [Доступ]
+item.matteroverdrive.security_protocol.access.details=Позволяет получить доступ к защищенным машинам
+item.matteroverdrive.security_protocol.remove.name=Протокол безопасности [Удаление]
+item.matteroverdrive.security_protocol.remove.details=Убирает защиту у машин
+item.matteroverdrive.security_protocol.invalid=Неверный протокол безопасности
+item.matteroverdrive.tritanium_wrench.name=Тритановый ключ
+item.matteroverdrive.tritanium_wrench.details=Безопасно демонтирует и вращает машины
+item.matteroverdrive.spacetime_equalizer.name=Пространственно-временной эквалайзер
+item.matteroverdrive.spacetime_equalizer.details=Может быть одет в слот нагрудника, чтобы предотвратить влияние гравитационных сил
+item.matteroverdrive.rogue_android_part.head.name=Андроид-голова
+item.matteroverdrive.rogue_android_part.arms.name=Андроид-рука
+item.matteroverdrive.rogue_android_part.legs.name=Андроид-нога
+item.matteroverdrive.rogue_android_part.chest.name=Андроид-торс
+item.matteroverdrive.rogue_android_part.melee=Рукопашный Андроид
+item.matteroverdrive.rogue_android_part.range=Дальнобойный Андроид
+item.matteroverdrive.forcefield_emitter.name=Излучатель силового поля
+item.matteroverdrive.hc_battery.name=Высокоёмкостная батарейка
 item.matteroverdrive.android_pill_red.name=Красная пилюля
 item.matteroverdrive.android_pill_red.details=Примите красную пилюлю /n и забудьте о том, что вас сдерживает
 item.matteroverdrive.android_pill_blue.name=Синяя пилюля
 item.matteroverdrive.android_pill_blue.details=Примите синюю пилюлю /n и вы проснетесь в постели более мудрым
-item.creative_pattern_drive.name=Творческий шаблон привода
-item.creative_pattern_drive.details=Содержит наиболее воспроизводимые элементы /n ПКМ во время приседа, чтобы перезагрузить
-item.network_flash_drive.name=Сетевой флэш-накопитель
-item.network_flash_drive.details=Используется в качестве фильтра в устройствах материальной сети
-item.energy_pack.name=Энергетический ранец
-item.energy_pack.details=Используется для быстрой подзарядки./nДля "подзарядки" энергетических оружий
-item.phaser_rifle.name=Фазерная винтовка
-item.transport_flash_drive.name=Транспортный флэш-накопитель
-item.transport_flash_drive.details=Используется для обозначения места для быстрого использования Транспортера
-item.matter_container.name=Контейнер материи (Пустой)
-item.matter_container_full.name=Контейнер материи (Полный)
-item.tritanium_nugget.name=Тритановый самородок
-item.tritanium_spine.name=Тритановый позвоночник
-item.data_pad.name=Датапад
-item.data_pad.details=Содержит информацию о всём в Matter Overdrive
-item.omni_tool.name=Омнитул
+item.matteroverdrive.creative_pattern_drive.name=Творческий шаблон привода
+item.matteroverdrive.creative_pattern_drive.details=Содержит наиболее воспроизводимые элементы /n ПКМ во время приседа, чтобы перезагрузить
+item.matteroverdrive.network_flash_drive.name=Сетевой флэш-накопитель
+item.matteroverdrive.network_flash_drive.details=Используется в качестве фильтра в устройствах материальной сети
+item.matteroverdrive.name=Энергетическая ячейка
+item.matteroverdrive.energy_pack.details=Используется для быстрой подзарядки./nДля "подзарядки" энергетических оружий
+item.matteroverdrive.phaser_rifle.name=Фазерная винтовка
+item.matteroverdrive.transport_flash_drive.name=Транспортный флэш-накопитель
+item.matteroverdrive.transport_flash_drive.details=Используется для обозначения места для быстрого использования Транспортера
+item.matteroverdrive.matter_container.name=Контейнер материи (Пустой)
+item.matteroverdrive.matter_container_full.name=Контейнер материи (Полный)
+item.matteroverdrive.tritanium_nugget.name=Тритановый самородок
+item.matteroverdrive.tritanium_spine.name=Тритановый позвоночник
+item.matteroverdrive.data_pad.name=Датапад
+item.matteroverdrive.data_pad.details=Содержит информацию о всём в Matter Overdrive
+item.matteroverdrive.omni_tool.name=Омнитул
 item.matteroverdrive.android_pill_yellow.name=Жёлтая пилюля
 item.matteroverdrive.android_pill_yellow.details=Используется для сброса всех разблокированных способностей Андроида
-item.tritanium_helmet.name=Тритановый шлем
-item.tritanium_chestplate.name=Тритановый нагрудник
-item.tritanium_leggings.name=Тритановые поножи
-item.tritanium_boots.name=Тритановые ботинки
-item.tritanium_hoe.name=Тритановая мотыга
-item.tritanium_sword.name=Тритановый меч
-item.tritanium_pickaxe.name=Тритановая кирка
-item.tritanium_axe.name=Тритановый топор
-item.tritanium_shovel.name=Тритановая лопата
-item.contract.name=Контракт
-item.ion_sniper.name=Ионная винтовка
-item.plasma_shotgun.name=Плазменный дробовик
-item.weapon_receiver.name=Оружейный приёмник
-item.weapon_handle.name=Оружейная рукоять
-item.plasma_core.name=Плазменное ядро
-item.portable_decomposer.name=Портативный разлагатель
-item.portable_decomposer.details=Разлагает подобранные предметы в плазменную материю
+item.matteroverdrive.tritanium_helmet.name=Тритановый шлем
+item.matteroverdrive.tritanium_chestplate.name=Тритановый нагрудник
+item.matteroverdrive.tritanium_leggings.name=Тритановые поножи
+item.matteroverdrive.tritanium_boots.name=Тритановые ботинки
+item.matteroverdrive.tritanium_hoe.name=Тритановая мотыга
+item.matteroverdrive.tritanium_sword.name=Тритановый меч
+item.matteroverdrive.tritanium_pickaxe.name=Тритановая кирка
+item.matteroverdrive.tritanium_axe.name=Тритановый топор
+item.matteroverdrive.tritanium_shovel.name=Тритановая лопата
+item.matteroverdrive.contract.name=Контракт
+item.matteroverdrive.ion_sniper.name=Ионная винтовка
+item.matteroverdrive.plasma_shotgun.name=Плазменный дробовик
+item.matteroverdrive.weapon_receiver.name=Оружейный приёмник
+item.matteroverdrive.weapon_handle.name=Оружейная рукоять
+item.matteroverdrive.plasma_core.name=Плазменное ядро
+item.matteroverdrive.portable_decomposer.name=Портативный разлагатель
+item.matteroverdrive.portable_decomposer.details=Разлагает подобранные предметы в плазменную материю
+item.record.matteroverdrive.transformation.desc=BoxCat Games - Trace Route
+item.matteroverdrive.trilithium_crystal.name=Чистый Трилитиевый кристалл
+item.matteroverdrive.artifact.name=Неизвестный артефакт
+item.matteroverdrive.quantum_fold_manipulator.name=Квантовый складной манипулятор
+item.matteroverdrive.matter.name=Материя
 
 ##  Улучшения/Upgrades  ##
-item.upgrade.speed.name=Улучшение «Скорость»
-item.upgrade.power.name=Улучшение «Энергия»
-item.upgrade.failsafe.name=Улучшение «Отказоустойчивость»
-item.upgrade.range.name=Улучшение «Диапазон»
-item.upgrade.power_storage.name=Улучшение «Хранимая энергия»
-item.upgrade.hyper_speed.name=Улучшение «Гипер-скорость»
-item.upgrade.matter_storage.name=Улучшение «Хранимая материя»
+item.matteroverdrive.upgrade.speed.name=Улучшение «Скорость»
+item.matteroverdrive.upgrade.power.name=Улучшение «Энергия»
+item.matteroverdrive.upgrade.failsafe.name=Улучшение «Отказоустойчивость»
+item.matteroverdrive.upgrade.range.name=Улучшение «Диапазон»
+item.matteroverdrive.upgrade.power_storage.name=Улучшение «Хранимая энергия»
+item.matteroverdrive.upgrade.hyper_speed.name=Улучшение «Гипер-скорость»
+item.matteroverdrive.upgrade.matter_storage.name=Улучшение «Хранимая материя»
+item.matteroverdrive.upgrade.muffler.name=Улучшение Тишина
 
 ## Оружейные модули/Weapon Modules ##
-item.weapon_module_color.name=Модуль «Цвет»
-item.weapon_module_barrel.damage.name=Дилитиевая фокусирующая матрица
-item.weapon_module_barrel.fire.name=Зажигательный фильтр
-item.weapon_module_barrel.explosion.name=Взрыво-индуктивный барабан
-item.weapon_module_barrel.heal.name=Восстанавливающий конвертер
-item.weapon_module_ricochet.name=Модуль «Рикошет»
-item.sniper_scope.name=Снайперский прицел
+item.matteroverdrive.weapon_module_color.name=Модуль «Цвет»
+item.matteroverdrive.weapon_module_barrel.damage.name=Дилитиевая фокусирующая матрица
+item.matteroverdrive.weapon_module_barrel.fire.name=Зажигательный фильтр
+item.matteroverdrive.weapon_module_barrel.explosion.name=Взрыво-индуктивный барабан
+item.matteroverdrive.weapon_module_barrel.heal.name=Восстанавливающий конвертер
+item.matteroverdrive.weapon_module_barrel.doomsday.name=Судный день
+item.matteroverdrive.weapon_module_barrel.block.name=Воксельная матрица Преувеличения, Обнуления и Уничтожения (ВМПОУ)
+item.matteroverdrive.weapon_module_ricochet.name=Модуль «Рикошет»
+item.matteroverdrive.weapon_module_holo_sights.name=Голографический прицел
+item.matteroverdrive.weapon_module_holo_sights.normal.name=Голографический прицел
+item.matteroverdrive.weapon_module_holo_sights.wide.name=Широкий голографический прицел
+item.matteroverdrive.weapon_module_holo_sights.small.name=Маленький голографический прицел
+item.matteroverdrive.weapon_module_holo_sights.dot.name=Прицел точка
+item.matteroverdrive.holo_sights_base.name=Основа голографического прицела
 
-## Строения/Buildings ##
-item.building_matter_extractor.name=Экстрактор материи
-item.building_residential.name=Жилые дома
-item.building_ship_hangar.name=Корабль-ангар
-item.building_power_generator.name=Генератор энергии
+item.matteroverdrive.sniper_scope.name=Снайперский прицел
+
 
 item.info.configured=Настроенный
 
@@ -185,6 +193,8 @@ tile.solar_panel.name=Солнечная панель
 tile.solar_panel.details=Производит FE от солнечного света
 tile.weapon_station.name=Оружейная станция
 tile.weapon_station.details=Используется для улучшения и заряда оружия
+tile.star_map.name=Звездная карта
+tile.star_map.details=Используется для управления галактикой
 tile.microwave.name=Микроволновая печь
 tile.pattern_monitor.name=Монитор шаблонов
 tile.pattern_monitor.details=Используется для поставки в очередь репликационных задач
@@ -192,12 +202,15 @@ tile.gravitational_anomaly.name=Гравитационная аномалия
 tile.gravitational_stabilizer.name=Гравитационный стабилизатор
 tile.gravitational_stabilizer.details=Используется для подавления эффектов гравитационных аномалий
 tile.matter_recycler.name=Утилизатор материи
+tile.microwave.name=Микроволновая печь
 tile.matter_recycler.details=Используется для переработки предметов, готовых для разложения
 tile.android_spawner.name=Спаунер Андроидов-разбойников
 
 ## Жидкости/Fluids ##
 tile.matter_plasma.name=Плазменная материя
+fluid.matter_plasma=Плазменная материя
 tile.molten_tritanium.name=Расплавленный тританиум
+fluid.molten_tritanium=Расплавленный тританиум
 
 
 ## Термоядерный реактор/Fusion Reactor ##
@@ -211,12 +224,17 @@ tile.fusion_reactor_controller.config.check.delay=Задержка провер�
 tile.fusion_reactor_controller.details=Главный контроллер термоядерного реактора
 tile.fusion_reactor_coil.name=Катушка термоядерного реактора
 tile.fusion_reactor_coil.details=Используется для удержания плазмы в термоядерных реакторах
+
+fusion_reactor.info.invalid_structure=НЕВЕРНАЯ${newline}СТРУКТУРА
+fusion_reactor.info.ok=МОЩНОСТЬ ${power}${newline}ЗАРЯД ${charge}${newline}МАТЕРИЯ ${matter}
+fusion_reactor.info.invalid_materials=НЕВЕРНЫЕ${newline}МАТЕРИАЛЫ
+fusion_reactor.info.need_coils=ТРЕБУЮТСЯ${newline}КАТУШКИ
+fusion_reactor.info.no_anomaly=ОТСУТСТВУЕТ${newline}ГРАВИТАЦИОННАЯ${newline}АНОМАЛИЯ
+fusion_reactor.info.anomaly_too_far=ГРАВИТАЦИОННАЯ${newline}АНОМАЛИЯ${newline}СЛИШКОМ${newline}ДАЛЕКО
  
 ## Андроид-станция/Android Station ##
 tile.android_station.name=Андроид-станция
 tile.android_station.details=Управление улучшениями Андроида
-tile.star_map.name=Звездная карта
-tile.star_map.details=Используется для управления галактикой
 tile.charging_station.name=Зарядная станция
 tile.charging_station.details=Используется для зарядки Андроидов
 container.replicator.name=Репликатор
@@ -225,18 +243,42 @@ machine.tooltip.energy=Заряд
 
 ## Тритановый ящик/Tritanium Crate ##
 tile.tritanium_crate.name=Тритановый ящик
+
+tile.tritanium_crate_white.name=Белый тритановый ящик
+tile.tritanium_crate_orange.name=Оранжевый тритановый ящик
+tile.tritanium_crate_magenta.name=Пурпурный тритановый ящик
+tile.tritanium_crate_light_blue.name=Голубой тритановый ящик
 tile.tritanium_crate_yellow.name=Жёлтый тритановый ящик
+tile.tritanium_crate_lime.name=Лаймовый тритановый ящик
+tile.tritanium_crate_pink.name=Розовый тритановый ящик
+tile.tritanium_crate_gray.name=Серый тритановый ящик
+tile.tritanium_crate_silver.name=Светло-серый тритановый ящик
+tile.tritanium_crate_cyan.name=Бирюзовый тритановый ящик
+tile.tritanium_crate_purple.name=Фиолетовый тритановый ящик
+tile.tritanium_crate_blue.name=Синий тритановый ящик
+tile.tritanium_crate_brown.name=Коричневый тритановый ящик
+tile.tritanium_crate_green.name=Зелёный тритановый ящик
+tile.tritanium_crate_red.name=Красный тритановый ящик
+tile.tritanium_crate_black.name=Чёрный тритановый ящик
+
+tile.new_tritanium_crate.name=Новый тритановый ящик
+tile.new_tritanium_crate_white.name=Белый новый тритановый ящик
+tile.new_tritanium_crate_purple.name=Фиолетовый новый тритановый ящик
 
 ## Существа/Entities ##
-entity.matteroverdrive.rogue_android.name=Невооруженный Андроид-разбойник
-entity.matteroverdrive.failed_pig.name=Неудачная свинья
-entity.matteroverdrive.failed_chicken.name=Неудачная курица
-entity.matteroverdrive.failed_cow.name=Неудачная корова
-entity.matteroverdrive.failed_sheep.name=Неудачная овца
+
+entity.rogue_android.name=Невооруженный Андроид-разбойник
+entity.failed_pig.name=Неудачная свинья
+entity.failed_chicken.name=Неудачная курица
+entity.failed_cow.name=Неудачная корова
+entity.failed_sheep.name=Неудачная овца
+entity.mad_scientist.name=Безумный учёный
+entity.Villager.matteroverdrive.mad_scientist.name=Безумный учёный
 entity.matteroverdrive.mad_scientist.name=Безумный учёный
 entity.matteroverdrive.mad_scientist.junkie.name=Безумный учёный-наркоман
-entity.matteroverdrive.ranged_rogue_android.name=Дальнобойный Андроид-разбойник
-entity.matteroverdrive.mutant_scientist.name=Учёный-мутант
+entity.ranged_rogue_android.name=Дальнобойный Андроид-разбойник
+entity.mutant_scientist.name=Учёный-мутант
+entity.drone.name=Дрон
 
 ## Декорации/Decorative ##
 tile.decorative.stripes.name=Жёлтые полосы
@@ -250,7 +292,6 @@ tile.decorative.carbon_fiber_plate.name=Плита из углеродного �
 tile.decorative.matter_tube.name=Материальная труба
 tile.decorative.beams.name=Тритановая решетка
 tile.decorative.floor_tiles.name=Напольная плитка
-tile.decorative.floor_tiles_green.name=Зелёная напольная плитка
 tile.decorative.floor_noise.name=Линолеум
 tile.decorative.tritanium_plate_stripe.name=Ориентировочная тритановая плита
 tile.decorative.floor_tile_white.name=Белая напольная плитка
@@ -320,12 +361,8 @@ dialog.mad_scientist.trade_route_quest.1.line=What do you mean? It's nothing rea
 
 itemGroup.tabMO=Matter Overdrive
 itemGroup.tabMO_modules=Matter Overdrive: Модули
-itemGroup.tabMO_upgrades=Matter Overdrive: Улучшения
-itemGroup.tabMO_food=Matter Overdrive: Еда
-itemGroup.tabMO_ships=Matter Overdrive: Корабли
-itemGroup.tabMO_buildings=Matter Overdrive: Строения
-itemGroup.tabMO_decorative=Matter Overdrive: Декорации
 itemGroup.tabMO_androidParts=Matter Overdrive: Андроид-части
+itemGroup.tabMO_contracts=Matter Overdrive: Контракты
 
 ##########################################################################################################
 # Типы улучшений/Upgrade Types #
@@ -338,36 +375,29 @@ upgradetype.Range.name=Диапазон
 upgradetype.PowerStorage.name=Хранимая энергия
 upgradetype.MatterStorage.name=Хранимая материя
 upgradetype.MatterUsage.name=Потребление материи
+upgradetype.Muffler.name=Шумоподавление
+upgradetype.Muffler.description=Глушит весь шум, исходящий от машины.
 
 ##########################################################################################################
 # Оружейные статистики/Weapon Stats #
-weaponstat.0.name=Урон
-weaponstat.1.name=Боеприпасы
-weaponstat.2.name=Эффект
-weaponstat.3.name=Диапазон
-weaponstat.4.name=Урон от огня
-weaponstat.5.name=Урон блокам
-weaponstat.6.name=Урон от взрыва
-weaponstat.7.name=Скорострельность
-weaponstat.8.name=Лечение
-
-##########################################################################################################
-# Статистики планет/Planet Stats #
-planet_stat.population_count.name=Население
-planet_stat.building_size.name=Building Space
-planet_stat.energy_production.name=Производимая энергия
-planet_stat.matter_production.name=Производимая материя
-planet_stat.fleet_size.name=Производимая материя
+weaponstat.damage.name=Урон
+weaponstat.ammo.name=Боеприпасы
+weaponstat.effect.name=Эффект
+weaponstat.range.name=Диапазон
+weaponstat.fire_damage.name=Урон от огня
+weaponstat.block_damage.name=Урон блокам
+weaponstat.explosion_damage.name=урон от взрыва
+weaponstat.fire_rate.name=Скорострельность
+weaponstat.heal.name=Лечение
+weaponstat.range.name=Диапазон
+weaponstat.ricochet.name=Рикошет
+weaponstat.max_heat.name=Максимальная температура
+weaponstat.accuracy.name=Точность
 
 ##########################################################################################################
 # Графический интерфейс/GUI #
 
 ## Подсказки/Tooltips ##
-gui.tooltip.starmap.no_ship_space=Не хватает пространства для короблей
-gui.tooltip.starmap.no_building_space=Не хватает пространства для строительства
-gui.tooltip.starmap.no_ship_factory=Нет корабля-фабрики
-gui.tooltip.starmap.has_base=Основное здание уже присутствует
-gui.tooltip.starmap.no_base=Нет основного здания
 gui.tooltip.close_menu=Закрыть меню
 gui.tooltip.open_menu=Открыть меню
 gui.tooltip.close=Закрыть
@@ -378,16 +408,14 @@ gui.tooltip.page.tasks=Задачи
 gui.tooltip.page.scan_info=Сканировать информацию
 gui.tooltip.page.galaxy=Галактика
 gui.tooltip.page.quadrant=Квадрант
-gui.tooltip.page.star=Cолнечная система
+gui.tooltip.page.star=Планетарная система
 gui.tooltip.page.planet=Планета
-gui.tooltip.page.planet_stats=Статистика планеты
 gui.tooltip.button.refresh=Обновить список
 gui.tooltip.button.request=Отправить запросы
 gui.tooltip.matter=Материя
 gui.tooltip.matter.none=Нет
 gui.tooltip.energy.io=Ввод/вывод
 gui.tooltip.requires=Требуется
-gui.tooltip.scout_button=Отправить разведывательные корабли для обнаружения планет и начала строительства
 gui.tooltip.slot.bionic.head=Голова
 gui.tooltip.slot.bionic.arms=Руки
 gui.tooltip.slot.bionic.legs=Ноги
@@ -433,11 +461,13 @@ gui.solar_panel.name=Солнечная панель
 gui.pattern_monitor.name=Сетевой монитор шаблонов
 gui.network_switch.name=Сетевой переключатель
 gui.recycler.name=Утилизатор материи
+gui.microwave.name=Микроволновая печь
 gui.fusion_reactor.name=Термоядерный реактор
 gui.charging_station.name=Зарядная станция
 gui.weapon_station.name=Оружейная станция
 gui.inscriber.name=Молекулярный высекатель
 gui.contract_market.name=Контракты
+gui.dimensional_pylon.name=Пространственный реактор
 
 ## Другое/Other ##
 gui.redstone_mode.high=Высокий
@@ -446,6 +476,11 @@ gui.redstone_mode.disabled=Отключен
 gui.config.redstone=Редстоун
 gui.config.owner=Владелец
 gui.config.mnet.address=Адрес
+
+gui.config.spawn_amount=Количество
+gui.config.spawn_range=Радиус
+gui.config.spawn_delay=Задержка [20t=1s]
+item.transport_flash_drive.name=Слот для транспортного флэш-накопителя
 
 gui.android_hud.transforming.line.0=Загрузка системы
 gui.android_hud.transforming.line.1=Построение нервных путей
@@ -476,6 +511,12 @@ module.color.grey=Серый
 module.barrel.name=Модуль «Ствол»
 module.sights.name=Модуль «Прицел»
 module.other.name=Другой модуль
+moduleslot.-1.name=Слот отсутствует, сообщите автору модуля
+moduleslot.0.name=Применимо к слоту батареи
+moduleslot.1.name=Применимо к слоту цвета
+moduleslot.2.name=Применимо к слоту «Ствол»
+moduleslot.3.name=Применимо к слоту «Прицел»
+moduleslot.4.name=Applicable to Misc slot
 
 ##########################################################################################################
 # Биочасти/Bioparts #
@@ -601,24 +642,17 @@ config.compatibility.name=Совместимость
 ##########################################################################################################
 # Чат-оповещения/Chat Alerts #
 
-alert.no_rights=No Rights to Access the $0
-alert.no_access_default=Access denied to $0
+alert.no_rights=Нет доступа к $0
+alert.no_access_default=Доступ закрыт $0
 alert.not_android=Биологическое существо обнаружено! Доступ закрыт!
 alert.no_rights.break=Только владелец может останавливать $0
 alert.no_rights.dismantle=Только владелец может демонтировать $0
 alert.new_update=Доступна новая версия!
-alert.starmap.ship_arrive=§3%1$s §rприбыл на §3%2$s!
-alert.starmap.on_build=§3%1$s §rбыл построен на §3%2$s§r!
 
 ##########################################################################################################
 # Зачарования/Enchantments #
 
 enchantment.matteroverdrive.weapon.damage=Разгон
-
-##########################################################################################################
-# Жидкости/Fluids #
-fluid.matter_plasma.name=Плазменная материя
-fluid.molten_tritanium=Расплавленный тританиум
 
 ##########################################################################################################
 # Путеводители/Guides #
@@ -684,6 +718,7 @@ color.white=Белая
 
 material.tritanium=Тританиум
 container.tritanium_crate=Тритановый ящик
+container.new_tritanium_crate=Новый тритановый ящик
 rarity.legendary=Легендарный
 
 mo.jei.time=%d секунд
@@ -694,59 +729,59 @@ mo.jei.inscriber=Высекатель
 ## Квесты ##
 quest.kill_androids.title=Они убьют нас всех!
 quest.kill_androids.info=Они захватили весь мир! Я не знаю как именно они сюда попали, но их количество с каждым днем растет. Кажется что их бесчисленное множество. Мы должны бороться, иначе, мы все погибнем. Борьба начинается с тебя, $player! Помоги нам уничтожит их как можно больше, пока они нас не поработили.
-quest.kill_androids.objective.0=Kill $killCount/$maxKillCount Rogue Androids.
+quest.kill_androids.objective.0=Убить $killCount/$maxKillCount Андроидов-Разбойников.
 quest.cocktail_of_ascension.title=Коктейль Вознесения
-quest.cocktail_of_ascension.info=A Crazy scientist has asked you to bring him $gunpowdermaxAmount gunpowder from a shoveled creeper and $mushroommaxAmount red mushrooms from the darkest depths of the Nether, for his Cocktail Of Ascension.
+quest.cocktail_of_ascension.info=Безумный учёный попросил вас принести ему $gunpowdermaxAmount пороха с убитых лопатой криперов и $mushroommaxAmount красных грибов из темнейших глубин Незера для его Коктейля Вознесения
 quest.cocktail_of_ascension.objective.0=Убейте $creeperAmount/$creepermaxAmount криперов лопатой
 quest.cocktail_of_ascension.objective.1=Добудьте $gunpowderAmount/$gunpowdermaxAmount пороха
 quest.cocktail_of_ascension.objective.2=Добудьте $mushroomAmount/$mushroommaxAmount красных грибов в Незере
 quest.cocktail_of_ascension.objective.3=Поговорите с сумасшедшим ученым-наркоманом
 quest.sacrifice.title=Жертвоприношение
-quest.sacrifice.info=We are the Dark Vail. We have begun restoring an ancient artifact, the effects of which will remain a secret. All we need from you $player is to sacrifice $maxKillCount animal newborns in the name of the dark lord, whose name strikes fear in the hearts of the innocent. Barry the dark lord. You will be compensated handsomely for your efforts.
-quest.sacrifice.objective.0=Kill $killCount/$maxKillCount Babies
+quest.sacrifice.info=Мы — Темная Завеса. Мы начали восстановление древнего артефакта, последствия которого останутся тайной. Всё, что нам нужно от тебя, $player, — это принести в жертву $maxKillCount детёнышей животных во имя тёмного лорда, чьё имя вселяет страх и ужас в сердца невинных. Во славу тёмного лорда. Ты будешь щедро вознаграждён за свои труды.
+quest.sacrifice.objective.0=Убейте $killCount/$maxKillCount детёнышей
 quest.department_of_agriculture.title=Министерство сельского хозяйства
-quest.department_of_agriculture.info=To all willing hands. This is a job offer from the department of agriculture. We operate in the desolate world of Barus V and you can image the obstacles we face when it comes to growing $mineBlock. As our plans for hydroponic farms come to turn, our people starve to death. We are searching for capable parties to aid us in the supplying of $mineBlock shipments to our citizens in need.
-quest.department_of_agriculture.objective.0=Gather $mineAmount/$maxMineAmount $mineBlock
-quest.department_of_agriculture.objective.1=Now Gather $mineAmount/$maxMineAmount $mineBlock.
-quest.department_of_agriculture.objective.2=Now Gather $mineAmount/$maxMineAmount $mineBlock.
-quest.one_true_love.title=One true love
-quest.one_true_love.info=I'm so happy! You can't even imagine what a joyous moment this is! Merry has finally agreed to merry me. You don't even know how many times I've tried to win her heart. At long last her father gave us his blessing. I know our love is more than enough to keeps us going, but I wanted to give her something special. I was hoping you can find me a diamond so I can put a marvelous ring onto her precious finger. I will forever be in dept and I will be more than happy to compensate for you troubles.
-quest.one_true_love.objective.0=Mine $mineAmount/$maxMineAmount Diamonds
+quest.department_of_agriculture.info=Всем желающим. Это предложеие от министерства сельского хозяйства. Мы работаем в опустошённом мире Барус V, и вы можете себе представить, с какими препятствиями мы сталкиваемся, когда дело доходит до выращивания $mineBlock. Когда наши планы по созданию гидропонных ферм меняются, наши люди начинают голодать. Мы ищем способных людей, которые помогут нам в доставке грузов $mineBlock нуждающимся нажим гражданам.
+quest.department_of_agriculture.objective.0=Соберите $mineAmount/$maxMineAmount $mineBlock
+quest.department_of_agriculture.objective.1=Теперь соберите $mineAmount/$maxMineAmount $mineBlock.
+quest.department_of_agriculture.objective.2=Теперь соберите $mineAmount/$maxMineAmount $mineBlock.
+quest.one_true_love.title=Единственная истинная любовь
+quest.one_true_love.info=Я так счастлив! Вы даже не представляете, какой это радостный момент! Мерри наконец-то согласилась выйти за меня. Вы даже не знаете, как много раз я пытался завоевать её сердце. Наконец её отец дал нам своё благословление. Я знаю, что нашей любви более чем достаточно, чтобы поддерживать нас, но я хотел бы подарить ей что-то особенное. Я очень надеюсь, что ты сможешь найти мне алмаз, чтобы я мог надеть чудесное кольцо на её драгоценный палец. Я навсегда останусь в долгу и буду более чем счастлив компенсировать вам хлопоты.
+quest.one_true_love.objective.0=Добудьте $mineAmount/$maxMineAmount алмазов
 quest.weapons_of_war.title=Оружие войны
-quest.weapons_of_war.info=They have oppressed us for long enough! Our proud people will no longer stand for this. Years of oppression, end now! We may be broken in body be we are strong in spirit. This is where we need your help. It may not be pretty, but war is coming and we need a way to defend ourselves. They will throw everything they have at us. The first step of many, is to build anvils use them to forge the weapons we desperately need.
+quest.weapons_of_war.info=Они уже долго угнетают нас! Наш гордый народ больше не намерен терпеть это. Настал конец годам угнетения! Может мы сломлены телом, но дух наш крепок. Вот здесь нам нужна ваша помощь. Возможно, это не очень-то и красиво, но близится война, и нам нужен способ постоять за себя. Они бросят на нас всё, что у них есть. Первый шаг из многих — сделать наковальни и использовать их для ковки оружия, в котором мы отчаянно нуждаемся.
 quest.weapons_of_war.objective.0=Изготовьте $craftAmount/$craftMaxAmount $craftItem
 quest.weapons_of_war.objective.1=Изготовьте $craftAmount мечей.
-quest.to_the_power_of.title=To the power of
-quest.to_the_power_of.info=Before I can begin work on my ascension from my limiting mortality I need to ensure a consistent source of power.
-quest.to_the_power_of.objective.0=Create $craftAmount/$craftMaxAmount $craftItem
-quest.puny_humans.title=Puny Humans
-quest.puny_humans.info=I have spoken to scientist, who is obviously mad, but makes quite the offering. He has agreed to turn me into an android. All I need to do is collect a full set of Android Parts for the procedure. Rouge Androids seem to be the only ones who drop these parts.
-quest.puny_humans.objective.0=Collect a full set of android parts
+quest.to_the_power_of.title=Во власть
+quest.to_the_power_of.info=Перед тем, как я начну работать над мои вознесением от моей ограниченной смертной жизни, мне нужно обеспечить для себя постоянный источник энергии. 
+quest.to_the_power_of.objective.0=Изготовьте $craftAmount/$craftMaxAmount $craftItem
+quest.puny_humans.title=Маленькие люди
+quest.puny_humans.info=Я разговаривал с учёный, который очевидно безумен, но делает вполне возможное предложеие. Он согласился превратить меня в андроида. Всё, что мне нужно, так это собрать полный комплект частей андроди для процедуры. Андроиды-Разбойники, кажется, единственные, кто имеет эти детали.
+quest.puny_humans.objective.0=Соберите полный набор частей андроида
 quest.puny_humans.objective.1=Поговорите с сумасшедшим ученым
 quest.is_it_really_me.title=Это действительно я?
-quest.is_it_really_me.info=Our investors have finally decided to let us begin human trails. We are all ready to proceed whenever you are. We have done rigorous testing on animals and inanimate objects and the fail rate is well below 25%. We can assure you that everything will go according to plan. Of course there is still the matter of the psychological barriers, we don't know how exactly the Edux got over them, but we are positive you can push yourself to do it. Just step onto the platform and close your eyes.
-quest.is_it_really_me.objective.0=Use a Transporter
-quest.beast_belly.title=The belly of the beast
-quest.beast_belly.info=There is no easy way to say this, but we need you to die for us. For science! Have you ever encountered strange gravitational anomalies? We can't figure out exactly what happens then matter is introduced into their event horizon. We can see it growing, but where does all that matter go ? We want you to travel into the event horizon of a gravitational anomaly and see what mysteries lie within. Be careful, it might hurt a bit.
-quest.beast_belly.objective.0=Travel into an anomaly's horizon
-quest.crash_landing.title=Crash Landing
-quest.crash_landing.info=Captain's Log stardate 48940.8./n//n/I've had to initiate emergency landing procedures. My ship's port nacelle is completely fried. I have enough emergency rations to last me for a while, but the watter tank was ruptured./n/I must get out and find fresh water pronto./n/From what I can gather by looking at the star charts , I seem to have crashed somewhere in the orion sector. Last I heard the whole sector was overwhelmed with Edux rejects./n/I guess that means I won't find anybody to talk to in a while./n/To think this happened just before I got to finally visit Emily for the first time, in 5 years.
-quest.crash_landing.objective.0=Build a $craftItem and try to hack the terminal to contact the captain's family.
+quest.is_it_really_me.info=Наши инвесторы наконец решили позволить нам начать человеческий путь. Мы все готовы продолжить работу в любое время. Мы провели тщательное тестирование на животных и неодушевленных предметах, и процент неудач значительно ниже 25%. Мы можем заверить вас, что все пойдет по плану. Конечно, остается вопрос психологических барьеров, мы не знаем, как именно Edux их преодолел, но мы уверены, что вы сможете заставить себя это сделать. Просто встаньте на платформу и закройте глаза.
+quest.is_it_really_me.objective.0=Используйте Транспортёр
+quest.beast_belly.title=Живот зверя
+quest.beast_belly.info=Сказать это нелегко, но нам нужно, чтобы ты умер за нас. Для науки! Вы когда-нибудь сталкивались со странными гравитационными аномалиями? Мы не можем точно понять, что происходит, когда материя попадает в их горизонт событий. Мы видим, как оно растет, но куда уходит все это? Мы хотим, чтобы вы отправились за горизонт событий гравитационной аномалии и увидели, какие тайны таятся внутри. Будьте осторожны, это может быть немного больно.
+quest.beast_belly.objective.0=Отправьтесь за горизонт событий аномалии
+quest.crash_landing.title=Аварийная посадка
+quest.crash_landing.info=Журнал капитана, звёздная дата 48940.8./n//n/Мне пришлось инициировать процедуру экстренной посадки. Левая гондола моего корабля полностью сгорела. У меня достаточно аварийного пайка, чтобы продержаться какое-то время, но резервуар для воды был прорван./n/Мне нужно срочно выбраться и найти пресную воду./n/Судя по тому, что я могу понять, глядя на звёздные карты, я, кажется, разбился где-то в секторе Ориона. Последнее, что я слышал, что весь сектор был завален отказами от Edux./n/Думаю, это означает, что мне будет не с кем говорить ближайшее время./n/Подумать только, это произошло как раз перед тем, как я наконец навестил бы Эмили впервые за пять лет.
+quest.crash_landing.objective.0=Изготовьте $craftItem и попытайтесь взломать терминал, чтобы связаться с семьёй капитана.
 quest.we_must_know.title=Мы должны знать
-quest.we_must_know.info=Thank you for contacting us./n/I still find this whole ordeal shocking. I know we weren't on the best of terms for quite some time, but I just can't imagine what my daughter feels right now./n/Emily is quite a strong woman, but she didn't take the news very well./n/I have one last request of you. As his commanding officer It's my duty to honor the death of a fellow solder. Hell it's the least I can do./n/Will you put down the $block I've sent you so that we can retrieve all of his logs. I know he cared deeply for my Emily and I hope there is something in there to put my daughter's mind at ease.
-quest.we_must_know.objective.0=Place the $block near the ship at $distance away.
-quest.gmo.title=G.M.O.
-quest.gmo.info=Replicating vegetables! That's just absurd!/n/They taste awful, all those replicated stuff feel just like eating plastic./n/No no, we need something different. I just got my new biolistic particle delivery system and I can't wait to test that baby out. I see all these pathetic villagers planting their crops, crawling in the dirt like animals. I just need to get my hands on some crop gene sequences. The thing is these brainless, villagers won't let me anywhere near the crops. Can you use my Data Pad and scan some for me? I'm sure I can give you something for the favor. I had some old android parts laying around.
-quest.gmo.objective.0=Scan $scanAmount/$maxScanAmount $block with the Scientist's Data Pad.
+quest.we_must_know.info=Спасибо, что связались с нами./n/Я всё ещё нахожу это шокирующим. Я знаю, что мы какое-то время были не в лучших отношениях, но я просто не могу представить, что сейчас чувствует моя дочь./n/Эмили довольно сильная женщина, но она не очень хорошо восприняла эту новость./n/У меня к вам последняя просьба. Как его командир, я обязана почтить память товарища-солдата. Черт, это меньшее, что я могу сделать./n/Положишь ли ты $block, который я тебе отправлю, чтобы мы могли получить все его журналы? Я знаю, что он глубоко заботился о моей Эмили, и надеюсь, что в этом есть что-то, что успокоит мою дочь.
+quest.we_must_know.objective.0=Поставьте $block рядом с кораблёнм на расстоянии $distance.
+quest.gmo.title=Г.М.О.
+quest.gmo.info=Репликация овощей! Это абсурд!/n/У них ужасный вкус, все эти реплицированные штуки кажутся похожими на пластик./n/Нет-нет, нам нужно что-то другое. Я только что получил свою новую систему доставки биолистических частиц, и мне не терпится протестировать ее. Я вижу, как все эти жалкие деревенские жители сажают урожай и ползают по грязи, как животные. Мне просто нужно заполучить несколько последовательностей генов сельскохозяйственных культур. Дело в том, что эти безмозглые жители деревни не подпускают меня к посевам. Можете ли вы использовать мой Датапад и отсканировать что-нибудь для меня? уверен, что смогу дать тебе кое-что за услугу. У меня валялись какие-то старые детали андроида.
+quest.gmo.objective.0=Просканируйте $scanAmount/$maxScanAmount $block с помощью Датапада.
 quest.gmo.objective.1=Сейчас сканируется $scanAmount/$maxScanAmount $block.
-quest.trade_route.title=Trading Routes
-quest.trade_route.info=I know the Orion sector is not the safest place to go through, but where is, these days. I can't even wrap my head around how the Edux managed to miss such a potential flaw. I mean what were they thinking? Were they that selfish?/n/Anyhow, I know I've lost a lot of friends traveling through the Orion sector, but the pay is just too damn good./n/The crew will be dropping the cargo in the nearest village, I might even join them, but first, I have to take care of something I promised to a friend.
-quest.trade_route.info.2=As you open the captain's chest, you find a $itemName, signed with a digital seal, indicating the establishment of a trade route between Ticonderoga and Overworld. You don't fully understand the language but you quickly notice the unmistakable price. A ridiculous amount of emeralds even for a trade route. You start to wonder, exactly what trade requires such an enormous amount of emeralds. Maybe you should ask one of the Scientists down on the planet.
+quest.trade_route.title=Торговые пути
+quest.trade_route.info=Я знаю, что сектор Ориона — не самое безопасное место, но где сейчас безопасно. Я даже не могу понять, как Edux умудрился пропустить такой потенциальный недостаток. Я имею в виду, о чем они думали? Были ли они такими эгоистичными?/n/В любом случае, я знаю, что потерял много друзей, путешествуя по сектору Ориона, но зарплата чертовски хорошая./n/Экипаж высадит груз в ближайшей деревне, Я мог бы даже присоединиться к ним, но сначала мне нужно выполнить то, что я обещал другу.
+quest.trade_route.info.2=Открывая сундук капитана, вы находите $itemName, подписанный цифровой печатью, указывающий на установление торгового пути между Тикондерогой и Верхним миром. Вы не до конца понимаете язык, но быстро замечаете безошибочную цену. Смешное количество изумрудов даже для торгового пути. Начинаешь задаваться вопросом, для какой именно торговли требуется такое огромное количество изумрудов. Возможно, вам стоит спросить об этом кого-нибудь из учёных на планете.
 quest.trade_route.objective.0=Найдите сундук капитана и откройте его
 quest.trade_route.objective.1=Прочтите $itemName
 quest.trade_route.objective.2=Поговорите с $target
-quest.stem_bolts.title=Self-Sealing Stem Bolts
-quest.stem_bolts.info.0=After speaking with the Mad Scientist, you were left with an unwary feeling. The scientist was keeping something from you./n/You had that feeling ever since you saw the trade route agreement, so you decided to make a copy, before giving it to the scientist. You realise you might have missed something.
-quest.stem_bolts.info.1=You found it! A small text at the end, reefers to a disclaimer stating that the shipping party will not be responsible for any undesirable mutations caused by Ionizing radiation. You begin to wonder what sort of cargo can have mutations. You decide to revisit the cargo ship for more clues.
+quest.stem_bolts.title=Самоуплотняющие болты штока
+quest.stem_bolts.info.0=После разговора с Безумным Ученым у вас осталось чувство неосторожности. Ученый что-то скрывал от вас./n/У вас возникло это чувство с тех пор, как вы увидели соглашение о торговых маршрутах, поэтому вы решили сделать копию, прежде чем передать ее ученому. Вы понимаете, что могли что-то пропустить.
+quest.stem_bolts.info.1=Вы нашли это! Небольшой текст в конце относится к отказу от ответственности, в котором говорится, что сторона-отправитель не несет ответственности за любые нежелательные мутации, вызванные ионизирующим излучением. Вы начинаете задаваться вопросом, какой груз может иметь мутации. Вы решаете снова посетить грузовой корабль, чтобы получить больше улик.
 quest.stem_bolts.objective.0=Прочтите $itemName
-quest.stem_bolts.objective.1=Return to the cargo ship
+quest.stem_bolts.objective.1=Вернитесь на грузовой корабль
