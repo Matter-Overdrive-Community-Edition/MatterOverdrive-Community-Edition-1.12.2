@@ -8,13 +8,17 @@ import javax.annotation.Nullable;
 
 import matteroverdrive.api.IScannable;
 import matteroverdrive.blocks.includes.MOBlockContainer;
+import matteroverdrive.data.world.GenPositionWorldData;
+import matteroverdrive.data.world.WorldPosition2D;
 import matteroverdrive.handler.ConfigurationHandler;
 import matteroverdrive.tile.TileEntityGravitationalAnomaly;
 import matteroverdrive.util.IConfigSubscriber;
+import matteroverdrive.world.MOWorldGen;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -40,6 +44,15 @@ public class BlockGravitationalAnomaly extends MOBlockContainer<TileEntityGravit
 	@Deprecated
 	public boolean isNormalCube(IBlockState blockState) {
 		return false;
+	}
+	
+	@Override
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	{
+	  if(placer instanceof EntityPlayer) {
+			GenPositionWorldData data = MOWorldGen.getWorldPositionData(world);
+			data.addPosition("gravitational_anomaly", new WorldPosition2D(pos.getX(), pos.getZ()));
+	  }
 	}
 
 	@Override
