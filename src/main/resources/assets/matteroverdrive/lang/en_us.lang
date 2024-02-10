@@ -232,6 +232,13 @@ fusion_reactor.info.need_coils=NEED${newline}MORE${newline}COILS
 fusion_reactor.info.no_anomaly=NO${newline}GRAVITATIONAL${newline}ANOMALY
 fusion_reactor.info.anomaly_too_far=GRAVITATIONAL${newline}ANOMALY${newline}TOO${newline}FAR
 
+#///////////// Anomaly Info ////////////
+anomaly.info.mass=Mass
+anomaly.info.range=Range
+anomaly.info.brake_range=Brake Range
+anomaly.info.horizon=Horizon
+anomaly.info.brake_lvl=Brake Lvl
+
 #///////////// Android Station ////////////
 tile.android_station.name=Android Station
 tile.android_station.details=Android Upgrade Management

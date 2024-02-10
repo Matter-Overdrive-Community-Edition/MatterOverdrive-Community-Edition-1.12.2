@@ -28,6 +28,7 @@ import matteroverdrive.init.OverdriveBioticStats;
 import matteroverdrive.items.SpacetimeEqualizer;
 import matteroverdrive.machines.MachineNBTCategory;
 import matteroverdrive.util.MOLog;
+import matteroverdrive.util.MOStringHelper;
 import matteroverdrive.util.MatterHelper;
 import matteroverdrive.util.TimeTracker;
 import matteroverdrive.util.math.MOMathHelper;
@@ -633,11 +634,11 @@ public class TileEntityGravitationalAnomaly extends MOTileEntity
 	@Override
 	public void addInfo(World world, double x, double y, double z, List<String> infos) {
 		DecimalFormat format = new DecimalFormat("#.##");
-		infos.add("Mass: " + mass);
-		infos.add("Range: " + format.format(getMaxRange()));
-		infos.add("Brake Range: " + format.format(getBlockBreakRange()));
-		infos.add("Horizon: " + format.format(getEventHorizon()));
-		infos.add("Brake Lvl: " + format.format(getBreakStrength()));
+		infos.add(MOStringHelper.translateToLocal("anomaly.info.mass") + ": " + mass);
+		infos.add(MOStringHelper.translateToLocal("anomaly.info.range") + ": " + format.format(getMaxRange()));
+		infos.add(MOStringHelper.translateToLocal("anomaly.info.brake_range") + ": " + format.format(getBlockBreakRange()));
+		infos.add(MOStringHelper.translateToLocal("anomaly.info.horizon") + ": " + format.format(getEventHorizon()));
+		infos.add(MOStringHelper.translateToLocal("anomaly.info.brake_lvl") + ": " + format.format(getBreakStrength()));
 	}
 
 	public void suppress(AnomalySuppressor suppressor) {

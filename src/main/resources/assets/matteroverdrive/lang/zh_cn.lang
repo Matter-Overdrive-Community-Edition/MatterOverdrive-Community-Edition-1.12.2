@@ -232,6 +232,13 @@ fusion_reactor.info.need_coils=NEED${newline}增加${newline}线圈数
 fusion_reactor.info.no_anomaly=无${newline}引力${newline}异常点
 fusion_reactor.info.anomaly_too_far=引力${newline}异常点${newline}过${newline}远
 
+#///////////// Anomaly Info ////////////
+anomaly.info.mass=质量
+anomaly.info.range=引力半径
+anomaly.info.brake_range=破坏半径
+anomaly.info.horizon=视界边界长度
+anomaly.info.brake_lvl=破坏强度
+
 #/#//////////// Android Station ////////////
 tile.android_station.name=机械人改造台
 tile.android_station.details=机械人升级管理
