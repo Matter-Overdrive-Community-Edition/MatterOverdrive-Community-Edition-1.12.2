@@ -1,5 +1,5 @@
 ##########################################################################################################
-# Items
+# Items #
 item.selector.name=选择器
 item.debugger.name=传送机调试器
 
@@ -99,7 +99,7 @@ item.matteroverdrive.artifact.name=未知工艺品
 item.matteroverdrive.quantum_fold_manipulator.name=量子折叠操纵仪
 item.matteroverdrive.matter.name=物质
 
-#/#//////////// Upgrades ////////////
+## Upgrades ##
 item.matteroverdrive.upgrade.speed.name=速度升级
 item.matteroverdrive.upgrade.power.name=能耗升级
 item.matteroverdrive.upgrade.failsafe.name=故障保护升级
@@ -109,7 +109,7 @@ item.matteroverdrive.upgrade.hyper_speed.name=超速升级
 item.matteroverdrive.upgrade.matter_storage.name=仓储升级
 item.matteroverdrive.upgrade.muffler.name=静音
 
-#/#//////////// Weapon Modules ///////
+## Weapon Modules ##
 item.matteroverdrive.weapon_module_color.name=颜色模块
 item.matteroverdrive.weapon_module_barrel.damage.name=二锂聚焦矩阵
 item.matteroverdrive.weapon_module_barrel.fire.name=高能燃烧弹
@@ -131,9 +131,9 @@ item.matteroverdrive.sniper_scope.name=狙击镜
 item.overdrivef.info.configured=已配置
 
 ##########################################################################################################
-# Tile Entities
+# Tile Entities #
 
-#/#//////////// Replicator ////////////
+## Replicator ##
 tile.replicator.name=物质重组机
 tile.replicator.config.volume.replicate=复制数目
 tile.replicator.config.particles.vent=粒子排放
@@ -145,7 +145,7 @@ tile.replicator.config.fail=失败概率
 tile.replicator.details=将等离子物质重组为物品和方块
 tile.replicator_active.name=物质重组机
 
-#/#//////////// Decomposer ////////////
+## Decomposer ##
 tile.decomposer.name=物质分解机
 tile.decomposer.details=将正常物质分解为等离子物质
 tile.decomposer.config.storage.matter=物质储量
@@ -181,7 +181,7 @@ tile.spacetime_accelerator.name=时空加速仪
 tile.spacetime_accelerator.details=加速方块和机器
 tile.pylon.name=维度塔
 
-#/#//////////// Pattern Storage ////////////
+## Pattern Storage ##
 tile.pattern_storage.name=模式保存仪
 tile.pattern_storage.details=保存物品模式以供复制
 tile.pattern_storage.config.particles.vent=粒子排放
@@ -206,14 +206,14 @@ tile.microwave.name=微波炉
 tile.matter_recycler.details=回收物质以便重新分解
 tile.android_spawner.name=机械人刷怪笼
 
-#/#//////////// Fluids ////////////
+## Fluids ##
 tile.matter_plasma.name=等离子物质
 fluid.matter_plasma=等离子物质
 tile.molten_tritanium.name=熔融三钛合金
 fluid.molten_tritanium=熔融三钛合金
 
 
-#/#//////////// Fusion Reactor ////////////
+## Fusion Reactor ##
 tile.fusion_reactor_controller.name=湮灭反应堆控制器
 tile.fusion_reactor_controller.config.storage.energy=能量储存
 tile.fusion_reactor_controller.config.storage.matter=物质储存
@@ -232,14 +232,14 @@ fusion_reactor.info.need_coils=NEED${newline}增加${newline}线圈数
 fusion_reactor.info.no_anomaly=无${newline}引力${newline}异常点
 fusion_reactor.info.anomaly_too_far=引力${newline}异常点${newline}过${newline}远
 
-#///////////// Anomaly Info ////////////
+## Anomaly Info ##
 anomaly.info.mass=质量
 anomaly.info.range=引力半径
 anomaly.info.brake_range=破坏半径
 anomaly.info.horizon=视界边界长度
 anomaly.info.brake_lvl=破坏强度
 
-#/#//////////// Android Station ////////////
+## Android Station ##
 tile.android_station.name=机械人改造台
 tile.android_station.details=机械人升级管理
 tile.charging_station.name=充能站
@@ -248,7 +248,7 @@ container.replicator.name=重组机
 machine.tooltip.matter=物质
 machine.tooltip.energy=充能
 
-#/#//////////// Tritanium Crate ////////////
+## Tritanium Crate ##
 tile.tritanium_crate.name=三钛货箱
 
 tile.tritanium_crate_white.name=白色三钛货箱
@@ -272,7 +272,7 @@ tile.new_tritanium_crate.name=新型三钛货箱
 tile.new_tritanium_crate_white.name=新型白色三钛货箱
 tile.new_tritanium_crate_purple.name=新型紫色三钛货箱
 
-#/#//////////// Entities /////////////////
+## Entities ##
 
 entity.matteroverdrive.rogue_android.name=混战机械人
 entity.matteroverdrive.failed_pig.name=失败品改造猪
@@ -287,7 +287,7 @@ entity.matteroverdrive.ranged_rogue_android.name=枪战机械人
 entity.matteroverdrive.mutant_scientist.name=变异科学家
 entity.drone.name=无人机
 
-#/#//////////// Decorative ////////////////////
+## Decorative ##
 tile.decorative.stripes.name=警戒纹板材
 tile.decorative.coils.name=线圈
 tile.decorative.clean.name=平滑三钛板材
@@ -309,7 +309,7 @@ tile.decorative.tritanium_lamp.name=三钛灯饰
 tile.decorative.tritanium_plate_colored.name=染色三钛板材
 
 ##########################################################################################################
-# Dialogs
+# Dialogs #
 
 dialog.generic.quit.0.question=回见。
 dialog.generic.quit.1.question=我得走了。
@@ -325,7 +325,7 @@ dialog.generic.trade.1.question=让我们做个买卖吧。
 dialog.generic.trade.2.question=让我看看你的货物。
 dialog.generic.trade.3.question=你都卖些什么？
 
-#/#//////////// Mad Scientist ///////////////
+## Mad Scientist ##
 dialog.mad_scientist.convert.question=我有全套机械人部件！
 dialog.mad_scientist.requirements.line=终于！<br>摆脱那具脆弱的肉体是最好的选择。<br>唯一的问题是，我们得准备好全套的机械人部件才行。
 dialog.mad_scientist.requirements.question=我想化身机械战士。
@@ -364,7 +364,7 @@ dialog.mad_scientist.trade_route_quest.1.question=我注意到上面有关价格
 dialog.mad_scientist.trade_route_quest.1.line=我不知道你在说什么？没有什么，就是一些自动密封的阀杆螺栓。
 
 ##########################################################################################################
-# Creative Panels
+# Creative Panels #
 
 itemGroup.tabMO=超能物质
 itemGroup.tabMO_modules=超能物质 武器配件
@@ -372,7 +372,7 @@ itemGroup.tabMO_androidParts=超能物质 机械人部件
 itemGroup.tabMO_contracts=超能物质 任务卡
 
 ##########################################################################################################
-# Upgrade Types
+# Upgrade Types #
 upgradetype.Speed.name=时间
 upgradetype.PowerUsage.name=能耗
 upgradetype.Output.name=输出
@@ -386,7 +386,7 @@ upgradetype.Muffler.name=静音
 upgradetype.Muffler.description=消除机器的全部噪声
 
 ##########################################################################################################
-# Weapon Stats
+# Weapon Stats #
 weaponstat.damage.name=伤害
 weaponstat.ammo.name=弹药
 weaponstat.effect.name=效果
@@ -402,9 +402,9 @@ weaponstat.max_heat.name=热量上限
 weaponstat.accuracy.name=精准度
 
 ##########################################################################################################
-# GUI
+# GUI #
 
-#/#//////////// tooltips ///////////////
+## tooltips ##
 gui.tooltip.close_menu=关闭菜单
 gui.tooltip.open_menu=打开菜单
 gui.tooltip.close=关闭
@@ -446,7 +446,7 @@ gui.tooltip.quest.complete=已完成任务
 gui.tooltip.locks=锁定
 gui.tooltip.parent=前置
 
-#//////////// Labels //////////////
+## Labels ##
 gui.label.button.save=保存
 gui.label.button.remove=删除
 gui.label.button.add=添加
@@ -458,7 +458,7 @@ gui.label.button.import.too_far=目标距离过远
 gui.label.auto_line_size=自动化生产线规模
 gui.label.accept=接受
 
-#//////////// Machines /////////////
+## Machines ##
 gui.replicator.name=物质重组机
 gui.decomposer.name=物质分解机
 gui.matter_analyzer.name=物质分析仪
@@ -476,7 +476,7 @@ gui.inscriber.name=分子刻录仪
 gui.contract_market.name=赏金公会
 gui.dimensional_pylon.name=维度反应器
 
-#//////////// Other ///////////////
+## Other ##
 gui.redstone_mode.high=高频
 gui.redstone_mode.low=低频
 gui.redstone_mode.disabled=禁用
@@ -500,7 +500,7 @@ gui.hologram.access_denied=拒绝访问
 gui.time_until_next_quest=下次请求时间：%1$s
 
 ##########################################################################################################
-# Modules
+# Modules #
 
 module.battery.name=能量模块
 module.color.name=颜色模块
@@ -526,7 +526,7 @@ moduleslot.3.name=可作为视野模块安装
 moduleslot.4.name=可作为附属模块安装
 
 ##########################################################################################################
-# Bioparts
+# Bioparts #
 
 biopart.head.name=头部
 biopart.arms.name=手臂
@@ -536,7 +536,7 @@ biopart.other.name=其它
 biopart.battery.name=能源
 
 ##########################################################################################################
-# Biostats
+# Biostats #
 
 biotic_stat.teleport.name=末影传送
 biotic_stat.teleport.details=按下'%1$s'键进行短距离传送，/n/每次传送消耗%2$s/n/需要一个输出超过 %2$s 的电池
@@ -584,7 +584,7 @@ biotic_stat.oxygen.name=呼吸机
 biotic_stat.oxygen.details=机体不再需要氧气
 
 ##########################################################################################################
-# Deaths
+# Deaths #
 
 death.attack.phaser=%1$s被%2$s分解掉了
 death.attack.phaser.item=%2$s用%3$s分解掉了%1$s
@@ -594,7 +594,7 @@ death.attack.plasmaBolt=%1$s被%2$s爆头
 death.attack.plasmaBolt.item=%2$s用%3$s把%1$s打成了筛子
 
 ##########################################################################################################
-# Tasks
+# Tasks #
 
 task.state.INVALID.name=无效
 task.state.INVALID.description=该任务无效。
@@ -620,7 +620,7 @@ info.matteroverdrive.updater.download=下载
 info.matteroverdrive.updater.hover=点击下载最新版本。
 
 ##########################################################################################################
-# Config
+# Config #
 config.machine_options.name=机器
 config.world_gen.name=世界生成
 config.matter_network.name=物质网络
@@ -648,7 +648,7 @@ config.android_hud.opacity_background=HUD不透明度
 config.compatibility.name=兼容性
 
 ##########################################################################################################
-# Chat Alerts
+# Chat Alerts #
 
 alert.no_rights=无权访问$0
 alert.no_access_default=访问被$0拒绝
@@ -658,12 +658,12 @@ alert.no_rights.dismantle=只有拥有者可以拆除$0
 alert.new_update=有新版本可用！
 
 #############################################################################################################
-# Enchantments
+# Enchantments #
 
 enchantment.matteroverdrive.weapon.damage=超频
 
 ###############################################################################################################
-# Guides
+# Guides #
 guide.category.general.name=基础
 guide.category.weapons.name=武器
 guide.category.android.name=机械人
@@ -697,7 +697,7 @@ guide.entry.tritanium_armor.name=三钛合金护甲
 guide.entry.tritanium_tools.name=三钛合金工具
 
 ###############################################################################################################
-# attributes
+# attributes #
 
 modifier.bionic.max_health=生命上限
 attribute.name.android.glitchTime=故障时间
@@ -705,8 +705,8 @@ attribute.name.android.batteryUse=能量消耗
 
 
 ###############################################################################################################
-# others
-#//////////// colors ////////////
+# others #
+## colors ##
 color.black=黑色
 color.red=红色
 color.green=绿色
@@ -734,7 +734,7 @@ mo.jei.inscriber=分子刻录仪
 
 
 ###############################################################################################################
-# quests
+# quests #
 quest.kill_androids.title=异族将屠净我等！
 quest.kill_androids.info=机械人正在抢走我们的世界！我不知道它们究竟来自何处，但它们的数量与日俱增，源源不绝。如若不想就此灭亡，我们必须奋起反抗！Player，带领我们战斗吧！在它们彻底夺取这个世界前，尽力干掉它们吧！
 quest.kill_androids.objective.0=杀死$killCount/$maxKillCount机械人

@@ -1,5 +1,5 @@
 ##########################################################################################################
-# Items
+# Items #
 
 item.matter_scanner.name=Scanner de matière
 item.emergency_ration.name=Ration de secours
@@ -102,9 +102,9 @@ item.weapon_module_barrel.heal.name=Convertisseur de régénération
 item.info.configured=Configuré
 
 ##########################################################################################################
-# Tile Entities
+# Tile Entities #
 
-//////////// Replicator ////////////
+## Replicator ##
 tile.replicator.name=Réplicateur de matière
 tile.replicator.config.volume.replicate=Volume de réplication
 tile.replicator.config.particles.vent=Ventilateur de particules
@@ -116,7 +116,7 @@ tile.replicator.config.fail=Possibilité d'échouer
 tile.replicator.details=Réplique les éléments et les blocs depuis le plasma de matière
 tile.replicator_active.name=Réplicateur de matière
 
-//////////// Decomposer ////////////
+## Decomposer ##
 tile.decomposer.name=Décomposeur de matière
 tile.decomposer.details=Décompose les éléments en plasma de matière
 tile.decomposer.config.storage.matter=Stockage de matière
@@ -146,7 +146,7 @@ tile.holo_sign.name=Signe holographique
 tile.force_glass.name=Verre en tritanium
 tile.bounding_box.name=Bloc de limitation
 
-//////////// Pattern Storage ////////////
+## Pattern Storage ##
 tile.pattern_storage.name=Stockage de modèles
 tile.pattern_storage.details=Stocke les modèles d'éléments pour la réplication
 tile.pattern_storage.config.particles.vent=Ventilateur de particules
@@ -167,12 +167,12 @@ tile.gravitational_stabilizer.details=Utilisé pour supprimer les effets des ano
 tile.matter_recycler.name=Recycleur de matière
 tile.matter_recycler.details=Utilisé pour recycler des éléments, préparer à la décomposition
 
-//////////// Fluids ////////////
+## Fluids ##
 tile.matter_plasma.name=Plasma de matière
 tile.molten_tritanium.name=Tritanium fondu
 
 
-//////////// Fusion Reactor ////////////
+## Fusion Reactor ##
 tile.fusion_reactor_controller.name=Contrôleur de réacteur à fusion
 tile.fusion_reactor_controller.config.storage.energy=Stockage d'énergie
 tile.fusion_reactor_controller.config.storage.matter=Stockage de matière
@@ -184,7 +184,14 @@ tile.fusion_reactor_controller.details=Contrôleur principal de réacteur à fus
 tile.fusion_reactor_coil.name=Bobine de réacteur à fusion
 tile.fusion_reactor_coil.details=Utilisé pour confiner le plasma dans le réacteur à fusion
 
-//////////// Android Station ////////////
+## Anomaly Info ##
+anomaly.info.mass=Masse
+anomaly.info.range=Gamme
+anomaly.info.brake_range=Plage de freinage
+anomaly.info.horizon=Horizon
+anomaly.info.brake_lvl=Niveau de frein
+
+## Android Station ##
 tile.android_station.name=Station d'Androïdes
 tile.android_station.details=Amélioration de gestion des androïdes
 tile.star_map.name=Carte des étoiles
@@ -195,7 +202,7 @@ container.replicator.name=Réplicateur
 machine.tooltip.matter=Matière
 machine.tooltip.energy=Chargé
 
-//////////// Tritanium Crate ////////////
+## Tritanium Crate ##
 tile.tritanium_crate.black.name=Caisse de tritanium noire
 tile.tritanium_crate.red.name=Caisse de tritanium rouge
 tile.tritanium_crate.green.name=Caisse de tritanium verte
@@ -220,7 +227,7 @@ entity.failed_cow.name=Vache ratée
 entity.failed_sheep.name=Mouton raté
 entity.mad_scientist.name=Scientifique fou
 
-///////////// Decorative ////////////////////
+## Decorative ##
 tile.decorative.stripes.name=Bandes jaunes
 tile.decorative.coils.name=Bobines
 tile.decorative.clean.name=Plaque de tritanium lisse
@@ -240,13 +247,13 @@ tile.decorative.white_plate.name=Plaques murales douces
 tile.decorative.separator.name=Rail en tritanium
 
 ##########################################################################################################
-# Dialogs
+# Dialogs #
 
 dialog.generic.quit.questions=À plus tard.;Je dois y aller.;Je suis pressé.;Au revoir.;Adieu.;Salut.
 dialog.generic.back.questions=Tant pis.;Parlons d'autre chose.;Je m'en fiche.
 dialog.generic.trade.questions=Je veux échanger.;Négocions.;Montrez-moi vos biens.;Qu'avez-vous a vendre ?;
 
-//////////// Mad Scientist ///////////////
+## Mad Scientist ##
 dialog.mad_scientist.convert.question=J'ai toutes les parties!
 dialog.mad_scientist.requirements.line=Finalement !<br>Vous libérer de ce corps fragile est le meilleur choix.<br>Le seul problème est que j'ai besoin que vous m'apportiez un ensemble de parties d'androïde avant que nous ne commencions.
 dialog.mad_scientist.requirements.question=Je veux devenir un androïde.
@@ -258,7 +265,7 @@ dialog.mad_scientist.whatDidYouDo.line=Vous êtes un androïde maintenant ! Vous
 dialog.mad_scientist.whatDidYouDo.question=Qu'avez-vous fait de moi ?
 
 ##########################################################################################################
-# Creative Panels
+# Creative Panels #
 itemGroup.tabMO=Matter Overdrive
 itemGroup.tabMO_modules=Matter Overdrive: Modules
 itemGroup.tabMO_upgrades=Matter Overdrive: Améliorations
@@ -267,7 +274,7 @@ itemGroup.tabMO_ships=Matter Overdrive: Vaisseaux
 itemGroup.tabMO_buildings=Matter Overdrive: Constructions
 
 ##########################################################################################################
-# Upgrade Types
+# Upgrade Types #
 upgradetype.Speed.name=Temps
 upgradetype.PowerUsage.name=Consommation
 upgradetype.Output.name=Sortie
@@ -278,7 +285,7 @@ upgradetype.PowerStorage.name=Stockage d'énergie
 upgradetype.MatterStorage.name=Stockage de matière
 
 ##########################################################################################################
-# Weapon Stats
+# Weapon Stats #
 weaponstat.0.name=Dommage
 weaponstat.1.name=Minution
 weaponstat.2.name=Effet
@@ -290,7 +297,7 @@ weaponstat.7.name=Cadence de tir
 weaponstat.8.name=Santé
 
 ##########################################################################################################
-# GUI
+# GUI #
 
 gui.replicator.name=Réplicateur de matière
 gui.decomposer.name=Décomposeur de matière
@@ -371,7 +378,7 @@ gui.tooltip.starmap.no_ship_factory=Pas d'usine à vaisseau
 gui.tooltip.starmap.has_base=Base déjà présente
 
 ##########################################################################################################
-# Modules
+# Modules #
 
 module.battery.name=Module de batterie
 module.color.name=Module de couleur
@@ -391,7 +398,7 @@ module.sights.name=Module de curiosités
 module.other.name=Autres modules
 
 ##########################################################################################################
-# Bioparts
+# Bioparts #
 
 biopart.head.name=Tête
 biopart.arms.name=Bras
@@ -401,7 +408,7 @@ biopart.other.name=Autre
 biopart.battery.name=Batterie
 
 ##########################################################################################################
-# Biostats
+# Biostats #
 
 biotic_stat.teleport.name=Téléporteur du Néant
 biotic_stat.teleport.details=Permet de courtes téléportation en tappant la touche '%1$s'/n/Chaque téléportation coûte %2$s /n/Une batterie capable d'extraire du %2$s est requise
@@ -429,7 +436,7 @@ biotic_stat.minimap.name=Mini carte
 biotic_stat.minimap.details=Ajoute une mini carte sur l'afficheur à l'écran
 
 ##########################################################################################################
-# Deaths
+# Deaths #
 
 death.attack.phaser=%1$s a été désintégré par %2$s
 death.attack.phaser.item=%1$s a été désintégré par %2$s avec %3$s
@@ -437,7 +444,7 @@ death.attack.blackHole=%1$s a été écrasé par une anomalie gravitationnelle
 death.attack.android_transformation=%1$s a mis fin son existence biologique
 
 ##########################################################################################################
-# Tasks
+# Tasks #
 
 task.state.INVALID.name=Invalide
 task.state.INVALID.description=La tâche n'est pas valide.
@@ -463,7 +470,7 @@ info.matteroverdrive.updater.download=téléchargement
 info.matteroverdrive.updater.hover=Cliquez pour télécharger la dernière version.
 
 ##########################################################################################################
-# Config
+# Config #
 config.machine_options.name=Machines
 config.world_gen.name=Génération du monde
 config.matter_network.name=Réseau de matière
@@ -487,7 +494,7 @@ config.android_hud.color=Couleur de l'afficheur sur l'écran
 config.android_hud.opacity=Opacité de l'afficheur sur l'écran
 
 ##########################################################################################################
-# Chat Alerts
+# Chat Alerts #
 
 alert.no_rights=Aucun droits d'accès à $0
 alert.no_access_default=Accès interdit à $0
@@ -499,17 +506,17 @@ alert.starmap.ship_arrive=§3%1$s §rest arrivé à §3%2$s§r !
 alert.starmap.on_build=§3%1$s §ra été construit à §3%2$s§r !
 
 #############################################################################################################
-# Enchantments
+# Enchantments #
 
 enchantment.matteroverdrive.weapon.meta=Surcadencement
 
 ###############################################################################################################
-# Fluids
+# Fluids #
 fluid.matter_plasma.name=Plasma de matière
 fluid.molten_tritanium=Tritanium fondu
 
 ##########################################################################################################
-# Guides
+# Guides #
 guide.category.general.name=Bases
 guide.category.weapons.name=Armement
 guide.category.android.name=Androïde
@@ -540,12 +547,12 @@ guide.entry.drinks.name=Boissons
 guide.entry.upgrades.name=Améliorations
 
 ###############################################################################################################
-# modifiers
+# modifiers #
 
 modifier.bionic.max_health=Santé maxi
 modifier.bionic.glitch_time=Temps du problème
 
 ###############################################################################################################
-# others
+# others #
 material.tritanium=Tritanium
 container.tritanium_crate=Caisse de tritanium

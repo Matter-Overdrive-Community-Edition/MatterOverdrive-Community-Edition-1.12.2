@@ -231,7 +231,14 @@ fusion_reactor.info.invalid_materials=НЕВЕРНЫЕ${newline}МАТЕРИАЛ
 fusion_reactor.info.need_coils=ТРЕБУЮТСЯ${newline}КАТУШКИ
 fusion_reactor.info.no_anomaly=ОТСУТСТВУЕТ${newline}ГРАВИТАЦИОННАЯ${newline}АНОМАЛИЯ
 fusion_reactor.info.anomaly_too_far=ГРАВИТАЦИОННАЯ${newline}АНОМАЛИЯ${newline}СЛИШКОМ${newline}ДАЛЕКО
- 
+
+##  Информация об аномалиях/Anomaly Info ##
+anomaly.info.mass=Масса
+anomaly.info.range=Диапазон
+anomaly.info.brake_range=Диапазон тормозов
+anomaly.info.horizon=Горизонт
+anomaly.info.brake_lvl=Уровень тормоза
+
 ## Андроид-станция/Android Station ##
 tile.android_station.name=Андроид-станция
 tile.android_station.details=Управление улучшениями Андроида
