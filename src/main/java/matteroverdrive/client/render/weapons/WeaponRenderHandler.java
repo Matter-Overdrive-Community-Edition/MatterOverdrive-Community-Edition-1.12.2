@@ -62,7 +62,8 @@ public class WeaponRenderHandler {
 		if (event.getHand() == EnumHand.MAIN_HAND && !weapon.isEmpty() && weapon.getItem() instanceof EnergyWeapon) {
 			event.setCanceled(true);
 
-			GlStateManager.clear(GL11.GL_DEPTH_BUFFER_BIT);
+			//Optifine Fix?
+			//GlStateManager.clear(GL11.GL_DEPTH_BUFFER_BIT);
 			EntityRenderer entityRenderer = mc.entityRenderer;
 			GlStateManager.matrixMode(GL11.GL_PROJECTION);
 			GlStateManager.loadIdentity();
