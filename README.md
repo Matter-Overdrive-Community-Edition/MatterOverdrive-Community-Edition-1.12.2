@@ -8,7 +8,7 @@
 * [Features](#features)
 * [Issues](#issues)
 * [Building](#building)
-* 
+
 ## About
 Matter Overdrive is a Minecraft mod inspired by the popular Sci-fi TV series Star Trek. It dwells in the concept of replicating and transforming one type matter into another.
 Although it may seem overpowered, Matter Overdrive takes a more realistic approach and requires the player to build a complex system before even the simplest replication can be achieved.
