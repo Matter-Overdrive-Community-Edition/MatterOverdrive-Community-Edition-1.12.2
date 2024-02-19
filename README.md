@@ -7,7 +7,8 @@
 * [Mod-Links](#mod-links)
 * [Features](#features)
 * [Issues](#issues)
-
+* [Building](#building)
+* 
 ## About
 Matter Overdrive is a Minecraft mod inspired by the popular Sci-fi TV series Star Trek. It dwells in the concept of replicating and transforming one type matter into another.
 Although it may seem overpowered, Matter Overdrive takes a more realistic approach and requires the player to build a complex system before even the simplest replication can be achieved.
@@ -28,8 +29,19 @@ Although it may seem overpowered, Matter Overdrive takes a more realistic approa
 * Star Maps, with Galaxies, Stars, and Planets.
 * [Androids](https://mo.simeonradivoev.com/android-guide/), become an Android and learn powerful RPG like abilities, such as Teleportation and Forcefields.
 
+
 ![Matter Overdrive Blocks and Items](https://mo.simeonradivoev.com/wp-content/uploads/2015/05/main_screenshot.png)
 
 ## Issues:
-
 https://github.com/Matter-Overdrive-Community-Edition/MatterOverdrive-Community-Edition-1.12.2/issues
+
+## Building
+1. Clone this repository via 
+  - SSH `git clone git@github.com:Matter-Overdrive-Community-Edition/MatterOverdrive-Community-Edition-1.12.2.git` or 
+  - HTTPS `git clone https://github.com/Matter-Overdrive-Community-Edition/MatterOverdrive-Community-Edition-1.12.2.git`
+2. Setup workspace 
+  - Decompiled source `gradlew setupDecompWorkspace`
+3. Build `gradlew build`. Jar will be in `build/libs`
+4. For core developer: Setup IDE
+  - IntelliJ: Import into IDE and execute `gradlew genIntellijRuns` afterwards
+  - Eclipse: execute `gradlew eclipse`
