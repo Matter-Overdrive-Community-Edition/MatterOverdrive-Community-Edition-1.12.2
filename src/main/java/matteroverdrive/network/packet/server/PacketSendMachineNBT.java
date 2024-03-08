@@ -64,13 +64,12 @@ public class PacketSendMachineNBT extends TileEntityUpdatePacket {
 		@Override
 		public void handleServerMessage(EntityPlayerMP player, PacketSendMachineNBT message, MessageContext ctx) {
 			TileEntity tileEntity = message.getTileEntity(player.world);
-			if (tileEntity instanceof MOTileEntity) {
+			EnumSet<MachineNBTCategory> category = MachineNBTCategory.decode(message.cattegories);
+			if (tileEntity instanceof MOTileEntityMachine && category.stream().noneMatch(MachineNBTCategory.SERVER_CATEGORIES::contains)) {
 				((MOTileEntity) tileEntity).readCustomNBT(message.data, MachineNBTCategory.decode(message.cattegories));
 				if (message.forceUpdate) {
-					if (tileEntity instanceof MOTileEntityMachine) {
-						((MOTileEntityMachine) tileEntity).forceSync();
-					}
-				}
+                    ((MOTileEntityMachine) tileEntity).forceSync();
+                }
 			}
 		}
 	}
