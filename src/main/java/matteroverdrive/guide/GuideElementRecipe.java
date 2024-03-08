@@ -21,7 +21,7 @@ public class GuideElementRecipe extends GuideElementAbstract {
 	public void drawElement(int width, int mouseX, int mouseY) {
 		GlStateManager.pushMatrix();
 		if (textAlign == 1) {
-			GlStateManager.translate(marginLeft + this.width / 2 - 110 / 2, marginTop, 0);
+			GlStateManager.translate(marginLeft + (float) this.width / 2 - 110 / 2, marginTop, 0);
 		} else {
 			GlStateManager.translate(marginLeft, marginTop, 0);
 		}

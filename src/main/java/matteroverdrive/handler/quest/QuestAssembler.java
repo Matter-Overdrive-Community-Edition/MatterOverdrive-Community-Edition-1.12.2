@@ -49,8 +49,8 @@ public class QuestAssembler {
 	private static final ResourceLocation questsLocation = new ResourceLocation(
 			Reference.MOD_ID + ":" + "quests/quests.json");
 	private static final String customQuestsLocation = "custom_quests.json";
-	private Map<String, Class<? extends IQuestLogic>> questLogicClassMap;
-	private Map<String, Class<? extends IQuestReward>> questRewardClassMap;
+	private final Map<String, Class<? extends IQuestLogic>> questLogicClassMap;
+	private final Map<String, Class<? extends IQuestReward>> questRewardClassMap;
 	private String currentQuestName;
 
 	public QuestAssembler() {

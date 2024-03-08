@@ -17,10 +17,10 @@ public class EntityAIFollowCreator<T extends EntityLiving & IEntityOwnable> exte
 	World world;
 	float maxDist;
 	float minDist;
-	private T pet;
+	private final T pet;
 	private Entity theOwner;
-	private double followSpeed;
-	private PathNavigate petPathfinder;
+	private final double followSpeed;
+	private final PathNavigate petPathfinder;
 	private int timeToRecalcPath;
 
 	public EntityAIFollowCreator(T pet, double followSpeed, float minDist, float maxDist) {

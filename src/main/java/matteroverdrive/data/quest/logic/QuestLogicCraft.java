@@ -117,7 +117,7 @@ public class QuestLogicCraft extends AbstractQuestLogicRandomItem {
 	@Override
 	public QuestLogicState onEvent(QuestStack questStack, Event event, EntityPlayer entityPlayer) {
 		if (event instanceof PlayerEvent.ItemCraftedEvent) {
-			if (((PlayerEvent.ItemCraftedEvent) event).crafting != null
+			if (!((PlayerEvent.ItemCraftedEvent) event).crafting.isEmpty()
 					&& matches(questStack, ((PlayerEvent.ItemCraftedEvent) event).crafting)) {
 				if (getCraftCount(questStack) < getMaxCraftCount(questStack)) {
 					setCraftCount(questStack, getCraftCount(questStack) + 1);

@@ -25,9 +25,7 @@ public class AndroidTargetSelector implements Predicate<Entity> {
 				return entity.getTeam() != null && !entity.getTeam().isSameTeam(mob.getTeam());
 			} else {
 				AndroidPlayer androidPlayer = MOPlayerCapabilityProvider.GetAndroidCapability(entity);
-				if (androidPlayer == null || !androidPlayer.isAndroid()) {
-					return true;
-				}
+                return androidPlayer == null || !androidPlayer.isAndroid();
 			}
 		} else if (entity instanceof EntityMutantScientist) {
 			return true;

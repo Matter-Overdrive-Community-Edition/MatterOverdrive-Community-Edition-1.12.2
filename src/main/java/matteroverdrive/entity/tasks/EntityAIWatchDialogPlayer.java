@@ -6,7 +6,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class EntityAIWatchDialogPlayer extends EntityAIWatchClosest {
-	private IDialogNpc npc;
+	private final IDialogNpc npc;
 
 	public EntityAIWatchDialogPlayer(IDialogNpc dialogNpc) {
 		super(dialogNpc.getEntity(), EntityPlayer.class, 8.0F);

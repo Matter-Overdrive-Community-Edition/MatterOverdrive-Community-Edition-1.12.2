@@ -22,13 +22,13 @@ public abstract class AbstractBioticStat implements IBioticStat {
 	boolean showOnWheel;
 	@SideOnly(Side.CLIENT)
 	HoloIcon icon;
-	private int xp;
+	private final int xp;
 	private IBioticStat root;
 	private BionicStatGuiInfo guiInfo;
 	private boolean rootMaxLevel;
-	private List<IBioticStat> competitors;
-	private List<ItemStack> requiredItems;
-	private List<IBioticStat> enabledBlacklist;
+	private final List<IBioticStat> competitors;
+	private final List<ItemStack> requiredItems;
+	private final List<IBioticStat> enabledBlacklist;
 	private int maxLevel;
 
 	public AbstractBioticStat(String name, int xp) {
@@ -72,7 +72,7 @@ public abstract class AbstractBioticStat implements IBioticStat {
 		if (isLocked(android, level)) {
 			return false;
 		}
-		if (requiredItems.size() > 0 && !android.getPlayer().capabilities.isCreativeMode) {
+		if (!requiredItems.isEmpty() && !android.getPlayer().capabilities.isCreativeMode) {
 			for (ItemStack item : requiredItems) {
 
 				if (!hasItem(android, item)) {
@@ -156,13 +156,13 @@ public abstract class AbstractBioticStat implements IBioticStat {
 		}
 
 		StringBuilder requires = new StringBuilder();
-		if (requiredItems.size() > 0) {
+		if (!requiredItems.isEmpty()) {
 			for (ItemStack itemStack : requiredItems) {
 				if (requires.length() > 0) {
 					requires.append(TextFormatting.GRAY + ", ");
 				}
 				if (itemStack.getCount() > 1) {
-					requires.append(TextFormatting.DARK_GREEN.toString()).append(itemStack.getCount()).append("x");
+					requires.append(TextFormatting.DARK_GREEN).append(itemStack.getCount()).append("x");
 				}
 
 				requires.append(TextFormatting.DARK_GREEN + "[").append(itemStack.getDisplayName()).append("]");
@@ -174,12 +174,12 @@ public abstract class AbstractBioticStat implements IBioticStat {
 					+ requires);
 		}
 
-		if (competitors.size() > 0) {
-			String locks = TextFormatting.RED + MOStringHelper.translateToLocal("gui.tooltip.locks") + ": ";
+		if (!competitors.isEmpty()) {
+			StringBuilder locks = new StringBuilder(TextFormatting.RED + MOStringHelper.translateToLocal("gui.tooltip.locks") + ": ");
 			for (IBioticStat compeditor : competitors) {
-				locks += String.format("[%s] ", compeditor.getDisplayName(android, 0));
+				locks.append(String.format("[%s] ", compeditor.getDisplayName(android, 0)));
 			}
-			list.add(locks);
+			list.add(locks.toString());
 		}
 
 		if (level < maxLevel()) {
@@ -291,7 +291,7 @@ public abstract class AbstractBioticStat implements IBioticStat {
 	}
 
 	public boolean areCompeditrosUnlocked(AndroidPlayer androidPlayer) {
-		if (competitors.size() > 0) {
+		if (!competitors.isEmpty()) {
 			for (IBioticStat competitor : competitors) {
 				if (androidPlayer.isUnlocked(competitor, 0)) {
 					return true;

@@ -64,9 +64,7 @@ public class TileEntityMachineSolarPanel extends MOTileEntityMachineEnergy {
 		if (world.provider.hasSkyLight()) {
 			boolean i1 = world.canSeeSky(getPos().up());
 			float time = getTime();
-			if (i1 && time > 0.5) {
-				return true;
-			}
+            return i1 && time > 0.5;
 		}
 		return false;
 	}

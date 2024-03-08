@@ -7,11 +7,11 @@ import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.util.math.Vec3d;
 
 public class EntityAIMoveAlongPath extends EntityAIBase {
-	private IPathableMob<?> pathableMob;
+	private final IPathableMob<?> pathableMob;
 	private double movePosX;
 	private double movePosY;
 	private double movePosZ;
-	private double movementSpeed;
+	private final double movementSpeed;
 
 	public EntityAIMoveAlongPath(IPathableMob<?> pathableMob, double moveSpeedMultiply) {
 		this.pathableMob = pathableMob;

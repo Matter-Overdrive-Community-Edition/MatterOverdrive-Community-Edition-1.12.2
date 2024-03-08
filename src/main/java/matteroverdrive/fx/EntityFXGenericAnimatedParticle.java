@@ -55,20 +55,20 @@ public class EntityFXGenericAnimatedParticle extends MOEntityFX {
 			int i = this.getBrightnessForRender(partialTicks);
 			int j = i >> 16 & 65535;
 			int k = i & 65535;
-			buffer.pos((double) (f5 - rotationX * f4 - rotationXY * f4), (double) (f6),
-					(double) (f7 - rotationYZ * f4 - rotationXZ * f4)).tex((double) f1, (double) f3)
+			buffer.pos(f5 - rotationX * f4 - rotationXY * f4, f6,
+                            f7 - rotationYZ * f4 - rotationXZ * f4).tex(f1, f3)
 					.color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j, k)
 					.endVertex();
-			buffer.pos((double) (f5 - rotationX * f4 + rotationXY * f4), (double) (f6 + rotationZ * f4 * 2),
-					(double) (f7 - rotationYZ * f4 + rotationXZ * f4)).tex((double) f1, (double) f2)
+			buffer.pos(f5 - rotationX * f4 + rotationXY * f4, f6 + rotationZ * f4 * 2,
+                            f7 - rotationYZ * f4 + rotationXZ * f4).tex(f1, f2)
 					.color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j, k)
 					.endVertex();
-			buffer.pos((double) (f5 + rotationX * f4 + rotationXY * f4), (double) (f6 + rotationZ * f4 * 2),
-					(double) (f7 + rotationYZ * f4 + rotationXZ * f4)).tex((double) f, (double) f2)
+			buffer.pos(f5 + rotationX * f4 + rotationXY * f4, f6 + rotationZ * f4 * 2,
+                            f7 + rotationYZ * f4 + rotationXZ * f4).tex(f, f2)
 					.color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j, k)
 					.endVertex();
-			buffer.pos((double) (f5 + rotationX * f4 - rotationXY * f4), (double) (f6),
-					(double) (f7 + rotationYZ * f4 - rotationXZ * f4)).tex((double) f, (double) f3)
+			buffer.pos(f5 + rotationX * f4 - rotationXY * f4, f6,
+                            f7 + rotationYZ * f4 - rotationXZ * f4).tex(f, f3)
 					.color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j, k)
 					.endVertex();
 		} else {

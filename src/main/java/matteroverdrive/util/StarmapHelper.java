@@ -16,19 +16,20 @@ public class StarmapHelper {
 
 	public static void drawPlanetInfo(Planet planet, String text, int x, int y, float multiply, boolean unicode) {
 		boolean lastUnicode;
-		if (GalaxyClient.getInstance().canSeePlanetInfo(planet, Minecraft.getMinecraft().player)
-				|| Minecraft.getMinecraft().player.capabilities.isCreativeMode) {
-			lastUnicode = Minecraft.getMinecraft().fontRenderer.getUnicodeFlag();
-			Minecraft.getMinecraft().fontRenderer.setUnicodeFlag(unicode);
-			Minecraft.getMinecraft().fontRenderer.drawString(text, x, y,
+		Minecraft mc = Minecraft.getMinecraft();
+		if (GalaxyClient.getInstance().canSeePlanetInfo(planet, mc.player)
+				|| mc.player.capabilities.isCreativeMode) {
+			lastUnicode = mc.fontRenderer.getUnicodeFlag();
+			mc.fontRenderer.setUnicodeFlag(unicode);
+			mc.fontRenderer.drawString(text, x, y,
 					Planet.getGuiColor(planet).multiplyWithoutAlpha(multiply).getColor());
-			Minecraft.getMinecraft().fontRenderer.setUnicodeFlag(lastUnicode);
+			mc.fontRenderer.setUnicodeFlag(lastUnicode);
 		} else {
-			lastUnicode = Minecraft.getMinecraft().standardGalacticFontRenderer.getUnicodeFlag();
-			Minecraft.getMinecraft().standardGalacticFontRenderer.setUnicodeFlag(unicode);
-			Minecraft.getMinecraft().standardGalacticFontRenderer.drawString(text, x, y,
+			lastUnicode = mc.standardGalacticFontRenderer.getUnicodeFlag();
+			mc.standardGalacticFontRenderer.setUnicodeFlag(unicode);
+			mc.standardGalacticFontRenderer.drawString(text, x, y,
 					Planet.getGuiColor(planet).multiplyWithoutAlpha(multiply).getColor());
-			Minecraft.getMinecraft().standardGalacticFontRenderer.setUnicodeFlag(lastUnicode);
+			mc.standardGalacticFontRenderer.setUnicodeFlag(lastUnicode);
 		}
 	}
 }

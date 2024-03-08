@@ -89,8 +89,7 @@ public class DialogAssembler {
 			return optionMessage;
 		} else if (element.isJsonPrimitive() && element.getAsJsonPrimitive().isString()) {
 			ResourceLocation location = new ResourceLocation(element.getAsString());
-			DialogOptionReference optionReference = new DialogOptionReference(location);
-			return optionReference;
+            return new DialogOptionReference(location);
 		}
 		throw new MORuntimeException(String.format("Dialog Option must be of type string or Object at: '%s'"));
 	}

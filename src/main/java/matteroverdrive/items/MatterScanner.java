@@ -283,15 +283,13 @@ public class MatterScanner extends MOBaseItem implements IBlockScanner {
 
 		RayTraceResult position = getScanningPos(stack, entityLiving);
 		if (position != null && position.typeOfHit == RayTraceResult.Type.BLOCK) {
-			if (!worldIn.isRemote) {
-				ItemStack worldItem = MatterDatabaseHelper.GetItemStackFromWorld(worldIn, position.getBlockPos());
+            ItemStack worldItem = MatterDatabaseHelper.getItemStackFromWorld(worldIn, position.getBlockPos());
 
-				// finished scanning
-				if (!MinecraftForge.EVENT_BUS.post(new MOEventScan((EntityPlayer) entityLiving, stack, position))) {
-					Scan(worldIn, stack, (EntityPlayer) entityLiving, worldItem, position.getBlockPos());
-				}
-			}
-		}
+            // finished scanning
+            if (!MinecraftForge.EVENT_BUS.post(new MOEventScan((EntityPlayer) entityLiving, stack, position))) {
+                scan(worldIn, stack, (EntityPlayer) entityLiving, worldItem, position.getBlockPos());
+            }
+        }
 		return stack;
 	}
 
@@ -319,7 +317,7 @@ public class MatterScanner extends MOBaseItem implements IBlockScanner {
 			if (hit != null) {
 				if (hit.typeOfHit == RayTraceResult.Type.BLOCK) {
 					ItemStack lastSelected = getSelectedAsItem(stack);
-					ItemStack worldItem = MatterDatabaseHelper.GetItemStackFromWorld(player.world, hit.getBlockPos());
+					ItemStack worldItem = MatterDatabaseHelper.getItemStackFromWorld(player.world, hit.getBlockPos());
 
 					if (worldItem != null && !MatterDatabaseHelper.areEqual(lastSelected, worldItem)) {
 
@@ -364,7 +362,7 @@ public class MatterScanner extends MOBaseItem implements IBlockScanner {
 		}
 	}
 
-	public boolean Scan(World world, ItemStack scanner, EntityPlayer player, ItemStack worldBlock, BlockPos pos) {
+	public boolean scan(World world, ItemStack scanner, EntityPlayer player, ItemStack worldBlock, BlockPos pos) {
 		this.TagCompountCheck(scanner);
 
 		StringBuilder scanInfo = new StringBuilder();

@@ -31,7 +31,7 @@ public class PlayerQuestData {
 
 	public void writeToNBT(NBTTagCompound tagCompound, EnumSet<DataType> dataTypes) {
 		if (dataTypes.contains(DataType.COMPLETED_QUESTS)) {
-			if (completedQuests.size() > 0) {
+			if (!completedQuests.isEmpty()) {
 				NBTTagList activeQuestsTagList = new NBTTagList();
 				for (QuestStack questStack : completedQuests) {
 					NBTTagCompound questStackNBT = new NBTTagCompound();
@@ -42,7 +42,7 @@ public class PlayerQuestData {
 			}
 		}
 		if (dataTypes.contains(DataType.ACTIVE_QUESTS)) {
-			if (activeQuests.size() > 0) {
+			if (!activeQuests.isEmpty()) {
 				NBTTagList activeQuestsTagList = new NBTTagList();
 				for (QuestStack questStack : activeQuests) {
 					NBTTagCompound questStackNBT = new NBTTagCompound();

@@ -11,7 +11,7 @@ public class ReplicatorParticle extends Particle {
 	/**
 	 * the scale of the flame FX
 	 */
-	private float flameScale;
+	private final float flameScale;
 	private double centerX, centerY, centerZ;
 	private double pointGravityScale = 1.0D;
 

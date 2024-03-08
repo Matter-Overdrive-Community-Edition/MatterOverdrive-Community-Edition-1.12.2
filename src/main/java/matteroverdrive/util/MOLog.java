@@ -6,7 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public final class MOLog {
-	private static Logger logger = LogManager.getLogger("MatterOverdrive");
+	private static final Logger logger = LogManager.getLogger("MatterOverdrive");
 
 	private MOLog() {
 	}

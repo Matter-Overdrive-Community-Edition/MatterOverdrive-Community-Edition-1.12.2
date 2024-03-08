@@ -10,7 +10,7 @@ import java.util.concurrent.Callable;
 
 public class OverdriveTab extends CreativeTabs {
 	private ItemStack itemstack = ItemStack.EMPTY;
-	private Callable<ItemStack> stackCallable;
+	private final Callable<ItemStack> stackCallable;
 
 	public OverdriveTab(String label, Callable<ItemStack> stackCallable) {
 		super(label);

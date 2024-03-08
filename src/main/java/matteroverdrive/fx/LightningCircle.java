@@ -9,10 +9,10 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class LightningCircle extends MOEntityFX {
-	private float randomness;
-	private float speed;
-	private float scale;
-	private float growth;
+	private final float randomness;
+	private final float speed;
+	private final float scale;
+	private final float growth;
 
 	public LightningCircle(World world, double posX, double posY, double posZ, float randomness, float speed,
 			float scale, float growth) {

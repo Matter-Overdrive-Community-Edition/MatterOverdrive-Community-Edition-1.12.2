@@ -6,7 +6,7 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class EntityAITalkToPlayer extends EntityAIBase {
-	private IDialogNpc npc;
+	private final IDialogNpc npc;
 
 	public EntityAITalkToPlayer(IDialogNpc npc) {
 		this.npc = npc;

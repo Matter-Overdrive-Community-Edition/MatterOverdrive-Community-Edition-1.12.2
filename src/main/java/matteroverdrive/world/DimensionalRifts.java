@@ -8,7 +8,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
 public class DimensionalRifts {
-	private double noiseScale;
+	private final double noiseScale;
 
 	public DimensionalRifts(double noiseScale) {
 		this.noiseScale = noiseScale;

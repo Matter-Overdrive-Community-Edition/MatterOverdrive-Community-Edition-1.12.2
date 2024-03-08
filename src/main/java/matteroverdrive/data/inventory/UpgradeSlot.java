@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.Map;
 
 public class UpgradeSlot extends Slot {
-	private IUpgradeable upgradeable;
+	private final IUpgradeable upgradeable;
 
 	public UpgradeSlot(boolean isMainSlot, IUpgradeable upgradeable) {
 		super(isMainSlot);

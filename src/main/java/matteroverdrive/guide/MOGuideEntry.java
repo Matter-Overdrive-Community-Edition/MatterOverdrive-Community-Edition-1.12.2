@@ -62,7 +62,7 @@ public class MOGuideEntry {
 	public MOGuideEntry setStackIcons(Item item) {
 		NonNullList<ItemStack> stacks = NonNullList.create();
 		item.getSubItems(CreativeTabs.SEARCH, stacks);
-		if (stacks.size() > 0) {
+		if (!stacks.isEmpty()) {
 			this.stackIcons = new ItemStack[stacks.size()];
 			this.stackIcons = stacks.toArray(this.stackIcons);
 		} else {
@@ -113,7 +113,7 @@ public class MOGuideEntry {
 	public MOGuideEntry setStackIcons(Block block) {
 		NonNullList<ItemStack> stacks = NonNullList.create();
 		block.getSubBlocks(CreativeTabs.SEARCH, stacks);
-		if (stacks.size() > 0) {
+		if (!stacks.isEmpty()) {
 			this.stackIcons = new ItemStack[stacks.size()];
 			this.stackIcons = stacks.toArray(this.stackIcons);
 		} else {

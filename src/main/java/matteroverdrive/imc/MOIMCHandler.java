@@ -85,7 +85,7 @@ public class MOIMCHandler {
 		try {
 			if (msg.isItemStackMessage()) {
 				ItemStack itemStack = msg.getItemStackValue();
-				if (itemStack != null) {
+				if (!itemStack.isEmpty()) {
 					MatterOverdrive.MATTER_REGISTRY.register(itemStack.getItem(),
 							new DamageAwareStackHandler(itemStack.getItemDamage(), 0, true));
 				}

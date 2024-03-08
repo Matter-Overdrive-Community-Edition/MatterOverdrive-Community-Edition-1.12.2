@@ -99,14 +99,14 @@ public class AndroidPlayer implements IEnergyStorage, IAndroid {
 	private static List<String> POTION_REMOVAL_BLACKLIST = new ArrayList<>();
 	private final int ENERGY_SLOT;
 	private final Inventory inventory;
-	private NonNullList<ItemStack> previousBionicParts = NonNullList.withSize(5, ItemStack.EMPTY);
+	private final NonNullList<ItemStack> previousBionicParts = NonNullList.withSize(5, ItemStack.EMPTY);
 	private EntityPlayer player;
 	private IBioticStat activeStat;
 	private NBTTagCompound unlocked;
 	private int maxEnergy;
 	private boolean isAndroid;
 	private boolean hasRunOutOfPower;
-	private AndroidEffects androidEffects;
+	private final AndroidEffects androidEffects;
 
 	public AndroidPlayer(EntityPlayer player) {
 		this.maxEnergy = 512000;
@@ -312,8 +312,7 @@ public class AndroidPlayer implements IEnergyStorage, IAndroid {
 			return amount;
 		}
 
-		if (getStackInSlot(ENERGY_SLOT) != null
-				&& getStackInSlot(ENERGY_SLOT).hasCapability(CapabilityEnergy.ENERGY, null)) {
+		if (getStackInSlot(ENERGY_SLOT).hasCapability(CapabilityEnergy.ENERGY, null)) {
 			ItemStack battery = getStackInSlot(ENERGY_SLOT);
 			IEnergyStorage energyContainerItem = battery.getCapability(CapabilityEnergy.ENERGY, null);
 			energyExtracted = energyContainerItem.extractEnergy(amount, simulate);

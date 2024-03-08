@@ -292,7 +292,7 @@ public class WeaponRenderHandler {
 			GlStateManager.translate(MathHelper.sin(f1 * (float) Math.PI) * f2 * 0.05F,
 					-Math.abs(MathHelper.cos(f1 * (float) Math.PI) * f2) * 0.1f, 0.0F);
 			GlStateManager.rotate(MathHelper.sin(f1 * (float) Math.PI) * f2 * 0f, 0.0F, 0.0F, 1.0F);
-			GlStateManager.rotate(Math.abs(MathHelper.cos(f1 * (float) Math.PI - 0.2F) * f2) * 1f, 1.0F, 0.0F, 0.0F);
+			GlStateManager.rotate(Math.abs(MathHelper.cos(f1 * (float) Math.PI - 0.2F) * f2), 1.0F, 0.0F, 0.0F);
 			GlStateManager.rotate(f3, 1.0F, 0.0F, 0.0F);
 		}
 	}

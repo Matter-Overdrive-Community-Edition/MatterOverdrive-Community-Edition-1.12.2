@@ -26,7 +26,7 @@ import net.minecraft.world.gen.IChunkGenerator;
 
 public abstract class MOImageGen<T extends MOImageGen.ImageGenWorker> {
 	public static HashMap<Block, Integer> worldGenerationBlockColors = new HashMap<>();
-	private HashMap<Integer, BlockMapping> blockMap;
+	private final HashMap<Integer, BlockMapping> blockMap;
 	protected ResourceLocation texture;
 	private List<int[][]> layers;
 	private int textureWidth;
@@ -71,7 +71,7 @@ public abstract class MOImageGen<T extends MOImageGen.ImageGenWorker> {
 	}
 
 	public void generateFromImage(World world, Random random, BlockPos start, int layer, int placeNotify, T worker) {
-		if (layers != null && layers.size() > 0) {
+		if (layers != null && !layers.isEmpty()) {
 			for (BlockMapping blockMapping : blockMap.values()) {
 				blockMapping.reset(localRandom);
 			}
@@ -156,7 +156,7 @@ public abstract class MOImageGen<T extends MOImageGen.ImageGenWorker> {
 	}
 
 	public void manageTextureLoading() {
-		if (layers == null || layers.size() == 0) {
+		if (layers == null || layers.isEmpty()) {
 			loadTexture(getTexture());
 		}
 	}
@@ -339,7 +339,7 @@ public abstract class MOImageGen<T extends MOImageGen.ImageGenWorker> {
 	}
 
 	public static class BlockMapping {
-		private Block[] blocks;
+		private final Block[] blocks;
 		private boolean noise;
 		private int lastSelected;
 

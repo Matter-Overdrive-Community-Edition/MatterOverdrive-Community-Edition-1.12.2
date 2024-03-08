@@ -61,13 +61,11 @@ public class TileEntityMachineContractMarket extends MOTileEntityMachine {
 				MatterOverdriveQuests.contractGeneration)).getQuest();
 		QuestStack questStack = MatterOverdrive.QUEST_FACTORY.generateQuestStack(random, quest);
 		for (int i = 0; i < inventory.getSizeInventory(); i++) {
-			if (inventory.getSlot(i).getItem() != null) {
-				ItemStack itemStack = inventory.getSlot(i).getItem();
-				if (itemStack.getTagCompound() != null) {
-					QuestStack qs = QuestStack.loadFromNBT(itemStack.getTagCompound());
-					if (questStack.getQuest().areQuestStacksEqual(questStack, qs)) {
-						return;
-					}
+			ItemStack itemStack = inventory.getSlot(i).getItem();
+			if (itemStack.getTagCompound() != null) {
+				QuestStack qs = QuestStack.loadFromNBT(itemStack.getTagCompound());
+				if (questStack.getQuest().areQuestStacksEqual(questStack, qs)) {
+					return;
 				}
 			}
 		}
@@ -80,7 +78,7 @@ public class TileEntityMachineContractMarket extends MOTileEntityMachine {
 	public void addGenerationDelay() {
 		int freeSlots = getFreeSlots();
 		lastGenerationTime = world.getTotalWorldTime() + QUEST_GENERATE_DELAY_MIN
-				+ (inventory.getSizeInventory() - freeSlots) * QUEST_GENERATE_DELAY_PER_SLOT;
+				+ (long) (inventory.getSizeInventory() - freeSlots) * QUEST_GENERATE_DELAY_PER_SLOT;
 	}
 
 	@Override
@@ -102,7 +100,7 @@ public class TileEntityMachineContractMarket extends MOTileEntityMachine {
 	public int getFreeSlots() {
 		int freeSlots = 0;
 		for (int i = 0; i < inventory.getSizeInventory(); i++) {
-			if (inventory.getSlot(i).getItem() == null) {
+			if (inventory.getSlot(i).getItem().isEmpty()) {
 				freeSlots++;
 			}
 		}

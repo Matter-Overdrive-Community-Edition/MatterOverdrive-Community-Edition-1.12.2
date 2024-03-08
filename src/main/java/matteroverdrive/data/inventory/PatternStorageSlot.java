@@ -10,8 +10,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PatternStorageSlot extends Slot {
-	private IMatterDatabase database;
-	private int storageId;
+	private final IMatterDatabase database;
+	private final int storageId;
 
 	public PatternStorageSlot(boolean isMainSlot, IMatterDatabase database, int storageId) {
 		super(isMainSlot);
