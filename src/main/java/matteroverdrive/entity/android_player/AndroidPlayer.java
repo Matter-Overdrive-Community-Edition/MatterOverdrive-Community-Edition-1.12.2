@@ -700,11 +700,12 @@ public class AndroidPlayer implements IEnergyStorage, IAndroid {
 
 	private void manageCharging() {
 		//// TODO: 3/24/2016 Add support for off hand
-		if (player != null && player.isSneaking() && !player.getHeldItem(EnumHand.MAIN_HAND).isEmpty()
-				&& (player.getHeldItem(EnumHand.MAIN_HAND).getItem() == MatterOverdrive.ITEMS.battery
-						|| player.getHeldItem(EnumHand.MAIN_HAND).getItem() == MatterOverdrive.ITEMS.hc_battery)) {
+		ItemStack heldItem = player.getHeldItem(EnumHand.MAIN_HAND);
+		if (player != null && player.isSneaking() && !heldItem.isEmpty()
+				&& (heldItem.getItem() == MatterOverdrive.ITEMS.battery
+						|| heldItem.getItem() == MatterOverdrive.ITEMS.hc_battery)) {
 			int freeEnergy = getMaxEnergyStored() - getEnergyStored();
-			int receivedAmount = (player.getHeldItem(EnumHand.MAIN_HAND).getCapability(CapabilityEnergy.ENERGY, null))
+			int receivedAmount = (heldItem.getCapability(CapabilityEnergy.ENERGY, null))
 					.extractEnergy(freeEnergy, false);
 			receiveEnergy(receivedAmount, false);
 		}

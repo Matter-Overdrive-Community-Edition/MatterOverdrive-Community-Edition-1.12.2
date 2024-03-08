@@ -56,7 +56,7 @@ public class PacketDataPadCommands extends PacketAbstract {
 		@Override
 		public void handleServerMessage(EntityPlayerMP player, PacketDataPadCommands message, MessageContext ctx) {
 			ItemStack dataPadStack = player.getHeldItem(message.hand);
-			if (dataPadStack != null && dataPadStack.getItem() instanceof DataPad) {
+			if (dataPadStack.getItem() instanceof DataPad) {
 				if (message.command == 0) {
 					dataPadStack.setTagCompound(message.data);
 				}

@@ -178,12 +178,16 @@ public class AndroidHudStats extends AndroidHudElement {
 	}
 
 	private int renderAmmoBox(AndroidPlayer androidPlayer, int x, int y, boolean leftSided, Color baseColor) {
-		if (androidPlayer.getPlayer() != null && androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND) != null
-				&& androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof IWeapon) {
-			float percent = (float) ((IWeapon) androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem())
-					.getAmmo(androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND))
-					/ (float) ((IWeapon) androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem())
-							.getMaxAmmo(androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND));
+		if(androidPlayer.getPlayer() == null) {
+			return 0;
+		}
+
+		ItemStack heldItem = androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND);
+		if (heldItem.getItem() instanceof IWeapon) {
+			float percent = (float) ((IWeapon) heldItem.getItem())
+					.getAmmo(heldItem)
+					/ (float) ((IWeapon) heldItem.getItem())
+							.getMaxAmmo(heldItem);
 			int energyPackCount = getEnergyPackCount(androidPlayer.getPlayer());
 			return renderIconWithInfo("ammo",
 					DecimalFormat.getPercentInstance().format(percent) + " | " + Integer.toString(energyPackCount),
@@ -193,12 +197,16 @@ public class AndroidHudStats extends AndroidHudElement {
 	}
 
 	private int getAmmoBoxWidth(AndroidPlayer androidPlayer) {
-		if (androidPlayer.getPlayer() != null && androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND) != null
-				&& androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof IWeapon) {
+		if(androidPlayer.getPlayer() == null) {
+			return 0;
+		}
+
+		ItemStack heldItem = androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND);
+		if (heldItem.getItem() instanceof IWeapon) {
 			float percent = (float) ((IWeapon) androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem())
-					.getAmmo(androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND))
-					/ (float) ((IWeapon) androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem())
-							.getMaxAmmo(androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND));
+					.getAmmo(heldItem)
+					/ (float) ((IWeapon) heldItem.getItem())
+							.getMaxAmmo(heldItem);
 			int energyPackCount = getEnergyPackCount(androidPlayer.getPlayer());
 			return getWidthIconWithInfo(
 					DecimalFormat.getPercentInstance().format(percent) + " | " + Integer.toString(energyPackCount), 18);
@@ -207,14 +215,18 @@ public class AndroidHudStats extends AndroidHudElement {
 	}
 
 	private int renderHeat(AndroidPlayer androidPlayer, int x, int y, boolean leftSided, Color baseColor) {
-		if (androidPlayer.getPlayer() != null && androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND) != null
-				&& androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof IWeapon) {
-			if (((IWeapon) androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem())
-					.getMaxHeat(androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND)) > 0) {
-				float percent = ((IWeapon) androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem())
-						.getHeat(androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND))
-						/ ((IWeapon) androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem())
-								.getMaxHeat(androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND));
+		if(androidPlayer.getPlayer() == null) {
+			return 0;
+		}
+
+		ItemStack heldItem = androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND);
+		if (heldItem.getItem() instanceof IWeapon) {
+			if (((IWeapon) heldItem.getItem())
+					.getMaxHeat(heldItem) > 0) {
+				float percent = ((IWeapon) heldItem.getItem())
+						.getHeat(heldItem)
+						/ ((IWeapon) heldItem.getItem())
+								.getMaxHeat(heldItem);
 				return renderIconWithPercent("temperature", percent, x, y, 0, 0, leftSided, baseColor,
 						Reference.COLOR_HOLO_RED, 18, 18);
 			}
@@ -223,14 +235,18 @@ public class AndroidHudStats extends AndroidHudElement {
 	}
 
 	private int getHeatWidth(AndroidPlayer androidPlayer) {
-		if (androidPlayer.getPlayer() != null && androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND) != null
-				&& androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof IWeapon) {
-			if (((IWeapon) androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem())
-					.getMaxHeat(androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND)) > 0) {
-				float percent = ((IWeapon) androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem())
-						.getHeat(androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND))
-						/ ((IWeapon) androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem())
-								.getMaxHeat(androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND));
+		if(androidPlayer.getPlayer() == null) {
+			return 0;
+		}
+
+		ItemStack heldItem = androidPlayer.getPlayer().getHeldItem(EnumHand.MAIN_HAND);
+		if (heldItem.getItem() instanceof IWeapon) {
+			if (((IWeapon) heldItem.getItem())
+					.getMaxHeat(heldItem) > 0) {
+				float percent = ((IWeapon) heldItem.getItem())
+						.getHeat(heldItem)
+						/ ((IWeapon) heldItem.getItem())
+								.getMaxHeat(heldItem);
 				return getWidthIconWithPercent(percent, 18);
 			}
 		}
