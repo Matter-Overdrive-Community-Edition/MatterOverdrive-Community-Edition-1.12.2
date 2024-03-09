@@ -128,8 +128,7 @@ public class MOInventoryHelper {
 				}
 
 				for (var6 = 0; var6 < var5.length && itemstack != null; ++var6) {
-					if (inventory.getStackInSlot(var5[var6]) == null
-							&& var4.canInsertItem(var5[var6], itemstack, side)) {
+					if (var4.canInsertItem(var5[var6], itemstack, side)) {
 						itemstack = addToEmptyInventorySlot(var4, var5[var6], itemstack);
 					}
 				}

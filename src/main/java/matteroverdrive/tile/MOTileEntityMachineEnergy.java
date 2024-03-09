@@ -102,7 +102,7 @@ public abstract class MOTileEntityMachineEnergy extends MOTileEntityMachine {
 	public void readFromPlaceItem(ItemStack itemStack) {
 		super.readFromPlaceItem(itemStack);
 
-		if (itemStack != null) {
+		if (!itemStack.isEmpty()) {
 			if (itemStack.hasTagCompound()) {
 				energyStorage.deserializeNBT(itemStack.getTagCompound().getCompoundTag("Energy"));
 			}
@@ -113,7 +113,7 @@ public abstract class MOTileEntityMachineEnergy extends MOTileEntityMachine {
 	public void writeToDropItem(ItemStack itemStack) {
 		super.writeToDropItem(itemStack);
 
-		if (itemStack != null) {
+		if (!itemStack.isEmpty()) {
 			if (energyStorage.getEnergyStored() > 0) {
 				if (!itemStack.hasTagCompound()) {
 					itemStack.setTagCompound(new NBTTagCompound());

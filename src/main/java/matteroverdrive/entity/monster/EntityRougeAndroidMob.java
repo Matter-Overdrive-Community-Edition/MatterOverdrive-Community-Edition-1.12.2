@@ -159,7 +159,7 @@ public class EntityRougeAndroidMob extends EntityMob
 	private boolean addToSpawner(BlockPos position) {
 		this.spawnerPosition = position;
 		TileEntity spawnerEntity = world.getTileEntity(position);
-		if (spawnerEntity != null && spawnerEntity instanceof TileEntityAndroidSpawner) {
+		if (spawnerEntity instanceof TileEntityAndroidSpawner) {
 			((TileEntityAndroidSpawner) spawnerEntity).addSpawnedAndroid(this);
 			return true;
 		}
@@ -206,7 +206,7 @@ public class EntityRougeAndroidMob extends EntityMob
 
 	public boolean getCanSpawnHere(boolean ignoreEntityCollision, boolean ignoreLight, boolean ignoreDimension) {
 		if (!ignoreDimension) {
-			if (EntityRogueAndroid.dimensionWhitelist.size() > 0) {
+			if (!EntityRogueAndroid.dimensionWhitelist.isEmpty()) {
 				return EntityRogueAndroid.dimensionWhitelist.contains(world.provider.getDimension())
 						&& inDimensionBlacklist();
 			}
@@ -226,7 +226,7 @@ public class EntityRougeAndroidMob extends EntityMob
 	public float getBlockPathWeight(BlockPos pos) {
 		float weight = 1 - this.world.getLightBrightness(pos);
 		weight *= this.world.isSideSolid(pos, EnumFacing.UP) ? 0 : 1;
-		weight /= Math.abs(pos.getY() - posY);
+		weight /= (float) Math.abs(pos.getY() - posY);
 		return weight;
 	}
 
@@ -340,7 +340,7 @@ public class EntityRougeAndroidMob extends EntityMob
 	public void setDead() {
 		if (spawnerPosition != null) {
 			TileEntity spawner = world.getTileEntity(spawnerPosition);
-			if (spawner != null && spawner instanceof TileEntityAndroidSpawner) {
+			if (spawner instanceof TileEntityAndroidSpawner) {
 				((TileEntityAndroidSpawner) spawner).removeAndroid(this);
 			}
 		}

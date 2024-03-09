@@ -62,16 +62,14 @@ public class MOPhysicsHelper {
 			float f1 = 1.0F;
 			List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(viewer,
 					viewer.getEntityBoundingBox().expand(dir.x * distance, dir.y * distance, dir.z * distance)
-							.expand((double) f1, (double) f1, (double) f1));
+							.expand(f1, f1, f1));
 			double d2 = d1;
 
-			for (Object aList : list) {
-				Entity entity = (Entity) aList;
-
+			for (Entity entity : list) {
 				if (entity.canBeCollidedWith()) {
 					float f2 = entity.getCollisionBorderSize();
-					AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().expand((double) f2, (double) f2,
-							(double) f2);
+					AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().expand(f2, f2,
+                            f2);
 					RayTraceResult movingobjectposition = axisalignedbb.calculateIntercept(Vec3d, Vec3d2);
 
 					if (axisalignedbb.contains(Vec3d)) {

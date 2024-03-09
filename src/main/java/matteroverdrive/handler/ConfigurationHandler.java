@@ -231,9 +231,7 @@ public class ConfigurationHandler {
 	}
 
 	public void subscribe(IConfigSubscriber subscriber) {
-		if (!subscribers.contains(subscriber)) {
-			subscribers.add(subscriber);
-		}
+        subscribers.add(subscriber);
 	}
 
 	@SubscribeEvent

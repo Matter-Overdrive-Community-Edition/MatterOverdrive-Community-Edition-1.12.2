@@ -99,14 +99,14 @@ public class AndroidPlayer implements IEnergyStorage, IAndroid {
 	private static List<String> POTION_REMOVAL_BLACKLIST = new ArrayList<>();
 	private final int ENERGY_SLOT;
 	private final Inventory inventory;
-	private NonNullList<ItemStack> previousBionicParts = NonNullList.withSize(5, ItemStack.EMPTY);
+	private final NonNullList<ItemStack> previousBionicParts = NonNullList.withSize(5, ItemStack.EMPTY);
 	private EntityPlayer player;
 	private IBioticStat activeStat;
 	private NBTTagCompound unlocked;
 	private int maxEnergy;
 	private boolean isAndroid;
 	private boolean hasRunOutOfPower;
-	private AndroidEffects androidEffects;
+	private final AndroidEffects androidEffects;
 
 	public AndroidPlayer(EntityPlayer player) {
 		this.maxEnergy = 512000;
@@ -312,8 +312,7 @@ public class AndroidPlayer implements IEnergyStorage, IAndroid {
 			return amount;
 		}
 
-		if (getStackInSlot(ENERGY_SLOT) != null
-				&& getStackInSlot(ENERGY_SLOT).hasCapability(CapabilityEnergy.ENERGY, null)) {
+		if (getStackInSlot(ENERGY_SLOT).hasCapability(CapabilityEnergy.ENERGY, null)) {
 			ItemStack battery = getStackInSlot(ENERGY_SLOT);
 			IEnergyStorage energyContainerItem = battery.getCapability(CapabilityEnergy.ENERGY, null);
 			energyExtracted = energyContainerItem.extractEnergy(amount, simulate);
@@ -701,11 +700,12 @@ public class AndroidPlayer implements IEnergyStorage, IAndroid {
 
 	private void manageCharging() {
 		//// TODO: 3/24/2016 Add support for off hand
-		if (player != null && player.isSneaking() && !player.getHeldItem(EnumHand.MAIN_HAND).isEmpty()
-				&& (player.getHeldItem(EnumHand.MAIN_HAND).getItem() == MatterOverdrive.ITEMS.battery
-						|| player.getHeldItem(EnumHand.MAIN_HAND).getItem() == MatterOverdrive.ITEMS.hc_battery)) {
+		ItemStack heldItem = player.getHeldItem(EnumHand.MAIN_HAND);
+		if (player != null && player.isSneaking() && !heldItem.isEmpty()
+				&& (heldItem.getItem() == MatterOverdrive.ITEMS.battery
+						|| heldItem.getItem() == MatterOverdrive.ITEMS.hc_battery)) {
 			int freeEnergy = getMaxEnergyStored() - getEnergyStored();
-			int receivedAmount = (player.getHeldItem(EnumHand.MAIN_HAND).getCapability(CapabilityEnergy.ENERGY, null))
+			int receivedAmount = (heldItem.getCapability(CapabilityEnergy.ENERGY, null))
 					.extractEnergy(freeEnergy, false);
 			receiveEnergy(receivedAmount, false);
 		}

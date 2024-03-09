@@ -20,7 +20,7 @@ import net.minecraft.util.math.BlockPos;
 public abstract class AbstractGridNetwork<T extends IGridNode> implements IGridNetwork<T> {
 	private final Class<T> nodeTypes;
 	private final Set<T> nodes;
-	private GridNetworkHandler gridNetworkHandler;
+	private final GridNetworkHandler gridNetworkHandler;
 
 	public AbstractGridNetwork(GridNetworkHandler gridNetworkHandler, final Class<T> nodeTypes) {
 		this.nodeTypes = nodeTypes;
@@ -32,7 +32,7 @@ public abstract class AbstractGridNetwork<T extends IGridNode> implements IGridN
 	public void onNodeDestroy(final IBlockState blockState, final T node) {
 		removeNode(node);
 
-		if (nodes.size() > 0) {
+		if (!nodes.isEmpty()) {
 			ConnectionPathfind<T> pathfind = new ConnectionPathfind(node, nodeTypes);
 			List<T> connections = new ArrayList<>();
 

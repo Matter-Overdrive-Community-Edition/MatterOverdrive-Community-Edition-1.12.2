@@ -61,10 +61,8 @@ public class MatterHelper {
 	}
 
 	private static IRecipe GetRecipeOf(ItemStack item) {
-		List recipes = ForgeRegistries.RECIPES.getValues();
-		for (Object recipe1 : recipes) {
-			IRecipe recipe = (IRecipe) recipe1;
-
+		List<IRecipe> recipes = ForgeRegistries.RECIPES.getValues();
+		for (IRecipe recipe : recipes) {
 			if (recipe != null && !recipe.getRecipeOutput().isEmpty()
 					&& recipe.getRecipeOutput().getItem() == item.getItem()) {
 				return recipe;
@@ -75,11 +73,11 @@ public class MatterHelper {
 	}
 
 	public static boolean isMatterScanner(ItemStack item) {
-		return item != null && item.getItem() != null && item.getItem() instanceof MatterScanner;
+		return item != null && item.getItem() instanceof MatterScanner;
 	}
 
 	public static boolean isMatterPatternStorage(ItemStack item) {
-		return item != null && item.getItem() != null && item.getItem() instanceof IMatterPatternStorage;
+		return item != null && item.getItem() instanceof IMatterPatternStorage;
 	}
 
 	public static boolean isUpgrade(ItemStack itemStack) {
@@ -114,7 +112,7 @@ public class MatterHelper {
 		return MOStringHelper.formatNumber(matter) + " / " + MOStringHelper.formatNumber(capacity) + MATTER_UNIT;
 	}
 
-	public static boolean DropInventory(World world, IInventory inventory, BlockPos pos) {
+	public static boolean dropInventory(World world, IInventory inventory, BlockPos pos) {
 		if (inventory != null) {
 			for (int i1 = 0; i1 < inventory.getSizeInventory(); ++i1) {
 				ItemStack itemstack = inventory.getStackInSlot(i1);
@@ -124,17 +122,17 @@ public class MatterHelper {
 					float f1 = world.rand.nextFloat() * 0.8F + 0.1F;
 					float f2 = world.rand.nextFloat() * 0.8F + 0.1F;
 
-					EntityItem entityitem = new EntityItem(world, (double) ((float) pos.getX() + f),
-							(double) ((float) pos.getY() + f1), (double) ((float) pos.getZ() + f2), itemstack);
+					EntityItem entityitem = new EntityItem(world, (float) pos.getX() + f,
+                            (float) pos.getY() + f1, (float) pos.getZ() + f2, itemstack);
 
 					if (itemstack.hasTagCompound()) {
 						entityitem.getItem().setTagCompound(itemstack.getTagCompound().copy());
 					}
 
 					float f3 = 0.05F;
-					entityitem.motionX = (double) ((float) world.rand.nextGaussian() * f3);
-					entityitem.motionY = (double) ((float) world.rand.nextGaussian() * f3 + 0.2F);
-					entityitem.motionZ = (double) ((float) world.rand.nextGaussian() * f3);
+					entityitem.motionX = (float) world.rand.nextGaussian() * f3;
+					entityitem.motionY = (float) world.rand.nextGaussian() * f3 + 0.2F;
+					entityitem.motionZ = (float) world.rand.nextGaussian() * f3;
 					world.spawnEntity(entityitem);
 				}
 			}
@@ -147,10 +145,10 @@ public class MatterHelper {
 	public static void DrawMatterInfoTooltip(ItemStack itemStack, int speed, int energyPerTick, List<String> tooltips) {
 		int matter = MatterHelper.getMatterAmountFromItem(itemStack);
 		if (matter > 0) {
-			tooltips.add(TextFormatting.ITALIC.toString() + TextFormatting.BLUE.toString() + "Matter: "
+			tooltips.add(TextFormatting.ITALIC.toString() + TextFormatting.BLUE + "Matter: "
 					+ MatterHelper.formatMatter(matter));
 			tooltips.add(TextFormatting.ITALIC.toString() + TextFormatting.DARK_RED + "Power: "
-					+ MOEnergyHelper.formatEnergy(speed * matter * energyPerTick));
+					+ MOEnergyHelper.formatEnergy((long) speed * matter * energyPerTick));
 		}
 	}
 }

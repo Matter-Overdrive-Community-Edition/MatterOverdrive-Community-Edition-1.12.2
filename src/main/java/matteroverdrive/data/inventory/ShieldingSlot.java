@@ -15,7 +15,7 @@ public class ShieldingSlot extends Slot {
 
 	@Override
 	public boolean isValidForSlot(ItemStack itemStack) {
-		if (this.getItem() == null || this.getItem().getCount() < 4) {
+		if (this.getItem().getCount() < 4) {
 			if (itemStack != null && !itemStack.isEmpty()) {
 				return itemStack.getItem() == MatterOverdrive.ITEMS.tritanium_plate;
 			}

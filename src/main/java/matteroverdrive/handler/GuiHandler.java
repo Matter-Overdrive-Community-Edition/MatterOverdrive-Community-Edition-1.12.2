@@ -78,8 +78,8 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.relauncher.Side;
 
 public class GuiHandler implements IGuiHandler {
-	private Map<Class<? extends MOTileEntity>, Class<? extends MOGuiBase>> tileEntityGuiList;
-	private Map<Class<? extends MOTileEntity>, Class<? extends MOBaseContainer>> tileEntityContainerList;
+	private final Map<Class<? extends MOTileEntity>, Class<? extends MOGuiBase>> tileEntityGuiList;
+	private final Map<Class<? extends MOTileEntity>, Class<? extends MOBaseContainer>> tileEntityContainerList;
 
 	public GuiHandler() {
 		tileEntityGuiList = new HashMap<>();
@@ -151,37 +151,32 @@ public class GuiHandler implements IGuiHandler {
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-
 		TileEntity entity = world.getTileEntity(new BlockPos(x, y, z));
-
-		switch (ID) {
-		default:
-			if (entity != null && tileEntityContainerList.containsKey(entity.getClass())) {
-				try {
-					Class<? extends MOBaseContainer> containerClass = tileEntityContainerList.get(entity.getClass());
-					Constructor[] constructors = containerClass.getDeclaredConstructors();
-					for (Constructor<?> constructor : constructors) {
-						Class[] parameterTypes = constructor.getParameterTypes();
-						if (parameterTypes.length == 2) {
-							if (parameterTypes[0].isInstance(player.inventory)
-									&& parameterTypes[1].isInstance(entity)) {
-								onContainerOpen(entity, Side.SERVER);
-								return constructor.newInstance(player.inventory, entity);
-							}
-						}
-					}
-				} catch (InvocationTargetException e) {
-					MOLog.log(Level.WARN, e, "Could not call TileEntity constructor in server GUI handler");
-				} catch (InstantiationException e) {
-					MOLog.log(Level.WARN, e, "Could not instantiate TileEntity in server GUI handler");
-				} catch (IllegalAccessException e) {
-					MOLog.log(Level.WARN, e, "Could not access TileEntity constructor in server GUI handler");
-				}
-			} else if (entity instanceof MOTileEntityMachine) {
-				return ContainerFactory.createMachineContainer((MOTileEntityMachine) entity, player.inventory);
-			}
-		}
-		return null;
+        if (entity != null && tileEntityContainerList.containsKey(entity.getClass())) {
+            try {
+                Class<? extends MOBaseContainer> containerClass = tileEntityContainerList.get(entity.getClass());
+                Constructor[] constructors = containerClass.getDeclaredConstructors();
+                for (Constructor<?> constructor : constructors) {
+                    Class[] parameterTypes = constructor.getParameterTypes();
+                    if (parameterTypes.length == 2) {
+                        if (parameterTypes[0].isInstance(player.inventory)
+                                && parameterTypes[1].isInstance(entity)) {
+                            onContainerOpen(entity, Side.SERVER);
+                            return constructor.newInstance(player.inventory, entity);
+                        }
+                    }
+                }
+            } catch (InvocationTargetException e) {
+                MOLog.log(Level.WARN, e, "Could not call TileEntity constructor in server GUI handler");
+            } catch (InstantiationException e) {
+                MOLog.log(Level.WARN, e, "Could not instantiate TileEntity in server GUI handler");
+            } catch (IllegalAccessException e) {
+                MOLog.log(Level.WARN, e, "Could not access TileEntity constructor in server GUI handler");
+            }
+        } else if (entity instanceof MOTileEntityMachine) {
+            return ContainerFactory.createMachineContainer((MOTileEntityMachine) entity, player.inventory);
+        }
+        return null;
 	}
 
 	private void onContainerOpen(TileEntity entity, Side side) {
@@ -192,39 +187,33 @@ public class GuiHandler implements IGuiHandler {
 
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-
 		TileEntity entity = world.getTileEntity(new BlockPos(x, y, z));
-
-		switch (ID) {
-		default:
-			if (tileEntityGuiList.containsKey(entity.getClass())) {
-				try {
-
-					Class<? extends MOGuiBase> containerClass = tileEntityGuiList.get(entity.getClass());
-					Constructor[] constructors = containerClass.getDeclaredConstructors();
-					for (Constructor<?> constructor : constructors) {
-						Class[] parameterTypes = constructor.getParameterTypes();
-						if (parameterTypes.length == 2) {
-							if (parameterTypes[0].isInstance(player.inventory)
-									&& parameterTypes[1].isInstance(entity)) {
-								onContainerOpen(entity, Side.CLIENT);
-								return constructor.newInstance(player.inventory, entity);
-							}
-						}
-					}
-				} catch (InvocationTargetException e) {
-					MOLog.log(Level.WARN, e, "Could not call TileEntity constructor in client GUI handler");
-				} catch (InstantiationException e) {
-					MOLog.log(Level.WARN, e, "Could not instantiate the TileEntity in client GUI handler");
-				} catch (IllegalAccessException e) {
-					MOLog.log(Level.WARN, e, "Could not access TileEntity constructor in client GUI handler");
-				}
-			} else if (entity instanceof MOTileEntityMachine) {
-				return new MOGuiMachine<>(
-						ContainerFactory.createMachineContainer((MOTileEntityMachine) entity, player.inventory),
-						(MOTileEntityMachine) entity);
-			}
-		}
-		return null;
+        if (tileEntityGuiList.containsKey(entity.getClass())) {
+            try {
+                Class<? extends MOGuiBase> containerClass = tileEntityGuiList.get(entity.getClass());
+                Constructor[] constructors = containerClass.getDeclaredConstructors();
+                for (Constructor<?> constructor : constructors) {
+                    Class[] parameterTypes = constructor.getParameterTypes();
+                    if (parameterTypes.length == 2) {
+                        if (parameterTypes[0].isInstance(player.inventory)
+                                && parameterTypes[1].isInstance(entity)) {
+                            onContainerOpen(entity, Side.CLIENT);
+                            return constructor.newInstance(player.inventory, entity);
+                        }
+                    }
+                }
+            } catch (InvocationTargetException e) {
+                MOLog.log(Level.WARN, e, "Could not call TileEntity constructor in client GUI handler");
+            } catch (InstantiationException e) {
+                MOLog.log(Level.WARN, e, "Could not instantiate the TileEntity in client GUI handler");
+            } catch (IllegalAccessException e) {
+                MOLog.log(Level.WARN, e, "Could not access TileEntity constructor in client GUI handler");
+            }
+        } else if (entity instanceof MOTileEntityMachine) {
+            return new MOGuiMachine<>(
+                    ContainerFactory.createMachineContainer((MOTileEntityMachine) entity, player.inventory),
+                    (MOTileEntityMachine) entity);
+        }
+        return null;
 	}
 }

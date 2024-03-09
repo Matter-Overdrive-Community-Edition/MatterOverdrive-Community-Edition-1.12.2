@@ -154,8 +154,7 @@ public class MOJsonHelper {
 	}
 
 	public static void removeDoubleQuotes(NBTTagCompound tagCompound) {
-		List<String> cachedKeyList = new ArrayList<>();
-		cachedKeyList.addAll(tagCompound.getKeySet());
+        List<String> cachedKeyList = new ArrayList<>(tagCompound.getKeySet());
 		for (String key : cachedKeyList) {
 			NBTBase base = tagCompound.getTag(key);
 			tagCompound.removeTag(key);

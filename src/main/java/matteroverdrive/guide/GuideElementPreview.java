@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 
 public class GuideElementPreview extends GuideElementAbstract {
-	private static Random random = new Random();
+	private static final Random random = new Random();
 	double size = 1;
 	ItemStack itemStack;
 
@@ -21,7 +21,7 @@ public class GuideElementPreview extends GuideElementAbstract {
 			GlStateManager.pushMatrix();
 
 			if (textAlign == 1) {
-				GlStateManager.translate(width / 2 - 8 * size, 0, 0);
+				GlStateManager.translate((double) width / 2 - 8 * size, 0, 0);
 			} else if (textAlign == 2) {
 				GlStateManager.translate(width - 16 * size, 0, 0);
 			}

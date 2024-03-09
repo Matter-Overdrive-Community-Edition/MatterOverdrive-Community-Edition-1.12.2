@@ -28,6 +28,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.shader.ShaderGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -145,21 +146,18 @@ public class GuiAndroidHud extends Gui implements IConfigSubscriber {
 			}
 		}
 
-		if ((android.isAndroid() || (!mc.player.getHeldItem(EnumHand.MAIN_HAND).isEmpty()
-				&& mc.player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof IWeapon)) && event.isCancelable()
+		ItemStack heldItem = mc.player.getHeldItem(EnumHand.MAIN_HAND);
+		if ((android.isAndroid() || (!heldItem.isEmpty()
+				&& heldItem.getItem() instanceof IWeapon)) && event.isCancelable()
 				&& event.getType() == RenderGameOverlayEvent.ElementType.CROSSHAIRS) {
 			event.setCanceled(true);
 
 			if ((!showRadial)) {
-				if (mc.player.getHeldItem(EnumHand.MAIN_HAND) != null) {
-					if (mc.player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof IWeapon
-							&& ((IWeapon) mc.player.getHeldItem(EnumHand.MAIN_HAND).getItem()).isWeaponZoomed(mc.player,
-									mc.player.getHeldItem(EnumHand.MAIN_HAND))) {
-					} else {
-						renderCrosshair(event);
-					}
-				}
-			}
+                if (heldItem.getItem() instanceof IWeapon && ((IWeapon) heldItem.getItem()).isWeaponZoomed(mc.player, heldItem)) {
+                } else {
+                    renderCrosshair(event);
+                }
+            }
 
 			mc.getTextureManager().bindTexture(Gui.ICONS);
 		} else if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR) {

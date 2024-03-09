@@ -69,7 +69,7 @@ public abstract class MOBlockMachine<TE extends TileEntity> extends MOBlockConta
 		// drops inventory
 		Inventory inventory = getInventory(worldIn, pos);
 		if (inventory != null) {
-			MatterHelper.DropInventory(worldIn, inventory, pos);
+			MatterHelper.dropInventory(worldIn, inventory, pos);
 		}
 
 		super.breakBlock(worldIn, pos, state);

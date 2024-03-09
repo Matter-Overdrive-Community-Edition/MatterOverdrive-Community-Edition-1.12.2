@@ -44,7 +44,7 @@ public class AndroidPartsFactory {
 
 	public void addLegendaryAttributesToPart(ItemStack part, AndroidPartFactoryContext context) {
 		if (context.legendary) {
-			int healthLevel = random.nextInt(context.level + 1 * 10);
+			int healthLevel = random.nextInt(context.level + 10);
 			if (healthLevel > 0) {
 				addAttributeToPart(part,
 						new AttributeModifier(SharedMonsterAttributes.MAX_HEALTH.getName(), healthLevel, 0));

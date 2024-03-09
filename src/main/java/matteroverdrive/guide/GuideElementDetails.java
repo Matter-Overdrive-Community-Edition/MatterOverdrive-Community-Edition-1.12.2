@@ -16,7 +16,7 @@ public class GuideElementDetails extends GuideElementAbstract {
 	protected void loadContent(MOGuideEntry entry, Element element, int width, int height) {
 		if (element.hasAttribute("item")) {
 			ItemStack stack = shortCodeToStack(decodeShortcode(element.getAttribute("item")));
-			if (!stack.isEmpty() && stack.getItem() != null && stack.getItem() instanceof MOBaseItem) {
+			if (!stack.isEmpty() && stack.getItem() instanceof MOBaseItem) {
 				List<String> details = new ArrayList<>();
 				((MOBaseItem) stack.getItem()).addDetails(stack, Minecraft.getMinecraft().player,
 						Minecraft.getMinecraft().world, details);

@@ -48,10 +48,8 @@ public class PlayerEventHandler {
 		if (event.player instanceof EntityPlayerMP) {
 			if (MatterOverdrive.MATTER_REGISTRY.hasComplitedRegistration) {
 				if (!event.player.getServer().isSinglePlayer()) {
-
 					MatterOverdrive.NETWORK.sendTo(new PacketUpdateMatterRegistry(MatterOverdrive.MATTER_REGISTRY),
 							(EntityPlayerMP) event.player);
-
 				}
 			} else {
 				players.add((EntityPlayerMP) event.player);
@@ -129,11 +127,6 @@ public class PlayerEventHandler {
 		}
 	}
 
-	@SubscribeEvent
-	public void onPlayerDeath(LivingDeathEvent deathEvent) {
-
-	}
-
 	public void onServerTick(TickEvent.ServerTickEvent event) {
 		if (MatterOverdrive.MATTER_REGISTRY.hasComplitedRegistration) {
 			for (int i = 0; i < MatterOverdrive.PLAYER_EVENT_HANDLER.players.size(); i++) {
@@ -148,15 +141,10 @@ public class PlayerEventHandler {
 	@SubscribeEvent
 	public void onItemCrafted(PlayerEvent.ItemCraftedEvent event) {
 		if (event.player != null) {
-			if (event.player.world.isRemote) {
-				if (!event.crafting.isEmpty() && event.crafting.getItem() instanceof MOBaseItem) {
-				}
-			} else {
-				OverdriveExtendedProperties extendedProperties = MOPlayerCapabilityProvider
-						.GetExtendedCapability(event.player);
-				if (extendedProperties != null) {
-					extendedProperties.onEvent(event);
-				}
+			OverdriveExtendedProperties extendedProperties = MOPlayerCapabilityProvider
+					.GetExtendedCapability(event.player);
+			if (extendedProperties != null) {
+				extendedProperties.onEvent(event);
 			}
 		}
 	}
@@ -179,16 +167,6 @@ public class PlayerEventHandler {
 			if (extendedProperties != null) {
 				extendedProperties.onEvent(event);
 			}
-		}
-	}
-
-	/*
-	 * @SubscribeEvent public void onGuiOpen(GuiOpenEvent event) { }
-	 */
-
-	@SubscribeEvent
-	public void onBioticStatUse(MOEventBionicStat event) {
-		if (event.getEntityPlayer().world.isRemote) {
 		}
 	}
 

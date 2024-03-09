@@ -33,14 +33,14 @@ public class WorldGenCommands extends CommandBase {
 	@Override
 	public void execute(MinecraftServer server, ICommandSender commandSender, String[] parameters)
 			throws CommandException {
-		EntityPlayer entityPlayer = null;
+		EntityPlayer entityPlayer;
 		entityPlayer = (EntityPlayer) commandSender;
 		if (parameters.length == 0) {
 			commandSender.sendMessage(new TextComponentString(
 					TextFormatting.GOLD + "[" + Reference.MOD_NAME + "] " + TextFormatting.RESET + "Help"));
 			commandSender.sendMessage(new TextComponentString("Format: /mo_gen generate <structure> <force> <player>"));
 			commandSender.sendMessage(new TextComponentString(
-					"Example: /mo_gen generate cargo_ship f " + ((EntityPlayer) entityPlayer).getName()));
+					"Example: /mo_gen generate cargo_ship f " + entityPlayer.getName()));
 			commandSender.sendMessage(new TextComponentString(
 					"Structures: advfusion, android_house, cargo_ship, crashed_ship, fusion, sand_pit_house, underwater_base"));
 
@@ -57,7 +57,7 @@ public class WorldGenCommands extends CommandBase {
 
 			if (parameters.length >= 1) {
 				if (parameters[0].equalsIgnoreCase("generate")) {
-					if (parameters.length >= 2 && entityPlayer != null) {
+					if (parameters.length >= 2) {
 						for (WeightedRandomMOWorldGenBuilding entry : MatterOverdrive.MO_WORLD.worldGen.buildings) {
 							if (entry.worldGenBuilding.getName().equalsIgnoreCase(parameters[1])) {
 								MOImageGen.ImageGenWorker worker = MatterOverdrive.MO_WORLD.worldGen

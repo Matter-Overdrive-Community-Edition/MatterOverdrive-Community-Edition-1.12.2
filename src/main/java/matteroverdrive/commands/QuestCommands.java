@@ -130,9 +130,7 @@ public class QuestCommands extends CommandBase {
 
 		if (args.length == 2) {
 			if (args[0].equalsIgnoreCase("add") || args[0].equalsIgnoreCase("contract")) {
-				for (String questName : MatterOverdrive.QUESTS.getAllQuestName()) {
-					commands.add(questName);
-				}
+                commands.addAll(MatterOverdrive.QUESTS.getAllQuestName());
 			} else if (args[0].equalsIgnoreCase("remove")) {
 				commands.add("all");
 				commands.add("active");

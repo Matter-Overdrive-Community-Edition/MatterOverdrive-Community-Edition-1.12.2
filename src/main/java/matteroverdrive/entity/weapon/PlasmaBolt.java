@@ -99,15 +99,15 @@ public class PlasmaBolt extends Entity implements IProjectile, IGravityEntity, I
 
 	public void setThrowableHeading(double x, double y, double z, float speed, float accuracy) {
 		float dirLength = MathHelper.sqrt(x * x + y * y + z * z);
-		x /= (double) dirLength;
-		y /= (double) dirLength;
-		z /= (double) dirLength;
+		x /= dirLength;
+		y /= dirLength;
+		z /= dirLength;
 		x += this.rand.nextGaussian() * 0.007499999832361937D * (double) accuracy;
 		y += this.rand.nextGaussian() * 0.007499999832361937D * (double) accuracy;
 		z += this.rand.nextGaussian() * 0.007499999832361937D * (double) accuracy;
-		x *= (double) speed;
-		y *= (double) speed;
-		z *= (double) speed;
+		x *= speed;
+		y *= speed;
+		z *= speed;
 		this.motionX = x;
 		this.motionY = y;
 		this.motionZ = z;
@@ -167,7 +167,7 @@ public class PlasmaBolt extends Entity implements IProjectile, IGravityEntity, I
 			return;
 		}
 
-		distanceTraveled += new Vec3d(motionX, motionY, motionZ).length();
+		distanceTraveled += (int) new Vec3d(motionX, motionY, motionZ).length();
 		float motionLeway = 0.0f;
 		Vec3d vec31 = new Vec3d(this.posX - this.motionX * motionLeway, this.posY - this.motionY * motionLeway,
 				this.posZ - this.motionZ * motionLeway);
@@ -204,8 +204,8 @@ public class PlasmaBolt extends Entity implements IProjectile, IGravityEntity, I
 					}
 				}
 
-				AxisAlignedBB axisalignedbb1 = entity1.getEntityBoundingBox().expand((double) f1, (double) f1,
-						(double) f1);
+				AxisAlignedBB axisalignedbb1 = entity1.getEntityBoundingBox().expand(f1, f1,
+                        f1);
 				RayTraceResult movingobjectposition1 = axisalignedbb1.calculateIntercept(vec31, vec3);
 
 				if (movingobjectposition1 != null) {
@@ -224,8 +224,7 @@ public class PlasmaBolt extends Entity implements IProjectile, IGravityEntity, I
 			movingobjectposition = new RayTraceResult(entity, hit);
 		}
 
-		if (movingobjectposition != null && movingobjectposition.entityHit != null
-				&& movingobjectposition.entityHit instanceof EntityPlayer) {
+		if (movingobjectposition != null && movingobjectposition.entityHit instanceof EntityPlayer) {
 			EntityPlayer entityplayer = (EntityPlayer) movingobjectposition.entityHit;
 
 			if (entityplayer.capabilities.disableDamage || this.shootingEntity instanceof EntityPlayer
@@ -311,8 +310,8 @@ public class PlasmaBolt extends Entity implements IProjectile, IGravityEntity, I
 					if (this.blockState instanceof BlockTNT) {
 						world.setBlockToAir(blockPos);
 						EntityTNTPrimed entitytntprimed = new EntityTNTPrimed(world,
-								(double) ((float) blockPos.getX() + 0.5F), (double) ((float) blockPos.getY() + 0.5F),
-								(double) ((float) blockPos.getZ() + 0.5F),
+                                (float) blockPos.getX() + 0.5F, (float) blockPos.getY() + 0.5F,
+                                (float) blockPos.getZ() + 0.5F,
 								shootingEntity instanceof EntityLivingBase ? (EntityLivingBase) shootingEntity : null);
 						entitytntprimed.setFuse(0);
 						world.spawnEntity(entitytntprimed);
@@ -351,7 +350,7 @@ public class PlasmaBolt extends Entity implements IProjectile, IGravityEntity, I
 		float f3 = MathHelper.sqrt(motionX * motionX + motionZ * motionZ);
 		this.setPositionAndRotation(this.posX, this.posY, this.posZ,
 				(float) (Math.atan2(motionX, motionZ) * 180.0D / Math.PI),
-				(float) (Math.atan2(motionY, (double) f3) * 180.0D / Math.PI));
+				(float) (Math.atan2(motionY, f3) * 180.0D / Math.PI));
 		this.doBlockCollisions();
 		super.onUpdate();
 	}

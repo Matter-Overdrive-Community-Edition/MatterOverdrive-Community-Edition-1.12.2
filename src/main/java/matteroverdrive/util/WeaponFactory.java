@@ -125,14 +125,14 @@ public class WeaponFactory {
 		WeightedRandomWeaponModule barrelModule = null;
 		if (context.barrel) {
 			barrelModule = getRandomModule(random, barrelModules, context);
-			if (barrelModule != null && barrelModule.getWeaponModule() != null) {
+			if (barrelModule != null && !barrelModule.getWeaponModule().isEmpty()) {
 				WeaponHelper.setModuleAtSlot(barrelModule.getModuleSlot(), weapon, barrelModule.getWeaponModule());
 			}
 		}
 
 		if (context.battery) {
 			WeightedRandomWeaponModule battery = getRandomModule(random, batteryModules, context);
-			if (battery != null && battery.getWeaponModule() != null) {
+			if (battery != null && !battery.getWeaponModule().isEmpty()) {
 				WeaponHelper.setModuleAtSlot(battery.getModuleSlot(), weapon, battery.getWeaponModule());
 			}
 		}
@@ -140,7 +140,7 @@ public class WeaponFactory {
 		if (context.other) {
 			WeightedRandomWeaponModule other = getRandomModule(random, otherModules, context);
 			if (other != null) {
-				if (other.getWeaponModule() != null) {
+				if (!other.getWeaponModule().isEmpty()) {
 					WeaponHelper.setModuleAtSlot(other.getModuleSlot(), weapon, other.getWeaponModule());
 				}
 			} else {

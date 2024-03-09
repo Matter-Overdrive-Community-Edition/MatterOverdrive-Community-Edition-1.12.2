@@ -58,7 +58,7 @@ public class Vector3 {
 		double d0 = value.x - this.x;
 		double d1 = value.y - this.y;
 		double d2 = value.z - this.z;
-		return (double) MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
+		return MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
 	}
 
 	public double squareDistanceTo(Vector3 value) {
@@ -69,7 +69,7 @@ public class Vector3 {
 	}
 
 	public double length() {
-		return (double) MathHelper.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
+		return MathHelper.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
 	}
 
 	public String toString() {
@@ -104,7 +104,7 @@ public class Vector3 {
 	 * Rotates the vector around the x axis by the specified angle.
 	 */
 	public void rotateAroundX(float angle) {
-		angle *= Math.PI / 180.0;
+		angle *= (float) (Math.PI / 180.0);
 		float f1 = MathHelper.cos(angle);
 		float f2 = MathHelper.sin(angle);
 		double d0 = this.x;
@@ -117,7 +117,7 @@ public class Vector3 {
 	 * Rotates the vector around the y axis by the specified angle.
 	 */
 	public void rotateAroundY(float angle) {
-		angle *= Math.PI / 180.0;
+		angle *= (float) (Math.PI / 180.0);
 		float f1 = MathHelper.cos(angle);
 		float f2 = MathHelper.sin(angle);
 		double d0 = this.x * (double) f1 + this.z * (double) f2;
@@ -130,7 +130,7 @@ public class Vector3 {
 	 * Rotates the vector around the z axis by the specified angle.
 	 */
 	public void rotateAroundZ(float angle) {
-		angle *= Math.PI / 180.0;
+		angle *= (float) (Math.PI / 180.0);
 		float f1 = MathHelper.cos(angle);
 		float f2 = MathHelper.sin(angle);
 		double d0 = this.x * (double) f1 + this.y * (double) f2;

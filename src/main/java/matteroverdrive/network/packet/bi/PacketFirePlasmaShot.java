@@ -65,12 +65,13 @@ public class PacketFirePlasmaShot extends PacketAbstract {
 		public void handleClientMessage(EntityPlayerSP player, PacketFirePlasmaShot message, MessageContext ctx) {
 			if (player.getEntityId() != message.sender) {
 				Entity entity = player.world.getEntityByID(message.sender);
-				if (entity != null && entity instanceof EntityLivingBase) {
+				if (entity instanceof EntityLivingBase) {
 					EntityLivingBase livingBase = (EntityLivingBase) entity;
-					if (!livingBase.getHeldItem(EnumHand.MAIN_HAND).isEmpty()
-							&& livingBase.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof EnergyWeapon) {
-						((EnergyWeapon) livingBase.getHeldItem(EnumHand.MAIN_HAND).getItem()).onClientShot(
-								livingBase.getHeldItem(EnumHand.MAIN_HAND), livingBase, message.position,
+					ItemStack heldItem = livingBase.getHeldItem(EnumHand.MAIN_HAND);
+					if (!heldItem.isEmpty()
+							&& heldItem.getItem() instanceof EnergyWeapon) {
+						((EnergyWeapon) heldItem.getItem()).onClientShot(
+								heldItem, livingBase, message.position,
 								message.direction, message.shot);
 					}
 				}
@@ -86,8 +87,8 @@ public class PacketFirePlasmaShot extends PacketAbstract {
 
 		public void handleServerShot(EntityPlayer player, PacketFirePlasmaShot shot, int delay) {
 			ItemStack heldItem = player.getHeldItem(EnumHand.MAIN_HAND);
-			if (heldItem != null && heldItem.getItem() instanceof EnergyWeapon && ((EnergyWeapon) heldItem.getItem())
-					.canFire(player.getHeldItem(EnumHand.MAIN_HAND), player.world, player)) {
+			if (heldItem.getItem() instanceof EnergyWeapon && ((EnergyWeapon) heldItem.getItem())
+                    .canFire(player.getHeldItem(EnumHand.MAIN_HAND), player.world, player)) {
 				((EnergyWeapon) heldItem.getItem()).onServerFire(heldItem, player, shot.shot, shot.position,
 						shot.direction, delay);
 			}

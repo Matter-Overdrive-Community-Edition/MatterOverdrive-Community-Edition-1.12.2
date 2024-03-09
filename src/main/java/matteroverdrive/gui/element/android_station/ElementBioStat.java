@@ -24,13 +24,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
 public class ElementBioStat extends MOElementButton {
-	private IBioticStat stat;
-	private AndroidPlayer player;
+	private final IBioticStat stat;
+	private final AndroidPlayer player;
 	private int level;
 	private EnumFacing direction;
 	private boolean strongConnection;
-	private ResourceLocation strongConnectionTex = new ResourceLocation(Reference.PATH_ELEMENTS + "connection.png");
-	private ResourceLocation strongConnectionBrokenTex = new ResourceLocation(
+	private final ResourceLocation strongConnectionTex = new ResourceLocation(Reference.PATH_ELEMENTS + "connection.png");
+	private final ResourceLocation strongConnectionBrokenTex = new ResourceLocation(
 			Reference.PATH_ELEMENTS + "connection_broken.png");
 
 	public ElementBioStat(MOGuiBase gui, int posX, int posY, IBioticStat stat, int level, AndroidPlayer player) {
@@ -45,7 +45,6 @@ public class ElementBioStat extends MOElementButton {
 
 	@Override
 	public boolean isEnabled() {
-
 		if (stat.canBeUnlocked(player, level)) {
 			if (player.getUnlockedLevel(stat) < stat.maxLevel()) {
 				return true;

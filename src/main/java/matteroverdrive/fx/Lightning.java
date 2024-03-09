@@ -12,10 +12,10 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class Lightning extends MOEntityFX {
-	private float randomness;
-	private Vector3d destination;
-	private float length;
-	private float speed;
+	private final float randomness;
+	private final Vector3d destination;
+	private final float length;
+	private final float speed;
 
 	public Lightning(World worldIn, Vec3d start, Vec3d destination) {
 		this(worldIn, start, destination, 1, 1);
@@ -38,7 +38,7 @@ public class Lightning extends MOEntityFX {
 		rand.setSeed((long) (particleAge * speed) + hashCode());
 		Vector3d lastPos = new Vector3d(prevPosX, prevPosY, prevPosZ);
 
-		for (float i = 0; i < length; i += 0.1) {
+		for (float i = 0; i < length; i += 0.1F) {
 			float time = 1 - (i / length);
 			float randMag = (float) Math.sin(time * Math.PI) * randomness;
 			double tickX = (this.posX - this.prevPosX) * (double) partialTicks - interpPosX;

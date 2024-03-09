@@ -94,7 +94,6 @@ public class BioticStatFlashCooling extends AbstractBioticStat {
 
 	@Override
 	public boolean showOnHud(AndroidPlayer android, int level) {
-		return android.getPlayer().getHeldItem(EnumHand.MAIN_HAND) != null
-				&& android.getPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof IWeapon;
+		return android.getPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof IWeapon;
 	}
 }

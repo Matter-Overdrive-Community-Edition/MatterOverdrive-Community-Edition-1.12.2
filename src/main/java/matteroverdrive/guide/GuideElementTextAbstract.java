@@ -20,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public abstract class GuideElementTextAbstract extends GuideElementAbstract {
-	private static String shortcodePattern = "\\[(.*?)\\]";
+	private static final String shortcodePattern = "\\[(.*?)\\]";
 	private static String shortcodePatternSplitter = "((?<=" + shortcodePattern + ")|(?=" + shortcodePattern + "))";
 
 	@Override
@@ -46,7 +46,7 @@ public abstract class GuideElementTextAbstract extends GuideElementAbstract {
 			lastEnd = matcher.end();
 		}
 
-		shortCodeSplits.add(text.substring(lastEnd, text.length()));
+		shortCodeSplits.add(text.substring(lastEnd));
 
 		List<TextChunk> textChunks = new ArrayList<>();
 		for (Object o : shortCodeSplits) {
@@ -83,7 +83,7 @@ public abstract class GuideElementTextAbstract extends GuideElementAbstract {
 	protected TextChunk handleShortCode(Map<String, String> shortcodeMap) {
 		if (shortcodeMap.get("type").equalsIgnoreCase("block") || shortcodeMap.get("type").equalsIgnoreCase("item")) {
 			ItemStack stack = shortCodeToStack(shortcodeMap);
-			if (!stack.isEmpty() && stack.getItem() != null) {
+			if (!stack.isEmpty()) {
 				String guideName = shortcodeMap.containsKey("guide") ? shortcodeMap.get("guide") : null;
 				int guidePage = shortcodeMap.containsKey("page") ? Integer.parseInt(shortcodeMap.get("page")) : 0;
 				return new ItemstackTextLinkChunk(TextFormatting.GREEN + stack.getDisplayName() + TextFormatting.RESET,

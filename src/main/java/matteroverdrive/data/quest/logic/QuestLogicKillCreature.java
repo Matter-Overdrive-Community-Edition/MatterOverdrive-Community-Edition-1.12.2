@@ -119,11 +119,11 @@ public class QuestLogicKillCreature extends AbstractQuestLogic {
 				if (explosionOnly && !((LivingDeathEvent) event).getSource().isExplosion()) {
 					return null;
 				}
-				if (killWithItem != null && (entityPlayer.getHeldItemMainhand() == null
+				if (killWithItem != null && (entityPlayer.getHeldItemMainhand().isEmpty()
 						|| entityPlayer.getHeldItemMainhand().getItem() != killWithItem)) {
 					return null;
 				}
-				if (killWithItemStack != null && (entityPlayer.getHeldItemMainhand() == null
+				if (killWithItemStack != null && (entityPlayer.getHeldItemMainhand().isEmpty()
 						|| !ItemStack.areItemStacksEqual(entityPlayer.getHeldItemMainhand(), killWithItemStack))) {
 					return null;
 				}

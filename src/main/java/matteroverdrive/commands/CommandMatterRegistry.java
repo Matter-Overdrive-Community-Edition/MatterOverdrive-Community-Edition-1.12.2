@@ -55,7 +55,7 @@ public class CommandMatterRegistry extends MOCommand {
 						MatterOverdrive.MATTER_REGISTRY.register(stack.getItem(), new ItemHandler(0, true));
 					} else if (args[1].equalsIgnoreCase("ore")) {
 						int[] orenames = OreDictionary.getOreIDs(stack);
-						if (orenames != null && orenames.length > 0) {
+						if (orenames.length > 0) {
 							key = OreDictionary.getOreName(orenames[0]);
 							MatterOverdrive.MATTER_REGISTRY.registerOre(key, new OreHandler(0, true));
 						} else {
@@ -75,8 +75,7 @@ public class CommandMatterRegistry extends MOCommand {
 					commandSender.sendMessage(new TextComponentString(TextFormatting.GOLD + "[" + Reference.MOD_NAME
 							+ "]" + TextFormatting.RESET + " Added " + key
 							+ " to matter blacklist and config.\nYou must recalculate the registry for changes to take effect.\nUse /matterregistry recalculate."));
-					return;
-				} else {
+                } else {
 					throw new CommandException("Player is not holding any item", args[1]);
 				}
 			}
@@ -109,7 +108,7 @@ public class CommandMatterRegistry extends MOCommand {
 						MatterOverdrive.MATTER_REGISTRY.register(stack.getItem(), new ItemHandler(matter));
 					} else if (args[1].equalsIgnoreCase("ore")) {
 						int[] oreNames = OreDictionary.getOreIDs(stack);
-						if (oreNames != null && oreNames.length > 0) {
+						if (oreNames.length > 0) {
 							key = OreDictionary.getOreName(oreNames[0]);
 						} else {
 							throw new CommandException("Could not find an ore dictionary entry!");

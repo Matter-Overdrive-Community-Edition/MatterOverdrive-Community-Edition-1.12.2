@@ -101,8 +101,8 @@ public class TileEntityMachineSpacetimeAccelerator extends MOTileEntityMachineMa
 				IBlockState blockState = world.getBlockState(pos);
 				blockState.getBlock().randomTick(world, pos, blockState, random);
 				TileEntity tileEntity = world.getTileEntity(pos);
-				if (tileEntity != null && tileEntity instanceof ITickable
-						&& !(tileEntity instanceof TileEntityMachineSpacetimeAccelerator)) {
+				if (tileEntity instanceof ITickable
+                        && !(tileEntity instanceof TileEntityMachineSpacetimeAccelerator)) {
 					((ITickable) tileEntity).update();
 				}
 			}

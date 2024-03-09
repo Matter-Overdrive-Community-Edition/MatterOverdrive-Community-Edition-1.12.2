@@ -11,7 +11,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class ShockwaveParticle extends MOEntityFX {
-	private float maxScale;
+	private final float maxScale;
 
 	public ShockwaveParticle(World world, double posX, double posY, double posZ, float maxScale) {
 		super(world, posX, posY, posZ);
@@ -51,14 +51,14 @@ public class ShockwaveParticle extends MOEntityFX {
 		int i = this.getBrightnessForRender(partialTicks);
 		int j = i >> 16 & 65535;
 		int k = i & 65535;
-		worldRenderer.pos((double) (f11 - particleScale), (double) (f12), (double) (f13 - particleScale))
-				.tex((double) f7, (double) f9).color(red, green, blue, alpha).lightmap(j, k).endVertex();
-		worldRenderer.pos((double) (f11 - particleScale), (double) (f12), (double) (f13 + particleScale))
-				.tex((double) f7, (double) f8).color(red, green, blue, alpha).lightmap(j, k).endVertex();
-		worldRenderer.pos((double) (f11 + particleScale), (double) (f12), (double) (f13 + particleScale))
-				.tex((double) f6, (double) f8).color(red, green, blue, alpha).lightmap(j, k).endVertex();
-		worldRenderer.pos((double) (f11 + particleScale), (double) (f12), (double) (f13 - particleScale))
-				.tex((double) f6, (double) f9).color(red, green, blue, alpha).lightmap(j, k).endVertex();
+		worldRenderer.pos(f11 - particleScale, f12, f13 - particleScale)
+				.tex(f7, f9).color(red, green, blue, alpha).lightmap(j, k).endVertex();
+		worldRenderer.pos(f11 - particleScale, f12, f13 + particleScale)
+				.tex(f7, f8).color(red, green, blue, alpha).lightmap(j, k).endVertex();
+		worldRenderer.pos(f11 + particleScale, f12, f13 + particleScale)
+				.tex(f6, f8).color(red, green, blue, alpha).lightmap(j, k).endVertex();
+		worldRenderer.pos(f11 + particleScale, f12, f13 - particleScale)
+				.tex(f6, f9).color(red, green, blue, alpha).lightmap(j, k).endVertex();
 	}
 
 	@Override
