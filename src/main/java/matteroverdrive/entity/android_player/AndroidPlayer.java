@@ -83,6 +83,7 @@ public class AndroidPlayer implements IEnergyStorage, IAndroid {
 	public final static int MINIMAP_SEND_TIMEOUT = 20 * 2;
 	private final static int BUILTIN_ENERGY_TRANSFER = 1024;
 	private final static int ENERGY_WATCHER_DEFAULT = 29;
+	public final static int ENERGY_FOOD_MULTIPLY = 256;
 	private final static int ENERGY_PER_JUMP = 512;
 	private final static AttributeModifier outOfPowerSpeedModifier = new AttributeModifier(
 			UUID.fromString("ec778ddc-9711-498b-b9aa-8e5adc436e00"), "Android Out of Power", -0.5, 2).setSaved(false);
@@ -503,6 +504,12 @@ public class AndroidPlayer implements IEnergyStorage, IAndroid {
 		if (side.isServer()) {
 			if (isAndroid()) {
 				if (getEnergyStored() > 0) {
+					if (getPlayer().getFoodStats().needFood() && getEnergyStored() > 0) {
+						int foodNeeded = 20 - getPlayer().getFoodStats().getFoodLevel();
+						int extractedEnergy = extractEnergyRaw(foodNeeded * ENERGY_FOOD_MULTIPLY, false);
+						getPlayer().getFoodStats().addStats(extractedEnergy / ENERGY_FOOD_MULTIPLY, 0);
+					}
+
 					manageHasPower();
 					managePotionEffects();
 					if (hasRunOutOfPower) {
