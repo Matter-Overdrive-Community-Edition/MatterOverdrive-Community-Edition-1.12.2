@@ -28,6 +28,7 @@ public class OverdriveBioticStats {
 	public static BioticStatShockwave shockwave;
 	public static BioticStatAutoShield autoShield;
 	public static BioticStatStepAssist stepAssist;
+	public static BioticStatZeroCalories zeroCalories;
 	public static BioticStatWirelessCharger wirelessCharger;
 	public static BioticStatInertialDampers inertialDampers;
 	public static BioticStatItemMagnet itemMagnet;
@@ -53,6 +54,7 @@ public class OverdriveBioticStats {
 		shockwave = new BioticStatShockwave("shockwave", 32);
 		autoShield = new BioticStatAutoShield("auto_shield", 26);
 		stepAssist = new BioticStatStepAssist("step_assist", 24);
+		zeroCalories = new BioticStatZeroCalories("zero_calories", 18);
 		wirelessCharger = new BioticStatWirelessCharger("wireless_charger", 32);
 		inertialDampers = new BioticStatInertialDampers("inertial_dampers", 18);
 		itemMagnet = new BioticStatItemMagnet("item_magnet", 24);
@@ -80,6 +82,7 @@ public class OverdriveBioticStats {
 		flashCooling.setRoot(attack, true);
 		shockwave.setRoot(flashCooling, true);
 		autoShield.setRoot(shield, true);
+		oxygen.setRoot(zeroCalories, true);
 		flotation.setRoot(oxygen, true);
 		itemMagnet.setRoot(stepAssist, false);
 		airDash.setRoot(highJump, true);
@@ -90,6 +93,7 @@ public class OverdriveBioticStats {
 		wirelessCharger.setGuiInfo(new BionicStatGuiInfo(stepSizeX * -1, stepSizeY * 2));
 		teleport.setGuiInfo(new BionicStatGuiInfo(0, stepSizeY * -2));
 
+		zeroCalories.setGuiInfo(new BionicStatGuiInfo(stepSizeX, 0));
 		oxygen.setGuiInfo(new BionicStatGuiInfo(stepSizeX, stepSizeY * 2, EnumFacing.UP, true));
 		flotation.setGuiInfo(new BionicStatGuiInfo(stepSizeX, stepSizeY * 3, EnumFacing.UP));
 
@@ -136,6 +140,7 @@ public class OverdriveBioticStats {
 		androidStatRegistry.registerStat(shockwave);
 		androidStatRegistry.registerStat(autoShield);
 		androidStatRegistry.registerStat(stepAssist);
+		androidStatRegistry.registerStat(zeroCalories);
 		androidStatRegistry.registerStat(wirelessCharger);
 		androidStatRegistry.registerStat(inertialDampers);
 		androidStatRegistry.registerStat(itemMagnet);

@@ -137,7 +137,9 @@ public class GuiAndroidHud extends Gui implements IConfigSubscriber {
 						&& OverdriveBioticStats.oxygen.isEnabled(android, 1)) {
 					event.setCanceled(true);
 					return;
-				} else if (event.getType() == RenderGameOverlayEvent.ElementType.FOOD) {
+				} else if (event.getType() == RenderGameOverlayEvent.ElementType.FOOD
+						&& android.isUnlocked(OverdriveBioticStats.zeroCalories, 1)
+						&& OverdriveBioticStats.zeroCalories.isEnabled(android, 1)) {
 					event.setCanceled(true);
 					return;
 				}
