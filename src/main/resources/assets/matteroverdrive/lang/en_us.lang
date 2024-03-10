@@ -54,6 +54,10 @@ item.matteroverdrive.rogue_android_part.melee=Melee Android
 item.matteroverdrive.rogue_android_part.range=Range Android
 item.matteroverdrive.forcefield_emitter.name=Force Field Emitter
 item.matteroverdrive.hc_battery.name=High Capacity Battery
+item.matteroverdrive.scout_ship.name=Scout Ship
+item.matteroverdrive.scout_ship.details=A fast ship, used for scouting
+item.matteroverdrive.ship_colonizer.name=Colonizer Ship
+item.matteroverdrive.ship_colonizer.details=Used to claim planets by building a Base building on arrival/nIncreases building spaces by %s
 item.matteroverdrive.android_pill_red.name=Red Pill
 item.matteroverdrive.android_pill_red.details=Take the red pill /n and lose what's holding you back
 item.matteroverdrive.android_pill_blue.name=Blue Pill
@@ -127,6 +131,15 @@ item.matteroverdrive.holo_sights_base.name=Holo Sights Base
 
 item.matteroverdrive.sniper_scope.name=Sniper Scope
 
+## Buildings ##
+item.matteroverdrive.building_base.name=Base
+item.matteroverdrive.building_base.details=Main building, needed for everything
+item.matteroverdrive.ship_factory.name=Ship Factory
+item.matteroverdrive.ship_factory.details=Allows the building of Ships
+item.matteroverdrive.building_matter_extractor.name=Matter Extractor
+item.matteroverdrive.building_residential.name=Residential Buildings
+item.matteroverdrive.building_ship_hangar.name=Ship Hangar
+item.matteroverdrive.building_power_generator.name=Power Generator
 
 item.info.configured=Configured
 
@@ -367,9 +380,12 @@ dialog.mad_scientist.trade_route_quest.1.line=What do you mean? It's nothing rea
 # Creative Panels #
 
 itemGroup.tabMO=Matter Overdrive
-itemGroup.tabMO_modules=Matter Overdrive Modules
-itemGroup.tabMO_androidParts=Matter Overdrive Android Parts
-itemGroup.tabMO_contracts=Matter Overdrive Contracts
+itemGroup.tabMO_modules=Matter Overdrive: Modules
+itemGroup.tabMO_upgrades=Matter Overdrive: Upgrades
+itemGroup.tabMO_food=Matter Overdrive: Food
+itemGroup.tabMO_ships=Matter Overdrive: Ships
+itemGroup.tabMO_buildings=Matter Overdrive: Buildings
+itemGroup.tabMO_decorative=Matter Overdrive: Decorative
 
 ##########################################################################################################
 # Upgrade Types #

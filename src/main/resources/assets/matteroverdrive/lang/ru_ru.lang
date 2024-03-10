@@ -54,6 +54,10 @@ item.matteroverdrive.rogue_android_part.melee=Рукопашный Андрои�
 item.matteroverdrive.rogue_android_part.range=Дальнобойный Андроид
 item.matteroverdrive.forcefield_emitter.name=Излучатель силового поля
 item.matteroverdrive.hc_battery.name=Высокоёмкостная батарейка
+item.matteroverdrive.scout_ship.name=Корабль-разведчик
+item.matteroverdrive.scout_ship.details=Быстроходный корабль, используемый для разведки
+item.matteroverdrive.ship_colonizer.name=Корабль-колонизатор
+item.matteroverdrive.ship_colonizer.details=Используется для захвата планет путем постройки базового здания по прибытии/nУвеличивает пространство для построек на %s
 item.matteroverdrive.android_pill_red.name=Красная пилюля
 item.matteroverdrive.android_pill_red.details=Примите красную пилюлю /n и забудьте о том, что вас сдерживает
 item.matteroverdrive.android_pill_blue.name=Синяя пилюля
@@ -129,6 +133,16 @@ item.matteroverdrive.sniper_scope.name=Снайперский прицел
 
 
 item.info.configured=Настроенный
+
+## Buildings ##
+item.matteroverdrive.building_base.name=Основа
+item.matteroverdrive.building_base.details=Главное здание, необходимое для всего
+item.matteroverdrive.ship_factory.name=Судостроительный завод
+item.matteroverdrive.ship_factory.details=Позволяет строить корабли
+item.matteroverdrive.building_matter_extractor.name=Экстрактор материи
+item.matteroverdrive.building_residential.name=Жилые дома
+item.matteroverdrive.building_ship_hangar.name=Ангар для кораблей
+item.matteroverdrive.building_power_generator.name=Электрогенератор
 
 ##########################################################################################################
 # Tile Entities #
@@ -366,10 +380,11 @@ dialog.mad_scientist.trade_route_quest.1.line=What do you mean? It's nothing rea
 ##########################################################################################################
 # Вкладки в творческом режиме/Creative Panels #
 
-itemGroup.tabMO=Matter Overdrive
-itemGroup.tabMO_modules=Matter Overdrive: Модули
-itemGroup.tabMO_androidParts=Matter Overdrive: Андроид-части
-itemGroup.tabMO_contracts=Matter Overdrive: Контракты
+itemGroup.tabMO=Материя Овердрайв
+itemGroup.tabMO_modules=Материя Овердрайв: Модули
+itemGroup.tabMO_androidParts=Материя Овердрайв: Андроид-части
+itemGroup.tabMO_contracts=Материя Овердрайв: Контракты
+itemGroup.tabMO_decorative=Материя Овердрайв: Декоративная
 
 ##########################################################################################################
 # Типы улучшений/Upgrade Types #

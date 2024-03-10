@@ -54,6 +54,10 @@ item.matteroverdrive.rogue_android_part.melee=混战机械人
 item.matteroverdrive.rogue_android_part.range=枪战机械人
 item.matteroverdrive.forcefield_emitter.name=力场发生器
 item.matteroverdrive.hc_battery.name=高能电池
+item.matteroverdrive.scout_ship.name=侦察船
+item.matteroverdrive.scout_ship.details=一艘快速的船，用于侦察
+item.matteroverdrive.ship_colonizer.name=殖民者船
+item.matteroverdrive.ship_colonizer.details=用于通过在抵达时建造基地建筑来夺取行星/n增加 %s 的建筑空间
 item.matteroverdrive.android_pill_red.name=红色药丸
 item.matteroverdrive.android_pill_red.details=吃下红色药丸后/n你将无所畏惧
 item.matteroverdrive.android_pill_blue.name=蓝色药丸
@@ -127,6 +131,15 @@ item.matteroverdrive.holo_sights_base.name=全息瞄准镜基座
 
 item.matteroverdrive.sniper_scope.name=狙击镜
 
+## Buildings ##
+item.matteroverdrive.building_base.name=基础
+item.matteroverdrive.building_base.details=主楼，应有尽有
+item.matteroverdrive.ship_factory.name=船舶工厂
+item.matteroverdrive.ship_factory.details=允许建造船只
+item.matteroverdrive.building_matter_extractor.name=物质提取器
+item.matteroverdrive.building_residential.name=住宅
+item.matteroverdrive.building_ship_hangar.name=船舶机库
+item.matteroverdrive.building_power_generator.name=发电机
 
 item.overdrivef.info.configured=已配置
 
@@ -370,6 +383,7 @@ itemGroup.tabMO=超能物质
 itemGroup.tabMO_modules=超能物质 武器配件
 itemGroup.tabMO_androidParts=超能物质 机械人部件
 itemGroup.tabMO_contracts=超能物质 任务卡
+itemGroup.tabMO_decorative=物质超速 装饰性
 
 ##########################################################################################################
 # Upgrade Types #

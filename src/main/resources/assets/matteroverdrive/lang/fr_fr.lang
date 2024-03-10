@@ -46,14 +46,10 @@ item.rouge_android_part_legs.name=Jambe d'androïde
 item.rouge_android_part_chest.name=Torse d'androïde
 item.forcefield_emitter.name=Émetteur de champ de force
 item.hc_battery.name=Batterie haute capacité
-item.ship_factory.name=Usine à vaisseau
-item.ship_factory.details=Permet la construction de vaisseaux
 item.scout_ship.name=Vaisseau éclaireur
 item.scout_ship.details=Vaisseau rapide, utilisé pour la reconnaissance
 item.ship_colonizer.name=Vaisseau colonisateur
 item.ship_colonizer.details=Utilisé pour revendiquer les planètes par la construction d'une base à son arrivée
-item.building_base.name=Base
-item.building_base.details=Construction principale, nécessaire pout tout
 item.matteroverdrive.android_pill_red.name=Pilule rouge
 item.matteroverdrive.android_pill_red.details=Prenez la pilule rouge et perdez ce qui vous retiens
 item.matteroverdrive.android_pill_blue.name=Pilule bleue
@@ -98,6 +94,16 @@ item.weapon_module_barrel.meta.name=Matrice de concentration en dilithium
 item.weapon_module_barrel.fire.name=Filtre incendiaire
 item.weapon_module_barrel.explosion.name=Tambour inductif à explosion
 item.weapon_module_barrel.heal.name=Convertisseur de régénération
+
+## Buildings ##
+item.building_base.name=Base
+item.building_base.details=Construction principale, nécessaire pout tout
+item.ship_factory.name=Usine navale
+item.ship_factory.details=Permet la construction de navires
+item.building_matter_extractor.name=Extracteur de matière
+item.building_residential.name=Bâtiments résidentiels
+item.building_ship_hangar.name=Hangar à navires
+item.building_power_generator.name=Groupe électrogène
 
 item.info.configured=Configuré
 
@@ -266,12 +272,14 @@ dialog.mad_scientist.whatDidYouDo.question=Qu'avez-vous fait de moi ?
 
 ##########################################################################################################
 # Creative Panels #
-itemGroup.tabMO=Matter Overdrive
-itemGroup.tabMO_modules=Matter Overdrive: Modules
-itemGroup.tabMO_upgrades=Matter Overdrive: Améliorations
-itemGroup.tabMO_food=Matter Overdrive: Nourriture
-itemGroup.tabMO_ships=Matter Overdrive: Vaisseaux
-itemGroup.tabMO_buildings=Matter Overdrive: Constructions
+
+itemGroup.tabMO=Surmultipliée de matière
+itemGroup.tabMO_modules=Surmultipliée de matière: Modules
+itemGroup.tabMO_upgrades=Surmultipliée de matière: Améliorations
+itemGroup.tabMO_food=Surrégime de matière: Nourriture
+itemGroup.tabMO_ships=Surrégime de matière: Vaisseaux
+itemGroup.tabMO_buildings=Surcharge de matière: Bâtiments
+itemGroup.tabMO_decorative=Surcharge de matière: Décoratif
 
 ##########################################################################################################
 # Upgrade Types #
