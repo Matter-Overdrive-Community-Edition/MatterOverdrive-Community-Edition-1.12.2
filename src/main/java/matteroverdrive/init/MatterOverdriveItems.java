@@ -12,6 +12,14 @@ import matteroverdrive.items.food.MOItemFood;
 import matteroverdrive.items.food.RomulanAle;
 import matteroverdrive.items.includes.MOBaseItem;
 import matteroverdrive.items.includes.MOItemOre;
+import matteroverdrive.items.starmap.ItemBuildingBase;
+import matteroverdrive.items.starmap.ItemBuildingMatterExtractor;
+import matteroverdrive.items.starmap.ItemBuildingPowerGenerator;
+import matteroverdrive.items.starmap.ItemBuildingResidential;
+import matteroverdrive.items.starmap.ItemBuildingShipHangar;
+import matteroverdrive.items.starmap.ItemColonizerShip;
+import matteroverdrive.items.starmap.ItemScoutShip;
+import matteroverdrive.items.starmap.ShipFactory;
 import matteroverdrive.items.tools.*;
 import matteroverdrive.items.weapon.*;
 import matteroverdrive.items.weapon.module.*;
@@ -69,6 +77,18 @@ public class MatterOverdriveItems {
 	public MOBaseItem weaponReceiver;
 	public MOBaseItem plasmaCore;
 	public MatterItem matterItem;
+
+	// Ships
+	public ItemScoutShip scoutShip;
+	public ItemColonizerShip colonizerShip;
+    
+	// Buildings
+	public ShipFactory shipFactory;;
+	public ItemBuildingBase buildingBase;
+	public ItemBuildingResidential buildingResidential;
+	public ItemBuildingMatterExtractor buildingMatterExtractor;
+	public ItemBuildingShipHangar buildingShipHangar;
+	public ItemBuildingPowerGenerator buildingPowerGenerator;
 
 	// Weapons
 	public Phaser phaser;
@@ -178,6 +198,18 @@ public class MatterOverdriveItems {
 		weaponReceiver = register(new MOBaseItem("weapon_receiver"));
 		plasmaCore = register(new MOBaseItem("plasma_core"));
 
+//		Ships
+		scoutShip =  register(new ItemScoutShip("scout_ship"));
+		colonizerShip =  register(new ItemColonizerShip("ship_colonizer"));
+
+//		Buildings
+		shipFactory =  register(new ShipFactory("ship_factory"));
+		buildingBase =  register(new ItemBuildingBase("building_base"));
+		buildingMatterExtractor =  register(new ItemBuildingMatterExtractor("building_matter_extractor"));
+		buildingResidential =  register(new ItemBuildingResidential("building_residential"));
+		buildingShipHangar =  register(new ItemBuildingShipHangar("building_ship_hangar"));
+		buildingPowerGenerator =  register(new ItemBuildingPowerGenerator("building_power_generator"));
+        
 //		Weapons
 		phaser = register(new Phaser("phaser"));
 		phaserRifle = register(new PhaserRifle("phaser_rifle"));
