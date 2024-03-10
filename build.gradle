@@ -203,4 +203,14 @@ uploadArchives {
             }
         }
     }
+runClient {
+    jvmArgs "-Xmx1024m", "-Xms1024m", "-ea"
+    if (project.hasProperty("appArgs")) {
+        args Eval.me(appArgs)
+    }
+}
+
+runServer {
+    jvmArgs "-Xmx1024m", "-Xms1024m", "-ea"
+}
 }
