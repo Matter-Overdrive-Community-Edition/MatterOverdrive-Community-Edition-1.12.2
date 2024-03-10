@@ -30,7 +30,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class Contract extends MOBaseItem {
 	public Contract(String name) {
 		super(name);
-		setCreativeTab(MatterOverdrive.TAB_OVERDRIVE_CONTRACTS);
+		setCreativeTab(MatterOverdrive.TAB_OVERDRIVE);
 	}
 
 	public QuestStack getQuest(ItemStack itemStack) {
@@ -73,12 +73,16 @@ public class Contract extends MOBaseItem {
 
 	@Override
 	public String getItemStackDisplayName(ItemStack itemStack) {
+		if (itemStack.getItem() instanceof IQuest) {
 		if (itemStack.getTagCompound() != null) {
 			QuestStack questStack = QuestStack.loadFromNBT(itemStack.getTagCompound());
+			if (questStack != null) {
 			return questStack.getTitle();
+			}
 		}
-		return super.getItemStackDisplayName(itemStack);
 	}
+		return super.getItemStackDisplayName(itemStack);
+}
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
