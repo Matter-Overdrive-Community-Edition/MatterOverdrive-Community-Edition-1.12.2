@@ -26,7 +26,7 @@ public class MOItemFood extends ItemFood implements ItemModelProvider {
 		setTranslationKey(Reference.MOD_ID + "." + name);
 		setRegistryName(name);
 
-		setCreativeTab(MatterOverdrive.TAB_OVERDRIVE);
+		setCreativeTab(MatterOverdrive.TAB_OVERDRIVE_FOOD);
 	}
 
 	@Override
