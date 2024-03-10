@@ -67,7 +67,7 @@ public abstract class ItemBuildableAbstract extends MOBaseItem implements IBuild
         {
             if (ship.getTagCompound().hasKey("Owner") && !ship.getTagCompound().getString("Owner").isEmpty()) {
                 try {
-                    return false; //UUID.fromString(ship.getTagCompound().getString("Owner")).equals(EntityPlayer.func_146094_a(player.getGameProfile()));
+                    UUID.fromString(ship.getTagCompound().getString("Owner")).equals(EntityPlayer.getUUID(player.getGameProfile()));
                 }
                 catch (Exception e)
                 {

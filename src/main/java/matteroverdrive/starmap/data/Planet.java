@@ -4,6 +4,7 @@ package matteroverdrive.starmap.data;
 import java.io.File;
 import java.util.List;
 import java.util.UUID;
+import java.util.ArrayList;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -34,6 +35,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.relauncher.Side;
@@ -67,6 +69,10 @@ public class Planet extends SpaceBody implements IInventory {
 	public List<ItemStack> getFleet() {
 		return fleet;
 	}
+    public int getFactoryCount()
+    {
+        return buildings.size();
+    }
 
 	public int getFleetSpaces() {
 		return (int) getStatChangeFromBuildings(PlanetStatType.FLEET_SIZE, fleetSpaces);
@@ -129,6 +135,8 @@ public class Planet extends SpaceBody implements IInventory {
 
 	private void init() {
 		inventory = NonNullList.withSize(SLOT_COUNT, ItemStack.EMPTY);
+        buildings = new ArrayList<ItemStack>();
+        fleet = new ArrayList<ItemStack>();
 	}
 	// endregion
 
@@ -139,18 +147,104 @@ public class Planet extends SpaceBody implements IInventory {
 				needsClientUpdate = false;
 				MatterOverdrive.NETWORK.sendToDimention(new PacketUpdatePlanet(this), world);
 			}
-		}
-	}
-
+			for (int i = 0;i < SLOT_COUNT;i++)
+            {
+                List<String> buildInfo = new ArrayList<>();
+                ItemStack buildableStack = getStackInSlot(i);
+                if (buildableStack != null)
+                {
+                    if (buildableStack.getItem() instanceof IBuilding)
+                    {
+                        //check if building can be built and if build start is above zero
+                        //if below zero then the building was just put in
+                        if (canBuild((IBuilding) buildableStack.getItem(), buildableStack, buildInfo)) {
+                            if (((IBuilding) buildableStack.getItem()).isReadyToBuild(world, buildableStack, this)) {
+                                buildings.add(buildableStack);
+                                if (getOwnerUUID() != null)
+                                {
+                                    ((IBuilding)buildableStack.getItem()).setOwner(buildableStack,getOwnerUUID());
+                                }
+                                setInventorySlotContents(i, null);
+                                onBuild((IBuilding)buildableStack.getItem(),buildableStack,world);
+                                markDirty();
+                            }
+                        }else
+                        {
+                            //resets the build start time
+                            ((IBuilding) buildableStack.getItem()).setBuildStart(buildableStack,world.getTotalWorldTime());
+                            markDirty();
+                        }
+                    }
+                    else if (buildableStack.getItem() instanceof IShip)
+                    {
+                        //check if ship can be built and if build start is above zero
+                        //if below zero then the ship was just put in
+                        if (canBuild((IShip) buildableStack.getItem(), buildableStack, buildInfo)) {
+                            if (((IShip) buildableStack.getItem()).isReadyToBuild(world, buildableStack, this)) {
+                                fleet.add(buildableStack);
+                                if (getOwnerUUID() != null)
+                                {
+                                    ((IShip) buildableStack.getItem()).setOwner(buildableStack, getOwnerUUID());
+                                }
+                                setInventorySlotContents(i, null);
+                                onBuild((IShip) buildableStack.getItem(), buildableStack,world);
+                                markDirty();
+                            }
+                        }else
+                        {
+                            //resets the build start time
+                            ((IShip) buildableStack.getItem()).setBuildStart(buildableStack,world.getTotalWorldTime());
+                            markDirty();
+                        }
+                    }
+                }
+            }
+        }
+    }
+    public void onBuild(IBuildable buildable,ItemStack buildableStack,World world)
+    {
+        UUID ownerID = buildable.getOwnerID(buildableStack);
+        if (ownerID != null)
+        {
+            EntityPlayer entityPlayer = world.getPlayerEntityByUUID(ownerID);
+            if(entityPlayer != null) {
+            	entityPlayer.sendMessage(new TextComponentString(TextFormatting.GOLD + "[" + Reference.MOD_NAME + "]" + TextFormatting.RESET + String.format(MOStringHelper.translateToLocal("alert.starmap.on_build"), buildableStack.getDisplayName(), name)));
+            }
+        }
+    }
+    
 	// region Events
 	public void onSave(File file, World world) {
 		isDirty = false;
 	}
 
 	public void onTravelEvent(ItemStack ship, GalacticPosition from, World world) {
-		if (!world.isRemote) {
-		}
-	}
+	        if (!world.isRemote)
+	        {
+	            if (ship.getItem() instanceof IShip)
+	            {
+	                UUID ownerID = ((IShip) ship.getItem()).getOwnerID(ship);
+	                if (ownerID != null)
+	                {
+	                    EntityPlayer owner = world.getPlayerEntityByUUID(ownerID);
+	                    if (owner != null) {
+	                    owner.sendMessage(new TextComponentString(TextFormatting.GOLD + "[" + Reference.MOD_NAME + "]" + TextFormatting.RESET + String.format(MOStringHelper.translateToLocal("alert.starmap.ship_arrive"), ship.getDisplayName(), name)
+	                                )
+	                        );
+	                    }
+	                }
+
+	                ((IShip) ship.getItem()).onTravel(ship,this);
+	                if (ship.getCount() <= 0)
+	                {
+	                    removeShip(ship);
+	                }
+
+	                markDirty();
+	                markForUpdate();
+	            }
+	        }
+	    }
 	// endregion
 
 	// region Read - Write
@@ -171,6 +265,8 @@ public class Planet extends SpaceBody implements IInventory {
 		tagCompound.setFloat("Size", size);
 		tagCompound.setByte("Type", type);
 		tagCompound.setFloat("Orbit", orbit);
+        tagCompound.setInteger("BuildingSpaces", buildingSpaces);
+        tagCompound.setInteger("FleetSpaces",fleetSpaces);
 		tagCompound.setInteger("Seed", seed);
 	}
 
@@ -189,6 +285,38 @@ public class Planet extends SpaceBody implements IInventory {
 				setInventorySlotContents(i, new ItemStack(tagCompound.getCompoundTag("Slot" + i)));
 			}
 		}
+        buildingSpaces = tagCompound.getInteger("BuildingSpaces");
+        for (int i = 0;i < getBuildingSpaces();i++)
+        {
+            if (tagCompound.hasKey("Building" + i,10))
+            {
+            	System.out.println("Building: " + (tagCompound.getCompoundTag("Building" + i)));
+            	
+                ItemStack stack = new ItemStack(tagCompound.getCompoundTag("Building" + i));
+                System.out.println("Stackb: " + stack);
+                if (stack != null) {
+                    addBuilding(stack);
+               } else  {
+					MatterOverdrive.LOGGER.error("There was a problem loading a building from NBT of planet ", getName());
+                }
+            }
+        }
+        fleetSpaces = tagCompound.getInteger("FleetSpaces");
+        for (int i = 0;i < getFleetSpaces();i++)
+        {
+            if (tagCompound.hasKey("Ship"+i,10))
+            {
+                ItemStack shipStack = new ItemStack(tagCompound.getCompoundTag("Ship" + i));
+                System.out.println("Stack: " + shipStack);
+                if (shipStack != null)
+                {
+                    addShip(shipStack);
+                }else
+                {
+					MatterOverdrive.LOGGER.error("There was a problem loading a ship from NBT of planet ", getName());
+                }
+            }
+        }
 		if (tagCompound.hasKey("OwnerUUID", 8)) {
 			try {
 				ownerUUID = UUID.fromString(tagCompound.getString("OwnerUUID"));
@@ -427,11 +555,18 @@ public class Planet extends SpaceBody implements IInventory {
 
 	}
 
-	@Override
-	public boolean isItemValidForSlot(int slot, @Nonnull ItemStack stack) {
-		return false;
-	}
-
+    @Override
+    public boolean isItemValidForSlot(int slot, ItemStack stack)
+    {
+        if (slot < SLOT_COUNT/2)
+        {
+            return stack.getItem() instanceof IBuilding;
+        }else
+        {
+            return stack.getItem() instanceof IShip;
+        }
+    }
+    
 	@Override
 	public int getField(int id) {
 		return 0;
@@ -563,8 +698,7 @@ public class Planet extends SpaceBody implements IInventory {
 			if (building.getItem() instanceof IBuilding) {
 				this.buildings.add(building);
 			} else {
-				MatterOverdrive.LOGGER
-						.error("Trying to add a stack to buildings, that does not contain a Building Item");
+				MatterOverdrive.LOGGER.error("Trying to add a stack to buildings, that does not contain a Building Item");
 			}
 		} else {
 			MatterOverdrive.LOGGER.error("Trying to add a null building to planet %s", getName());

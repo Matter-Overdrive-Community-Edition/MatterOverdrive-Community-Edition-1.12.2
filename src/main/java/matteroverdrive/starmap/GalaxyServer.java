@@ -2,6 +2,9 @@
 package matteroverdrive.starmap;
 
 import matteroverdrive.MatterOverdrive;
+import matteroverdrive.api.starmap.GalacticPosition;
+import matteroverdrive.api.starmap.IBuilding;
+import matteroverdrive.api.starmap.IShip;
 import matteroverdrive.handler.ConfigurationHandler;
 import matteroverdrive.network.packet.client.starmap.PacketUpdateGalaxy;
 import matteroverdrive.network.packet.client.starmap.PacketUpdatePlanet;
@@ -9,10 +12,12 @@ import matteroverdrive.starmap.data.Galaxy;
 import matteroverdrive.starmap.data.Planet;
 import matteroverdrive.starmap.data.Quadrant;
 import matteroverdrive.starmap.data.Star;
+import matteroverdrive.starmap.data.TravelEvent;
 import matteroverdrive.util.IConfigSubscriber;
 import matteroverdrive.util.MOLog;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -29,7 +34,7 @@ import java.util.UUID;
 
 public class GalaxyServer extends GalaxyCommon implements IConfigSubscriber {
 	// region Static Vars
-	public static final int GALAXY_VERSION = 1;
+	public static final int GALAXY_VERSION = 0;
 	// endregion
 	// region Private Vars
 	private static GalaxyServer instance;
@@ -49,6 +54,7 @@ public class GalaxyServer extends GalaxyCommon implements IConfigSubscriber {
 		}
 		return instance;
 	}
+	
 
 	// region Saving and Creation
 	public void createGalaxy(File file, World world) {
@@ -148,6 +154,14 @@ public class GalaxyServer extends GalaxyCommon implements IConfigSubscriber {
 	private void buildHomeworld(Planet planet, EntityPlayer player) {
 		planet.setOwner(player);
 		planet.setHomeworld(true);
+        planet.setBuildingSpaces(8);
+        planet.setFleetSpaces(10);
+        ItemStack base = new ItemStack(MatterOverdrive.ITEMS.buildingBase);
+        ((IBuilding)base.getItem()).setOwner(base,EntityPlayer.getUUID(player.getGameProfile()));
+        planet.addBuilding(base);
+        ItemStack scoutShip = new ItemStack(MatterOverdrive.ITEMS.scoutShip);
+        ((IShip)scoutShip.getItem()).setOwner(scoutShip,EntityPlayer.getUUID(player.getGameProfile()));
+        planet.addShip(scoutShip);
 		planet.markDirty();
 	}
 
@@ -172,6 +186,36 @@ public class GalaxyServer extends GalaxyCommon implements IConfigSubscriber {
 		}
 		return false;
 	}
+
+    /**
+     * a Helper function that tries to create a travel event from one
+     * Galactic Position to another, by checking if the event can be finished
+     * and if so, then removes the ship from the source planet and puts it in the
+     * travel event and returns the event itself
+     * @param from The source planet position
+     * @param to The Destination Planet position
+     * @param shipID The Id of the ship. The id will be checked if valid
+     * @return The Travel event if valid, and if not then returns null
+     */
+    public TravelEvent createTravelEvent(GalacticPosition from,GalacticPosition to,int shipID)
+    {
+        Planet planet = theGalaxy.getPlanet(from);
+        if (planet != null) {
+            ItemStack ship = planet.getShip(shipID);
+            if (ship != null) {
+                TravelEvent travelEvent = new TravelEvent(world, from, to, ship, GalaxyServer.getInstance().getTheGalaxy());
+                if (travelEvent.isValid(GalaxyServer.getInstance().getTheGalaxy())) {
+                    if (GalaxyServer.getInstance().getTheGalaxy().canCompleteTravelEvent(travelEvent)) {
+                        theGalaxy.getPlanet(from).removeShip(shipID);
+                        theGalaxy.getPlanet(from).markDirty();
+                        GalaxyServer.getInstance().getTheGalaxy().addTravelEvent(travelEvent);
+                        return travelEvent;
+                    }
+                }
+            }
+        }
+        return null;
+    }
 
 	// region Events
 	@SubscribeEvent
@@ -258,15 +302,13 @@ public class GalaxyServer extends GalaxyCommon implements IConfigSubscriber {
 		Galaxy.GALAXY_TRAVEL_TIME_MULTIPLY = config.config.getFloat("galaxy travel time multiply",
 				ConfigurationHandler.CATEGORY_STARMAP, 1, 0, 10, "The multiplier for the ship travel times");
 	}
-
+	public GalaxyGenerator getGalaxyGenerator(){return galaxyGenerator;}
+	
 	// region Getters and Setters
 	private File getGalaxyFile(World world) {
 		File worldDirectory = world.getSaveHandler().getWorldDirectory();
 		return new File(worldDirectory.getPath() + "/galaxy.dat");
 	}
 
-	public GalaxyGenerator getGalaxyGenerator() {
-		return galaxyGenerator;
-	}
 	// endregion
 }

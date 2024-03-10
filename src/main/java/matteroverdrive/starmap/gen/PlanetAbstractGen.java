@@ -20,6 +20,8 @@ public abstract class PlanetAbstractGen implements ISpaceBodyGen<Planet> {
 	public void generateSpaceBody(Planet planet, Random random) {
 		planet.setType((byte) 2);
 		setSize(planet, random);
+        planet.setBuildingSpaces(buildingSpaces);
+        planet.setFleetSpaces(fleetSpaces);
 	}
 
 	@Override
@@ -31,6 +33,12 @@ public abstract class PlanetAbstractGen implements ISpaceBodyGen<Planet> {
 			if (!tagCompound.hasKey("Size", 5)) {
 				setSize(planet, random);
 			}
+            if (!tagCompound.hasKey("BuildingSpaces", 3)) {
+                planet.setBuildingSpaces(buildingSpaces);
+            }
+            if (!tagCompound.hasKey("FleetSpaces", 3)) {
+                planet.setFleetSpaces(fleetSpaces);
+            }
 			return true;
 		}
 		return false;

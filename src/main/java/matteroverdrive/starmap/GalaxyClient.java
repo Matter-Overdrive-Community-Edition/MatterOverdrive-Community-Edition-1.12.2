@@ -1,10 +1,12 @@
 
 package matteroverdrive.starmap;
 
+import matteroverdrive.api.starmap.IShip;
 import matteroverdrive.starmap.data.Planet;
 import matteroverdrive.starmap.data.Star;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -22,17 +24,22 @@ public class GalaxyClient extends GalaxyCommon {
 	}
 	// endregion
 
-	// region Getters and Setters
-	public static GalaxyClient getInstance() {
-		if (instance == null) {
-			instance = new GalaxyClient();
-		}
+    public boolean canSeePlanetInfo(Planet planet,EntityPlayer player)
+    {
+        if (planet.isOwner(player) || player.capabilities.isCreativeMode)
+        {
+            return true;
+        }
 
-		return instance;
-	}
+        for (ItemStack shipStack : planet.getFleet())
+        {
+            if (((IShip)shipStack.getItem()).isOwner(shipStack,player))
+            {
+                return true;
+            }
+        }
 
-	public boolean canSeePlanetInfo(Planet planet, EntityPlayer player) {
-        return planet.isOwner(player) || player.capabilities.isCreativeMode;
+        return false;
     }
 
 	public boolean canSeeStarInfo(Star star, EntityPlayer player) {
@@ -41,9 +48,8 @@ public class GalaxyClient extends GalaxyCommon {
 				return true;
 			}
 		}
-		return true;
+		return false;
 	}
-	// endregion
 
 	// region Events
 	@SubscribeEvent
@@ -54,6 +60,16 @@ public class GalaxyClient extends GalaxyCommon {
 				&& Minecraft.getMinecraft().world != null) {
 			theGalaxy.update(Minecraft.getMinecraft().world);
 		}
+	}
+    //endregion
+
+	// region Getters and Setters
+	public static GalaxyClient getInstance() {
+		if (instance == null) {
+			instance = new GalaxyClient();
+		}
+
+		return instance;
 	}
 	// endregion
 }

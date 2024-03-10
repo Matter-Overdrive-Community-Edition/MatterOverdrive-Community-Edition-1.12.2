@@ -127,6 +127,10 @@ public abstract class MOElementBase {
 		this.update();
 	}
 
+	public void update(int mouseX, int mouseY) {
+		this.update();
+	}
+	
 	public void update() {
 	}
 

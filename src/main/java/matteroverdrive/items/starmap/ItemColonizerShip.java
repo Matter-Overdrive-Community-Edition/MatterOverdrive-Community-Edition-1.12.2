@@ -32,7 +32,6 @@ public class ItemColonizerShip  extends ItemShipAbstract
             ItemStack base = new ItemStack(MatterOverdrive.ITEMS.buildingBase);
             MatterOverdrive.ITEMS.buildingBase.setOwner(base,owner);
             if (to.canBuild((IBuilding) base.getItem(), base,new ArrayList<>())) {
-                //shipStack.stackSize = 0;
                 to.addBuilding(base);
                 to.setOwnerUUID(owner);
             }

@@ -421,6 +421,11 @@ weaponstat.accuracy.name=Accuracy
 # GUI #
 
 ## tooltips ##
+gui.tooltip.starmap.no_ship_space=Not enough ship spaces
+gui.tooltip.starmap.no_building_space=Not enough building spaces
+gui.tooltip.starmap.no_ship_factory=No ship factory
+gui.tooltip.starmap.has_base=Base building already present
+gui.tooltip.starmap.no_base=No Base building
 gui.tooltip.close_menu=Close Menu
 gui.tooltip.open_menu=Open Menu
 gui.tooltip.close=Close
@@ -433,6 +438,7 @@ gui.tooltip.page.galaxy=Galaxy
 gui.tooltip.page.quadrant=Quadrant
 gui.tooltip.page.star=Planetary System
 gui.tooltip.page.planet=Planet
+gui.tooltip.page.planet_stats=Planet Stats
 gui.tooltip.button.refresh=Refresh List
 gui.tooltip.button.request=Send Requests
 gui.tooltip.matter=Matter

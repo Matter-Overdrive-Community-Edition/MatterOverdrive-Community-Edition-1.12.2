@@ -1,6 +1,7 @@
 
 package matteroverdrive.tile;
 
+import matteroverdrive.MatterOverdrive;
 import matteroverdrive.api.inventory.UpgradeTypes;
 import matteroverdrive.api.starmap.GalacticPosition;
 import matteroverdrive.data.Inventory;
@@ -238,6 +239,11 @@ public class TileEntityMachineStarMap extends MOTileEntityMachineEnergy {
 	@Override
 	public int[] getSlotsForFace(EnumFacing side) {
 		return new int[0];
+	}
+
+	public void Attack(GalacticPosition galaxyPosition, GalacticPosition destination2, int shipId) {
+		//MatterOverdrive.packetPipeline.sendToServer(new PacketStarMapAttack(from,to,shipID));
+		
 	}
 
 }
