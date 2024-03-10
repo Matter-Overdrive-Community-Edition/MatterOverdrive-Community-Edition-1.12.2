@@ -96,7 +96,7 @@ public class AndroidPill extends MOItemFood {
 	}
 
 	public void register() {
-		setCreativeTab(MatterOverdrive.TAB_OVERDRIVE);
+		setCreativeTab(MatterOverdrive.TAB_OVERDRIVE_FOOD);
 		setRegistryName(new ResourceLocation(Reference.MOD_ID, this.getTranslationKey().substring(5)));
 		GameData.register_impl(this);
 	}
