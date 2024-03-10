@@ -28,7 +28,7 @@ import java.util.UUID;
 public abstract class BionicPart extends MOBaseItem implements IBionicPart {
 	public BionicPart(String name) {
 		super(name);
-		this.setCreativeTab(MatterOverdrive.TAB_OVERDRIVE_ANDROID_PARTS);
+		this.setCreativeTab(MatterOverdrive.TAB_OVERDRIVE);
 	}
 
 	@SideOnly(Side.CLIENT)
