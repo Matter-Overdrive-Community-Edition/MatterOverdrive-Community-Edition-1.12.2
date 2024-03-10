@@ -30,7 +30,7 @@ public class ItemUpgrade extends MOBaseItem implements IUpgrade, IAdvancedModelP
 		this.setMaxStackSize(16);
 		this.setHasSubtypes(true);
 		this.setMaxDamage(0);
-		setCreativeTab(MatterOverdrive.TAB_OVERDRIVE_MODULES);
+		setCreativeTab(MatterOverdrive.TAB_OVERDRIVE_UPGRADES);
 	}
 
 	@Override
@@ -71,29 +71,12 @@ public class ItemUpgrade extends MOBaseItem implements IUpgrade, IAdvancedModelP
 			}
 	}
 
-	/*
-	 * @Override
-	 * 
-	 * @SideOnly(Side.CLIENT) public IIcon getIconFromDamage(int damage) { int j =
-	 * MathHelper.clamp(damage, 0, (icons.length-1)); return this.icons[j]; }
-	 */
-
 	@Override
 	public String getTranslationKey(ItemStack stack) {
 		int i = MathHelper.clamp(stack.getItemDamage(), 0, (subItemNames.length - 1));
 		return super.getTranslationKey() + "." + subItemNames[i];
 	}
 
-	/*
-	 * @SideOnly(Side.CLIENT) public void registerIcons(IIconRegister iconRegister)
-	 * { this.icons = new IIcon[subItemNames.length];
-	 * 
-	 * for (int i = 0; i < subItemNames.length; ++i) { this.icons[i] =
-	 * iconRegister.registerIcon(Reference.MOD_ID + ":" +
-	 * getUnlocalizedName().substring(5) + "_" + subItemNames[i]); }
-	 * 
-	 * this.itemIcon = this.icons[0]; }
-	 */
 	@Override
 	public Map<UpgradeTypes, Double> getUpgrades(ItemStack itemStack) {
 		HashMap<UpgradeTypes, Double> upgrades = new HashMap<>();
