@@ -1,21 +1,31 @@
+
 package matteroverdrive.starmap.data;
 
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import org.apache.logging.log4j.Level;
 
 import io.netty.buffer.ByteBuf;
 import matteroverdrive.MatterOverdrive;
 import matteroverdrive.Reference;
+import matteroverdrive.api.starmap.BuildingType;
 import matteroverdrive.api.starmap.GalacticPosition;
+import matteroverdrive.api.starmap.IBuildable;
+import matteroverdrive.api.starmap.IBuilding;
+import matteroverdrive.api.starmap.IPlanetStatChange;
+import matteroverdrive.api.starmap.IShip;
+import matteroverdrive.api.starmap.PlanetStatType;
 import matteroverdrive.client.data.Color;
 import matteroverdrive.network.packet.client.starmap.PacketUpdatePlanet;
 import matteroverdrive.starmap.GalaxyGenerator;
 import matteroverdrive.starmap.gen.ISpaceBodyGen;
 import matteroverdrive.util.MOLog;
+import matteroverdrive.util.MOStringHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -30,23 +40,63 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class Planet extends SpaceBody implements IInventory {
-	// region Static Vars
+
 	public static final int SLOT_COUNT = 4;
-	// endregion
-	// region Private Vars
 	private Star star;
 	private float size, orbit;
 	private byte type;
 	private UUID ownerUUID;
 	private NonNullList<ItemStack> inventory;
+	private List<ItemStack> buildings;
+	private List<ItemStack> fleet;
 	private boolean isDirty, homeworld, generated, needsClientUpdate;
-	private int seed;
-	// endregion
+	private int buildingSpaces, fleetSpaces, seed;
+
+	public int getBuildingSpaces() {
+		return (int) getStatChangeFromBuildings(PlanetStatType.BUILDINGS_SIZE, buildingSpaces);
+	}
+
+	public void setBuildingSpaces(int buildingSpaces) {
+		this.buildingSpaces = buildingSpaces;
+	}
+
+	public List<ItemStack> getBuildings() {
+		return buildings;
+	}
+
+	public List<ItemStack> getFleet() {
+		return fleet;
+	}
+
+	public int getFleetSpaces() {
+		return (int) getStatChangeFromBuildings(PlanetStatType.FLEET_SIZE, fleetSpaces);
+	}
+
+	public void setFleetSpaces(int fleetSpaces) {
+		this.fleetSpaces = fleetSpaces;
+	}
+
+	public ItemStack getShip(int at) {
+		return fleet.get(at);
+	}
+
+	public int getPowerProducation() {
+		return (int) getStatChangeFromBuildings(PlanetStatType.ENERGY_PRODUCTION, 0);
+	}
 
 	// region Constructors
 	public Planet() {
 		super();
 		init();
+	}
+
+	public float getStatChangeFromBuildings(PlanetStatType statType, float original) {
+		for (ItemStack building : getBuildings()) {
+			if (building.getItem() instanceof IPlanetStatChange) {
+				original = ((IPlanetStatChange) building.getItem()).changeStat(building, this, statType, original);
+			}
+		}
+		return original;
 	}
 
 	public Planet(String name, int id) {
@@ -418,5 +468,106 @@ public class Planet extends SpaceBody implements IInventory {
 	public ITextComponent getDisplayName() {
 		return new TextComponentString(getSpaceBodyName());
 	}
+
+	public boolean canBuild(IBuildable buildable, ItemStack stack, List<String> info) {
+		if (buildable instanceof IBuilding) {
+			return canBuild((IBuilding) buildable, stack, info);
+		} else if (buildable instanceof IShip) {
+			return canBuild((IShip) buildable, stack, info);
+		} else
+			return false;
+	}
+
+	public boolean canBuild(IBuilding building, ItemStack stack, List<String> info) {
+		if (buildings.size() < getBuildingSpaces()) {
+			if (hasBuildingType(BuildingType.BASE)) {
+				return building.canBuild(stack, this, info);
+			}
+
+			info.add(MOStringHelper.translateToLocal("gui.tooltip.starmap.no_base"));
+		}
+		info.add(MOStringHelper.translateToLocal("gui.tooltip.starmap.no_building_space"));
+		return false;
+	}
+
+	public boolean canBuild(IShip ship, ItemStack stack, List<String> info) {
+		if (fleet.size() < getFleetSpaces()) {
+			if (hasBuildingType(BuildingType.SHIP_FACTORY)) {
+				return ship.canBuild(stack, this, info);
+			}
+
+			info.add(MOStringHelper.translateToLocal("gui.tooltip.starmap.no_ship_factory"));
+		} else {
+			info.add(MOStringHelper.translateToLocal("gui.tooltip.starmap.no_ship_space"));
+		}
+		return false;
+	}
+
+	public boolean hasBuildingType(BuildingType buildingType) {
+		for (ItemStack building : getBuildings()) {
+			if (building.getItem() instanceof IBuilding
+					&& ((IBuilding) building.getItem()).getType(building) == buildingType) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	// endregion
+	public void addShip(ItemStack ship) {
+		if (ship != null) {
+			if (ship.getItem() instanceof IShip) {
+				fleet.add(ship);
+			} else {
+				MatterOverdrive.LOGGER.error("Trying to add an itemstack to ships, that does not contain a Ship Item");
+			}
+		} else {
+			MatterOverdrive.LOGGER.error("Trying to add a null Ship itemstack to %s", getName());
+		}
+	}
+
+	public boolean canAddShip(ItemStack ship, @Nullable EntityPlayer player) {
+		if (ship != null && ship.getItem() instanceof IShip) {
+			if (player != null && hasOwner() && isHomeworld()) {
+				return isOwner(player);
+			} else {
+				if (fleetCount() < getFleetCount()) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public int fleetCount() {
+		return fleet.size();
+	}
+
+	public int getFleetCount() {
+		return fleet.size();
+	}
+
+	public ItemStack removeShip(int at) {
+		if (at < fleet.size())
+			return fleet.remove(at);
+		else
+			return null;
+	}
+
+	public boolean removeShip(ItemStack ship) {
+		return fleet.remove(ship);
+	}
+
+	public void addBuilding(@Nonnull ItemStack building) {
+		if (building != null) {
+			if (building.getItem() instanceof IBuilding) {
+				this.buildings.add(building);
+			} else {
+				MatterOverdrive.LOGGER
+						.error("Trying to add a stack to buildings, that does not contain a Building Item");
+			}
+		} else {
+			MatterOverdrive.LOGGER.error("Trying to add a null building to planet %s", getName());
+		}
+	}
 }
