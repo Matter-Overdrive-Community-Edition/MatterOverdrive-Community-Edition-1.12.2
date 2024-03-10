@@ -22,11 +22,11 @@ public class WorldGenGravitationalAnomaly extends WorldGenerator implements ICon
 	public final Map<Integer, Integer> yLevelMap = new HashMap<>();
 	private final HashSet<Integer> blacklist = new HashSet<>();
 	private final HashSet<Integer> whitelist = new HashSet<>();
-	private float defaultChance;
+	private final float defaultChance;
 	private float chance;
-	private int minMatter;
-	private int maxMatter;
-	private String name;
+	private final int minMatter;
+	private final int maxMatter;
+	private final String name;
 
 	public WorldGenGravitationalAnomaly(String name, float chance, int minMatter, int maxMatter) {
 		this.defaultChance = chance;

@@ -70,10 +70,10 @@ public class ClientWeaponHandler extends CommonWeaponHandler {
 		if (Minecraft.getMinecraft().player != null && event.phase.equals(TickEvent.Phase.END)) {
 			EntityPlayer entityPlayer = Minecraft.getMinecraft().player;
 
-			if (entityPlayer.getHeldItem(EnumHand.MAIN_HAND) != null
-					&& entityPlayer.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof IWeapon) {
-				if (((IWeapon) entityPlayer.getHeldItem(EnumHand.MAIN_HAND).getItem()).isWeaponZoomed(entityPlayer,
-						entityPlayer.getHeldItem(EnumHand.MAIN_HAND))) {
+            ItemStack heldItem = entityPlayer.getHeldItem(EnumHand.MAIN_HAND);
+            if (heldItem.getItem() instanceof IWeapon) {
+				if (((IWeapon) heldItem.getItem()).isWeaponZoomed(entityPlayer,
+						heldItem)) {
 					ZOOM_TIME = Math.min(ZOOM_TIME + (event.renderTickTime * 0.1f), 1);
 				} else {
 					ZOOM_TIME = Math.max(ZOOM_TIME - (event.renderTickTime * 0.1f), 0);
@@ -90,12 +90,11 @@ public class ClientWeaponHandler extends CommonWeaponHandler {
 					lastMouseSensitivity = Minecraft.getMinecraft().gameSettings.mouseSensitivity;
 				}
 			} else if (ZOOM_TIME != 0) {
-				if (entityPlayer.getHeldItem(EnumHand.MAIN_HAND) != null
-						&& entityPlayer.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof IWeapon) {
+                if (heldItem.getItem() instanceof IWeapon) {
 					hasChangedSensitivity = true;
 					Minecraft.getMinecraft().gameSettings.mouseSensitivity = lastMouseSensitivity
-							* (1f - (ZOOM_TIME * ((IWeapon) entityPlayer.getHeldItem(EnumHand.MAIN_HAND).getItem())
-									.getZoomMultiply(entityPlayer, entityPlayer.getHeldItem(EnumHand.MAIN_HAND))));
+							* (1f - (ZOOM_TIME * ((IWeapon) heldItem.getItem())
+									.getZoomMultiply(entityPlayer, heldItem)));
 				} else {
 					hasChangedSensitivity = true;
 					Minecraft.getMinecraft().gameSettings.mouseSensitivity = lastMouseSensitivity;
@@ -113,21 +112,19 @@ public class ClientWeaponHandler extends CommonWeaponHandler {
 
 	@SubscribeEvent
 	public void onFovUpdate(FOVUpdateEvent event) {
-		if (Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND) != null
-				&& Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof IWeapon) {
+        ItemStack heldItem = Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND);
+        if (heldItem.getItem() instanceof IWeapon) {
 			event.setNewfov(event.getNewfov() - event.getFov() * ZOOM_TIME
-					* ((IWeapon) Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND).getItem())
+					* ((IWeapon) heldItem.getItem())
 							.getZoomMultiply(Minecraft.getMinecraft().player,
-									Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND)));
+									heldItem));
 		}
 	}
 
 	private void manageWeaponView() {
-		for (Object playerObj : Minecraft.getMinecraft().world.playerEntities) {
-			EntityPlayer player = (EntityPlayer) playerObj;
+		for (EntityPlayer player : Minecraft.getMinecraft().world.playerEntities) {
 			ItemStack currentitem = player.getHeldItem(EnumHand.MAIN_HAND);
-			if (currentitem != null && currentitem.getItem() instanceof IWeapon
-					&& ((IWeapon) currentitem.getItem()).isAlwaysEquipped(currentitem)) {
+			if (currentitem.getItem() instanceof IWeapon && ((IWeapon) currentitem.getItem()).isAlwaysEquipped(currentitem)) {
 				if (player == Minecraft.getMinecraft().player
 						&& Minecraft.getMinecraft().gameSettings.thirdPersonView == 0) {
 					// this disables the use animation of the weapon in first person
@@ -175,14 +172,14 @@ public class ClientWeaponHandler extends CommonWeaponHandler {
 	}
 
 	public float getEquippedWeaponAccuracyPercent(EntityPlayer entityPlayer) {
-		if (entityPlayer.getHeldItem(EnumHand.MAIN_HAND) != null
-				&& entityPlayer.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof IWeapon) {
-			return ((IWeapon) entityPlayer.getHeldItem(EnumHand.MAIN_HAND).getItem()).getAccuracy(
-					entityPlayer.getHeldItem(EnumHand.MAIN_HAND), entityPlayer,
-					((IWeapon) entityPlayer.getHeldItem(EnumHand.MAIN_HAND).getItem()).isWeaponZoomed(entityPlayer,
-							entityPlayer.getHeldItem(EnumHand.MAIN_HAND)))
-					/ ((IWeapon) entityPlayer.getHeldItem(EnumHand.MAIN_HAND).getItem())
-							.getMaxHeat(entityPlayer.getHeldItem(EnumHand.MAIN_HAND));
+        ItemStack heldItem = entityPlayer.getHeldItem(EnumHand.MAIN_HAND);
+        if (heldItem.getItem() instanceof IWeapon) {
+			return ((IWeapon) heldItem.getItem()).getAccuracy(
+					heldItem, entityPlayer,
+					((IWeapon) heldItem.getItem()).isWeaponZoomed(entityPlayer,
+							heldItem))
+					/ ((IWeapon) heldItem.getItem())
+							.getMaxHeat(heldItem);
 		}
 		return 0;
 	}

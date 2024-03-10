@@ -69,27 +69,27 @@ public class EntityRendererPhaserFire extends Render {
 		GL11.glNormal3f(f10, 0.0F, 0.0F);
 		BufferBuilder wr = Tessellator.getInstance().getBuffer();
 		wr.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-		wr.pos(1, -renderSize, -renderSize).tex((double) f6, (double) f8).endVertex();
-		wr.pos(1, -renderSize, renderSize).tex((double) f7, (double) f8).endVertex();
-		wr.pos(1, renderSize, renderSize).tex((double) f7, (double) f9).endVertex();
-		wr.pos(1, renderSize, -renderSize).tex((double) f6, (double) f9).endVertex();
+		wr.pos(1, -renderSize, -renderSize).tex(f6, f8).endVertex();
+		wr.pos(1, -renderSize, renderSize).tex(f7, f8).endVertex();
+		wr.pos(1, renderSize, renderSize).tex(f7, f9).endVertex();
+		wr.pos(1, renderSize, -renderSize).tex(f6, f9).endVertex();
 		Tessellator.getInstance().draw();
 
 		wr.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-		wr.pos(length - 1, -renderSize, renderSize).tex((double) f7, (double) f8).endVertex();
-		wr.pos(length - 1, renderSize, renderSize).tex((double) f7, (double) f9).endVertex();
-		wr.pos(length - 1, renderSize, -renderSize).tex((double) f6, (double) f9).endVertex();
-		wr.pos(length - 1, -renderSize, -renderSize).tex((double) f6, (double) f8).endVertex();
+		wr.pos(length - 1, -renderSize, renderSize).tex(f7, f8).endVertex();
+		wr.pos(length - 1, renderSize, renderSize).tex(f7, f9).endVertex();
+		wr.pos(length - 1, renderSize, -renderSize).tex(f6, f9).endVertex();
+		wr.pos(length - 1, -renderSize, -renderSize).tex(f6, f8).endVertex();
 		Tessellator.getInstance().draw();
 
 		for (int i = 0; i < 2; ++i) {
 			GlStateManager.rotate(90.0F, 1.0F, 0.0F, 0.0F);
 			GL11.glNormal3f(0.0F, 0.0F, f10);
 			wr.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-			wr.pos(0, -renderSize, 0.0D).tex((double) f2, (double) f4).endVertex();
-			wr.pos(length, -renderSize, 0.0D).tex((double) f3, (double) f4).endVertex();
-			wr.pos(length, renderSize, 0.0D).tex((double) f3, (double) f5).endVertex();
-			wr.pos(0, renderSize, 0.0D).tex((double) f2, (double) f5).endVertex();
+			wr.pos(0, -renderSize, 0.0D).tex(f2, f4).endVertex();
+			wr.pos(length, -renderSize, 0.0D).tex(f3, f4).endVertex();
+			wr.pos(length, renderSize, 0.0D).tex(f3, f5).endVertex();
+			wr.pos(0, renderSize, 0.0D).tex(f2, f5).endVertex();
 			Tessellator.getInstance().draw();
 		}
 

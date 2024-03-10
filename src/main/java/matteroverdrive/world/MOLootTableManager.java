@@ -17,16 +17,12 @@ public class MOLootTableManager {
 
 	@SubscribeEvent
 	public void onLootTablesLoaded(LootTableLoadEvent event) {
-
 		if (event.getName().equals(LootTableList.CHESTS_SIMPLE_DUNGEON)) {
-
-			final LootPool pool2 = event.getTable().getPool("pool2");
-
-			if (pool2 != null) {
-
+			final LootPool pool = event.getTable().getPool("pool2");
+			if (pool != null) {
 				// pool2.addEntry(new LootEntryItem(ITEM, WEIGHT, QUALITY, FUNCTIONS,
 				// CONDITIONS, NAME));
-				pool2.addEntry(new LootEntryItem(MatterOverdrive.ITEMS.androidPill, 10, 0, new LootFunction[0],
+				pool.addEntry(new LootEntryItem(MatterOverdrive.ITEMS.androidPill, 10, 0, new LootFunction[0],
 						new LootCondition[0], "loottable:redPill"));
 			}
 		}

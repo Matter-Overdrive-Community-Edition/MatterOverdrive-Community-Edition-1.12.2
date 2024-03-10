@@ -4,6 +4,7 @@ package matteroverdrive.handler;
 import matteroverdrive.api.weapon.IWeapon;
 import matteroverdrive.gui.GuiAndroidHud;
 import net.minecraft.client.Minecraft;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -27,11 +28,11 @@ public class MouseHandler {
 				GuiAndroidHud.radialDeltaY /= mag;
 			}
 		}
-		if (Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND) != null
-				&& Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof IWeapon) {
+		ItemStack heldItem = Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND);
+		if (heldItem.getItem() instanceof IWeapon) {
 			if (event.getButton() == 0 && event.isButtonstate()) {
-				if (((IWeapon) Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND).getItem()).onLeftClick(
-						Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND),
+				if (((IWeapon) heldItem.getItem()).onLeftClick(
+						heldItem,
 						Minecraft.getMinecraft().player)) {
 					event.setCanceled(true);
 				}

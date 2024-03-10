@@ -15,7 +15,6 @@ public class GuideElementTooltip extends GuideElementAbstract {
 
 	public GuideElementTooltip() {
 		lines = new ArrayList<>();
-
 	}
 
 	@Override

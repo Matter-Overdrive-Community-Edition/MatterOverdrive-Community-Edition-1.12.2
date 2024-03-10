@@ -27,11 +27,11 @@ public class InfogramDepth extends GuideElementAbstract {
 		float maxPercent = 1 - Math.min(maxDepth, 64) / 64f;
 
 		if (maxDepth >= 0) {
-			getFontRenderer().drawString(Integer.toString(maxDepth) + "-", 8, 8 + (int) (46 * maxPercent),
+			getFontRenderer().drawString(maxDepth + "-", 8, 8 + (int) (46 * maxPercent),
 					Reference.COLOR_HOLO_GREEN.getColor());
 		}
 		if (minDepth > 0) {
-			getFontRenderer().drawString(Integer.toString(minDepth) + "-", 8, 8 + (int) (46 * minPercent),
+			getFontRenderer().drawString(minDepth + "-", 8, 8 + (int) (46 * minPercent),
 					Reference.COLOR_HOLO_GREEN.getColor());
 		}
 

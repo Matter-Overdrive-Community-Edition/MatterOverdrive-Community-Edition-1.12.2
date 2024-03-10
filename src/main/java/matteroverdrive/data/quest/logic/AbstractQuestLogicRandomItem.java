@@ -44,7 +44,7 @@ public abstract class AbstractQuestLogicRandomItem extends AbstractQuestLogic {
 					avalibleBlocks.add(i);
 				}
 			}
-			if (avalibleBlocks.size() > 0) {
+			if (!avalibleBlocks.isEmpty()) {
 				setItemType(questStack, avalibleBlocks.get(random.nextInt(avalibleBlocks.size())));
 			}
 		} else if (anyItem) {

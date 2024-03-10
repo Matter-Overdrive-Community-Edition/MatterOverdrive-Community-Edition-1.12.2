@@ -45,7 +45,7 @@ public class MOWorldGen implements IWorldGenerator, IConfigSubscriber {
 	private WorldGenMinable dilithiumGen;
 	private WorldGenMinable tritaniumGen;
 	private WorldGenGravitationalAnomaly anomalyGen;
-	private Queue<MOImageGen.ImageGenWorker> worldGenBuildingQueue;
+	private final Queue<MOImageGen.ImageGenWorker> worldGenBuildingQueue;
 
 	public MOWorldGen() {
 		oreRandom = new Random();

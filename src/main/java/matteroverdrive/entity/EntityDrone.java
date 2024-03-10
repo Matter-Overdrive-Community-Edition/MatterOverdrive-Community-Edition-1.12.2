@@ -148,7 +148,7 @@ public class EntityDrone extends EntityCreature implements IEntityOwnable {
 			s = PreYggdrasilConverter.convertMobOwnerIfNeeded(this.getServer(), s1);
 		}
 
-		if (s.length() > 0) {
+		if (!s.isEmpty()) {
 			this.setOwnerId(UUID.fromString(s));
 		}
 	}

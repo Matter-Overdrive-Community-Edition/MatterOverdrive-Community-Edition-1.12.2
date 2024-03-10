@@ -8,6 +8,8 @@ public enum MachineNBTCategory {
 
 	public static final EnumSet<MachineNBTCategory> ALL_OPTS = EnumSet.allOf(MachineNBTCategory.class);
 
+	public static final EnumSet<MachineNBTCategory> SERVER_CATEGORIES = EnumSet.of(MachineNBTCategory.DATA, MachineNBTCategory.INVENTORY, MachineNBTCategory.COLOR);
+
 	public static int encode(EnumSet<MachineNBTCategory> set) {
 		int ret = 0;
 

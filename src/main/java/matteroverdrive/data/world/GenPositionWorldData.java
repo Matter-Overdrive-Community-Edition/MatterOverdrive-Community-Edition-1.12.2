@@ -75,12 +75,8 @@ public class GenPositionWorldData extends WorldSavedData {
 	}
 
 	public void addPosition(String name, WorldPosition2D position2D) {
-		List<WorldPosition2D> pos = positions.get(name);
-		if (pos == null) {
-			pos = new ArrayList<>();
-			positions.put(name, pos);
-		}
-		pos.add(position2D);
+        List<WorldPosition2D> pos = positions.computeIfAbsent(name, k -> new ArrayList<>());
+        pos.add(position2D);
 		markDirty();
 	}
 

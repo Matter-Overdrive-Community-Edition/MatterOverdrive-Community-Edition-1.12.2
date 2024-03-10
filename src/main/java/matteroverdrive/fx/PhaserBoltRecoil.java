@@ -8,14 +8,14 @@ import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 
 public class PhaserBoltRecoil extends Particle {
-	private float lavaParticleScale;
+	private final float lavaParticleScale;
 
 	public PhaserBoltRecoil(World world, double x, double y, double z, Color color, double dirX, double dirY,
 			double dirZ) {
 		super(world, x, y, z, dirX, dirY, dirZ);
-		this.motionX += (double) ((this.rand.nextFloat() - 0.5f) * 0.2F);
-		this.motionY += (double) ((this.rand.nextFloat() - 0.5f) * 0.2F);
-		this.motionZ += (double) ((this.rand.nextFloat() - 0.5f) * 0.2F);
+		this.motionX += (this.rand.nextFloat() - 0.5f) * 0.2F;
+		this.motionY += (this.rand.nextFloat() - 0.5f) * 0.2F;
+		this.motionZ += (this.rand.nextFloat() - 0.5f) * 0.2F;
 		this.particleRed = color.getFloatR();
 		this.particleGreen = color.getFloatG();
 		this.particleBlue = color.getFloatB();

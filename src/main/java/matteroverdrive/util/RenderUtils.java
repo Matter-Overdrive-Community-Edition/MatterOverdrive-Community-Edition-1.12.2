@@ -120,14 +120,14 @@ public class RenderUtils {
 
 	private static void func_181565_a(BufferBuilder bufferBuilder, int posX, int posY, int p_181565_4_, int p_181565_5_,
 			int p_181565_6_, int p_181565_7_, int p_181565_8_, int p_181565_9_) {
-		bufferBuilder.begin(7, DefaultVertexFormats.POSITION_COLOR);
-		bufferBuilder.pos((double) (posX), (double) (posY), 0.0D)
+		bufferBuilder.begin(GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
+		bufferBuilder.pos(posX, posY, 0.0D)
 				.color(p_181565_6_, p_181565_7_, p_181565_8_, p_181565_9_).endVertex();
-		bufferBuilder.pos((double) (posX), (double) (posY + p_181565_5_), 0.0D)
+		bufferBuilder.pos(posX, posY + p_181565_5_, 0.0D)
 				.color(p_181565_6_, p_181565_7_, p_181565_8_, p_181565_9_).endVertex();
-		bufferBuilder.pos((double) (posX + p_181565_4_), (double) (posY + p_181565_5_), 0.0D)
+		bufferBuilder.pos(posX + p_181565_4_, posY + p_181565_5_, 0.0D)
 				.color(p_181565_6_, p_181565_7_, p_181565_8_, p_181565_9_).endVertex();
-		bufferBuilder.pos((double) (posX + p_181565_4_), (double) (posY), 0.0D)
+		bufferBuilder.pos(posX + p_181565_4_, posY, 0.0D)
 				.color(p_181565_6_, p_181565_7_, p_181565_8_, p_181565_9_).endVertex();
 		Tessellator.getInstance().draw();
 	}
@@ -255,10 +255,10 @@ public class RenderUtils {
 		GL11.glDepthMask(false);
 		BufferBuilder wr = Tessellator.getInstance().getBuffer();
 		wr.begin(GL_QUADS, DefaultVertexFormats.POSITION);
-		wr.pos((double) xMin, (double) yMax, 0.0D).endVertex();
-		wr.pos((double) xMax, (double) yMax, 0.0D).endVertex();
-		wr.pos((double) xMax, (double) yMin, 0.0D).endVertex();
-		wr.pos((double) xMin, (double) yMin, 0.0D).endVertex();
+		wr.pos(xMin, yMax, 0.0D).endVertex();
+		wr.pos(xMax, yMax, 0.0D).endVertex();
+		wr.pos(xMax, yMin, 0.0D).endVertex();
+		wr.pos(xMin, yMin, 0.0D).endVertex();
 		Tessellator.getInstance().draw();
 		GL11.glEnable(GL_TEXTURE_2D);
 		GL11.glStencilFunc(GL_EQUAL, mask, mask);
@@ -514,7 +514,7 @@ public class RenderUtils {
 
 			if (yCount + scaledHeight < sizeY) {
 				int width = fontRenderer.getStringWidth(anInfo);
-				GlStateManager.translate(leftMargin + sizeX / 2, 50 + yCount + scaledHeight / 2 - height / 2, 0);
+				GlStateManager.translate(leftMargin + (float) sizeX / 2, 50 + yCount + (float) scaledHeight / 2 - (float) height / 2, 0);
 				GlStateManager.scale(scaleFactor, scaleFactor, 0);
 				fontRenderer.drawString(anInfo, -width / 2, -fontRenderer.FONT_HEIGHT / 2, color.getColor());
 
@@ -571,7 +571,7 @@ public class RenderUtils {
 			int scaledHeight = (int) (fontRenderer.FONT_HEIGHT * scaleFactor);
 
 			if (yCount + scaledHeight < sizeY) {
-				GlStateManager.translate(leftMargin + sizeX / 2, 50 + yCount + scaledHeight / 2 - height / 2, 0);
+				GlStateManager.translate(leftMargin + (float) sizeX / 2, 50 + yCount + (float) scaledHeight / 2 - (float) height / 2, 0);
 				GlStateManager.scale(scaleFactor, scaleFactor, 0);
 				fontRenderer.drawString(anInfo, -width / 2, -fontRenderer.FONT_HEIGHT / 2, color.getColor());
 
@@ -605,9 +605,8 @@ public class RenderUtils {
 
 	public static void DrawMultilineInfo(List<?> infos, int x, int y, int maxLines, int maxLineWidth, int color) {
 		try {
-			int linesCounter = 0;
 			String infoText = StringUtils.join(infos, "\n");
-			fontRenderer.drawSplitString(infoText, x, y + linesCounter * 10, maxLineWidth, color);
+			fontRenderer.drawSplitString(infoText, x, y, maxLineWidth, color);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -620,7 +619,7 @@ public class RenderUtils {
 				String info = infos.get(i).toString();
 				info = info.substring(0, Math.min(maxLineWidth, info.length()));
 				int width = fontRenderer.getStringWidth(info);
-				fontRenderer.drawStringWithShadow(info, x - (width / 2), y + i * 10, color);
+				fontRenderer.drawStringWithShadow(info, x - ((float) width / 2), y + i * 10, color);
 			}
 		} catch (Exception ignored) {
 
@@ -669,13 +668,13 @@ public class RenderUtils {
 		float z = (float) position.z;
 		BufferBuilder wr = Tessellator.getInstance().getBuffer();
 		wr.pos(x - f1 * scale - f3 * scale, y - f5 * scale, z - f2 * scale - f4 * scale)
-				.tex((double) uMax, (double) vMax).color(r, g, b, a).endVertex();
+				.tex(uMax, vMax).color(r, g, b, a).endVertex();
 		wr.pos(x - f1 * scale + f3 * scale, y + f5 * scale, z - f2 * scale + f4 * scale)
-				.tex((double) uMax, (double) vMin).color(r, g, b, a).endVertex();
+				.tex(uMax, vMin).color(r, g, b, a).endVertex();
 		wr.pos(x + f1 * scale + f3 * scale, y + f5 * scale, z + f2 * scale + f4 * scale)
-				.tex((double) uMin, (double) vMin).color(r, g, b, a).endVertex();
+				.tex(uMin, vMin).color(r, g, b, a).endVertex();
 		wr.pos(x + f1 * scale - f3 * scale, y - f5 * scale, z + f2 * scale - f4 * scale)
-				.tex((double) uMin, (double) vMax).color(r, g, b, a).endVertex();
+				.tex(uMin, vMax).color(r, g, b, a).endVertex();
 	}
 
 	public static void enable3DRender() {
@@ -797,11 +796,11 @@ public class RenderUtils {
 	public static void renderIcon(double x, double y, double z, TextureAtlasSprite icon, int width, int height) {
 		BufferBuilder wr = Tessellator.getInstance().getBuffer();
 		wr.begin(GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-		wr.pos(x, y + (double) height, z).tex((double) icon.getMinU(), (double) icon.getMaxV()).endVertex();
-		wr.pos(x + (double) width, y + (double) height, z).tex((double) icon.getMaxU(), (double) icon.getMaxV())
+		wr.pos(x, y + (double) height, z).tex(icon.getMinU(), icon.getMaxV()).endVertex();
+		wr.pos(x + (double) width, y + (double) height, z).tex(icon.getMaxU(), icon.getMaxV())
 				.endVertex();
-		wr.pos(x + (double) width, y, z).tex((double) icon.getMaxU(), (double) icon.getMinV()).endVertex();
-		wr.pos(x, y, z).tex((double) icon.getMinU(), (double) icon.getMinV()).endVertex();
+		wr.pos(x + (double) width, y, z).tex(icon.getMaxU(), icon.getMinV()).endVertex();
+		wr.pos(x, y, z).tex(icon.getMinU(), icon.getMinV()).endVertex();
 		Tessellator.getInstance().draw();
 	}
 }

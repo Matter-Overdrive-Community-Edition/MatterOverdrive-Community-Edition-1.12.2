@@ -26,7 +26,7 @@ public class EntityAIPhaserBoltAttack extends EntityAIBase {
 	 * is then set back to the maxRangedAttackDelay.
 	 */
 	private int rangedAttackDelayTime;
-	private double entityMoveSpeed;
+	private final double entityMoveSpeed;
 	private int pathRetryTimer;
 	private int shootPatienceTime;
 	/**

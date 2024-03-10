@@ -30,7 +30,6 @@ public class MatterOverdriveEntities {
 	public static EntityRogueAndroid rogueandroid;
 
 	public static VillagerProfession MAD_SCIENTIST_PROFESSION;
-	public static VillagerCareer MAD_SCIENTIST_CAREER;
 	public static boolean enableVillager = false;
 
 	public static void init(FMLPreInitializationEvent event, ConfigurationHandler configurationHandler) {

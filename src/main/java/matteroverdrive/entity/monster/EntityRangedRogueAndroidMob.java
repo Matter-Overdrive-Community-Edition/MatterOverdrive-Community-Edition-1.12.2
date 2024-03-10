@@ -130,7 +130,7 @@ public class EntityRangedRogueAndroidMob extends EntityRougeAndroidMob implement
 	public void setCombatTask() {
 		ItemStack itemstack = this.getHeldItem(EnumHand.MAIN_HAND);
 
-		if (itemstack != null && itemstack.getItem() instanceof EnergyWeapon) {
+		if (itemstack.getItem() instanceof EnergyWeapon) {
 			this.aiBoltAttack.setMaxChaseDistance(((EnergyWeapon) itemstack.getItem()).getRange(itemstack) - 2);
 			if (itemstack.getItem() == MatterOverdrive.ITEMS.ionSniper) {
 				aiRangedRunFromMelee.setMinDistance(16f);

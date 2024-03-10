@@ -12,9 +12,9 @@ public class MOAnimationTimeline {
 	boolean autoLength;
 	boolean isPlaying;
 	private float maxTime;
-	private boolean repeat;
+	private final boolean repeat;
 	private float time;
-	private float defaultValue;
+	private final float defaultValue;
 
 	public MOAnimationTimeline(float maxTime, boolean repeat, boolean autoPlay, float defaultValue) {
 		this.maxTime = maxTime;

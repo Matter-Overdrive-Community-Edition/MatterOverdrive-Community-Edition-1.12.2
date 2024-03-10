@@ -92,7 +92,7 @@ public class QuestLogicMine extends AbstractQuestLogic {
 					avalibleBlocks.add(i);
 				}
 			}
-			if (avalibleBlocks.size() > 0) {
+			if (!avalibleBlocks.isEmpty()) {
 				setBlockType(questStack, avalibleBlocks.get(random.nextInt(avalibleBlocks.size())));
 			}
 		} else {

@@ -118,7 +118,6 @@ public class QuestLogicCocktailOfAscension extends AbstractQuestLogic {
 		if (getCreeperKillCount(questStack) < MAX_CREEPER_KILS && event instanceof LivingDeathEvent) {
 			// TODO: 3/26/2016 Add support for offhand
 			if (((LivingDeathEvent) event).getEntityLiving() instanceof EntityCreeper
-					&& !entityPlayer.getHeldItem(EnumHand.MAIN_HAND).isEmpty()
 					&& entityPlayer.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemSpade) {
 				initTag(questStack);
 				byte currentCreeperKillCount = getTag(questStack).getByte("CreeperKills");

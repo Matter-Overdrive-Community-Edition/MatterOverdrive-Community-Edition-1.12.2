@@ -9,8 +9,8 @@ import matteroverdrive.proxy.ClientProxy;
 import matteroverdrive.util.MOStringHelper;
 
 public class GuideCategory {
-	private String name;
-	private Set<MOGuideEntry> entries;
+	private final String name;
+	private final Set<MOGuideEntry> entries;
 	private String holoIcon;
 
 	public GuideCategory(String name) {

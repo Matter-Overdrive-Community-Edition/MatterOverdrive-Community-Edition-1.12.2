@@ -16,7 +16,7 @@ import java.io.File;
 import java.util.concurrent.Future;
 
 public class MatterRegistrationHandler {
-	private Future matterCalculationThread;
+	private Future<?> matterCalculationThread;
 
 	@SubscribeEvent
 	public void onWorldLoad(WorldEvent.Load load) {

@@ -97,12 +97,12 @@ public class TileEntityAndroidSpawner extends MOTileEntityMachine {
 							ScorePlayerTeam team = getTeam();
 							if (team != null) {
 								entity.setTeam(team);
-								if (inventory.getStackInSlot(COLOR_MODULE_SLOT) != null && inventory
+								if (inventory
 										.getStackInSlot(COLOR_MODULE_SLOT).getItem() instanceof IWeaponColor) {
 									entity.setVisorColor(
 											((IWeaponColor) inventory.getStackInSlot(COLOR_MODULE_SLOT).getItem())
 													.getColor(inventory.getStackInSlot(COLOR_MODULE_SLOT), null));
-									if (entity.getHeldItem(EnumHand.MAIN_HAND) != null) {
+									if (!entity.getHeldItem(EnumHand.MAIN_HAND).isEmpty()) {
 										WeaponHelper.setModuleAtSlot(Reference.MODULE_COLOR,
 												entity.getHeldItem(EnumHand.MAIN_HAND),
 												inventory.getStackInSlot(COLOR_MODULE_SLOT));
@@ -139,7 +139,7 @@ public class TileEntityAndroidSpawner extends MOTileEntityMachine {
 		List<Vec3d> paths = new ArrayList<>();
 		for (int i = FLASH_DRIVE_SLOT_START; i < FLASH_DRIVE_COUNT; i++) {
 			ItemStack flashDrive = inventory.getSlot(i).getItem();
-			if (flashDrive != null && flashDrive.getItem() instanceof TransportFlashDrive) {
+			if (flashDrive.getItem() instanceof TransportFlashDrive) {
 				BlockPos position = ((TransportFlashDrive) flashDrive.getItem()).getTarget(flashDrive);
 				if (position != null) {
 					paths.add(new Vec3d(position));
@@ -150,7 +150,7 @@ public class TileEntityAndroidSpawner extends MOTileEntityMachine {
 		if (paths.size() <= 0) {
 			androidMob.setPath(new Vec3d[] { new Vec3d(getPos()) }, getSpawnRange());
 		} else {
-			androidMob.setPath(paths.toArray(new Vec3d[paths.size()]), getSpawnRange());
+			androidMob.setPath(paths.toArray(new Vec3d[0]), getSpawnRange());
 		}
 	}
 

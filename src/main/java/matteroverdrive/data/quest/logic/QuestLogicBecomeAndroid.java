@@ -42,15 +42,12 @@ public class QuestLogicBecomeAndroid extends AbstractQuestLogic {
 	public boolean isObjectiveCompleted(QuestStack questStack, EntityPlayer entityPlayer, int objectiveIndex) {
 		if (objectiveIndex == 0) {
 			boolean[] hasParts = new boolean[4];
-			int[] slots = new int[4];
 
 			for (int i = 0; i < entityPlayer.inventory.getSizeInventory(); i++) {
-				if (entityPlayer.inventory.getStackInSlot(i) != null
-						&& entityPlayer.inventory.getStackInSlot(i).getItem() == MatterOverdrive.ITEMS.androidParts) {
+				if (entityPlayer.inventory.getStackInSlot(i).getItem() == MatterOverdrive.ITEMS.androidParts) {
 					int damage = entityPlayer.inventory.getStackInSlot(i).getItemDamage();
 					if (damage < hasParts.length) {
 						hasParts[damage] = true;
-						slots[damage] = i;
 					}
 				}
 			}
@@ -93,8 +90,7 @@ public class QuestLogicBecomeAndroid extends AbstractQuestLogic {
 		int[] slots = new int[4];
 
 		for (int i = 0; i < entityPlayer.inventory.getSizeInventory(); i++) {
-			if (entityPlayer.inventory.getStackInSlot(i) != null
-					&& entityPlayer.inventory.getStackInSlot(i).getItem() == MatterOverdrive.ITEMS.androidParts) {
+			if (entityPlayer.inventory.getStackInSlot(i).getItem() == MatterOverdrive.ITEMS.androidParts) {
 				int damage = entityPlayer.inventory.getStackInSlot(i).getItemDamage();
 				if (damage < hasParts.length) {
 					hasParts[damage] = true;

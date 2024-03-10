@@ -348,7 +348,7 @@ public class AndroidEffects {
 					effect.setWatched(false);
 
 					if (list == null) {
-						list = Lists.<Effect>newArrayList();
+						list = Lists.newArrayList();
 					}
 
 					list.add(effect);
@@ -396,7 +396,7 @@ public class AndroidEffects {
 
 		for (Effect datawatcher$watchableobject : this.effectMap.values()) {
 			if (list == null) {
-				list = Lists.<Effect>newArrayList();
+				list = Lists.newArrayList();
 			}
 
 			list.add(datawatcher$watchableobject);

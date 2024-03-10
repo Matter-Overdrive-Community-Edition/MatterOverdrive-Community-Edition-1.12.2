@@ -9,7 +9,7 @@ import net.minecraft.util.math.Vec3d;
 public class EntityAIRangedRunFromMelee extends EntityAIBase {
 	Vec3d destinaton;
 	private double minDistanceSq;
-	private EntityCreature entity;
+	private final EntityCreature entity;
 	private double moveSpeed;
 
 	public EntityAIRangedRunFromMelee(EntityCreature entity, double moveSpeed) {

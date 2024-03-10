@@ -142,9 +142,7 @@ public class TileEntityMachineMatterRecycler extends MOTileEntityMachineEnergy {
 			return true;
 		} else if (!inputStack.isEmpty() && inputStack.getItem() instanceof IRecyclable) {
 			ItemStack outputStack = ((IRecyclable) inputStack.getItem()).getOutput(inputStack);
-			if (!outputStack.isEmpty() && outputStack.getCount() < stack.getMaxStackSize()) {
-				return true;
-			}
+            return !outputStack.isEmpty() && outputStack.getCount() < stack.getMaxStackSize();
 		}
 
 		return false;

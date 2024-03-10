@@ -5,6 +5,7 @@ import matteroverdrive.api.matter.IMatterDatabase;
 import matteroverdrive.api.matter.IMatterPatternStorage;
 import matteroverdrive.data.matter_network.ItemPattern;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -118,9 +119,7 @@ public class MatterDatabaseHelper {
 		if (one != null && two != null) {
 			if (one.getItem() == two.getItem()) {
 				if (one.getHasSubtypes() && two.getHasSubtypes()) {
-					if (one.getItemDamage() == two.getItemDamage()) {
-						return true;
-					}
+                    return one.getItemDamage() == two.getItemDamage();
 				} else {
 					return true;
 				}
@@ -137,10 +136,10 @@ public class MatterDatabaseHelper {
 		return areEqual(new ItemStack(one), new ItemStack(two));
 	}
 
-	public static ItemStack GetItemStackFromWorld(World world, BlockPos pos) {
+	public static ItemStack getItemStackFromWorld(World world, BlockPos pos) {
 		IBlockState blockState = world.getBlockState(pos);
 		Item item = Item.getItemFromBlock(blockState.getBlock());
-		if (item != null) {
+		if (item != Items.AIR) {
 			return new ItemStack(item, 1, blockState.getBlock().getMetaFromState(blockState));
 		}
 		return ItemStack.EMPTY;

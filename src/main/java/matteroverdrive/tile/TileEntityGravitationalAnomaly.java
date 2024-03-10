@@ -91,7 +91,7 @@ public class TileEntityGravitationalAnomaly extends MOTileEntity
 	private float suppression;
 	public int tickCounter = 0;
 	public int index = 0;
-	
+
 	public TileEntityGravitationalAnomaly() {
 		this(2048 + Math.round(Math.random() * 8192));
 	}
@@ -168,11 +168,11 @@ public class TileEntityGravitationalAnomaly extends MOTileEntity
 		if (distanceSq < rangeSq) {
 			if ((!Minecraft.getMinecraft().player.inventory.armorItemInSlot(2).isEmpty()
 					&& Minecraft.getMinecraft().player.inventory.armorItemInSlot(2)
-							.getItem() instanceof SpacetimeEqualizer)
+					.getItem() instanceof SpacetimeEqualizer)
 					|| Minecraft.getMinecraft().player.capabilities.isCreativeMode
 					|| Minecraft.getMinecraft().player.isSpectator()
 					|| MOPlayerCapabilityProvider.GetAndroidCapability(Minecraft.getMinecraft().player)
-							.isUnlocked(OverdriveBioticStats.equalizer, 0))
+					.isUnlocked(OverdriveBioticStats.equalizer, 0))
 				return;
 
 			double acceleration = getAcceleration(distanceSq);
@@ -194,42 +194,38 @@ public class TileEntityGravitationalAnomaly extends MOTileEntity
 		List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, bb);
 		Vec3d blockPos = new Vec3d(getPos()).add(0.5, 0.5, 0.5);
 
-		for (Object entityObject : entities) {
-			if (entityObject instanceof Entity) {
-				Entity entity = (Entity) entityObject;
-				if (entity instanceof IGravityEntity) {
-					if (!((IGravityEntity) entity).isAffectedByAnomaly(this)) {
-						continue;
-					}
-				}
-				Vec3d entityPos = entity.getPositionVector();
-
-				// pos.y += entity.getEyeHeight();
-				double distanceSq = entityPos.squareDistanceTo(blockPos);
-				double acceleration = getAcceleration(distanceSq);
-				double eventHorizon = getEventHorizon();
-				Vec3d dir = blockPos.subtract(entityPos).normalize();
-				dir = new Vec3d(dir.x * acceleration, dir.y * acceleration, dir.z * acceleration);
-				if (intersectsAnomaly(entityPos, dir, blockPos, eventHorizon)) {
-					consume(entity);
-				}
-
-				if (entityObject instanceof EntityPlayer) // Players handle this clientside, no need to run on the
-															// server for no reason
+		for (Entity entity : entities) {
+			if (entity instanceof IGravityEntity) {
+				if (!((IGravityEntity) entity).isAffectedByAnomaly(this)) {
 					continue;
-
-				if (entityObject instanceof EntityLivingBase) {
-					AtomicBoolean se = new AtomicBoolean(false);
-					((EntityLivingBase) entityObject).getArmorInventoryList().forEach(i -> {
-						if (!i.isEmpty() && i.getItem() instanceof SpacetimeEqualizer)
-							se.set(true);
-					});
-					if (se.get())
-						continue;
 				}
-
-				entity.addVelocity(dir.x, dir.y, dir.z);
 			}
+			Vec3d entityPos = entity.getPositionVector();
+
+			// pos.y += entity.getEyeHeight();
+			double distanceSq = entityPos.squareDistanceTo(blockPos);
+			double acceleration = getAcceleration(distanceSq);
+			double eventHorizon = getEventHorizon();
+			Vec3d dir = blockPos.subtract(entityPos).normalize();
+			dir = new Vec3d(dir.x * acceleration, dir.y * acceleration, dir.z * acceleration);
+			if (intersectsAnomaly(entityPos, dir, blockPos, eventHorizon)) {
+				consume(entity);
+			}
+
+			if (entity instanceof EntityPlayer) // Players handle this clientside, no need to run on the server for no reason
+				continue;
+
+			if (entity instanceof EntityLivingBase) {
+				AtomicBoolean se = new AtomicBoolean(false);
+				entity.getArmorInventoryList().forEach(i -> {
+					if (!i.isEmpty() && i.getItem() instanceof SpacetimeEqualizer)
+						se.set(true);
+				});
+				if (se.get())
+					continue;
+			}
+
+			entity.addVelocity(dir.x, dir.y, dir.z);
 		}
 	}
 
@@ -272,12 +268,12 @@ public class TileEntityGravitationalAnomaly extends MOTileEntity
 	@SideOnly(Side.CLIENT)
 	public void manageSound() {
 		if(SOUND) {
-		if (sound == null) {
-			playSounds();
-		} else {
-			sound.setVolume(Math.min(MAX_VOLUME, getBreakStrength(0, (float) getMaxRange()) * 0.1f));
-			sound.setRange(getMaxRange());
-		}
+			if (sound == null) {
+				playSounds();
+			} else {
+				sound.setVolume(Math.min(MAX_VOLUME, getBreakStrength(0, (float) getMaxRange()) * 0.1f));
+				sound.setRange(getMaxRange());
+			}
 		} else {
 			stopSounds();
 		}
@@ -397,9 +393,8 @@ public class TileEntityGravitationalAnomaly extends MOTileEntity
 						}
 
 						float strength = getBreakStrength((float) distance, range);
-						if (blockState != null && blockState.getBlock() != null && blockState.getBlock() != Blocks.AIR
-								&& distance <= range && hardness >= 0
-								&& (distance < eventHorizon || hardness < strength)) {
+                        blockState.getBlock();
+                        if (blockState.getBlock() != Blocks.AIR && distance <= range && hardness >= 0 && (distance < eventHorizon || hardness < strength)) {
 							blocks.add(blockPos);
 						}
 					}
@@ -622,7 +617,7 @@ public class TileEntityGravitationalAnomaly extends MOTileEntity
 
 	public boolean cleanFlowingLiquids(IBlockState block, BlockPos pos) {
 		if (VANILLA_FLUIDS) {
-			if (block == Blocks.FLOWING_WATER || block == Blocks.FLOWING_LAVA) {
+			if (block.getBlock() == Blocks.FLOWING_WATER || block.getBlock() == Blocks.FLOWING_LAVA) {
 				return world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
 			}
 		}
@@ -675,7 +670,7 @@ public class TileEntityGravitationalAnomaly extends MOTileEntity
 		if (categories.contains(MachineNBTCategory.DATA)) {
 			nbt.setLong("Mass", mass);
 			nbt.setFloat("Suppression", suppression);
-			if (toDisk && this.supressors != null && this.supressors.size() > 0) {
+			if (toDisk && this.supressors != null && !this.supressors.isEmpty()) {
 				NBTTagList suppressors = new NBTTagList();
 				for (AnomalySuppressor s : this.supressors) {
 					NBTTagCompound suppressorTag = new NBTTagCompound();

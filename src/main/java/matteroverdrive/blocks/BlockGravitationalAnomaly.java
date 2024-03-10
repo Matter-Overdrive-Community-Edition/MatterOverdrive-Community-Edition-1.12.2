@@ -16,6 +16,7 @@ import matteroverdrive.util.IConfigSubscriber;
 import matteroverdrive.world.MOWorldGen;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -23,6 +24,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -114,7 +116,7 @@ public class BlockGravitationalAnomaly extends MOBlockContainer<TileEntityGravit
 	public void addInfo(World world, double x, double y, double z, List<String> infos) {
 		TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
 
-		if (tileEntity != null && tileEntity instanceof TileEntityGravitationalAnomaly) {
+		if (tileEntity instanceof TileEntityGravitationalAnomaly) {
 			((TileEntityGravitationalAnomaly) tileEntity).addInfo(world, x, y, z, infos);
 		}
 	}
@@ -134,6 +136,11 @@ public class BlockGravitationalAnomaly extends MOBlockContainer<TileEntityGravit
 	@Deprecated
 	public EnumBlockRenderType getRenderType(IBlockState state) {
 		return EnumBlockRenderType.INVISIBLE;
+	}
+
+	@Override
+	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+		return BlockFaceShape.UNDEFINED;
 	}
 
 	@Override

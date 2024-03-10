@@ -28,7 +28,7 @@ public class EntityDamageSourcePhaser extends EntityDamageSource {
 
 		if (damageSourceEntity instanceof EntityLivingBase) {
 			ItemStack itemStack = ((EntityLivingBase) damageSourceEntity).getActiveItemStack();
-			if (itemStack != null && itemStack.hasDisplayName() && MOStringHelper.hasTranslation(itemMsg)) {
+			if (itemStack.hasDisplayName() && MOStringHelper.hasTranslation(itemMsg)) {
 				return new TextComponentTranslation(itemMsg, entity.getDisplayName().getFormattedText(),
 						damageSourceEntity.getDisplayName().getFormattedText(), itemStack.getTextComponent());
 			}

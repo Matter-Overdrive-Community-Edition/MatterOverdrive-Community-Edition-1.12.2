@@ -70,8 +70,7 @@ public class RenderMatterScannerInfoHandler implements IWorldLastRenderer {
 		EnumHand hand = EnumHand.MAIN_HAND;
 		ItemStack heldItem = ItemStack.EMPTY;
 		if (!player.getHeldItem(EnumHand.MAIN_HAND).isEmpty()) {
-			hand = EnumHand.MAIN_HAND;
-			heldItem = player.getHeldItem(EnumHand.MAIN_HAND);
+            heldItem = player.getHeldItem(EnumHand.MAIN_HAND);
 			if (heldItem.getItem() instanceof IBlockScanner) {
 				holdingPad = true;
 			} else {
@@ -277,7 +276,7 @@ public class RenderMatterScannerInfoHandler implements IWorldLastRenderer {
 				IMatterDatabase database = MatterScanner.getLink(player.world, scanner);
 				if (database != null) {
 					ItemPattern pattern = database.getPattern(
-							MatterDatabaseHelper.GetItemStackFromWorld(player.world, position.getBlockPos()));
+							MatterDatabaseHelper.getItemStackFromWorld(player.world, position.getBlockPos()));
 					if (pattern != null) {
 						ref = 1 - pattern.getProgressF();
 						color = pattern.getProgress() == 100 ? Reference.COLOR_HOLO : Reference.COLOR_HOLO_YELLOW;

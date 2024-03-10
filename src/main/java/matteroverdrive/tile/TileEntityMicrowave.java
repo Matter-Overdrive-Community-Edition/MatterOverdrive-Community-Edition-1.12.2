@@ -105,7 +105,7 @@ public class TileEntityMicrowave extends MOTileEntityMachineEnergy {
 	public int getEnergyDrainMax() {
 		ItemStack input = inventory.getStackInSlot(INPUT_SLOT_ID);
 		ItemStack res = FurnaceRecipes.instance().getSmeltingResult(input);
-		if (res != null) {
+		if (!res.isEmpty()) {
 			return (int) (1000 * getUpgradeMultiply(UpgradeTypes.PowerUsage));
 		}
 		return 0;
@@ -114,7 +114,7 @@ public class TileEntityMicrowave extends MOTileEntityMachineEnergy {
 	public int getSpeed() {
 		ItemStack input = inventory.getStackInSlot(INPUT_SLOT_ID);
 		ItemStack res = FurnaceRecipes.instance().getSmeltingResult(input);
-		if (res != null) {
+		if (!res.isEmpty()) {
 			return (int) (1 * getUpgradeMultiply(UpgradeTypes.Speed));
 		}
 		return 0;
@@ -123,7 +123,7 @@ public class TileEntityMicrowave extends MOTileEntityMachineEnergy {
 	public boolean isCooking() {
 		ItemStack input = inventory.getStackInSlot(INPUT_SLOT_ID);
 		ItemStack res = FurnaceRecipes.instance().getSmeltingResult(input);
-		return res != null && canPutInOutput() && getRedstoneActive();
+		return !res.isEmpty() && canPutInOutput() && getRedstoneActive();
 	}
 
 	@Override
