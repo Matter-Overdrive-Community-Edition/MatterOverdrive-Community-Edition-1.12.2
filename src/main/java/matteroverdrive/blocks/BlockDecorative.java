@@ -22,7 +22,7 @@ public class BlockDecorative extends MOBlock implements IImageGenBlock {
 		setHardness(hardness);
 		setHarvestLevel("pickaxe", harvestLevel);
 		setResistance(resistance);
-		setCreativeTab(MatterOverdrive.TAB_OVERDRIVE);
+		setCreativeTab(MatterOverdrive.TAB_OVERDRIVE_DECORATIVE);
 		this.mapColor = mapColor;
 		decorativeBlocks.add(this);
 		MOImageGen.worldGenerationBlockColors.put(this, getBlockColor(0));
