@@ -18,18 +18,6 @@ public class BlockFluidMatterPlasma extends BlockFluidClassic {
 		setRegistryName(new ResourceLocation(Reference.MOD_ID, "matter_plasma"));
 	}
 
-	/*
-	 * @Override public IIcon getIcon(int side, int meta) { return (side == 0 ||
-	 * side == 1) ? this.getFluid().getStillIcon() :
-	 * this.getFluid().getFlowingIcon(); }
-	 * 
-	 * @SideOnly(Side.CLIENT)
-	 * 
-	 * @Override public void registerBlockIcons(IIconRegister register) {
-	 * 
-	 * }
-	 */
-
 	@Override
 	public boolean canDisplace(IBlockAccess world, BlockPos pos) {
 		IBlockState state = world.getBlockState(pos);
