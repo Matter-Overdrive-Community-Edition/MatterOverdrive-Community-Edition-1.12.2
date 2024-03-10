@@ -176,8 +176,8 @@ public class TileEntityMatterPipe extends TileEntityPipe implements IFluidPipe {
 				BlockPos neighborPos = pos.offset(enumFacing);
 				TileEntity tileEntityNeignbor = world.getTileEntity(neighborPos);
 				IBlockState neighborState = world.getBlockState(neighborPos);
-				if (tileEntityNeignbor instanceof TileEntityMatterPipe) {
-					if (connectionCount < 2 && ((TileEntityMatterPipe) tileEntityNeignbor)
+				if (tileEntityNeignbor instanceof IFluidPipe) {
+					if (connectionCount < 2 && ((IFluidPipe) tileEntityNeignbor)
 							.establishConnectionFromSide(neighborState, enumFacing.getOpposite())) {
 						this.setConnection(enumFacing, true);
 						world.markBlockRangeForRenderUpdate(pos, pos);
@@ -204,6 +204,16 @@ public class TileEntityMatterPipe extends TileEntityPipe implements IFluidPipe {
 
     @Override
     public void onDestroyed(World worldIn, BlockPos pos, IBlockState state) {
+    }
+    
+    @Override
+    public void onChunkUnload() {
+        if (!world.isRemote) {
+            IBlockState blockState = world.getBlockState(getPos());
+            if (fluidPipeNetwork != null) {
+            	fluidPipeNetwork.onNodeDestroy(blockState, this);
+            }
+        }
     }
 
 	public void breakConnection(IBlockState blockState, EnumFacing side) {
