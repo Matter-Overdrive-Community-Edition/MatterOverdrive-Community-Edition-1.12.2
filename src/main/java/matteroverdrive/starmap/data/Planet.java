@@ -266,7 +266,7 @@ public class Planet extends SpaceBody implements IInventory {
 		tagCompound.setByte("Type", type);
 		tagCompound.setFloat("Orbit", orbit);
         tagCompound.setInteger("BuildingSpaces", buildingSpaces);
-        tagCompound.setInteger("FleetSpaces",fleetSpaces);
+        tagCompound.setInteger("FleetSpaces", fleetSpaces);
 		tagCompound.setInteger("Seed", seed);
 	}
 
