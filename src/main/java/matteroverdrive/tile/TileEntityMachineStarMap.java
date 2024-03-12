@@ -4,15 +4,19 @@ package matteroverdrive.tile;
 import matteroverdrive.MatterOverdrive;
 import matteroverdrive.api.inventory.UpgradeTypes;
 import matteroverdrive.api.starmap.GalacticPosition;
+import matteroverdrive.api.starmap.IBuildable;
 import matteroverdrive.data.Inventory;
+import matteroverdrive.data.inventory.Slot;
 import matteroverdrive.machines.MachineNBTCategory;
 import matteroverdrive.machines.events.MachineEvent;
+import matteroverdrive.network.packet.server.starmap.PacketStarMapAttack;
 import matteroverdrive.starmap.GalaxyClient;
 import matteroverdrive.starmap.GalaxyServer;
 import matteroverdrive.starmap.data.Planet;
 import matteroverdrive.starmap.data.Quadrant;
 import matteroverdrive.starmap.data.SpaceBody;
 import matteroverdrive.starmap.data.Star;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -20,6 +24,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -48,7 +53,11 @@ public class TileEntityMachineStarMap extends MOTileEntityMachineEnergy {
 
 	@Override
 	protected void RegisterSlots(Inventory inventory) {
-		super.RegisterSlots(inventory);
+	    	super.RegisterSlots(inventory);
+	        for (int i = 0; i < Planet.SLOT_COUNT; i++)
+	        {
+	            inventory.AddSlot(new Slot(false));
+	        }
 	}
 
 	@Override
@@ -138,6 +147,11 @@ public class TileEntityMachineStarMap extends MOTileEntityMachineEnergy {
 		}
 	}
 
+	@Override
+	public void update() {
+		super.update();
+	}
+
 	public Planet getPlanet() {
 		if (world.isRemote) {
 			return GalaxyClient.getInstance().getPlanet(destination);
@@ -170,9 +184,28 @@ public class TileEntityMachineStarMap extends MOTileEntityMachineEnergy {
 		}
 	}
 
+    @Override
+    public void onPlaced(World world,EntityLivingBase entityLiving)
+    {
+        if (entityLiving instanceof EntityPlayer) {
+            if (world.isRemote) {
+                Planet homeworld = GalaxyClient.getInstance().getHomeworld((EntityPlayer)entityLiving);
+                if (homeworld != null)
+                    position = new GalacticPosition(homeworld);
+            } else {
+                Planet homeworld = GalaxyServer.getInstance().getHomeworld((EntityPlayer)entityLiving);
+                if (homeworld != null)
+                    position = new GalacticPosition(homeworld);
+            }
+
+            destination = new GalacticPosition(position);
+            owner = ((EntityPlayer) entityLiving).getGameProfile().getId();
+        }
+    }
+    
 	@Override
 	protected void onMachineEvent(MachineEvent event) {
-		if (event instanceof MachineEvent.Placed) {
+	/*	if (event instanceof MachineEvent.Placed) {
 			MachineEvent.Placed placed = (MachineEvent.Placed) event;
 			if (placed.entityLiving instanceof EntityPlayer) {
 				if (placed.world.isRemote) {
@@ -191,7 +224,7 @@ public class TileEntityMachineStarMap extends MOTileEntityMachineEnergy {
 				owner = ((EntityPlayer) placed.entityLiving).getGameProfile().getId();
 			}
 		}
-	}
+*/	}
 
 	public GalacticPosition getGalaxyPosition() {
 		return position;
@@ -228,13 +261,19 @@ public class TileEntityMachineStarMap extends MOTileEntityMachineEnergy {
 
 	public void onItemPickup(EntityPlayer player, ItemStack itemStack) {
 		if (!world.isRemote) {
-		}
-	}
+            if (itemStack != null && itemStack.getItem() instanceof IBuildable) {
+                ((IBuildable) itemStack.getItem()).setBuildStart(itemStack, getWorld().getTotalWorldTime());
+            }
+        }
+    }
 
 	public void onItemPlaced(ItemStack itemStack) {
 		if (!world.isRemote) {
-		}
-	}
+            if (itemStack != null && itemStack.getItem() instanceof IBuildable) {
+                ((IBuildable) itemStack.getItem()).setBuildStart(itemStack, getWorld().getTotalWorldTime());
+            }
+        }
+    }
 
 	@Override
 	public int[] getSlotsForFace(EnumFacing side) {
@@ -242,7 +281,7 @@ public class TileEntityMachineStarMap extends MOTileEntityMachineEnergy {
 	}
 
 	public void Attack(GalacticPosition galaxyPosition, GalacticPosition destination2, int shipId) {
-		//MatterOverdrive.packetPipeline.sendToServer(new PacketStarMapAttack(from,to,shipID));
+		MatterOverdrive.NETWORK.sendToServer(new PacketStarMapAttack(galaxyPosition,destination2,shipId));
 		
 	}
 
