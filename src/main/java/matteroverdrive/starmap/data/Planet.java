@@ -257,6 +257,18 @@ public class Planet extends SpaceBody implements IInventory {
 				tagCompound.setTag("Slot" + i, itemTag);
 			}
 		}
+        for (int i = 0;i < buildings.size();i++)
+        {
+            NBTTagCompound buiildingTAG = new NBTTagCompound();
+            buildings.get(i).writeToNBT(buiildingTAG);
+            tagCompound.setTag("Building" + i, buiildingTAG);
+        }
+        for (int i = 0;i < fleet.size();i++)
+        {
+            NBTTagCompound shipTag = new NBTTagCompound();
+            fleet.get(i).writeToNBT(shipTag);
+            tagCompound.setTag("Ship"+i,shipTag);
+        }
 		if (ownerUUID != null) {
 			tagCompound.setString("OwnerUUID", ownerUUID.toString());
 		}
@@ -280,8 +292,11 @@ public class Planet extends SpaceBody implements IInventory {
 
 	public void readFromNBT(NBTTagCompound tagCompound, GalaxyGenerator generator) {
 		super.readFromNBT(tagCompound, generator);
+		buildings.clear();
+        fleet.clear();
 		for (int i = 0; i < getSizeInventory(); i++) {
 			if (tagCompound.hasKey("Slot" + i, 10)) {
+				//setInventorySlotContents(i, ItemStack.loadItemStackFromNBT(tagCompound.getCompoundTag("Slot" + i)));
 				setInventorySlotContents(i, new ItemStack(tagCompound.getCompoundTag("Slot" + i)));
 			}
 		}
@@ -291,11 +306,11 @@ public class Planet extends SpaceBody implements IInventory {
             if (tagCompound.hasKey("Building" + i,10))
             {
             	System.out.println("Building: " + (tagCompound.getCompoundTag("Building" + i)));
-            	
-                ItemStack stack = new ItemStack(tagCompound.getCompoundTag("Building" + i));
-                System.out.println("Stackb: " + stack);
-                if (stack != null) {
-                    addBuilding(stack);
+            	//ItemStack buildingStack = ItemStack.loadItemStackFromNBT(tagCompound.getCompoundTag("Building" + i));
+                ItemStack buildingStack = new ItemStack(tagCompound.getCompoundTag("Building" + i));
+                System.out.println("buildingStack: " + buildingStack);
+                if (buildingStack != null) {
+                    addBuilding(buildingStack);
                } else  {
 					MatterOverdrive.LOGGER.error("There was a problem loading a building from NBT of planet ", getName());
                 }
@@ -306,6 +321,7 @@ public class Planet extends SpaceBody implements IInventory {
         {
             if (tagCompound.hasKey("Ship"+i,10))
             {
+            	//ItemStack shipStack = ItemStack.loadItemStackFromNBT(tagCompound.getCompoundTag("Ship" + i));
                 ItemStack shipStack = new ItemStack(tagCompound.getCompoundTag("Ship" + i));
                 System.out.println("Stack: " + shipStack);
                 if (shipStack != null)

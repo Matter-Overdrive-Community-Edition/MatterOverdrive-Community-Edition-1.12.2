@@ -50,6 +50,7 @@ public class ElementSlotShip extends ElementInventorySlot
         if (starMap.getPlanet() != null) {
             if (getSlot().getStack() != null) {
                 if (getSlot().getStack().getItem() instanceof IShip)
+                	System.out.println("SHIP IN SLOT");
                 {
                     List<String> info = new ArrayList<>();
                     if (starMap.getPlanet().canBuild((IShip)getSlot().getStack().getItem(),getSlot().getStack(),info)) {
