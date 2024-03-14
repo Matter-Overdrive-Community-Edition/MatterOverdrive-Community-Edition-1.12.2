@@ -35,12 +35,15 @@ import java.util.List;
 public class PlayerEventHandler {
 	public final List<EntityPlayerMP> players;
 	private final VersionCheckerHandler versionCheckerHandler;
+	private final WeaponConfigHandler weaponConfigHandler;
 
 	public PlayerEventHandler(ConfigurationHandler configurationHandler) {
 		players = new ArrayList<>();
 		versionCheckerHandler = new VersionCheckerHandler();
+		weaponConfigHandler = new WeaponConfigHandler();
 
 		configurationHandler.subscribe(versionCheckerHandler);
+		configurationHandler.subscribe(weaponConfigHandler);
 	}
 
 	@SubscribeEvent
