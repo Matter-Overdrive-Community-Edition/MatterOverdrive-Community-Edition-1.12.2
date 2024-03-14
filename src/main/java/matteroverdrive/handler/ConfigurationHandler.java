@@ -1,9 +1,11 @@
-
 package matteroverdrive.handler;
 
 import matteroverdrive.MatterOverdrive;
 import matteroverdrive.Reference;
 import matteroverdrive.entity.android_player.AndroidPlayer;
+import matteroverdrive.items.weapon.EnergyPack;
+import matteroverdrive.items.weapon.EnergyWeapon;
+import matteroverdrive.items.weapon.IonSniper;
 import matteroverdrive.util.IConfigSubscriber;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.ConfigElement;
@@ -20,6 +22,49 @@ import java.util.Set;
 
 public class ConfigurationHandler {
 	public static final String CATEGORY_MATTER = "matter registry";
+	public static final String CATEGORY_WEAPON = "weapon values";
+	
+	public static final String KEY_WEAPON_ENERGY_PACK_VALUE = "energy pack value";
+	public static final String KEY_WEAPON_PHASER_RANGE_VALUE = "Phaser range";
+	public static final String KEY_WEAPON_PHASER_HEAT_VALUE = "Phaser max heat";
+	public static final String KEY_WEAPON_PHASER_DAMAGE_VALUE = "Phaser base damage";
+	public static final String KEY_WEAPON_PHASER_CAPACITY_VALUE = "Phaser energy cap";
+	public static final String KEY_WEAPON_PHASER_COOLDOWN_VALUE = "Phaser shot cooldown";
+	public static final String KEY_WEAPON_PHASER_USE_VALUE = "Phaser max use time";
+	public static final String KEY_WEAPON_PHASER_ENERGY_VALUE = "Phaser energy per shot";
+	public static final String KEY_WEAPON_PHASERRIFLE_RANGE_VALUE = "Phaser Rifle range";
+	public static final String KEY_WEAPON_PHASERRIFLE_HEAT_VALUE = "Phaser Rifle max heat";
+	public static final String KEY_WEAPON_PHASERRIFLE_DAMAGE_VALUE = "Phaser Rifle base damage";
+	public static final String KEY_WEAPON_PHASERRIFLE_CAPACITY_VALUE = "Phaser Rifle energy cap";
+	public static final String KEY_WEAPON_PHASERRIFLE_SPEED_VALUE = "Phaser Rifle shot speed";
+	public static final String KEY_WEAPON_PHASERRIFLE_COOLDOWN_VALUE = "Phaser Rifle shot cooldown";
+	public static final String KEY_WEAPON_PHASERRIFLE_USE_VALUE = "Phaser Rifle max use time";
+	public static final String KEY_WEAPON_PHASERRIFLE_ENERGY_VALUE = "Phaser Rifle energy per shot";
+	public static final String KEY_WEAPON_PLASMASHOTGUN_RANGE_VALUE = "Plasma Shotgun range";
+	public static final String KEY_WEAPON_PLASMASHOTGUN_HEAT_VALUE = "Plasma Shotgun max heat";
+	public static final String KEY_WEAPON_PLASMASHOTGUN_DAMAGE_VALUE = "Plasma Shotgun base damage";
+	public static final String KEY_WEAPON_PLASMASHOTGUN_CAPACITY_VALUE = "Plasma Shotgun energy cap";
+	public static final String KEY_WEAPON_PLASMASHOTGUN_SPEED_VALUE = "Plasma Shotgun shot speed";
+	public static final String KEY_WEAPON_PLASMASHOTGUN_COOLDOWN_VALUE = "Plasma Shotgun shot cooldown";
+	public static final String KEY_WEAPON_PLASMASHOTGUN_CHARGE_VALUE = "Plasma Shotgun max charge time";
+	public static final String KEY_WEAPON_PLASMASHOTGUN_ENERGY_VALUE = "Plasma Shotgun energy per shot";
+	public static final String KEY_WEAPON_ION_RANGE_VALUE = "ion sniper range";
+	public static final String KEY_WEAPON_ION_HEAT_VALUE = "ion sniper max heat";
+	public static final String KEY_WEAPON_ION_DAMAGE_VALUE = "ion sniper base damage";
+	public static final String KEY_WEAPON_ION_CAPACITY_VALUE = "ion sniper energy cap";
+	public static final String KEY_WEAPON_ION_SPEED_VALUE = "ion sniper shot speed";
+	public static final String KEY_WEAPON_ION_COOLDOWN_VALUE = "ion sniper shot cooldown";
+	public static final String KEY_WEAPON_ION_USE_VALUE = "ion sniper max use time";
+	public static final String KEY_WEAPON_ION_ENERGY_VALUE = "ion sniper energy per shot";
+	public static final String KEY_WEAPON_OMNITOOL_RANGE_VALUE = "Omni Tool range";
+	public static final String KEY_WEAPON_OMNITOOL_HEAT_VALUE = "Omni Tool max heat";
+	public static final String KEY_WEAPON_OMNITOOL_DAMAGE_VALUE = "Omni Tool base damage";
+	public static final String KEY_WEAPON_OMNITOOL_CAPACITY_VALUE = "Omni Tool energy cap";
+	public static final String KEY_WEAPON_OMNITOOL_SPEED_VALUE = "Omni Tool shot speed";
+	public static final String KEY_WEAPON_OMNITOOL_COOLDOWN_VALUE = "Omni Tool shot cooldown";
+	public static final String KEY_WEAPON_OMNITOOL_USE_VALUE = "Omni Tool max use time";
+	public static final String KEY_WEAPON_OMNITOOL_ENERGY_VALUE = "Omni Tool energy per shot";
+	
 	public static final String CATEGORY_WORLD_GEN = "world gen";
 	public static final String CATEGORY_MATTER_NETWORK = "matter network";
 	public static final String CATEGORY_MACHINES = "machine options";
@@ -85,7 +130,6 @@ public class ConfigurationHandler {
 		category.setComment(
 				"Registration of new items and the amount of matter they contain. Add them like so: I:[registered name or ore Dictionary name](meta)=[matter amount]. () - optional parameter. Example I:dye2=10 I:egg=29");
 		updateCategoryLang(category);
-		updateCategoryLang(category);
 		category = config.getCategory(CATEGORY_CLIENT);
 		updateCategoryLang(category);
 		category.setComment("Options for the Matter overdrive client");
@@ -101,6 +145,9 @@ public class ConfigurationHandler {
 		category = config.getCategory(CATEGORY_ANDROID_HUD);
 		updateCategoryLang(category);
 		category.setComment("Positioning and colors of Android HUD elements");
+		category = config.getCategory(CATEGORY_WEAPON);
+		updateCategoryLang(category);
+		category.setComment("Weapon Options.");
 
 		category = config.getCategory(CATEGORY_MACHINES);
 		category.setComment("Machine Options.");
@@ -134,7 +181,6 @@ public class ConfigurationHandler {
 
 		config.getBoolean(KEY_AUTOMATIC_RECIPE_CALCULATION, CATEGORY_MATTER, true,
 				"Shoud Matter be automaticly calculated from Recipes");
-
 		AndroidPlayer.loadConfigs(this);
 
 		save();
@@ -252,6 +298,7 @@ public class ConfigurationHandler {
 		list.add(new ConfigElement(getCategory(ConfigurationHandler.CATEGORY_MATTER_NETWORK)));
 		list.add(new ConfigElement(getCategory(ConfigurationHandler.CATEGORY_MACHINES)));
 		list.add(new ConfigElement(getCategory(ConfigurationHandler.CATEGORY_MATTER)));
+		list.add(new ConfigElement(getCategory(ConfigurationHandler.CATEGORY_WEAPON)));
 		list.add(new ConfigElement(getCategory(ConfigurationHandler.CATEGORY_ABILITIES)));
 		list.add(new ConfigElement(getCategory(ConfigurationHandler.CATEGORY_ENTITIES)));
 		list.add(new ConfigElement(getCategory(ConfigurationHandler.CATEGORY_DEBUG)));
