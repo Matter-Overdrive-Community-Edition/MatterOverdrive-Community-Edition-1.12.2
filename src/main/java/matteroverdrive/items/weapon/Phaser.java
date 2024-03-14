@@ -40,12 +40,15 @@ import java.util.List;
 import java.util.Map;
 
 public class Phaser extends EnergyWeapon implements IWeapon {
-
+	public static int RANGE = 18;
+	public static int MAX_HEAT = 100;
+	public static int MAX_CAPACITY = 32000;
+	public static int BASE_DAMAGE = 21;
+	public static int BASE_SHOT_COOLDOWN = 10;
+	public static int MAX_USE_TIME = 60;
+	public static int ENERGY_PER_SHOT = 3072;
 	public static final int MAX_LEVEL = 6;
-	public static final int RANGE = 18;
 	private static final double ENERGY_MULTIPLY = 2.1;
-	private static final int MAX_USE_TIME = 60;
-	private static final int MAX_HEAT = 100;
 	private static final int KILL_MODE_LEVEL = 3;
 	private static final float KILL_DAMAGE_MULTIPLY = 2f;
 	private static final int STUN_SLEEP_MULTIPLY = 5;
@@ -66,7 +69,7 @@ public class Phaser extends EnergyWeapon implements IWeapon {
 
 	@Override
 	protected int getCapacity() {
-		return 32000;
+		return MAX_CAPACITY;
 	}
 
 	@Override
@@ -407,7 +410,7 @@ public class Phaser extends EnergyWeapon implements IWeapon {
 
 	@Override
 	public int getBaseShootCooldown(ItemStack weapon) {
-		return 10;
+		return BASE_SHOT_COOLDOWN;
 	}
 
 	@Override
@@ -423,7 +426,6 @@ public class Phaser extends EnergyWeapon implements IWeapon {
 
 	@Override
 	public WeaponSound getFireSound(ItemStack weapon, EntityLivingBase entity) {
-		// return Reference.MOD_ID + ":" +"phaser_beam_1";
 		return new WeaponSound(MatterOverdriveSounds.weaponsPhaserBeam, SoundCategory.PLAYERS, (float) entity.posX,
 				(float) entity.posY, (float) entity.posZ, itemRand.nextFloat() * 0.05f + 0.2f, 1);
 	}

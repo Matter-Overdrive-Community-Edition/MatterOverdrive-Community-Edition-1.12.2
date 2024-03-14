@@ -36,7 +36,6 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 public class OmniTool extends EnergyWeapon {
-	
 	public static int RANGE = 24;
 	public static int MAX_HEAT = 80;
 	public static int MAX_CAPACITY = 32000;

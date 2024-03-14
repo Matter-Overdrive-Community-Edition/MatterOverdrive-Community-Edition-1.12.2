@@ -42,9 +42,15 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PlasmaShotgun extends EnergyWeapon {
-	public static final int RANGE = 16;
-	private static final int MAX_CHARGE_TIME = 20;
-	private static final int ENERGY_PER_SHOT = 2560;
+	public static int RANGE = 16;
+	public static int MAX_HEAT = 80;
+	public static int MAX_CAPACITY = 32000;
+	public static int BASE_DAMAGE = 16;
+	public static int SHOTSPEED = 3;
+	public static int BASE_SHOT_COOLDOWN = 22;
+	public static int ENERGY_PER_SHOT = 2560;
+	public static int MAX_CHARGE_TIME = 20;
+
 	@SideOnly(Side.CLIENT)
 	private MOPositionedSound lastChargingSound;
 
@@ -56,7 +62,7 @@ public class PlasmaShotgun extends EnergyWeapon {
 
 	@Override
 	protected int getCapacity() {
-		return 32000;
+		return MAX_CAPACITY;
 	}
 
 	@Override
@@ -230,12 +236,12 @@ public class PlasmaShotgun extends EnergyWeapon {
 
 	@Override
 	protected int getBaseMaxHeat(ItemStack item) {
-		return 80;
+		return MAX_HEAT;
 	}
 
 	@Override
 	public float getWeaponBaseDamage(ItemStack weapon) {
-		return 16;
+		return BASE_DAMAGE;
 	}
 
 	@Override
@@ -246,7 +252,7 @@ public class PlasmaShotgun extends EnergyWeapon {
 
 	@Override
 	public float getShotSpeed(ItemStack weapon, EntityLivingBase shooter) {
-		return 3;
+		return SHOTSPEED;
 	}
 
 	@Override
@@ -394,7 +400,7 @@ public class PlasmaShotgun extends EnergyWeapon {
 
 	@Override
 	public int getBaseShootCooldown(ItemStack itemStack) {
-		return 22;
+		return BASE_SHOT_COOLDOWN;
 	}
 
 	@Override
