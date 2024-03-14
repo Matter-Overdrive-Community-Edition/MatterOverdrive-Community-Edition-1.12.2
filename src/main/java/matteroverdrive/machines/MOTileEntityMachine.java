@@ -1,4 +1,3 @@
-
 package matteroverdrive.machines;
 
 import java.util.ArrayList;
@@ -71,10 +70,6 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
-/**
- * @autor Simeon
- * @since 3/11/2015
- */
 public abstract class MOTileEntityMachine extends MOTileEntity
 		implements IMOTileEntity, ISidedInventory, IUpgradeable, ITickable {
 	// TODO: do something with this hell inventory v1.0.0
@@ -135,7 +130,6 @@ public abstract class MOTileEntityMachine extends MOTileEntity
 			return;
 		} else {
 			activeState = getServerActive();
-			// System.out.println("state: " + activeState);
 			if (lastActive != activeState) {
 				forceSync();
 				onActiveChange();
@@ -145,13 +139,11 @@ public abstract class MOTileEntityMachine extends MOTileEntity
 		manageRedstoneState();
 		manageClientSync();
 		if (lastActive != isActive()) {
-			// System.out.println("!state: " + activeState);
 			onActiveChange();
 			lastActive = isActive();
 		}
 
 		components.stream().filter(component -> component instanceof ITickable).forEach(component -> {
-			// System.out.println("Components stream" + component);
 			try {
 				((ITickable) component).update();
 			} catch (Exception e) {
@@ -351,7 +343,6 @@ public abstract class MOTileEntityMachine extends MOTileEntity
 
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-		// System.out.println("Receiving Packet From Server");
 		NBTTagCompound syncData = pkt.getNbtCompound();
 		if (syncData != null) {
 			readCustomNBT(syncData, MachineNBTCategory.ALL_OPTS);
