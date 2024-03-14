@@ -31,10 +31,14 @@ import org.lwjgl.util.vector.Vector2f;
 import java.util.List;
 
 public class IonSniper extends EnergyWeapon {
-	public static final int RANGE = 96;
-	private static final int MAX_HEAT = 100;
-	private static final int MAX_USE_TIME = 512;
-	private static final int ENERGY_PER_SHOT = 3072;
+	public static int RANGE = 96;
+	public static int MAX_HEAT = 100;
+	public static int MAX_CAPACITY = 32000;
+	public static int BASE_DAMAGE = 21;
+	public static int SHOTSPEED = 8;
+	public static int BASE_SHOT_COOLDOWN = 30;
+	public static int MAX_USE_TIME = 512;
+	public static int ENERGY_PER_SHOT = 3072;
 
 	public IonSniper(String name) {
 		super(name, RANGE);
@@ -44,7 +48,7 @@ public class IonSniper extends EnergyWeapon {
 
 	@Override
 	protected int getCapacity() {
-		return 32000;
+		return MAX_CAPACITY;
 	}
 
 	@Override
@@ -75,7 +79,7 @@ public class IonSniper extends EnergyWeapon {
 
 	@Override
 	public float getWeaponBaseDamage(ItemStack weapon) {
-		return 21;
+		return BASE_DAMAGE;
 	}
 
 	@Override
@@ -95,12 +99,12 @@ public class IonSniper extends EnergyWeapon {
 
 	@Override
 	public float getShotSpeed(ItemStack weapon, EntityLivingBase shooter) {
-		return 8;
+		return SHOTSPEED;
 	}
 
 	@Override
 	public int getBaseShootCooldown(ItemStack weapon) {
-		return 30;
+		return BASE_SHOT_COOLDOWN;
 	}
 
 	@Override
