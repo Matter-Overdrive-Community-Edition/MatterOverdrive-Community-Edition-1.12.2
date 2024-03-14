@@ -294,7 +294,7 @@ public class DataPad extends MOBaseItem implements IBlockScanner {
 				return itemStack.getTagCompound().getBoolean("showGravWaves");
 			}
 		}
-		return true;
+		return false;
 	}
 
 	public boolean canScan(ItemStack itemStack, IBlockState state) {
