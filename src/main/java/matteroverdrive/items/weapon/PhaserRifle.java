@@ -35,11 +35,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PhaserRifle extends EnergyWeapon {
 
-	public static final int RANGE = 32;
-	private static final int HEAT_PER_SHOT = 20;
-	private static final int MAX_HEAT = 80;
-	private static final int MAX_USE_TIME = 512;
-	private static final int ENERGY_PER_SHOT = 1024;
+	public static int RANGE = 32;
+	public static int MAX_HEAT = 80;
+	public static int MAX_CAPACITY = 32000;
+	public static int BASE_DAMAGE = 8;
+	public static int SHOTSPEED = 4;
+	public static int BASE_SHOT_COOLDOWN = 11;
+	public static int MAX_USE_TIME = 512;
+	public static int ENERGY_PER_SHOT = 1024;
 
 	public PhaserRifle(String name) {
 		super(name, RANGE);
@@ -49,7 +52,7 @@ public class PhaserRifle extends EnergyWeapon {
 
 	@Override
 	protected int getCapacity() {
-		return 32000;
+		return MAX_CAPACITY;
 	}
 
 	@Override
@@ -138,7 +141,7 @@ public class PhaserRifle extends EnergyWeapon {
 
 	@Override
 	public int getBaseShootCooldown(ItemStack weapon) {
-		return 11;
+		return BASE_SHOT_COOLDOWN;
 	}
 
 	@Override
@@ -278,7 +281,7 @@ public class PhaserRifle extends EnergyWeapon {
 
 	@Override
 	public float getWeaponBaseDamage(ItemStack weapon) {
-		return 8;
+		return BASE_DAMAGE;
 	}
 
 	@Override
@@ -289,7 +292,7 @@ public class PhaserRifle extends EnergyWeapon {
 
 	@Override
 	public float getShotSpeed(ItemStack weapon, EntityLivingBase shooter) {
-		return 4;
+		return SHOTSPEED;
 	}
 
 	@Override

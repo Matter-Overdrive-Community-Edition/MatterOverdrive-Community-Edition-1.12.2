@@ -1,4 +1,3 @@
-
 package matteroverdrive.items.weapon;/* Created by Simeon on 10/17/2015. */
 
 import matteroverdrive.MatterOverdrive;
@@ -37,9 +36,15 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 public class OmniTool extends EnergyWeapon {
-	public static final int RANGE = 24;
-	private static final int MAX_USE_TIME = 240;
-	private static final int ENERGY_PER_SHOT = 512;
+	
+	public static int RANGE = 24;
+	public static int MAX_HEAT = 80;
+	public static int MAX_CAPACITY = 32000;
+	public static int BASE_DAMAGE = 7;
+	public static int SHOTSPEED = 3;
+	public static int BASE_SHOT_COOLDOWN = 18;
+	public static int MAX_USE_TIME = 240;
+	public static int ENERGY_PER_SHOT = 512;
 	private static final float DIG_POWER_MULTIPLY = 0.03f;
 	private static float BLOCK_DAMAGE, STEP_SOUND_COUNTER, LAST_BRAKE_TIME;
 	private static BlockPos CURRENT_BLOCK;
@@ -61,7 +66,7 @@ public class OmniTool extends EnergyWeapon {
 
 	@Override
 	protected int getCapacity() {
-		return 32000;
+		return MAX_CAPACITY;
 	}
 
 	@Override
@@ -257,12 +262,12 @@ public class OmniTool extends EnergyWeapon {
 
 	@Override
 	protected int getBaseMaxHeat(ItemStack item) {
-		return 80;
+		return MAX_HEAT;
 	}
 
 	@Override
 	public float getWeaponBaseDamage(ItemStack weapon) {
-		return 7;
+		return BASE_DAMAGE;
 	}
 
 	@Override
@@ -273,7 +278,7 @@ public class OmniTool extends EnergyWeapon {
 
 	@Override
 	public float getShotSpeed(ItemStack weapon, EntityLivingBase shooter) {
-		return 3;
+		return SHOTSPEED;
 	}
 
 	public boolean canDig(ItemStack itemStack, World world) {
@@ -386,7 +391,7 @@ public class OmniTool extends EnergyWeapon {
 
 	@Override
 	public int getBaseShootCooldown(ItemStack itemStack) {
-		return 18;
+		return BASE_SHOT_COOLDOWN;
 	}
 
 	@Override
@@ -403,7 +408,6 @@ public class OmniTool extends EnergyWeapon {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public WeaponSound getFireSound(ItemStack weapon, EntityLivingBase entity) {
-		// return Reference.MOD_ID + ":" +"omni_tool_hum";
 		return new WeaponSound(MatterOverdriveSounds.weaponsOmniToolHum, SoundCategory.PLAYERS, (float) entity.posX,
 				(float) entity.posY, (float) entity.posZ, itemRand.nextFloat() * 0.04f + 0.06f,
 				itemRand.nextFloat() * 0.1f + 0.95f);
