@@ -1,4 +1,3 @@
-
 package matteroverdrive.items.weapon;
 
 import matteroverdrive.api.inventory.IEnergyPack;
@@ -16,6 +15,7 @@ import java.util.List;
 
 public class EnergyPack extends MOBaseItem implements IEnergyPack {
 
+	public static int ENERGYPACKVALUE = 32000;
 	public EnergyPack(String name) {
 		super(name);
 	}
@@ -48,6 +48,6 @@ public class EnergyPack extends MOBaseItem implements IEnergyPack {
 
 	@Override
 	public int getEnergyAmount(ItemStack pack) {
-		return 32000;
+		return ENERGYPACKVALUE;
 	}
 }
