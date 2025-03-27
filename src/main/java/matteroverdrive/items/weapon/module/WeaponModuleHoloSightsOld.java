@@ -64,10 +64,6 @@ public class WeaponModuleHoloSightsOld extends WeaponModuleBase implements IWeap
 
 	@Override
 	public ResourceLocation getModelTexture(ItemStack module) {
-//        System.out.println("Getting texture for model texture with item damage of: " + module.getItemDamage());
-//
-//        return new ResourceLocation(Reference.PATH_ELEMENTS + String.format("holo_sight_%s.png", module.getItemDamage()));
-
 		return null;
 	}
 

@@ -71,7 +71,6 @@ public class GuiMatterScanner extends MOGuiBase {
 	protected void updateElementInformation() {
 		super.updateElementInformation();
 		if (refreshTimeTracker.hasDelayPassed(Minecraft.getMinecraft().world, REFRESH_DEPLAY)) {
-			// System.out.println("Refreshed");
 			updateSelected(scanner);
 		}
 	}

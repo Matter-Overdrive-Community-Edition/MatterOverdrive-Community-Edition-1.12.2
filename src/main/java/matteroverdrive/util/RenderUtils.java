@@ -170,9 +170,6 @@ public class RenderUtils {
 				break;
 			}
 		}
-
-		// System.out.println("Metadata " + metadata + "at [" + x +","+ y +","+ z +
-		// "]");
 	}
 
 	public static void rotateFromBlock(Matrix4f mat, IBlockAccess world, BlockPos pos) {

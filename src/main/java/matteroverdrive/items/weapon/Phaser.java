@@ -159,10 +159,6 @@ public class Phaser extends EnergyWeapon implements IWeapon {
 				if (WeaponHelper.hasStat(WeaponStats.FIRE_DAMAGE, item) && isKillMode(item)) {
 					el.setFire(Math.round(modifyStatFromModules(WeaponStats.FIRE_DAMAGE, item, 2)
 							* item.getTagCompound().getByte("power")));
-					//System.out.println("Fire time1:" + Math.round(modifyStatFromModules(WeaponStats.FIRE_DAMAGE, item, 1)
-					//		* item.getTagCompound().getByte("power")));
-					//System.out.println("Fire time:" + Math.round(modifyStatFromModules(WeaponStats.FIRE_DAMAGE, item, 0)
-					//		* item.getTagCompound().getByte("power")));
 				} else if (WeaponHelper.hasStat(WeaponStats.HEAL, item)) {
 					el.heal((WeaponHelper.modifyStat(WeaponStats.HEAL, item, 0)
 							* item.getTagCompound().getByte("power")));

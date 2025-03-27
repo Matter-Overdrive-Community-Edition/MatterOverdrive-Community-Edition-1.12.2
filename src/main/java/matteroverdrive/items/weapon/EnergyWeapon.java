@@ -138,7 +138,6 @@ public abstract class EnergyWeapon extends MOItemEnergyContainer implements IWea
 
 	private String addStatWithMultiplyInfo(String statName, Object value, double multiply, String units) {
 		String info = String.format("%s: %s%s", statName, TextFormatting.DARK_AQUA, value);
-//		System.out.println("statName: "+ statName + " Multiply: " + multiply);
 		if (!units.isEmpty()) {
 			info += " " + units;
 		}

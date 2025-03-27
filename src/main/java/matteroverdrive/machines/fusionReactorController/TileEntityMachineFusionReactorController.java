@@ -122,8 +122,6 @@ public class TileEntityMachineFusionReactorController extends MOTileEntityMachin
 			worldTickLast = getWorld().getTotalWorldTime();
 			super.update();
 			if (!world.isRemote) {
-				// System.out.println("Fusion Reactor Update in chunk that is loaded:" +
-				// world.getChunkFromBlocks(x,z).isChunkLoaded);
 				manageStructure();
 				manageEnergyGeneration();
 				manageEnergyExtract();
