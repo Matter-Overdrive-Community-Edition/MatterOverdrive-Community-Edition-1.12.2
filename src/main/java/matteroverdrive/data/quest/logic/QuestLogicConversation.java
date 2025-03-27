@@ -128,16 +128,9 @@ public class QuestLogicConversation extends AbstractQuestLogic {
 
 	public boolean isTarget(IDialogNpc npc) {
 		EntityLiving entity = npc.getEntity();
-		System.out.println("npcType2: " + npcType);
-		System.out.println("entity: " + entity);
-		System.out.println("newname check: " + EntityList.getKey(entity));
-		System.out.println("namedEntry : " + regex);
-
 		if (EntityList.getEntityString(entity).matches(regex)) {
-			System.out.println("false");
 			return npcType.equals(EntityList.getEntityString(entity));
 		}
-		System.out.println("true");
 		return npcType.equals(EntityList.getEntityString(entity));
 	}
 
