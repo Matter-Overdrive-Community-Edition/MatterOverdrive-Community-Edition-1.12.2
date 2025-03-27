@@ -15,6 +15,7 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.relauncher.Side;
 
 public class TickHandler {
@@ -49,6 +50,10 @@ public class TickHandler {
 	// Called when the server ticks. Usually 20 ticks a second.
 	@SubscribeEvent
 	public void onServerTick(TickEvent.ServerTickEvent event) {
+		if (event.side != Side.SERVER || event.phase != Phase.END) {
+		return;
+		}
+
 		playerEventHandler.onServerTick(event);
 
 		lastTickLength = (int) (System.nanoTime() - lastTickTime);
@@ -73,30 +78,28 @@ public class TickHandler {
 			worldStartFired = true;
 		}
 
-		if (event.side.isServer()) {
-			FMLCommonHandler.instance().getMinecraftServerInstance().profiler.startSection("MO WorldTick Tiles");
+		if (event.side == Side.SERVER && event.phase == Phase.END) {
+
 			matterNetworkTickHandler.onWorldTickPre(event.phase, event.world);
 			int tileEntityListSize = event.world.loadedTileEntityList.size();
-
 			for (int i = 0; i < tileEntityListSize; i++) {
 				try {
 					TileEntity tileEntity = event.world.loadedTileEntityList.get(i);
-					if (tileEntity instanceof IMOTickable) {
+					
 						if (tileEntity instanceof IMatterNetworkHandler) {
 							matterNetworkTickHandler.updateHandler((IMatterNetworkHandler) tileEntity, event.phase,
 									event.world);
 						} else {
+							if (tileEntity instanceof IMOTickable) {
 							((IMOTickable) tileEntity).onServerTick(event.phase, event.world);
 						}
-
+							return;
 					}
 				} catch (Throwable e) {
 					MOLog.log(Level.ERROR, e, "There was an Error while updating Matter Overdrive Tile Entities.");
 					return;
 				}
 			}
-			FMLCommonHandler.instance().getMinecraftServerInstance().profiler.endSection();
-
 			matterNetworkTickHandler.onWorldTickPost(event.phase, event.world);
 		}
 

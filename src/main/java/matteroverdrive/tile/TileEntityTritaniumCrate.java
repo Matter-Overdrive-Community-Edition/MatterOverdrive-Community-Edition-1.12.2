@@ -241,4 +241,10 @@ public class TileEntityTritaniumCrate extends MOTileEntity implements IInventory
 
 		nbt.setTag("inventory", invList);
 	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
 }

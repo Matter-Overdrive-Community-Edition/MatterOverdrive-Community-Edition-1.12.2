@@ -262,4 +262,10 @@ public class TileEntityNewTritaniumCrate extends MOTileEntity implements IInvent
 	public void setColor(int color) {
 		this.color = color;
 	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
 }

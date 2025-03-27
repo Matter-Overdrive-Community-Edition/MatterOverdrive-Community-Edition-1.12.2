@@ -25,6 +25,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -131,6 +132,9 @@ public class PlayerEventHandler {
 	}
 
 	public void onServerTick(TickEvent.ServerTickEvent event) {
+		if (event.side != Side.SERVER || event.phase != Phase.END) {
+			return;
+		}
 		if (MatterOverdrive.MATTER_REGISTRY.hasComplitedRegistration) {
 			for (int i = 0; i < MatterOverdrive.PLAYER_EVENT_HANDLER.players.size(); i++) {
 				MatterOverdrive.NETWORK.sendTo(new PacketUpdateMatterRegistry(MatterOverdrive.MATTER_REGISTRY),
