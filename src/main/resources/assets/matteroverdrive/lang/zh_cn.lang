@@ -111,7 +111,7 @@ item.matteroverdrive.upgrade.range.name=范围升级
 item.matteroverdrive.upgrade.power_storage.name=储能升级
 item.matteroverdrive.upgrade.hyper_speed.name=超速升级
 item.matteroverdrive.upgrade.matter_storage.name=仓储升级
-item.matteroverdrive.upgrade.muffler.name=消音器
+item.matteroverdrive.upgrade.muffler.name=静音升级
 
 ## Weapon Modules ##
 item.matteroverdrive.weapon_module_color.name=颜色模块
