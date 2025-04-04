@@ -149,7 +149,7 @@ public class MatterOverdriveBlocks {
 		solar_panel = register(new BlockSolarPanel(TRITANIUM, "solar_panel"));
 
 //		Gravitational Anomaly / Fusion Reactor
-		gravitational_anomaly = register(new BlockGravitationalAnomaly(Material.PORTAL, "gravitational_anomaly"));
+		gravitational_anomaly = register(new BlockGravitationalAnomaly(TRITANIUM, "gravitational_anomaly"));
 		gravitational_stabilizer = register(new BlockGravitationalStabilizer(TRITANIUM, "gravitational_stabilizer"));
 		fusion_reactor_controller = register(new BlockFusionReactorController(TRITANIUM, "fusion_reactor_controller"));
 		fusion_reactor_coil = register(new BlockFusionReactorCoil(TRITANIUM, "fusion_reactor_coil"));
