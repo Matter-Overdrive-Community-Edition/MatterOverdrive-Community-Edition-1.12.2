@@ -93,7 +93,6 @@ public class TickHandler {
 							if (tileEntity instanceof IMOTickable) {
 							((IMOTickable) tileEntity).onServerTick(event.phase, event.world);
 						}
-							return;
 					}
 				} catch (Throwable e) {
 					MOLog.log(Level.ERROR, e, "There was an Error while updating Matter Overdrive Tile Entities.");
