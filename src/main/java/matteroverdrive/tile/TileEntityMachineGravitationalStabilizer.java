@@ -199,7 +199,7 @@ public class TileEntityMachineGravitationalStabilizer extends MOTileEntityMachin
 			return;
 		}
 
-		if (phase.equals(TickEvent.Phase.START) && getRedstoneActive()) {
+		if (phase.equals(TickEvent.Phase.END) && getRedstoneActive()) {
 			manageAnomalies(world);
 		}
 	}
