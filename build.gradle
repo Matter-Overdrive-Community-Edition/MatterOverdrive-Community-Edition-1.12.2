@@ -100,6 +100,7 @@ repositories {
 
 dependencies {
     provided "team.chisel.ctm:CTM:MC1.12-0.2.3.12"
+    provided "li.cil.oc:OpenComputers:${OC_version}"
     deobfProvided "mezz.jei:jei_${mc_version}:${jei_version}:api"
     runtime "mezz.jei:jei_${mc_version}:${jei_version}"
     compile group: 'org.projectlombok', name: 'lombok', version: '1.16.20'
