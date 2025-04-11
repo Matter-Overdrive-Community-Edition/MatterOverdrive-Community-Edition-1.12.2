@@ -50,14 +50,12 @@ public class TickHandler {
 	// Called when the server ticks. Usually 20 ticks a second.
 	@SubscribeEvent
 	public void onServerTick(TickEvent.ServerTickEvent event) {
-		if (event.side != Side.SERVER || event.phase != Phase.END) {
-		return;
-		}
-
+		if (event.side == Side.SERVER && event.phase == Phase.END) {
 		playerEventHandler.onServerTick(event);
 
 		lastTickLength = (int) (System.nanoTime() - lastTickTime);
 		lastTickTime = System.nanoTime();
+	}
 	}
 
 	public void onServerStart(FMLServerStartedEvent event) {
