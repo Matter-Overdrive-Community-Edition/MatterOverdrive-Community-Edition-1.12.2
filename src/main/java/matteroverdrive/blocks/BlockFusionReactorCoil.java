@@ -21,11 +21,6 @@ public class BlockFusionReactorCoil extends MOBlock implements IDismantleable {
 		this.setHarvestLevel("pickaxe", 2);
 	}
 
-	/*
-	 * @SideOnly(Side.CLIENT) public IIcon getIcon(int p_149691_1_, int p_149691_2_)
-	 * { return MatterOverdriveIcons.YellowStripes; }
-	 */
-
 	@Override
 	public ArrayList<ItemStack> dismantleBlock(EntityPlayer player, World world, BlockPos pos, boolean returnDrops) {
 		if (!returnDrops) {
