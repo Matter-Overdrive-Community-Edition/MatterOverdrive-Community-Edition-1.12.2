@@ -24,8 +24,20 @@ public class MOAdvFusion extends MOWorldGenBuilding {
 		addMapping(0xffa200, MatterOverdrive.BLOCKS.machine_hull);
 		addMapping(0xfff600, MatterOverdrive.BLOCKS.fusion_reactor_controller);
 		addMapping(0xaccb00, MatterOverdrive.BLOCKS.fusion_reactor_controller);
+		//bottom
+		addMapping(0xec1c24, MatterOverdrive.BLOCKS.gravitational_stabilizer);
+		//north
+		addMapping(0xb97a56, MatterOverdrive.BLOCKS.gravitational_stabilizer);
+		//east
+		addMapping(0xb83dba, MatterOverdrive.BLOCKS.gravitational_stabilizer);
+		//south
+		addMapping(0x0ed145, MatterOverdrive.BLOCKS.gravitational_stabilizer);
+		//west
+		addMapping(0xffaec8, MatterOverdrive.BLOCKS.gravitational_stabilizer);
+		//top
+		addMapping(0xffca18, MatterOverdrive.BLOCKS.gravitational_stabilizer);
+		
 		addMapping(0x80b956, MatterOverdrive.BLOCKS.fusion_reactor_coil);
-		// addMapping(0xec1c24, Blocks.AIR);
 		addMapping(0xe400ff, MatterOverdrive.BLOCKS.gravitational_anomaly);
 	}
 
@@ -69,6 +81,21 @@ public class MOAdvFusion extends MOWorldGenBuilding {
 				world.setBlockState(pos, state.withProperty(MOBlock.PROPERTY_DIRECTION, EnumFacing.NORTH), 3);
 			} else if (colorsMatch(color, 0xaccb00)) {
 				world.setBlockState(pos, state.withProperty(MOBlock.PROPERTY_DIRECTION, EnumFacing.UP), 3);
+			}
+		}
+		if (state.getBlock() == MatterOverdrive.BLOCKS.gravitational_stabilizer) {
+			if (colorsMatch(color, 0xffca18)) {
+				world.setBlockState(pos, state.withProperty(MOBlock.PROPERTY_DIRECTION, EnumFacing.UP), 3);
+			} else if (colorsMatch(color, 0xec1c24)) {
+				world.setBlockState(pos, state.withProperty(MOBlock.PROPERTY_DIRECTION, EnumFacing.DOWN), 3);
+			} else if (colorsMatch(color, 0xb97a56)) {
+				world.setBlockState(pos, state.withProperty(MOBlock.PROPERTY_DIRECTION, EnumFacing.SOUTH), 3);
+			} else if (colorsMatch(color, 0xb83dba)) {
+				world.setBlockState(pos, state.withProperty(MOBlock.PROPERTY_DIRECTION, EnumFacing.WEST), 3);
+			} else if (colorsMatch(color, 0x0ed145)) {
+				world.setBlockState(pos, state.withProperty(MOBlock.PROPERTY_DIRECTION, EnumFacing.NORTH), 3);
+			} else if (colorsMatch(color, 0xffaec8)) {
+				world.setBlockState(pos, state.withProperty(MOBlock.PROPERTY_DIRECTION, EnumFacing.EAST), 3);
 			}
 		}
 	}
