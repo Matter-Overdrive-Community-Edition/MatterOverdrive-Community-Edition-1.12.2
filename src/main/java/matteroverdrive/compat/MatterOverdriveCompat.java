@@ -6,6 +6,7 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 
 import matteroverdrive.compat.modules.CompatTConstruct;
+import matteroverdrive.compat.modules.computercraft.CompatComputerCraft;
 import matteroverdrive.compat.modules.waila.CompatWaila;
 import matteroverdrive.util.MOLog;
 import net.minecraftforge.fml.common.Loader;
@@ -25,6 +26,7 @@ public class MatterOverdriveCompat {
 	// Add additional modules that need to run on the Server and/or Client here
 	public static void registerModules() {
 		register(CompatTConstruct.class);
+		register(CompatComputerCraft.class);
 	}
 
 	// Add additional modules that need to run ONLY on the Client

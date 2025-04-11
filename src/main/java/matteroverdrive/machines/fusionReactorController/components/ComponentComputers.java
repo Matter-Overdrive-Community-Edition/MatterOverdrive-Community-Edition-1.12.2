@@ -8,15 +8,22 @@ import matteroverdrive.machines.MachineComponentAbstract;
 import matteroverdrive.machines.MachineNBTCategory;
 import matteroverdrive.machines.events.MachineEvent;
 import matteroverdrive.machines.fusionReactorController.TileEntityMachineFusionReactorController;
+import dan200.computercraft.api.ComputerCraftAPI;
+import dan200.computercraft.api.lua.ILuaContext;
+import dan200.computercraft.api.lua.LuaException;
+import dan200.computercraft.api.peripheral.IComputerAccess;
+import dan200.computercraft.api.peripheral.IPeripheral;
+import dan200.computercraft.api.peripheral.IPeripheralProvider;
+
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fml.common.Optional;
 
 import java.util.EnumSet;
 
-/*@Optional.InterfaceList({
-		@Optional.Interface(modid = "ComputerCraft", iface = "dan200.computercraft.api.peripheral.IPeripheral")
-})*/
-public class ComponentComputers extends MachineComponentAbstract<TileEntityMachineFusionReactorController> // implements
-																											// IPeripheral
+@Optional.InterfaceList({
+		@Optional.Interface(modid = "computercraft", iface = "dan200.computercraft.api.peripheral.IPeripheralProvider")
+})
+public class ComponentComputers extends MachineComponentAbstract<TileEntityMachineFusionReactorController>  implements IPeripheral
 {
 
 	private String[] methodNames = new String[] { "getStatus", "isValid", "getEnergyGenerated", "getMatterUsed",
@@ -71,62 +78,60 @@ public class ComponentComputers extends MachineComponentAbstract<TileEntityMachi
 				machine.getCapability(MatterOverdriveCapabilities.MATTER_HANDLER, null).getMatterStored() };
 	}
 
-	/*
-	 * //region ComputerCraft
-	 * 
-	 * @Override
-	 * 
-	 * @Optional.Method(modid = "ComputerCraft") public String getType() { return
-	 * peripheralName; }
-	 * 
-	 * @Override
-	 * 
-	 * @Optional.Method(modid = "ComputerCraft") public String[] getMethodNames() {
-	 * return methodNames; }
-	 * 
-	 * @Override
-	 * 
-	 * @Optional.Method(modid = "ComputerCraft") public Object[]
-	 * callMethod(IComputerAccess computer, ILuaContext context, int method,
-	 * Object[] arguments) throws LuaException, InterruptedException { try { return
-	 * callMethod(method, arguments); } catch (Exception e) { throw new
-	 * LuaException(e.getMessage()); } }
-	 * 
-	 * @Override
-	 * 
-	 * @Optional.Method(modid = "ComputerCraft") public void attach(IComputerAccess
-	 * computer) {
-	 * 
-	 * }
-	 * 
-	 * @Override
-	 * 
-	 * @Optional.Method(modid = "ComputerCraft") public void detach(IComputerAccess
-	 * computer) {
-	 * 
-	 * }
-	 * 
-	 * @Override
-	 * 
-	 * @Optional.Method(modid = "ComputerCraft") public boolean equals(IPeripheral
-	 * other) { return false; }
-	 * 
-	 * 
-	 * 
-	 * @Optional.Method(modid = "OpenComputers") public String[] methods() { return
-	 * methodNames; }
-	 * 
-	 * @Optional.Method(modid = "OpenComputers") public Object[] invoke(String
-	 * method, Context context, Arguments args) throws Exception { int methodId =
-	 * Arrays.asList(methodNames).indexOf(method);
-	 * 
-	 * if (methodId == -1) { throw new RuntimeException("The method " + method +
-	 * " does not exist"); }
-	 * 
-	 * return callMethod(methodId, args.toArray()); }
-	 * 
-	 * @Optional.Method(modid = "OpenComputers") public String getComponentName() {
-	 * return peripheralName; }
+	 //region ComputerCraft
+	  
+	  @Override
+	  
+	  @Optional.Method(modid = "computercraft") public String getType() { return
+	  peripheralName; }
+	 
+	  @Override
+	  
+	  @Optional.Method(modid = "computercraft") public String[] getMethodNames() {
+	  return methodNames; }
+	  
+	  @Override
+	  
+	  @Optional.Method(modid = "computercraft") public Object[]
+	  callMethod(IComputerAccess computer, ILuaContext context, int method,
+	  Object[] arguments) throws LuaException, InterruptedException { try { return
+	  callMethod(method, arguments); } catch (Exception e) { throw new
+	  LuaException(e.getMessage()); } }
+	  
+	  @Override
+	  
+	  @Optional.Method(modid = "computercraft") public void attach(IComputerAccess
+	  computer) {
+	  
+	  }
+	  
+	  @Override
+	  
+	  @Optional.Method(modid = "computercraft") public void detach(IComputerAccess
+	  computer) {
+	  
+	  }
+	  
+	  @Override
+	  
+	  @Optional.Method(modid = "computercraft") public boolean equals(IPeripheral
+	  other) { return false; }
+	  
+	  /*	  
+	  @Optional.Method(modid = "OpenComputers") public String[] methods() { return
+	  methodNames; }
+	  
+	  @Optional.Method(modid = "OpenComputers") public Object[] invoke(String
+	  method, Context context, Arguments args) throws Exception { int methodId =
+	  Arrays.asList(methodNames).indexOf(method);
+	  
+	  if (methodId == -1) { throw new RuntimeException("The method " + method +
+	  " does not exist"); }
+	  
+	  return callMethod(methodId, args.toArray()); }
+	  
+	  @Optional.Method(modid = "OpenComputers") public String getComponentName() {
+	  return peripheralName; }
 	 */
 
 	@Override

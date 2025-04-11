@@ -17,6 +17,13 @@ import matteroverdrive.machines.transporter.components.ComponentComputers;
 import matteroverdrive.network.packet.client.PacketSyncTransportProgress;
 import matteroverdrive.tile.MOTileEntityMachineMatter;
 import matteroverdrive.util.math.MOMathHelper;
+import dan200.computercraft.api.ComputerCraftAPI;
+import dan200.computercraft.api.filesystem.IMount;
+import dan200.computercraft.api.lua.ILuaContext;
+import dan200.computercraft.api.lua.LuaException;
+import dan200.computercraft.api.peripheral.IComputerAccess;
+import dan200.computercraft.api.peripheral.IPeripheral;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -34,6 +41,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.Optional;
 import org.lwjgl.util.vector.Vector3f;
 
 import javax.annotation.Nonnull;
@@ -42,14 +50,14 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
-/*@Optional.InterfaceList({
-		@Optional.Interface(modid = "ComputerCraft", iface = "dan200.computercraft.api.peripheral.IPeripheral"),
-		@Optional.Interface(modid = "OpenComputers", iface = "li.cil.oc.api.network.SimpleComponent"),
-		@Optional.Interface(modid = "OpenComputers", iface = "li.cil.oc.api.network.ManagedPeripheral")
-})*/
-public class TileEntityMachineTransporter extends MOTileEntityMachineMatter implements ITransportList// ,
+@Optional.InterfaceList({
+		@Optional.Interface(modid = "computercraft", iface = "dan200.computercraft.api.peripheral.IPeripheral"),
+		//@Optional.Interface(modid = "OpenComputers", iface = "li.cil.oc.api.network.SimpleComponent"),
+		//@Optional.Interface(modid = "OpenComputers", iface = "li.cil.oc.api.network.ManagedPeripheral")
+})
+public class TileEntityMachineTransporter extends MOTileEntityMachineMatter implements ITransportList ,
 																										// IWailaBodyProvider,
-																										// IPeripheral,
+																										 IPeripheral
 																										// SimpleComponent,
 																										// ManagedPeripheral
 {
@@ -388,43 +396,43 @@ public class TileEntityMachineTransporter extends MOTileEntityMachineMatter impl
 		return super.getCapability(capability, facing);
 	}
 
-	/*
-	 * //region All Computers
-	 * 
-	 * @Override
-	 * 
-	 * @Optional.Method(modid = "ComputerCraft") public String getType() { return
-	 * computerComponent.getType(); }
-	 * 
-	 * @Override
-	 * 
-	 * @Optional.Method(modid = "ComputerCraft") public String[] getMethodNames() {
-	 * return computerComponent.getMethodNames(); }
-	 * 
-	 * @Override
-	 * 
-	 * @Optional.Method(modid = "ComputerCraft") public Object[]
-	 * callMethod(IComputerAccess computer, ILuaContext context, int method,
-	 * Object[] arguments) throws LuaException, InterruptedException { return
-	 * computerComponent.callMethod(computer,context,method,arguments); }
-	 * 
-	 * @Override
-	 * 
-	 * @Optional.Method(modid = "ComputerCraft") public void attach(IComputerAccess
-	 * computer) { computerComponent.attach(computer); }
-	 * 
-	 * @Override
-	 * 
-	 * @Optional.Method(modid = "ComputerCraft") public void detach(IComputerAccess
-	 * computer) { computerComponent.attach(computer); }
-	 * 
-	 * @Override
-	 * 
-	 * @Optional.Method(modid = "ComputerCraft") public boolean equals(IPeripheral
-	 * other) { // Does this mean if it's the same type or if they're the same one?
-	 * return computerComponent.equals(other); }
-	 * 
-	 * 
+	
+	  //region All Computers
+	  
+	  @Override
+	  
+	  @Optional.Method(modid = "computercraft") public String getType() { return
+	  computerComponent.getType(); }
+	  
+	  @Override
+	  
+	  @Optional.Method(modid = "computercraft") public String[] getMethodNames() {
+	  return computerComponent.getMethodNames(); }
+	  
+	  @Override
+	  
+	  @Optional.Method(modid = "computercraft") public Object[]
+	  callMethod(IComputerAccess computer, ILuaContext context, int method,
+	  Object[] arguments) throws LuaException, InterruptedException { return
+	  computerComponent.callMethod(computer,context,method,arguments); }
+	  
+	  @Override
+	  
+	  @Optional.Method(modid = "computercraft") public void attach(IComputerAccess
+	  computer) { computerComponent.attach(computer); }
+	  
+	  @Override
+	  
+	  @Optional.Method(modid = "computercraft") public void detach(IComputerAccess
+	  computer) { computerComponent.attach(computer); }
+	  
+	  @Override
+	  
+	  @Optional.Method(modid = "computercraft") public boolean equals(IPeripheral
+	  other) { // Does this mean if it's the same type or if they're the same one?
+	  return computerComponent.equals(other); }
+	  
+	 /* 
 	 * @Override
 	 * 
 	 * @Optional.Method(modid = "OpenComputers") public String getComponentName() {
