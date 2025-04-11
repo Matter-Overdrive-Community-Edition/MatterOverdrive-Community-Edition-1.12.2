@@ -28,14 +28,6 @@ public class BlockFusionReactorController extends MOBlockMachine<TileEntityMachi
 		setRotationType(MOBlockHelper.RotationType.SIX_WAY);
 	}
 
-	/*
-	 * @SideOnly(Side.CLIENT) public IIcon getIcon(int side, int meta) { if (side ==
-	 * meta) { return MatterOverdriveIcons.Monitor_back; } else if (side ==
-	 * MOBlockHelper.getRightSide(meta) || side == MOBlockHelper.getLeftSide(meta))
-	 * { return MatterOverdrive.blocks.decomposer.iconTop; } else { return
-	 * MatterOverdriveIcons.YellowStripes; } }
-	 */
-
 	@Override
 	public Class<TileEntityMachineFusionReactorController> getTileEntityClass() {
 		return TileEntityMachineFusionReactorController.class;
