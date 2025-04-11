@@ -8,22 +8,23 @@ import matteroverdrive.machines.MachineComponentAbstract;
 import matteroverdrive.machines.MachineNBTCategory;
 import matteroverdrive.machines.events.MachineEvent;
 import matteroverdrive.machines.fusionReactorController.TileEntityMachineFusionReactorController;
-import dan200.computercraft.api.ComputerCraftAPI;
 import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
-import dan200.computercraft.api.peripheral.IPeripheralProvider;
-
+import li.cil.oc.api.machine.Arguments;
+import li.cil.oc.api.machine.Context;
+import li.cil.oc.api.network.SimpleComponent;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.Optional;
 
+import java.util.Arrays;
 import java.util.EnumSet;
 
 @Optional.InterfaceList({
 		@Optional.Interface(modid = "computercraft", iface = "dan200.computercraft.api.peripheral.IPeripheralProvider")
 })
-public class ComponentComputers extends MachineComponentAbstract<TileEntityMachineFusionReactorController>  implements IPeripheral
+public class ComponentComputers extends MachineComponentAbstract<TileEntityMachineFusionReactorController>  implements IPeripheral, SimpleComponent
 {
 
 	private String[] methodNames = new String[] { "getStatus", "isValid", "getEnergyGenerated", "getMatterUsed",
@@ -116,12 +117,11 @@ public class ComponentComputers extends MachineComponentAbstract<TileEntityMachi
 	  
 	  @Optional.Method(modid = "computercraft") public boolean equals(IPeripheral
 	  other) { return false; }
-	  
-	  /*	  
-	  @Optional.Method(modid = "OpenComputers") public String[] methods() { return
+	  	  
+	  @Optional.Method(modid = "opencomputers") public String[] methods() { return
 	  methodNames; }
 	  
-	  @Optional.Method(modid = "OpenComputers") public Object[] invoke(String
+	  @Optional.Method(modid = "opencomputers") public Object[] invoke(String
 	  method, Context context, Arguments args) throws Exception { int methodId =
 	  Arrays.asList(methodNames).indexOf(method);
 	  
@@ -130,9 +130,8 @@ public class ComponentComputers extends MachineComponentAbstract<TileEntityMachi
 	  
 	  return callMethod(methodId, args.toArray()); }
 	  
-	  @Optional.Method(modid = "OpenComputers") public String getComponentName() {
+	  @Optional.Method(modid = "opencomputers") public String getComponentName() {
 	  return peripheralName; }
-	 */
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt, EnumSet<MachineNBTCategory> categories) {

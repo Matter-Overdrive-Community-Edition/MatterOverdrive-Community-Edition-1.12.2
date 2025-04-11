@@ -2,6 +2,7 @@
 package matteroverdrive.machines.transporter.components;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashMap;
 
@@ -9,6 +10,9 @@ import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
+import li.cil.oc.api.machine.Arguments;
+import li.cil.oc.api.machine.Context;
+import li.cil.oc.api.network.SimpleComponent;
 import matteroverdrive.Reference;
 import matteroverdrive.api.inventory.UpgradeTypes;
 import matteroverdrive.api.transport.TransportLocation;
@@ -25,9 +29,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 
 @Optional.InterfaceList({
-		@Optional.Interface(modid = "computercraft", iface = "dan200.computercraft.api.peripheral.IPeripheral"),
+		@Optional.Interface(modid = "computercraft", iface = "dan200.computercraft.api.peripheral.IPeripheral")
 })
-public class ComponentComputers extends MachineComponentAbstract<TileEntityMachineTransporter> implements IPeripheral
+public class ComponentComputers extends MachineComponentAbstract<TileEntityMachineTransporter> implements IPeripheral, SimpleComponent
 {
 	
 	  private static String[] methodNames = new String[] { "getLocations",
@@ -231,24 +235,22 @@ public class ComponentComputers extends MachineComponentAbstract<TileEntityMachi
 		  
 		  @Optional.Method(modid = "computercraft") public boolean equals(IPeripheral
 		  other) { return false; }
-		 
 		  
-		 /* 
-		 * @Optional.Method(modid = "OpenComputers") public String[] methods() { return
-		 * methodNames; }
-		 * 
-		 * @Optional.Method(modid = "OpenComputers") public Object[] invoke(String
-		 * method, Context context, Arguments args) throws Exception { int methodId =
-		 * Arrays.asList(methodNames).indexOf(method);
-		 * 
-		 * if (methodId == -1) { throw new RuntimeException("The method " + method +
-		 * " does not exist"); }
-		 * 
-		 * return callMethod(methodId, args.toArray()); }
-		 * 
-		 * @Optional.Method(modid = "OpenComputers") public String getComponentName() {
-		 * return peripheralName; }
-		 */
+		  @Optional.Method(modid = "opencomputers") public String[] methods() { return
+		  methodNames; }
+		  
+		  @Optional.Method(modid = "opencomputers") public Object[] invoke(String
+		  method, Context context, Arguments args) throws Exception { int methodId =
+		  Arrays.asList(methodNames).indexOf(method);
+		  
+		  if (methodId == -1) { throw new RuntimeException("The method " + method +
+		  " does not exist"); }
+		  
+		  return callMethod(methodId, args.toArray()); }
+		  
+		  @Optional.Method(modid = "opencomputers") public String getComponentName() {
+		  return peripheralName; }
+		 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt, EnumSet<MachineNBTCategory> categories) {
 

@@ -28,7 +28,11 @@ import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
-
+import li.cil.oc.api.machine.Arguments;
+import li.cil.oc.api.machine.Context;
+import li.cil.oc.api.network.ManagedPeripheral;
+import li.cil.oc.api.network.SidedComponent;
+import li.cil.oc.api.network.SimpleComponent;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -47,13 +51,18 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.fml.common.Optional;
+import li.cil.oc.api.Network;
+import li.cil.oc.api.network.Visibility;
+import li.cil.oc.api.prefab.AbstractManagedEnvironment;
 
 @Optional.InterfaceList({
 		@Optional.Interface(modid = "computercraft", iface = "dan200.computercraft.api.peripheral.IPeripheral"),
-		//@Optional.Interface(modid = "OpenComputers", iface = "li.cil.oc.api.network.SimpleComponent"),
-		//@Optional.Interface(modid = "OpenComputers", iface = "li.cil.oc.api.network.ManagedPeripheral")
+        @Optional.Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "opencomputers"),
+        @Optional.Interface(iface = "li.cil.oc.api.network.SidedComponent", modid = "opencomputers"),
+        @Optional.Interface(iface = "li.cil.oc.api.network.ManagedPeripheral", modid = "opencomputers")
 })
-public class TileEntityMachineFusionReactorController extends MOTileEntityMachineMatter implements IPeripheral {
+@SimpleComponent.SkipInjection
+public class TileEntityMachineFusionReactorController extends MOTileEntityMachineMatter implements IPeripheral, SimpleComponent, SidedComponent, ManagedPeripheral {
 	public static final int[] positions = new int[] { 0, 5, 1, 0, 2, 0, 3, 1, 4, 2, 5, 3, 5, 4, 5, 5, 5, 6, 5, 7, 4, 8,
 			3, 9, 2, 10, 1, 10, 0, 10, -1, 10, -2, 10, -3, 9, -4, 8, -5, 7, -5, 6, -5, 5, -5, 4, -5, 3, -4, 2, -3, 1,
 			-2, 0, -1, 0 };
@@ -489,24 +498,29 @@ public class TileEntityMachineFusionReactorController extends MOTileEntityMachin
 	  @Optional.Method(modid = "computercraft") public boolean equals(IPeripheral
 	  other) { return componentComputers.equals(other); }
 	  
-	  /*
-	 * @Override
-	 * 
-	 * @Optional.Method(modid = "OpenComputers") public String getComponentName() {
-	 * return componentComputers.getComponentName(); }
-	 * 
-	 * @Override
-	 * 
-	 * @Optional.Method(modid = "OpenComputers") public String[] methods() { return
-	 * componentComputers.methods(); }
-	 * 
-	 * @Override
-	 * 
-	 * @Optional.Method(modid = "OpenComputers") public Object[] invoke(String
-	 * method, Context context, Arguments args) throws Exception { return
-	 * componentComputers.invoke(method,context,args); }
-	 */
+	  //endregion
 
+	  //region OpenComputers
+	  @Override
+	  
+	  @Optional.Method(modid = "opencomputers") public String getComponentName() {
+	  return componentComputers.getComponentName(); }
+	  
+	  @Override
+	  
+	  @Optional.Method(modid = "opencomputers") public String[] methods() { return
+	  componentComputers.getMethodNames(); }
+	  
+	  @Override
+	  
+		@Optional.Method(modid = "OpenComputers") public Object[] invoke(String
+				  method, Context context, Arguments args) throws Exception { return
+				  componentComputers.invoke(method,context,args); }
+
+		@Override
+		public boolean canConnectNode(EnumFacing side) {
+	            return true;
+	}
 	public static enum MonitorInfo implements IStringSerializable {
 		INVALID_STRUCTURE, NEED_COILS, INVALID_MATERIALS, NO_ANOMALY, ANOMALY_TOO_FAR, OK;
 
