@@ -47,12 +47,14 @@ public class BlockDecorativeColored extends BlockDecorative implements OreDictIt
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack itemstack, @Nullable World worldIn, List<String> infos, ITooltipFlag flagIn) {
 		if (itemstack != null) {
+			//if (!infos.isEmpty()) {
 			String name = infos.get(0);
 			name = MOStringHelper.translateToLocal(EnumDyeColor
 					.byDyeDamage(MathHelper.clamp(itemstack.getItemDamage(), 0, ItemDye.DYE_COLORS.length - 1))
 					.getTranslationKey() + " " + name);
 			infos.set(0, name);
-		}
+		//}
+	}
 	}
 
 	@Override
