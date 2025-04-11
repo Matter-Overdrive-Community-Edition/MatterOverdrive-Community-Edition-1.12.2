@@ -3,12 +3,8 @@ package matteroverdrive.data.transport;
 
 import matteroverdrive.api.transport.IGridNetwork;
 import matteroverdrive.handler.matter_network.FluidNetworkHandler;
-import net.minecraftforge.fluids.Fluid;
 
 public class FluidPipeNetwork extends AbstractGridNetwork<IFluidPipe> {
-	private Fluid fluidType;
-	private int fluidReqiest;
-
 	public FluidPipeNetwork(FluidNetworkHandler networkHandler) {
 		super(networkHandler, IFluidPipe.class);
 	}
