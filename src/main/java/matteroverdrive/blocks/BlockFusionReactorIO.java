@@ -1,6 +1,7 @@
 
 package matteroverdrive.blocks;
 
+import matteroverdrive.api.wrench.IDismantleable;
 import matteroverdrive.blocks.includes.MOBlockMachine;
 import matteroverdrive.tile.TileEntityFusionReactorPart;
 import net.minecraft.block.material.Material;
@@ -10,7 +11,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class BlockFusionReactorIO extends MOBlockMachine<TileEntityFusionReactorPart> {
+public class BlockFusionReactorIO extends MOBlockMachine<TileEntityFusionReactorPart> implements IDismantleable {
 	public BlockFusionReactorIO(Material material, String name) {
 		super(material, name);
 		setHardness(30.0F);
