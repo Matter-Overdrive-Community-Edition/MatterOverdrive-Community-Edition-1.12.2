@@ -12,7 +12,6 @@ import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Context;
-import li.cil.oc.api.network.SimpleComponent;
 import matteroverdrive.Reference;
 import matteroverdrive.api.inventory.UpgradeTypes;
 import matteroverdrive.api.transport.TransportLocation;
@@ -31,7 +30,7 @@ import net.minecraft.util.math.BlockPos;
 @Optional.InterfaceList({
 		@Optional.Interface(modid = "computercraft", iface = "dan200.computercraft.api.peripheral.IPeripheral")
 })
-public class ComponentComputers extends MachineComponentAbstract<TileEntityMachineTransporter> implements IPeripheral, SimpleComponent
+public class ComponentComputers extends MachineComponentAbstract<TileEntityMachineTransporter> implements IPeripheral
 {
 	
 	  private static String[] methodNames = new String[] { "getLocations",

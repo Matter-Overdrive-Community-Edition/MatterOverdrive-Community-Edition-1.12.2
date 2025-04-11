@@ -14,7 +14,6 @@ import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Context;
-import li.cil.oc.api.network.SimpleComponent;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.Optional;
 
@@ -24,7 +23,7 @@ import java.util.EnumSet;
 @Optional.InterfaceList({
 		@Optional.Interface(modid = "computercraft", iface = "dan200.computercraft.api.peripheral.IPeripheralProvider")
 })
-public class ComponentComputers extends MachineComponentAbstract<TileEntityMachineFusionReactorController>  implements IPeripheral, SimpleComponent
+public class ComponentComputers extends MachineComponentAbstract<TileEntityMachineFusionReactorController>  implements IPeripheral
 {
 
 	private String[] methodNames = new String[] { "getStatus", "isValid", "getEnergyGenerated", "getMatterUsed",

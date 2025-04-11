@@ -22,10 +22,9 @@ import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import li.cil.oc.api.machine.Arguments;
-import li.cil.oc.api.network.ManagedPeripheral;
-import li.cil.oc.api.network.SidedComponent;
-import li.cil.oc.api.network.SimpleComponent;
 import li.cil.oc.api.machine.Context;
+import li.cil.oc.api.network.ManagedPeripheral;
+import li.cil.oc.api.network.SimpleComponent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -56,12 +55,11 @@ import java.util.List;
 @Optional.InterfaceList({
 		@Optional.Interface(modid = "computercraft", iface = "dan200.computercraft.api.peripheral.IPeripheral"),
             @Optional.Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "opencomputers"),
-            @Optional.Interface(iface = "li.cil.oc.api.network.SidedComponent", modid = "opencomputers"),
             @Optional.Interface(iface = "li.cil.oc.api.network.ManagedPeripheral", modid = "opencomputers")
     })
     @SimpleComponent.SkipInjection
 public class TileEntityMachineTransporter extends MOTileEntityMachineMatter
-		implements ITransportList, IPeripheral, SimpleComponent, SidedComponent, ManagedPeripheral {
+		implements ITransportList, IPeripheral, SimpleComponent, ManagedPeripheral {
 	public static int MATTER_PER_TRANSPORT = 25;
 	public static final int MAX_ENTITIES_PER_TRANSPORT = 3;
 	public static final int TRANSPORT_TIME = 70;
@@ -461,9 +459,4 @@ public class TileEntityMachineTransporter extends MOTileEntityMachineMatter
 	@Optional.Method(modid = "OpenComputers") public Object[] invoke(String
 			  method, Context context, Arguments args) throws Exception { return
 			  computerComponent.invoke(method,context,args); }
-
-	@Override
-	public boolean canConnectNode(EnumFacing side) {
-            return true;
-}
 }

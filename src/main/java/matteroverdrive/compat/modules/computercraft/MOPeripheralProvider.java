@@ -25,12 +25,10 @@ public class MOPeripheralProvider implements IPeripheralProvider
 
 		if (tileEntity instanceof TileEntityMachineTransporter)
 		{
-			System.out.println("TileEntityMachineTransporter");
 			return (IPeripheral)tileEntity;
 		}
 		else if (tileEntity instanceof TileEntityMachineFusionReactorController)
 		{
-			System.out.println("TileEntityMachineFusionReactorController");
 			return (IPeripheral)tileEntity;
 		}
 
