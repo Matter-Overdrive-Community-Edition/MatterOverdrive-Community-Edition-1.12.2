@@ -139,30 +139,6 @@ public class TileEntityMatterPipe extends TileEntityPipe implements IFluidPipe {
 
     }
 
-//	@Override
-//	public int getMatterStored()
-//	{
-//		return storage.getMatterStored();
-//	}
-//
-//	@Override
-//	public int getCapacity()
-//	{
-//		return storage.getCapacity();
-//	}
-//
-//	@Override
-//	public int receiveMatter(int amount, boolean simulate)
-//	{
-//		return storage.receiveMatter(amount, simulate);
-//	}
-//
-//	@Override
-//	public int extractMatter(int amount, boolean simulate)
-//	{
-//		return storage.extractMatter(amount, simulate);
-//	}
-
     @Override
     public void onPlaced(World world, EntityLivingBase entityLiving) {
 
@@ -208,12 +184,6 @@ public class TileEntityMatterPipe extends TileEntityPipe implements IFluidPipe {
     
     @Override
     public void onChunkUnload() {
-        if (!world.isRemote) {
-            IBlockState blockState = world.getBlockState(getPos());
-            if (fluidPipeNetwork != null) {
-            	fluidPipeNetwork.onNodeDestroy(blockState, this);
-            }
-        }
     }
 
 	public void breakConnection(IBlockState blockState, EnumFacing side) {
@@ -264,7 +234,6 @@ public class TileEntityMatterPipe extends TileEntityPipe implements IFluidPipe {
     @Override
     public boolean canConnectToNetworkNode(IBlockState blockState, IGridNode toNode, EnumFacing direction) {
     	return isConnectableSide(direction);
-    //	return toNode instanceof TileEntityMatterPipe;
     }
 
     @Override
