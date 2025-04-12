@@ -128,10 +128,6 @@ public class MatterOverdriveBlocks {
 		tritanium_block = register(new MOBlockOre(TRITANIUM, "tritanium_block", "blockTritanium"));
 		tritanium_block.setHardness(15.0F).setResistance(10.0F).setHarvestLevel("pickaxe", 2);
 
-//		Crafting
-		machine_hull = register(new MOBlock(TRITANIUM, "machine_hull"));
-		machine_hull.setHardness(15.0F).setResistance(8.0F).setHarvestLevel("pickaxe", 2);
-
 //		Matter Network
 		decomposer = register(new BlockDecomposer(TRITANIUM, "decomposer"));
 		recycler = register(new BlockMatterRecycler(TRITANIUM, "matter_recycler"));
@@ -154,6 +150,7 @@ public class MatterOverdriveBlocks {
 		fusion_reactor_controller = register(new BlockFusionReactorController(TRITANIUM, "fusion_reactor_controller"));
 		fusion_reactor_coil = register(new BlockFusionReactorCoil(TRITANIUM, "fusion_reactor_coil"));
 		fusionReactorIO = register(new BlockFusionReactorIO(TRITANIUM, "fusion_reactor_io"));
+		machine_hull = register(new BlockMachineHull(TRITANIUM, "machine_hull"));
 
 //		Fluids
 		blockMatterPlasma = register(new BlockFluidMatterPlasma(OverdriveFluids.matterPlasma, Material.WATER));
