@@ -29,9 +29,4 @@ public class BlockFusionReactorIO extends MOBlockMachine<TileEntityFusionReactor
 	public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
 		return new TileEntityFusionReactorPart();
 	}
-
-	/*
-	 * @SideOnly(Side.CLIENT) public IIcon getIcon(int side, int meta) { return
-	 * MatterOverdriveIcons.Network_port_square; }
-	 */
 }
