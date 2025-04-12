@@ -4,6 +4,7 @@ package matteroverdrive.machines.fusionReactorController;
 import static java.lang.Math.round;
 import static matteroverdrive.util.MOBlockHelper.getAboveSide;
 
+import java.text.DecimalFormat;
 import java.util.EnumSet;
 
 import javax.annotation.Nonnull;
@@ -419,6 +420,13 @@ public class TileEntityMachineFusionReactorController extends MOTileEntityMachin
 
 	public boolean isValidStructure() {
 		return validStructure;
+	}
+
+	public String getCMonitorInfo() {
+			return ("POWER 100\nCHARGE " + DecimalFormat.getPercentInstance().format((double) getEnergyStorage().getEnergyStored() / 
+					(double) getEnergyStorage().getMaxEnergyStored()) + "\nMATTER " 
+					+ DecimalFormat.getPercentInstance().format((double) getMatterStorage().getMatterStored()
+					/ (double) getMatterStorage().getCapacity()));
 	}
 
 	public MonitorInfo getMonitorInfo() {

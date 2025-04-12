@@ -54,7 +54,7 @@ public class ComponentComputers extends MachineComponentAbstract<TileEntityMachi
 	}
 
 	private Object[] computerGetStatus(Object[] args) {
-		return new Object[] { machine.getMonitorInfo() };
+		return new Object[] { machine.getCMonitorInfo() };
 	}
 
 	private Object[] computerIsValid(Object[] args) {
