@@ -46,7 +46,6 @@ public class WorldGenGravitationalAnomaly extends WorldGenerator implements ICon
 				anomaly = new TileEntityGravitationalAnomaly(minMatter + random.nextInt(maxMatter - minMatter));
 				world.setTileEntity(pos, anomaly);
 			} else {
-				anomaly.setMass(minMatter + random.nextInt(maxMatter - minMatter));
 				anomaly.markDirty();
 			}
 			GenPositionWorldData data = MOWorldGen.getWorldPositionData(world);

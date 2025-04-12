@@ -3,6 +3,7 @@ package matteroverdrive.util;
 
 import lombok.Getter;
 import lombok.Setter;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 
 public class Vector3 {
@@ -137,5 +138,16 @@ public class Vector3 {
 		double d1 = this.y * (double) f1 - this.x * (double) f2;
 		double d2 = this.z;
 		this.set(d0, d1, d2);
+	}
+
+	public double dotProduct(Vector3 dir) {
+        return this.x * dir.x + this.y * dir.y + this.z * dir.z;
+	}
+
+	public double squareDistanceTo(BlockPos blockPos) {
+		double d0 = blockPos.getX() - this.x;
+		double d1 = blockPos.getY() - this.y;
+		double d2 = blockPos.getZ() - this.z;
+		return d0 * d0 + d1 * d1 + d2 * d2;
 	}
 }
