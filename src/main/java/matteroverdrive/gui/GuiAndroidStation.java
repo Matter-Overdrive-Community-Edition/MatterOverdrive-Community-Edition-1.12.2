@@ -1,9 +1,11 @@
 
 package matteroverdrive.gui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import matteroverdrive.MatterOverdrive;
 import matteroverdrive.Reference;
-import matteroverdrive.api.android.BionicStatGuiInfo;
 import matteroverdrive.api.android.IBioticStat;
 import matteroverdrive.container.ContainerAndroidStation;
 import matteroverdrive.container.slot.MOSlot;
@@ -13,8 +15,8 @@ import matteroverdrive.entity.monster.EntityMeleeRougeAndroidMob;
 import matteroverdrive.entity.player.MOPlayerCapabilityProvider;
 import matteroverdrive.gui.element.*;
 import matteroverdrive.gui.element.android_station.ElementBioStat;
-import matteroverdrive.gui.element.android_station.ElementDoubleHelix;
 import matteroverdrive.handler.ConfigurationHandler;
+import matteroverdrive.init.OverdriveBioticStats;
 import matteroverdrive.proxy.ClientProxy;
 import matteroverdrive.tile.TileEntityAndroidStation;
 import net.minecraft.client.Minecraft;
@@ -28,16 +30,15 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.text.TextFormatting;
 
 public class GuiAndroidStation extends MOGuiMachine<TileEntityAndroidStation> {
-	private static int scrollX;
-	private static int scrollY = 65;
+
 	ElementSlot[] parts_slots = new ElementSlot[Reference.BIONIC_BATTERY + 1];
+	List<ElementBioStat> stats = new ArrayList<>(MatterOverdrive.STAT_REGISTRY.getStats().size());
 	private EntityMeleeRougeAndroidMob mob;
 	private MOElementButtonScaled hudConfigs;
 	private ElementGroup2DScroll abilitiesGroup;
-	private ElementDoubleHelix doubleHelix;
 
 	public GuiAndroidStation(InventoryPlayer inventoryPlayer, TileEntityAndroidStation machine) {
-		super(new ContainerAndroidStation(inventoryPlayer, machine), machine, 364, 280);
+		super(new ContainerAndroidStation(inventoryPlayer, machine), machine, 364, 250);
 		texW = 255;
 		texH = 237;
 		AndroidPlayer androidPlayer = MOPlayerCapabilityProvider.GetAndroidCapability(inventoryPlayer.player);
@@ -61,53 +62,28 @@ public class GuiAndroidStation extends MOGuiMachine<TileEntityAndroidStation> {
 		parts_slots[Reference.BIONIC_BATTERY].setPosition(320, ySize - 50);
 		parts_slots[Reference.BIONIC_BATTERY].setIcon(ClientProxy.holoIcons.getIcon("battery"));
 
-		abilitiesGroup = new ElementGroup2DScroll(this, 46, 30, 300, 155);
-		abilitiesGroup.setScrollBounds(-270, 370, -300, 300);
-		abilitiesGroup.setScroll(scrollX, scrollY);
-		ElementParallaxBackground background = new ElementParallaxBackground(this, 0, 0, abilitiesGroup.getWidth(),
-				abilitiesGroup.getHeight(), false, 0.005f);
-		background.setTexture(Reference.PATH_ELEMENTS + "grid_bg.png", 32, 32);
-		background.setPosZ(-10);
-		background.setColor(Reference.COLOR_HOLO.multiply(1, 1, 1, 0.1f));
-		doubleHelix = new ElementDoubleHelix(this, 0, 0, 320, 240, 2f);
-		doubleHelix.setPointColor(Reference.COLOR_HOLO.multiply(1, 1, 1, 0.3f));
-		doubleHelix.setLineColor(Reference.COLOR_HOLO.multiply(1, 1, 1, 0.15f));
-		doubleHelix.setFillColor(Reference.COLOR_HOLO.multiply(0.3f, 0.3f, 0.3f, 0.2f));
-		// abilitiesGroup.addElement(doubleHelix);
-		abilitiesGroup.addElement(background);
-
-		/*
-		 * addStat(androidPlayer, OverdriveBioticStats.teleport, -1, 1, null);
-		 * addStat(androidPlayer,OverdriveBioticStats.nightvision,1,1,null);
-		 * addStat(androidPlayer,OverdriveBioticStats.flotation,0,5,null);
-		 * 
-		 * addStat(androidPlayer,OverdriveBioticStats.speed,6,3,null);
-		 * addStat(androidPlayer,OverdriveBioticStats.highJump,6,1,EnumFacing.DOWN,true)
-		 * ; addStat(androidPlayer,OverdriveBioticStats.equalizer,6,0,EnumFacing.DOWN);
-		 * addStat(androidPlayer, OverdriveBioticStats.nanobots, 3, 3, null);
-		 * addStat(androidPlayer,OverdriveBioticStats.nanoArmor,3,5,EnumFacing.UP,true);
-		 * addStat(androidPlayer,OverdriveBioticStats.shield,3,6,EnumFacing.UP);
-		 * addStat(androidPlayer,OverdriveBioticStats.cloak,3,7,EnumFacing.UP);
-		 * addStat(androidPlayer,OverdriveBioticStats.attack,3,1,EnumFacing.DOWN,true);
-		 * addStat(androidPlayer,OverdriveBioticStats.flashCooling,3,0,EnumFacing.DOWN);
-		 * addStat(androidPlayer,OverdriveBioticStats.shockwave,3,-1,EnumFacing.DOWN);
-		 * 
-		 * addStat(androidPlayer,OverdriveBioticStats.minimap,7,5,null);
-		 */
-
-		// addStats(AndroidPlayer.get(Minecraft.getMinecraft().player));
-
-		for (IBioticStat stat : MatterOverdrive.STAT_REGISTRY.getStats()) {
-			int unlockedLevel = androidPlayer.getUnlockedLevel(stat);
-			BionicStatGuiInfo guiInfo = stat.getGuiInfo(androidPlayer, unlockedLevel);
-			if (guiInfo != null) {
-				ElementBioStat statElement = new ElementBioStat(this, guiInfo.getPosX(), guiInfo.getPosY(), stat,
-						unlockedLevel, androidPlayer);
-				statElement.setDirection(guiInfo.getDirection());
-				statElement.setStrongConnection(guiInfo.isStrongConnection());
-				abilitiesGroup.addElement(statElement);
-			}
-		}
+		addStat(androidPlayer, OverdriveBioticStats.teleport, 0, 0, null);
+		addStat(androidPlayer, OverdriveBioticStats.nanobots, 1, 1, null);
+		addStat(androidPlayer, OverdriveBioticStats.nanoArmor, 0, 1, EnumFacing.EAST);
+		addStat(androidPlayer, OverdriveBioticStats.flotation, 2, 0, null);
+		addStat(androidPlayer, OverdriveBioticStats.speed, 3, 0, EnumFacing.SOUTH);
+		addStat(androidPlayer, OverdriveBioticStats.highJump, 3, 1, EnumFacing.UP);
+		addStat(androidPlayer, OverdriveBioticStats.equalizer, 3, 3, EnumFacing.UP);
+		addStat(androidPlayer, OverdriveBioticStats.shield, 0, 2, EnumFacing.UP);
+		addStat(androidPlayer, OverdriveBioticStats.attack, 2, 1, EnumFacing.WEST);
+		addStat(androidPlayer, OverdriveBioticStats.cloak, 0, 3, EnumFacing.UP);
+		addStat(androidPlayer, OverdriveBioticStats.nightvision, 1, 0, null);
+		addStat(androidPlayer, OverdriveBioticStats.minimap, 4, 0, null);
+		addStat(androidPlayer, OverdriveBioticStats.flashCooling, 2, 2, EnumFacing.UP);
+		addStat(androidPlayer, OverdriveBioticStats.shockwave, 2, 3, EnumFacing.UP);
+		addStat(androidPlayer, OverdriveBioticStats.autoShield, 1, 2, EnumFacing.WEST);
+		addStat(androidPlayer, OverdriveBioticStats.stepAssist, 5, 0, null);
+		addStat(androidPlayer, OverdriveBioticStats.zeroCalories, 4, 2, null);
+		addStat(androidPlayer, OverdriveBioticStats.wirelessCharger, 1, 3, null);
+		addStat(androidPlayer, OverdriveBioticStats.inertialDampers, 3, 2, EnumFacing.UP);
+		addStat(androidPlayer, OverdriveBioticStats.itemMagnet, 5, 1, null);
+		addStat(androidPlayer, OverdriveBioticStats.airDash, 4, 1, EnumFacing.WEST);
+		addStat(androidPlayer, OverdriveBioticStats.oxygen, 4, 3, EnumFacing.UP);
 
 		mob = new EntityMeleeRougeAndroidMob(Minecraft.getMinecraft().world);
 		mob.getEntityData().setBoolean("Hologram", true);
@@ -119,11 +95,10 @@ public class GuiAndroidStation extends MOGuiMachine<TileEntityAndroidStation> {
 	public void addStat(AndroidPlayer androidPlayer, IBioticStat stat, int x, int y, EnumFacing direction,
 			boolean strong) {
 		ElementBioStat elemStat = new ElementBioStat(this, 0, 0, stat, androidPlayer.getUnlockedLevel(stat),
-				androidPlayer);
-		elemStat.setDirection(direction);
+				androidPlayer, direction);
 		elemStat.setStrongConnection(strong);
-		elemStat.setPosition(12 + x * 30, 6 + y * 30);
-		// stats.add(elemStat);
+		elemStat.setPosition(54 + x * 30, 36 + y * 30);
+		stats.add(elemStat);
 	}
 
 	public void addStat(AndroidPlayer androidPlayer, IBioticStat stat, int x, int y, EnumFacing direction) {
@@ -140,6 +115,9 @@ public class GuiAndroidStation extends MOGuiMachine<TileEntityAndroidStation> {
 			pages.get(0).addElement(elementSlot);
 		}
 
+		for (ElementBioStat stat : stats) {
+			pages.get(0).addElement(stat);
+		}
 		pages.get(1).addElement(hudConfigs);
 
 		AddMainPlayerSlots(inventorySlots, this);
@@ -154,9 +132,6 @@ public class GuiAndroidStation extends MOGuiMachine<TileEntityAndroidStation> {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
-
-		scrollX = abilitiesGroup.getScrollX();
-		scrollY = abilitiesGroup.getScrollY();
 
 		if (pages.get(0).isVisible()) {
 			GlStateManager.pushMatrix();
@@ -205,8 +180,6 @@ public class GuiAndroidStation extends MOGuiMachine<TileEntityAndroidStation> {
 		GlStateManager.rotate(ent.world.getWorldTime(), 0.0F, 1.0F, 0.0F);
 		RenderHelper.enableStandardItemLighting();
 		GlStateManager.rotate(-135.0F, 0.0F, 1.0F, 0.0F);
-		// GlStateManager.rotate(-((float)Math.atan((double)(mouseY / 40.0F))) * 20.0F,
-		// 1.0F, 0.0F, 0.0F);
 		ent.renderYawOffset = 0;
 		ent.rotationYaw = 0;
 		ent.rotationPitch = -((float) Math.atan((double) (mouseY / 40.0F))) * 20.0F;

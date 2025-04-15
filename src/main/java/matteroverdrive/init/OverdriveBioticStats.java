@@ -2,14 +2,12 @@
 package matteroverdrive.init;
 
 import matteroverdrive.MatterOverdrive;
-import matteroverdrive.api.android.BionicStatGuiInfo;
 import matteroverdrive.api.android.IAndroidStatRegistry;
 import matteroverdrive.data.biostats.*;
 import matteroverdrive.handler.ConfigurationHandler;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 
 public class OverdriveBioticStats {
 	public static BioticStatTeleport teleport;
@@ -42,9 +40,7 @@ public class OverdriveBioticStats {
 		flotation = new BioticStatFlotation("floatation", 14);
 		speed = new BioticStatSpeed("speed", 18);
 		highJump = new BioticStatHighJump("high_jump", 36);
-		highJump.addReqiredItm(new ItemStack(Blocks.PISTON));
 		equalizer = new BioticStatEqualizer("equalizer", 24);
-		equalizer.addReqiredItm(new ItemStack(MatterOverdrive.ITEMS.spacetime_equalizer));
 		shield = new BioticStatShield("shield", 36);
 		attack = new BioticStatAttack("attack", 30);
 		cloak = new BioticStatCloak("cloak", 36);
@@ -67,59 +63,47 @@ public class OverdriveBioticStats {
 	private static void configure() {
 		teleport.addReqiredItm(new ItemStack(MatterOverdrive.ITEMS.h_compensator));
 		teleport.addToEnabledBlacklist(shield);
-		nanoArmor.setRoot(nanobots, false);
+		nanobots.addReqiredItm(new ItemStack(MatterOverdrive.ITEMS.me_conversion_matrix, 1));
+		nanoArmor.setRoot(nanobots);
 		nanoArmor.addCompetitor(attack);
-		highJump.setRoot(speed, false);
+		flotation.addReqiredItm(new ItemStack(Items.GHAST_TEAR, 2));
+		nightvision.addReqiredItm(new ItemStack(Items.SPIDER_EYE, 2));
+		nanoArmor.addReqiredItm(new ItemStack(MatterOverdrive.ITEMS.androidParts, 1));
+		nanoArmor.addReqiredItm(new ItemStack(MatterOverdrive.ITEMS.androidParts, 2, 1));
+		nanoArmor.addReqiredItm(new ItemStack(MatterOverdrive.ITEMS.androidParts, 1, 3));
+		nanoArmor.addReqiredItm(new ItemStack(MatterOverdrive.ITEMS.androidParts, 2, 2));
+		highJump.setRoot(speed);
 		highJump.addToEnabledBlacklist(shield);
-		inertialDampers.setRoot(highJump, false);
-		equalizer.setRoot(inertialDampers, false);
-		shield.setRoot(nanoArmor, true);
+		highJump.addReqiredItm(new ItemStack(Blocks.PISTON));
+		highJump.addReqiredItm(new ItemStack(MatterOverdrive.ITEMS.item_upgrade, 1, 4));
+		inertialDampers.setRoot(highJump);
+		inertialDampers.addReqiredItm(new ItemStack(Blocks.SLIME_BLOCK, 2));
+		equalizer.setRoot(inertialDampers);
+		equalizer.addReqiredItm(new ItemStack(MatterOverdrive.ITEMS.spacetime_equalizer));
+		shield.setRoot(nanoArmor);
 		shield.addReqiredItm(new ItemStack(MatterOverdrive.ITEMS.forceFieldEmitter, 1));
 		attack.addCompetitor(nanoArmor);
-		attack.setRoot(nanobots, false);
-		cloak.setRoot(shield, true);
+		attack.setRoot(nanobots);
+		cloak.setRoot(shield);
+		cloak.addReqiredItm(new ItemStack(MatterOverdrive.ITEMS.forceFieldEmitter, 4));
 		minimap.addReqiredItm(new ItemStack(Items.COMPASS));
-		flashCooling.setRoot(attack, true);
-		shockwave.setRoot(flashCooling, true);
-		autoShield.setRoot(shield, true);
-		oxygen.setRoot(zeroCalories, true);
-		flotation.setRoot(oxygen, true);
-		itemMagnet.setRoot(stepAssist, false);
-		airDash.setRoot(highJump, true);
-
-		int stepSizeX = 52;
-		int stepSizeY = 30;
-
-		wirelessCharger.setGuiInfo(new BionicStatGuiInfo(stepSizeX * -1, stepSizeY * 2));
-		teleport.setGuiInfo(new BionicStatGuiInfo(0, stepSizeY * -2));
-
-		zeroCalories.setGuiInfo(new BionicStatGuiInfo(stepSizeX, 0));
-		oxygen.setGuiInfo(new BionicStatGuiInfo(stepSizeX, stepSizeY * 2, EnumFacing.UP, true));
-		flotation.setGuiInfo(new BionicStatGuiInfo(stepSizeX, stepSizeY * 3, EnumFacing.UP));
-
-		nightvision.setGuiInfo(new BionicStatGuiInfo(stepSizeX * 2, stepSizeY * -2));
-
-		nanobots.setGuiInfo(new BionicStatGuiInfo(stepSizeX * 3, 0));
-
-		nanoArmor.setGuiInfo(new BionicStatGuiInfo(stepSizeX * 3, stepSizeY * 2, EnumFacing.UP, true));
-		shield.setGuiInfo(new BionicStatGuiInfo(stepSizeX * 3, stepSizeY * 3, EnumFacing.UP));
-		cloak.setGuiInfo(new BionicStatGuiInfo(stepSizeX * 3, stepSizeY * 4, EnumFacing.UP));
-		autoShield.setGuiInfo(new BionicStatGuiInfo(stepSizeX * 3 - 30, stepSizeY * 3, EnumFacing.EAST));
-
-		attack.setGuiInfo(new BionicStatGuiInfo(stepSizeX * 3, stepSizeY * -2, EnumFacing.DOWN, true));
-		flashCooling.setGuiInfo(new BionicStatGuiInfo(stepSizeX * 3, stepSizeY * -3, EnumFacing.DOWN));
-		shockwave.setGuiInfo(new BionicStatGuiInfo(stepSizeX * 3, stepSizeY * -4, EnumFacing.DOWN));
-
-		minimap.setGuiInfo(new BionicStatGuiInfo(stepSizeX * 4, stepSizeY * 2));
-
-		speed.setGuiInfo(new BionicStatGuiInfo(stepSizeX * 5, 0));
-		highJump.setGuiInfo(new BionicStatGuiInfo(stepSizeX * 5, stepSizeY * -2, EnumFacing.DOWN, true));
-		airDash.setGuiInfo(new BionicStatGuiInfo(stepSizeX * 5 + 30, stepSizeY * -2, EnumFacing.WEST, false));
-		inertialDampers.setGuiInfo(new BionicStatGuiInfo(stepSizeX * 5, stepSizeY * -3, EnumFacing.DOWN));
-		equalizer.setGuiInfo(new BionicStatGuiInfo(stepSizeX * 5, stepSizeY * -4, EnumFacing.DOWN));
-
-		stepAssist.setGuiInfo(new BionicStatGuiInfo(stepSizeX * 6, stepSizeY * 2));
-		itemMagnet.setGuiInfo(new BionicStatGuiInfo(stepSizeX * 6, stepSizeY * 3, EnumFacing.UP));
+		flashCooling.setRoot(attack);
+		flashCooling.addReqiredItm(new ItemStack(Items.WATER_BUCKET));
+		shockwave.setRoot(flashCooling);
+		shockwave.addReqiredItm(new ItemStack(MatterOverdrive.ITEMS.item_upgrade, 1, 5));
+		autoShield.setRoot(shield);
+		oxygen.setRoot(zeroCalories);
+		airDash.setRoot(highJump);
+		itemMagnet.addReqiredItm(new ItemStack(MatterOverdrive.ITEMS.s_magnet, 1));
+		wirelessCharger.addReqiredItm(new ItemStack(MatterOverdrive.ITEMS.item_upgrade, 1, 2));
+		speed.addReqiredItm(new ItemStack(MatterOverdrive.ITEMS.item_upgrade, 2, 1));
+		stepAssist.addReqiredItm(new ItemStack(MatterOverdrive.ITEMS.androidParts, 2, 2));
+		stepAssist.addReqiredItm(new ItemStack(MatterOverdrive.ITEMS.tritaniumSpine, 1));
+		airDash.addReqiredItm(new ItemStack(MatterOverdrive.ITEMS.androidParts, 2, 2));
+		autoShield.addReqiredItm(new ItemStack(MatterOverdrive.ITEMS.forceFieldEmitter, 4));
+		attack.addReqiredItm(new ItemStack(MatterOverdrive.ITEMS.energyPack, 16));
+		zeroCalories.addReqiredItm(new ItemStack(MatterOverdrive.ITEMS.emergency_ration, 64));
+		oxygen.addReqiredItm(new ItemStack(MatterOverdrive.ITEMS.artifact, 1));
 	}
 
 	public static void registerAll(ConfigurationHandler configurationHandler,

@@ -124,10 +124,6 @@ public abstract class AbstractBioticStat implements IBioticStat {
 					androidPlayer.getPlayer().inventory.decrStackSize(j, countShouldTake);
 					itemCount -= countShouldTake;
 				}
-
-				if (itemCount <= 0) {
-					return;
-				}
 			}
 		}
 	}
@@ -162,10 +158,10 @@ public abstract class AbstractBioticStat implements IBioticStat {
 					requires.append(TextFormatting.GRAY + ", ");
 				}
 				if (itemStack.getCount() > 1) {
-					requires.append(TextFormatting.DARK_GREEN).append(itemStack.getCount()).append("x");
+					requires.append(TextFormatting.DARK_GREEN).append(itemStack.getCount()).append(" x ");
 				}
 
-				requires.append(TextFormatting.DARK_GREEN + "[").append(itemStack.getDisplayName()).append("]");
+				requires.append(TextFormatting.DARK_GREEN + "").append(itemStack.getDisplayName()).append("");
 			}
 		}
 
@@ -226,9 +222,8 @@ public abstract class AbstractBioticStat implements IBioticStat {
 		return root;
 	}
 
-	public void setRoot(IBioticStat stat, boolean rootMaxLevel) {
+	public void setRoot(IBioticStat stat) {
 		this.root = stat;
-		this.rootMaxLevel = rootMaxLevel;
 	}
 
 	public void addCompetitor(IBioticStat stat) {

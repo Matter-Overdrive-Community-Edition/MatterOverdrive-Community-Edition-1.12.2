@@ -33,7 +33,7 @@ public class ElementBioStat extends MOElementButton {
 	private final ResourceLocation strongConnectionBrokenTex = new ResourceLocation(
 			Reference.PATH_ELEMENTS + "connection_broken.png");
 
-	public ElementBioStat(MOGuiBase gui, int posX, int posY, IBioticStat stat, int level, AndroidPlayer player) {
+	public ElementBioStat(MOGuiBase gui, int posX, int posY, IBioticStat stat, int level, AndroidPlayer player, EnumFacing direction) {
 		super(gui, gui, posX, posY, stat.getUnlocalizedName(), 0, 0, 0, 0, 22, 22, "");
 		texture = ElementSlot.getTexture("holo");
 		texW = 22;
@@ -41,6 +41,7 @@ public class ElementBioStat extends MOElementButton {
 		this.stat = stat;
 		this.player = player;
 		this.level = level;
+		this.direction = direction;
 	}
 
 	@Override
