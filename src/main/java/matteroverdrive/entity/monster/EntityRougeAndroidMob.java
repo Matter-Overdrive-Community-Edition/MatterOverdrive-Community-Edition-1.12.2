@@ -35,6 +35,7 @@ public class EntityRougeAndroidMob extends EntityMob
 	private static final ResourceLocation androidNames = new ResourceLocation(
 			Reference.PATH_INFO + "android_names.txt");
 	private static final String[] names = MOStringHelper.readTextFile(androidNames).split(",");
+	private BlockPos homePosition = BlockPos.ORIGIN;
 	boolean fromSpawner;
 	private BlockPos spawnerPosition;
 	private int currentPathIndex;
@@ -268,7 +269,11 @@ public class EntityRougeAndroidMob extends EntityMob
 	@Override
 	public BlockPos getHomePosition() {
 		Vec3d currentTarget = getCurrentTarget();
-		return new BlockPos((int) currentTarget.x, (int) currentTarget.y, (int) currentTarget.z);
+		if (currentTarget == null) {
+			return this.homePosition;
+		} else {
+			return new BlockPos((int) currentTarget.x, (int) currentTarget.y, (int) currentTarget.z);
+		}
 	}
 
 	private boolean inDimensionBlacklist() {
