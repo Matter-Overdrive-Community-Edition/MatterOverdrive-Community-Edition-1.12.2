@@ -232,14 +232,10 @@ public class MatterOverdriveItems {
 		tritaniumSword = register(new TritaniumSword("tritanium_sword"));
 		tritaniumHoe = register(new TritaniumHoe("tritanium_hoe"));
 		tritaniumShovel = register(new TritaniumShovel("tritanium_shovel"));
-		tritaniumHelmet = register(
-				new TritaniumArmor("tritanium_helmet", ARMOR_MATERIAL_TRITANIUM, 2, EntityEquipmentSlot.HEAD));
-		tritaniumChestplate = register(
-				new TritaniumArmor("tritanium_chestplate", ARMOR_MATERIAL_TRITANIUM, 2, EntityEquipmentSlot.CHEST));
-		tritaniumLeggings = register(
-				new TritaniumArmor("tritanium_leggings", ARMOR_MATERIAL_TRITANIUM, 2, EntityEquipmentSlot.LEGS));
-		tritaniumBoots = register(
-				new TritaniumArmor("tritanium_boots", ARMOR_MATERIAL_TRITANIUM, 2, EntityEquipmentSlot.FEET));
+		tritaniumHelmet = register(new TritaniumArmor("tritanium_helmet", ARMOR_MATERIAL_TRITANIUM, 2, EntityEquipmentSlot.HEAD));
+		tritaniumChestplate = register(new TritaniumArmor("tritanium_chestplate", ARMOR_MATERIAL_TRITANIUM, 2, EntityEquipmentSlot.CHEST));
+		tritaniumLeggings = register(new TritaniumArmor("tritanium_leggings", ARMOR_MATERIAL_TRITANIUM, 2, EntityEquipmentSlot.LEGS));
+		tritaniumBoots = register(new TritaniumArmor("tritanium_boots", ARMOR_MATERIAL_TRITANIUM, 2, EntityEquipmentSlot.FEET));
 
 //		Android
 		androidParts = register(new RougeAndroidParts("rogue_android_part"));
