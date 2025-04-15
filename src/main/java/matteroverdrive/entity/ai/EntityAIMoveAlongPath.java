@@ -26,10 +26,8 @@ public class EntityAIMoveAlongPath extends EntityAIBase {
 		if (pathableMob.getEntity().getAttackTarget() != null) {
 			return false;
 		} else if (pathableMob.getCurrentTarget() != null) {
-			if (!pathableMob.getEntity().getNavigator().noPath()) {
+			if (!pathableMob.getEntity().getNavigator().noPath())
 				return true;
-			}
-
 			if (pathableMob.isNearTarget(pathableMob.getCurrentTarget())) {
 				pathableMob.onTargetReached(pathableMob.getCurrentTarget());
 			} else {

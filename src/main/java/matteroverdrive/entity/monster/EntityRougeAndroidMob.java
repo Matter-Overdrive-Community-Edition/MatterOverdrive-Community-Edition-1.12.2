@@ -257,12 +257,11 @@ public class EntityRougeAndroidMob extends EntityMob
 
 	@Override
 	public boolean isWithinHomeDistanceFromPosition(BlockPos pos) {
-		return true;
+		return this.getHomePosition().distanceSq(pos) < (double) (maxPathTargetRangeSq * maxPathTargetRangeSq);
 	}
 
 	@Override
 	public boolean hasHome() {
-
 		return getCurrentTarget() != null;
 	}
 
@@ -397,7 +396,7 @@ public class EntityRougeAndroidMob extends EntityMob
 
 	@Override
 	public boolean isNearTarget(Vec3d pos) {
-		return pos.squareDistanceTo(pos) < maxPathTargetRangeSq;
+		return this.isWithinHomeDistanceFromPosition(new BlockPos(this));
 	}
 
 	@Override
