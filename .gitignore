@@ -41,3 +41,4 @@ classes/
 *.gradle
 gradlew.bat
 gradlew.bat
+*.bat
