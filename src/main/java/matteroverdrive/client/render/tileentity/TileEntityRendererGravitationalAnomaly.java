@@ -3,16 +3,14 @@ package matteroverdrive.client.render.tileentity;
 
 import matteroverdrive.Reference;
 import matteroverdrive.tile.TileEntityGravitationalAnomaly;
-import matteroverdrive.util.RenderUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.util.glu.Sphere;
-
-import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
-import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
 
 public class TileEntityRendererGravitationalAnomaly extends TileEntitySpecialRenderer<TileEntityGravitationalAnomaly> {
 	public static final ResourceLocation core = new ResourceLocation(
@@ -32,44 +30,92 @@ public class TileEntityRendererGravitationalAnomaly extends TileEntitySpecialRen
 	@Override
 	public void render(TileEntityGravitationalAnomaly tileEntity, double x, double y, double z, float partialTicks,
 			int destroyStage, float alpha) {
+
+		float radius = (float) tileEntity.getEventHorizon();
+		renderSphere(tileEntity, x, y, z, radius);
+		renderDisk(tileEntity, x, y, z, partialTicks, radius);
+	}
+
+	public void renderSphere(TileEntityGravitationalAnomaly tileEntity, double x, double y, double z,
+			float visualSize) {
 		if (!tileEntity.shouldRender())
 			return;
-		EntityPlayer player = Minecraft.getMinecraft().player;
 		long time = Minecraft.getMinecraft().world.getWorldTime();
 		float speed = 1;
 		double resonateSpeed = 0.1;
 		double radius = tileEntity.getEventHorizon();
-
 		radius = radius * Math.sin(time * resonateSpeed) * 0.1 + radius * 0.9;
 
+		// Inner
 		GlStateManager.pushMatrix();
+		GlStateManager.translate(x + 0.5, y + 0.5, z + 0.5);
+		GlStateManager.rotate(time * speed, 0, 0, 1);
+		bindTexture(black);
+		GlStateManager.scale(radius, radius, radius);
+		GlStateManager.color(0.0F, 0.0F, 0.0F, 1);
+		sphere_model.draw((float) 0.33, 8, 8);
+		GlStateManager.popMatrix();
+
+		// Outer
+		GlStateManager.pushMatrix();
+		GlStateManager.enableBlend();
+		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+		GlStateManager.disableLighting();
+		GlStateManager.translate(x + 0.5, y + 0.5, z + 0.5);
+		GlStateManager.rotate(time * speed, 0, 1, 0);
+		bindTexture(black);
+		GlStateManager.scale(radius + 0.5, radius + 0.5, radius + 0.5);
+		GlStateManager.color(0.0F, 0.0F, 0.2F, 0.8f);
+		sphere_model.draw((float) 0.33, 8, 8);
+		GlStateManager.enableLighting();
+		GlStateManager.disableBlend();
+		GlStateManager.popMatrix();
+
+	}
+
+	public void renderDisk(TileEntityGravitationalAnomaly tileEntity, double x, double y, double z, float partialTicks,
+			float visualSize) {
+		BufferBuilder bufferbuilder = Tessellator.getInstance().getBuffer();
+		long time = Minecraft.getMinecraft().world.getWorldTime();
+		float speed = 1;
+		double resonateSpeed = 0.1;
+		double radius = tileEntity.getEventHorizon();
+		radius = radius * Math.sin(time * resonateSpeed) * 0.1 + radius * 0.9;
+
+		// Setup
+		GlStateManager.pushMatrix();
+		GlStateManager.enableBlend();
+		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 		GlStateManager.disableLighting();
 
+		// Translate
 		GlStateManager.translate(x + 0.5, y + 0.5, z + 0.5);
-		GlStateManager.scale(radius, radius, radius);
+		GlStateManager.rotate(time * speed, 0, 1, 0);
+		// Assign texture
+		this.bindTexture(core);
+		GlStateManager.color(1, 0, 0, 1);
 
-		GlStateManager.disableCull();
-		GlStateManager.disableTexture2D();
-		GlStateManager.color(0, 0, 0, 1);
-		sphere_model.draw((float) 0.33, 8, 8);
-		GlStateManager.enableTexture2D();
-		GlStateManager.enableCull();
+		// top render
+		bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
+		bufferbuilder.pos(-radius, 0, -radius).tex(0, 0).endVertex();
+		bufferbuilder.pos(-radius, 0, +radius).tex(0, 1).endVertex();
+		bufferbuilder.pos(+radius, 0, +radius).tex(1, 1).endVertex();
+		bufferbuilder.pos(+radius, 0, -radius).tex(1, 0).endVertex();
+		Tessellator.getInstance().draw();
 
-		GlStateManager.enableBlend();
-		GlStateManager.scale(2, 2, 2);
-		GlStateManager.rotate(player.prevRotationYaw + (player.rotationYaw - player.prevRotationYaw) * partialTicks, 0,
-				-1, 0);
-		GlStateManager.rotate(
-				player.prevRotationPitch + (player.rotationPitch - player.prevRotationPitch) * partialTicks, 1, 0, 0);
-		GlStateManager.rotate(time * speed, 0, 0, 1);
-		GlStateManager.translate(-0.5, -0.5, 0);
-		GlStateManager.color(1, 1, 1);
-		GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		bindTexture(core);
-		RenderUtils.drawPlane(1);
+		// bottom render
+		GlStateManager.rotate(180, 1, 0, 0);
+		bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
+		bufferbuilder.pos(-radius, 0, -radius).tex(1, 1).endVertex();
+		bufferbuilder.pos(-radius, 0, +radius).tex(1, 0).endVertex();
+		bufferbuilder.pos(+radius, 0, +radius).tex(0, 0).endVertex();
+		bufferbuilder.pos(+radius, 0, -radius).tex(0, 1).endVertex();
+		Tessellator.getInstance().draw();
 
-		GlStateManager.disableBlend();
+		// Reset
 		GlStateManager.enableLighting();
+		GlStateManager.disableBlend();
 		GlStateManager.popMatrix();
 	}
+
 }
