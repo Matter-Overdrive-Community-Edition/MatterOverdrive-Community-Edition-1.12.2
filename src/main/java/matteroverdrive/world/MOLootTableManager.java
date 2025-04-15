@@ -24,6 +24,8 @@ public class MOLootTableManager {
 				// CONDITIONS, NAME));
 				pool.addEntry(new LootEntryItem(MatterOverdrive.ITEMS.androidPill, 10, 0, new LootFunction[0],
 						new LootCondition[0], "loottable:redPill"));
+				pool.addEntry(new LootEntryItem(MatterOverdrive.ITEMS.artifact, 10, 0, new LootFunction[0],
+						new LootCondition[0], "loottable:artifact"));
 			}
 		}
 	}
