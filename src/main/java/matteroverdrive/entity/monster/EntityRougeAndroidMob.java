@@ -1,6 +1,8 @@
 
 package matteroverdrive.entity.monster;
 
+import java.util.Calendar;
+
 import io.netty.buffer.ByteBuf;
 import matteroverdrive.Reference;
 import matteroverdrive.api.entity.IPathableMob;
@@ -11,6 +13,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.init.Blocks;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
@@ -23,6 +28,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
@@ -248,11 +254,36 @@ public class EntityRougeAndroidMob extends EntityMob
 				++i;
 			}
 
-			// TODO: Do the random armor thing
-			replaceItemInInventory(100, ItemStack.EMPTY); // FEET
-			replaceItemInInventory(101, ItemStack.EMPTY); // LEGS
-			replaceItemInInventory(102, ItemStack.EMPTY); // CHEST
-			replaceItemInInventory(103, ItemStack.EMPTY); // HEAD
+			boolean flag = true;
+
+			for (EntityEquipmentSlot entityequipmentslot : EntityEquipmentSlot.values()) {
+				if (entityequipmentslot.getSlotType() == EntityEquipmentSlot.Type.ARMOR) {
+					ItemStack itemstack = this.getItemStackFromSlot(entityequipmentslot);
+
+					if (!flag && this.rand.nextFloat() < f) {
+						break;
+					}
+
+					flag = false;
+
+					if (itemstack.isEmpty()) {
+						Item item = getArmorByChance(entityequipmentslot, i);
+
+						if (item != null) {
+							this.setItemStackToSlot(entityequipmentslot, new ItemStack(item));
+						}
+					}
+				}
+			}
+		}
+		if (this.getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty()) {
+			Calendar calendar = this.world.getCurrentDate();
+
+			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && this.rand.nextFloat() < 0.25F) {
+				this.setItemStackToSlot(EntityEquipmentSlot.HEAD,
+						new ItemStack(this.rand.nextFloat() < 0.1F ? Blocks.LIT_PUMPKIN : Blocks.PUMPKIN));
+				this.inventoryArmorDropChances[EntityEquipmentSlot.HEAD.getIndex()] = 0.0F;
+			}
 		}
 	}
 

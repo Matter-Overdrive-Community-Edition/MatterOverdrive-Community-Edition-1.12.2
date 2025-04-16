@@ -7,6 +7,7 @@ import matteroverdrive.client.model.MOModelRenderColored;
 import matteroverdrive.entity.monster.EntityRangedRogueAndroidMob;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.util.ResourceLocation;
 
 public class EntityRendererRangedRougeAndroid extends EntityRendererRougeAndroid<EntityRangedRogueAndroidMob> {
@@ -19,13 +20,8 @@ public class EntityRendererRangedRougeAndroid extends EntityRendererRougeAndroid
 		visorModel.setDisableLighting(true);
 		visorModel.addBox(-4, -8, -4, 8, 8, 8);
 		((ModelBiped) mainModel).bipedHead.addChild(visorModel);
+		this.addLayer(new LayerBipedArmor(this));
 	}
-
-	/*
-	 * @Override protected void func_82422_c() {
-	 * GlStateManager.translate(0,0.2,-0.3); GL11.glRotatef(-97, 0, 0, 1.0F);
-	 * GL11.glRotatef(-60, 0.0F, 1.0F, 0.0F); GlStateManager.scale(0.6,0.6,0.6); }
-	 */
 
 	@Override
 	protected ResourceLocation getEntityTexture(EntityRangedRogueAndroidMob entity) {
