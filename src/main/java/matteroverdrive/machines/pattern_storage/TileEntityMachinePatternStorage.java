@@ -22,6 +22,7 @@ import matteroverdrive.items.MatterScanner;
 import matteroverdrive.machines.MachineNBTCategory;
 import matteroverdrive.machines.components.ComponentMatterNetworkConfigs;
 import matteroverdrive.machines.events.MachineEvent;
+import matteroverdrive.machines.pattern_monitor.TileEntityMachinePatternMonitor;
 import matteroverdrive.matter_network.MatterNetworkTaskQueue;
 import matteroverdrive.matter_network.components.MatterNetworkComponentClient;
 import matteroverdrive.matter_network.components.TaskQueueComponent;
@@ -40,6 +41,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
@@ -50,6 +52,7 @@ public class TileEntityMachinePatternStorage extends MOTileEntityMachineEnergy i
 			UpgradeTypes.PowerUsage);
 	public static int ENERGY_CAPACITY = 512000;
 	public static int ENERGY_TRANSFER = 512000;
+	public static int patternCount = 0;
 	public int input_slot;
 	public int[] pattern_storage_slots;
 	private ComponentMatterNetworkPatternStorage networkComponent;
@@ -77,6 +80,45 @@ public class TileEntityMachinePatternStorage extends MOTileEntityMachineEnergy i
 		if (!world.isRemote) {
 			if (energyStorage.getEnergyStored() > 0) {
 				manageLinking();
+				if (getNetwork() != null) {
+					List<IMatterNetworkClient> clients = getNetwork().getClients();
+					List<IMatterDatabase> databases = new ArrayList<>();
+					List<TileEntityMachinePatternMonitor> monitors = new ArrayList<>();
+
+					for (IMatterNetworkClient client : clients) {
+						if (client instanceof IMatterDatabase) {
+							databases.add((IMatterDatabase) client);
+						}
+					}
+					patternCount = 0;
+					for (IMatterDatabase database : databases) {
+						for (ItemStack patternDrive : database.getPatternStorageList()) {
+							if (patternDrive != null && patternDrive.getItem() instanceof IMatterPatternStorage) {
+								int capacity = ((IMatterPatternStorage) patternDrive.getItem())
+										.getCapacity(patternDrive);
+								for (int i = 0; i < capacity; i++) {
+									ItemPattern pattern = ((IMatterPatternStorage) patternDrive.getItem())
+											.getPatternAt(patternDrive, i);
+									if (pattern != null) {
+										patternCount++;
+									}
+								}
+							}
+						}
+					}
+					if (TileEntityMachinePatternMonitor.patternCount != patternCount) {
+						for (IMatterNetworkClient client : clients) {
+							if (client instanceof TileEntityMachinePatternMonitor) {
+								monitors.add((TileEntityMachinePatternMonitor) client);
+								TileEntityMachinePatternMonitor.patternCount = patternCount;
+								world.markBlockRangeForRenderUpdate(((TileEntityMachinePatternMonitor) client).getPos(),
+										((TileEntityMachinePatternMonitor) client).getPos());
+								markDirty();
+							}
+						}
+
+					}
+				}
 			}
 		} else {
 			if (isActive() && random.nextFloat() < 0.2f && getBlockType(BlockPatternStorage.class) != null

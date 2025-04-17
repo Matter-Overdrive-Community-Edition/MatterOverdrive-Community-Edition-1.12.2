@@ -8,7 +8,6 @@ import matteroverdrive.api.matter_network.IMatterNetworkComponent;
 import matteroverdrive.api.matter_network.IMatterNetworkConnection;
 import matteroverdrive.api.network.IMatterNetworkDispatcher;
 import matteroverdrive.api.transport.IGridNode;
-import matteroverdrive.blocks.includes.MOBlock;
 import matteroverdrive.container.matter_network.IMatterDatabaseMonitor;
 import matteroverdrive.data.transport.MatterNetwork;
 import matteroverdrive.machines.MOTileEntityMachine;
@@ -32,6 +31,7 @@ public class TileEntityMachinePatternMonitor extends MOTileEntityMachine
 	private ComponentMatterNetworkPatternMonitor networkComponent;
 	private ComponentMatterNetworkConfigs componentMatterNetworkConfigs;
 	private ComponentTaskProcessingPatternMonitor taskProcessingComponent;
+	public static int patternCount = 0;
 
 	public TileEntityMachinePatternMonitor() {
 		super(4);
