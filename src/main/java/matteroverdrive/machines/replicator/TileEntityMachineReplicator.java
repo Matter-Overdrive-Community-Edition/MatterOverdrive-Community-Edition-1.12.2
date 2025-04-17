@@ -154,13 +154,14 @@ public class TileEntityMachineReplicator extends MOTileEntityMachineMatter
 	boolean putInOutput(ItemStack item) {
 		if (getStackInSlot(OUTPUT_SLOT_ID).isEmpty()) {
 			setInventorySlotContents(OUTPUT_SLOT_ID, item);
-			world.notifyNeighborsOfStateChange(getPosition(), blockType, false);
 			return true;
 		} else {
 			if (getStackInSlot(OUTPUT_SLOT_ID).isStackable()
 					&& getStackInSlot(OUTPUT_SLOT_ID).getItemDamage() == item.getItemDamage()
 					&& getStackInSlot(OUTPUT_SLOT_ID).getItem() == item.getItem()) {
 				int newStackSize = getStackInSlot(OUTPUT_SLOT_ID).getCount() + 1;
+				this.world.markBlockRangeForRenderUpdate(this.pos, this.pos);
+					markDirty();
 
 				if (newStackSize <= getStackInSlot(OUTPUT_SLOT_ID).getMaxStackSize()) {
 					getStackInSlot(OUTPUT_SLOT_ID).setCount(newStackSize);
