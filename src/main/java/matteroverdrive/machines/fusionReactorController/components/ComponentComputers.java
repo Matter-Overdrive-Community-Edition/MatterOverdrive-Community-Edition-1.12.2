@@ -21,10 +21,9 @@ import java.util.Arrays;
 import java.util.EnumSet;
 
 @Optional.InterfaceList({
-		@Optional.Interface(modid = "computercraft", iface = "dan200.computercraft.api.peripheral.IPeripheralProvider")
-})
-public class ComponentComputers extends MachineComponentAbstract<TileEntityMachineFusionReactorController>  implements IPeripheral
-{
+		@Optional.Interface(modid = "computercraft", iface = "dan200.computercraft.api.peripheral.IPeripheral") })
+public class ComponentComputers extends MachineComponentAbstract<TileEntityMachineFusionReactorController>
+		implements IPeripheral {
 
 	private String[] methodNames = new String[] { "getStatus", "isValid", "getEnergyGenerated", "getMatterUsed",
 			"getEnergyStored", "getMatterStored" };
@@ -78,59 +77,75 @@ public class ComponentComputers extends MachineComponentAbstract<TileEntityMachi
 				machine.getCapability(MatterOverdriveCapabilities.MATTER_HANDLER, null).getMatterStored() };
 	}
 
-	 //region ComputerCraft
-	  
-	  @Override
-	  
-	  @Optional.Method(modid = "computercraft") public String getType() { return
-	  peripheralName; }
-	 
-	  @Override
-	  
-	  @Optional.Method(modid = "computercraft") public String[] getMethodNames() {
-	  return methodNames; }
-	  
-	  @Override
-	  
-	  @Optional.Method(modid = "computercraft") public Object[]
-	  callMethod(IComputerAccess computer, ILuaContext context, int method,
-	  Object[] arguments) throws LuaException, InterruptedException { try { return
-	  callMethod(method, arguments); } catch (Exception e) { throw new
-	  LuaException(e.getMessage()); } }
-	  
-	  @Override
-	  
-	  @Optional.Method(modid = "computercraft") public void attach(IComputerAccess
-	  computer) {
-	  
-	  }
-	  
-	  @Override
-	  
-	  @Optional.Method(modid = "computercraft") public void detach(IComputerAccess
-	  computer) {
-	  
-	  }
-	  
-	  @Override
-	  
-	  @Optional.Method(modid = "computercraft") public boolean equals(IPeripheral
-	  other) { return false; }
-	  	  
-	  @Optional.Method(modid = "opencomputers") public String[] methods() { return
-	  methodNames; }
-	  
-	  @Optional.Method(modid = "opencomputers") public Object[] invoke(String
-	  method, Context context, Arguments args) throws Exception { int methodId =
-	  Arrays.asList(methodNames).indexOf(method);
-	  
-	  if (methodId == -1) { throw new RuntimeException("The method " + method +
-	  " does not exist"); }
-	  
-	  return callMethod(methodId, args.toArray()); }
-	  
-	  @Optional.Method(modid = "opencomputers") public String getComponentName() {
-	  return peripheralName; }
+	// region ComputerCraft
+
+	@Override
+
+	@Optional.Method(modid = "computercraft")
+	public String getType() {
+		return peripheralName;
+	}
+
+	@Override
+
+	@Optional.Method(modid = "computercraft")
+	public String[] getMethodNames() {
+		return methodNames;
+	}
+
+	@Override
+
+	@Optional.Method(modid = "computercraft")
+	public Object[] callMethod(IComputerAccess computer, ILuaContext context, int method, Object[] arguments)
+			throws LuaException, InterruptedException {
+		try {
+			return callMethod(method, arguments);
+		} catch (Exception e) {
+			throw new LuaException(e.getMessage());
+		}
+	}
+
+	@Override
+
+	@Optional.Method(modid = "computercraft")
+	public void attach(IComputerAccess computer) {
+
+	}
+
+	@Override
+
+	@Optional.Method(modid = "computercraft")
+	public void detach(IComputerAccess computer) {
+
+	}
+
+	@Override
+
+	@Optional.Method(modid = "computercraft")
+	public boolean equals(IPeripheral other) {
+		return false;
+	}
+
+	@Optional.Method(modid = "opencomputers")
+	public String[] methods() {
+		return methodNames;
+	}
+
+	@Optional.Method(modid = "opencomputers")
+	public Object[] invoke(String method, Context context, Arguments args) throws Exception {
+		int methodId = Arrays.asList(methodNames).indexOf(method);
+
+		if (methodId == -1) {
+			throw new RuntimeException("The method " + method + " does not exist");
+		}
+
+		return callMethod(methodId, args.toArray());
+	}
+
+	@Optional.Method(modid = "opencomputers")
+	public String getComponentName() {
+		return peripheralName;
+	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt, EnumSet<MachineNBTCategory> categories) {
