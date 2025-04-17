@@ -10,6 +10,8 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.Sphere;
 
 public class TileEntityRendererGravitationalAnomaly extends TileEntitySpecialRenderer<TileEntityGravitationalAnomaly> {
@@ -60,6 +62,7 @@ public class TileEntityRendererGravitationalAnomaly extends TileEntitySpecialRen
 		GlStateManager.pushMatrix();
 		GlStateManager.enableBlend();
 		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+		GL11.glDepthMask(false);
 		GlStateManager.disableLighting();
 		GlStateManager.translate(x + 0.5, y + 0.5, z + 0.5);
 		GlStateManager.rotate(time * speed, 0, 1, 0);
@@ -86,6 +89,7 @@ public class TileEntityRendererGravitationalAnomaly extends TileEntitySpecialRen
 		GlStateManager.pushMatrix();
 		GlStateManager.enableBlend();
 		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+		//GL11.glDepthMask(true);
 		GlStateManager.disableLighting();
 
 		// Translate
@@ -115,6 +119,7 @@ public class TileEntityRendererGravitationalAnomaly extends TileEntitySpecialRen
 		// Reset
 		GlStateManager.enableLighting();
 		GlStateManager.disableBlend();
+		//GL11.glDepthMask(false);
 		GlStateManager.popMatrix();
 	}
 
