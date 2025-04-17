@@ -154,6 +154,7 @@ public class TileEntityMachineReplicator extends MOTileEntityMachineMatter
 	boolean putInOutput(ItemStack item) {
 		if (getStackInSlot(OUTPUT_SLOT_ID).isEmpty()) {
 			setInventorySlotContents(OUTPUT_SLOT_ID, item);
+			world.notifyNeighborsOfStateChange(getPosition(), blockType, false);
 			return true;
 		} else {
 			if (getStackInSlot(OUTPUT_SLOT_ID).isStackable()
@@ -302,10 +303,7 @@ public class TileEntityMachineReplicator extends MOTileEntityMachineMatter
 
 	@Override
 	public boolean canConnectFromSide(IBlockState blockState, EnumFacing side) {
-		// Allow connections from any side.
-		return true;
-
-//        return blockState.getValue(MOBlock.PROPERTY_DIRECTION).getOpposite().equals(side);
+        return blockState.getValue(MOBlock.PROPERTY_DIRECTION).getOpposite().equals(side);
 	}
 
 	@Override
