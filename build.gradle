@@ -8,18 +8,14 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-        classpath 'com.selesse:gradle-git-changelog:0.2.+'
     }
 }
 plugins {
     id 'maven'
     id 'maven-publish'
     id 'java'
-//    id 'net.minecrell.licenser' version '0.4.1'
-    id "com.hrznstudio.cursegradle" version "1.1.0"
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
-apply plugin: 'com.selesse.git.changelog'
 apply plugin: 'java'
 
 version = "$mc_version-$mod_version"
@@ -31,46 +27,6 @@ static def getCurrentYear() {
     def date = new Date()
     return date.format('yyyy')
 }
-
-//license {
-//    ext {
-//        name = "Matter Overdrive: Community Edition"
-//        organization = "Matter Overdrive: Community Edition"
-//        email = "contact@hrznstudio.com"
-//        url = "https://www.curseforge.com/minecraft/mc-mods/matter-overdrive-community-edition"
-//        year = getCurrentYear()
-//    }
-//
-//    header = file('HEADER')
-//    include '**/*.java'
-//}
-
-changelog {
-    title = "${archivesBaseName} - Changelog"
-
-    outputDirectory = file("$projectDir")
-
-    since = "beginning"
-
-    commitFormat = '%s (%an)'
-
-    markdown {
-        commitFormat = '* %s (%an)'
-    }
-
-    includeLines = {
-        !it.contains("Merge")
-    }
-
-    processLines = {
-        String input = it as String
-        if (input.contains('[ci skip] ')) {
-            input = input.minus('[ci skip] ')
-        }
-        input
-    }
-}
-
 sourceCompatibility = targetCompatibility = '1.8'
 compileJava {
     sourceCompatibility = targetCompatibility = '1.8'
@@ -123,7 +79,6 @@ processResources {
     }
 }
 
-
 jar {
     classifier = "universal"
     manifest.mainAttributes(
@@ -137,20 +92,6 @@ jar {
             "FMLAT": "mo_at.cfg"
     )
 }
-
-task deobfJar(type: Jar) {
-    from(sourceSets.main.java.srcDirs) {
-        include '*'
-    }
-    from(sourceSets.main.resources.srcDirs) {
-        include '*'
-    }
-    from(sourceSets.main.output) {
-        exclude '*'
-    }
-    classifier = "deobf"
-}
-
 task apiJar(type: Jar) {
     from(sourceSets.main.output) {
         include 'matteroverdrive/api/**'
@@ -159,51 +100,9 @@ task apiJar(type: Jar) {
 }
 
 artifacts {
-    archives deobfJar
     archives apiJar
 }
 
-curseforge {
-    if(System.getenv('HRZN_CURSE_KEY'))
-        apiKey = System.getenv('HRZN_CURSE_KEY')
-    else
-        apiKey = "NONE"
-    project {
-        apiUrl="https://minecraft.curseforge.com"
-        id = '557428'
-        changelog = file('CHANGELOG.md')
-        releaseType = 'release'
-        mainArtifact jar
-        addArtifact apiJar
-        addGameVersion "$mc_version"
-    }
-}
-
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: "file://$buildDir/repo")
-
-            pom {
-                groupId = project.group
-                version = project.version
-                artifactId = 'matteroverdrive-legacy-edition'
-                project {
-                    name "Matter Overdrive: Legacy Edition"
-                    packaging 'jar'
-                    description 'Legacy Edition of Matter Overdrive'
-                    url 'https://hrznstudio.com/mo'
-                    developers {
-                        developer {
-                            id 'coded'
-                            name 'Coded'
-                            roles {role 'developer'}
-                        }
-                    }
-                }
-            }
-        }
-    }
 runClient {
     jvmArgs "-Xmx1024m", "-Xms1024m", "-ea"
     if (project.hasProperty("appArgs")) {
@@ -213,5 +112,4 @@ runClient {
 
 runServer {
     jvmArgs "-Xmx1024m", "-Xms1024m", "-ea"
-}
 }
