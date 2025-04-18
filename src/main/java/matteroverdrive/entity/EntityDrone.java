@@ -7,15 +7,18 @@ import com.google.common.base.Optional;
 
 import matteroverdrive.entity.ai.EntityAIFollowCreator;
 import matteroverdrive.entity.ai.PathNavigateFly;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.IEntityOwnable;
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -23,6 +26,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.server.management.PreYggdrasilConverter;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
@@ -88,8 +92,7 @@ public class EntityDrone extends EntityCreature implements IEntityOwnable {
 		super.onUpdate();
 
 		if (targetPos != null) {
-			// this.motionY = MathHelper.clamp(((targetPos.getY() + 2) - this.posY), -0.2f,
-			// 0.2f);
+			 this.motionY = MathHelper.clamp(((targetPos.getY() + 2) - this.posY), -0.2f, 0.2f);
 		}
 
 		if (!getNavigator().noPath()) {
@@ -106,20 +109,18 @@ public class EntityDrone extends EntityCreature implements IEntityOwnable {
 							-motionZ * 2);
 				}
 			}
-			/*
-			 * IBlockState bottomBlock =
-			 * world.getBlockState(target.offset(EnumFacing.DOWN)); if
-			 * (bottomBlock.getBlock() != Blocks.air) { int blockID =
-			 * Block.getStateId(bottomBlock); for (int i = 0;i < 3;i++) { double angle =
-			 * rand.nextFloat()*Math.PI*2; float innerRadius = 0.4f; double x = posX +
-			 * (float)Math.sin(angle) * innerRadius; double z = posZ +
-			 * (float)Math.cos(angle) * innerRadius; float dirX = -(float) Math.sin(angle +
-			 * Math.PI) * 0.2f; float dirZ = -(float) Math.cos(angle + Math.PI) * 0.2f;
-			 * world.spawnParticle(EnumParticleTypes.BLOCK_DUST, x, target.getY(), z, dirX,
-			 * 0.15, dirZ, blockID); } }
-			 */
+			
+			  //IBlockState bottomBlock = world.getBlockState(targetPos.offset(EnumFacing.DOWN)); 
+			  //if (bottomBlock.getBlock() != Blocks.AIR) { 
+			//	  int blockID = Block.getStateId(bottomBlock); for (int i = 0;i < 3;i++) { 
+				//	  double angle = rand.nextFloat()*Math.PI*2; float innerRadius = 0.4f; double x = posX +
+			  //(float)Math.sin(angle) * innerRadius; double z = posZ +  (float)Math.cos(angle) * innerRadius; float dirX = -(float) Math.sin(angle +
+			  //Math.PI) * 0.2f; float dirZ = -(float) Math.cos(angle + Math.PI) * 0.2f;
+			  //world.spawnParticle(EnumParticleTypes.BLOCK_DUST, x, targetPos.getY(), z, dirX,
+			  //0.15, dirZ, blockID); } }
+			 
 		}
-		// this.motionY *= 0.6000000238418579D;
+		 this.motionY *= 0.6000000238418579D;
 	}
 
 	@Override
@@ -173,42 +174,42 @@ public class EntityDrone extends EntityCreature implements IEntityOwnable {
 
 	}
 
-	/*
-	 * @Override public void moveEntityWithHeading(float strafe, float forward) { if
-	 * (this.isInWater()) { this.moveRelative(strafe, forward, 0.02F);
-	 * this.move(this.motionX, this.motionY, this.motionZ); this.motionX *=
-	 * 0.800000011920929D; this.motionY *= 0.800000011920929D; this.motionZ *=
-	 * 0.800000011920929D; } else if (this.isInLava()) { this.moveRelative(strafe,
-	 * forward, 0.02F); this.moveEntity(this.motionX, this.motionY, this.motionZ);
-	 * this.motionX *= 0.5D; this.motionY *= 0.5D; this.motionZ *= 0.5D; } else {
-	 * float f = 0.91F;
-	 * 
-	 * if (this.onGround) { f = this.world.getBlockState(new
-	 * BlockPos(MathHelper.floor(this.posX),
-	 * MathHelper.floor(this.getEntityBoundingBox().minY) - 1,
-	 * MathHelper.floor(this.posZ))).getBlock().slipperiness * 0.91F; }
-	 * 
-	 * float f1 = 0.16277136F / (f * f * f); this.moveRelative(strafe, forward,
-	 * this.onGround ? 0.1F * f1 : 0.02F); f = 0.91F;
-	 * 
-	 * if (this.onGround) { f = this.world.getBlockState(new
-	 * BlockPos(MathHelper.floor(this.posX),
-	 * MathHelper.floor(this.getEntityBoundingBox().minY) - 1,
-	 * MathHelper.floor(this.posZ))).getBlock().slipperiness * 0.91F; }
-	 * 
-	 * this.move(MoverType.SELF,this.motionX, this.motionY, this.motionZ);
-	 * this.motionX *= (double)f; this.motionY *= (double)f; this.motionZ *=
-	 * (double)f; }
-	 * 
-	 * this.prevLimbSwingAmount = this.limbSwingAmount; double d1 = this.posX -
-	 * this.prevPosX; double d0 = this.posZ - this.prevPosZ; float f2 =
-	 * MathHelper.sqrt(d1 * d1 + d0 * d0) * 4.0F;
-	 * 
-	 * if (f2 > 1.0F) { f2 = 1.0F; }
-	 * 
-	 * this.limbSwingAmount += (f2 - this.limbSwingAmount) * 0.4F; this.limbSwing +=
-	 * this.limbSwingAmount; }
-	 */
+	
+	  public void moveEntityWithHeading(float strafe, float forward) { if
+	  (this.isInWater()) { this.moveRelative(strafe, forward, 0.02F, forward);
+	  this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ); this.motionX *=
+	  0.800000011920929D; this.motionY *= 0.800000011920929D; this.motionZ *=
+	  0.800000011920929D; } else if (this.isInLava()) { this.moveRelative(strafe,
+	  forward, 0.02F, forward); this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
+	  this.motionX *= 0.5D; this.motionY *= 0.5D; this.motionZ *= 0.5D; } else {
+	  float f = 0.91F;
+	  
+	  if (this.onGround) { f = this.world.getBlockState(new
+	  BlockPos(MathHelper.floor(this.posX),
+	  MathHelper.floor(this.getEntityBoundingBox().minY) - 1,
+	  MathHelper.floor(this.posZ))).getBlock().slipperiness * 0.91F; }
+	  
+	  float f1 = 0.16277136F / (f * f * f); this.moveRelative(strafe, forward,
+	  this.onGround ? 0.1F * f1 : 0.02F, f1); f = 0.91F;
+	  
+	  if (this.onGround) { f = this.world.getBlockState(new
+	  BlockPos(MathHelper.floor(this.posX),
+	  MathHelper.floor(this.getEntityBoundingBox().minY) - 1,
+	  MathHelper.floor(this.posZ))).getBlock().slipperiness * 0.91F; }
+	  
+	  this.move(MoverType.SELF,this.motionX, this.motionY, this.motionZ);
+	  this.motionX *= (double)f; this.motionY *= (double)f; this.motionZ *=
+	  (double)f; }
+	  
+	  this.prevLimbSwingAmount = this.limbSwingAmount; double d1 = this.posX -
+	  this.prevPosX; double d0 = this.posZ - this.prevPosZ; float f2 =
+	  MathHelper.sqrt(d1 * d1 + d0 * d0) * 4.0F;
+	  
+	  if (f2 > 1.0F) { f2 = 1.0F; }
+	  
+	  this.limbSwingAmount += (f2 - this.limbSwingAmount) * 0.4F; this.limbSwing +=
+	  this.limbSwingAmount; }
+	 
 	@Override
 	public boolean isOnLadder() {
 		return false;
