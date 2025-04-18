@@ -1,6 +1,7 @@
 
 package matteroverdrive.data.inventory;
 
+import matteroverdrive.MatterOverdrive;
 import matteroverdrive.client.render.HoloIcon;
 import matteroverdrive.proxy.ClientProxy;
 import net.minecraft.item.ItemStack;
@@ -13,8 +14,13 @@ public class DestinationFilterSlot extends Slot {
 	}
 
 	@Override
-	public boolean isValidForSlot(ItemStack item) {
-		return true;
+	public boolean isValidForSlot(ItemStack itemStack) {
+		if (this.getItem().getCount() < 4) {
+			if (itemStack != null && !itemStack.isEmpty()) {
+				return itemStack.getItem() == MatterOverdrive.ITEMS.networkFlashDrive;
+			}
+		}
+		return false;
 	}
 
 	@Override
