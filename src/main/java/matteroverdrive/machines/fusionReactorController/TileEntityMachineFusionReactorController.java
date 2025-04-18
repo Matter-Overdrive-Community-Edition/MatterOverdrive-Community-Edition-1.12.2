@@ -69,7 +69,7 @@ public class TileEntityMachineFusionReactorController extends MOTileEntityMachin
 	public static int MAX_GRAVITATIONAL_ANOMALY_DISTANCE = 3;
 	public static int ENERGY_CAPACITY = 100000000;
 	public static int MATTER_STORAGE = 2048;
-	public static int ENERGY_PER_TICK = 2048;
+	public static int ENERGY_PER_TICK = 9048;
 	public static double MATTER_DRAIN_PER_TICK = 1.0D / 80.0D;
 	private final TimeTracker structureCheckTimer;
 	private final MultiBlockTileStructureMachine multiBlock;
@@ -370,7 +370,7 @@ public class TileEntityMachineFusionReactorController extends MOTileEntityMachin
 		if (anomalyPosition != null) {
 			TileEntity entity = world.getTileEntity(getPos().add(anomalyPosition));
 			if (entity instanceof TileEntityGravitationalAnomaly) {
-				return ((TileEntityGravitationalAnomaly) entity).getRealMassUnsuppressed();
+				return ((TileEntityGravitationalAnomaly) entity).getRealMassUnsuppressed() * 10;
 			}
 		}
 		return 0;
