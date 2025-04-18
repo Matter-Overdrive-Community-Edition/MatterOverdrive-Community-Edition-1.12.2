@@ -19,21 +19,21 @@ public class TileEntityRendererPatternMonitor extends TileEntityRendererMonitor<
 
 	@Override
 	public void drawScreen(TileEntityMachinePatternMonitor tileEntity, float ticks) {
+		int count = tileEntity.getCount();
 		Minecraft.getMinecraft().renderEngine.bindTexture(screenTexture);
 		glColor3f(Reference.COLOR_HOLO.getFloatR() * 0.7f, Reference.COLOR_HOLO.getFloatG() * 0.7f,
 				Reference.COLOR_HOLO.getFloatB() * 0.7f);
 		DecimalFormat dF = new DecimalFormat("#.###");
-		int value = TileEntityMachinePatternMonitor.patternCount;
 		RenderUtils.drawPlane(1);
 		GlStateManager.pushMatrix();
-		int countWitdth = Minecraft.getMinecraft().fontRenderer.getStringWidth(dF.format(value));
+		int countWitdth = Minecraft.getMinecraft().fontRenderer.getStringWidth(dF.format(count));
 		double scale = ((double) Minecraft.getMinecraft().fontRenderer
 				.getStringWidth(MOStringHelper.formatNumber(10, "0")) / (double) countWitdth);
 		scale = Math.min(scale, 1);
 		GlStateManager.translate(0.47,
 				0.33 + (Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT * 0.03) * (1 - scale) * 0.5, 0);
 		GlStateManager.scale(scale * 0.03, scale * 0.03, scale * 0.03);
-		Minecraft.getMinecraft().fontRenderer.drawString(dF.format(value), 0, 0, 0x78a1b3);
+		Minecraft.getMinecraft().fontRenderer.drawString(dF.format(count), 0, 0, 0x78a1b3);
 		GlStateManager.popMatrix();
 	}
 }

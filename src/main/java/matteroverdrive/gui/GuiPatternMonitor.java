@@ -37,15 +37,12 @@ public class GuiPatternMonitor extends MOGuiNetworkMachine<TileEntityMachinePatt
 		requestButton.setToolTip(MOStringHelper.translateToLocal("gui.tooltip.button.request"));
 		elementGrid = new ElementPatternsGrid(this, 48, 40, 160, 110);
 		searchField = new MOElementTextField(this, 41, 26, 167, 14);
-		// slotsList.addElement(refreshButton);
 		slotsList.addElement(requestButton);
-		// elementGrid.updateStackList(((ContainerPatternMonitor)inventorySlots).getGuiPatterns());
 	}
 
 	@Override
 	public void registerPages(MOBaseContainer container, TileEntityMachinePatternMonitor machine) {
 		super.registerPages(container, machine);
-
 		pageTasks = new PageTasks(this, 0, 0, xSize, ySize, machine.getTaskQueue(0));
 		pageTasks.setName("Tasks");
 		AddPage(pageTasks, ClientProxy.holoIcons.getIcon("page_icon_tasks"),
@@ -55,9 +52,6 @@ public class GuiPatternMonitor extends MOGuiNetworkMachine<TileEntityMachinePatt
 	@Override
 	public void initGui() {
 		super.initGui();
-
-		// this.addElement(refreshButton);
-		// this.addElement(requestButton);
 		pages.get(0).addElement(elementGrid);
 		pages.get(0).addElement(searchField);
 		AddHotbarPlayerSlots(inventorySlots, this);
@@ -92,13 +86,6 @@ public class GuiPatternMonitor extends MOGuiNetworkMachine<TileEntityMachinePatt
 	@Override
 	protected void updateElementInformation() {
 		super.updateElementInformation();
-
-		// if (machine.needsRefresh())
-		// {
-		// elementGrid.updateStackList(machine.getGuiPatterns());
-		// machine.forceSearch(false);
-		//
-
 		elementGrid.setFilter(searchField.getText());
 	}
 

@@ -31,7 +31,7 @@ public class TileEntityMachinePatternMonitor extends MOTileEntityMachine
 	private ComponentMatterNetworkPatternMonitor networkComponent;
 	private ComponentMatterNetworkConfigs componentMatterNetworkConfigs;
 	private ComponentTaskProcessingPatternMonitor taskProcessingComponent;
-	public static int patternCount = 0;
+	private int count = 0;
 
 	public TileEntityMachinePatternMonitor() {
 		super(4);
@@ -67,11 +67,26 @@ public class TileEntityMachinePatternMonitor extends MOTileEntityMachine
 	@Override
 	public void writeCustomNBT(NBTTagCompound nbt, EnumSet<MachineNBTCategory> categories, boolean toDisk) {
 		super.writeCustomNBT(nbt, categories, toDisk);
+
+		if (categories.contains(MachineNBTCategory.GUI)) {
+			nbt.setInteger("Count", count);
+		}
 	}
 
 	@Override
 	public void readCustomNBT(NBTTagCompound nbt, EnumSet<MachineNBTCategory> categories) {
 		super.readCustomNBT(nbt, categories);
+		if (categories.contains(MachineNBTCategory.GUI)) {
+			count = nbt.getInteger("Count");
+		}
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int Count) {
+		this.count = Count;
 	}
 
 	@Override
