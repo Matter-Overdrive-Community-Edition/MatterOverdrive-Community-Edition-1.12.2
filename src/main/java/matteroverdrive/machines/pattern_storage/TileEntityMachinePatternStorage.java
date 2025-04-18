@@ -33,6 +33,7 @@ import matteroverdrive.util.MatterHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundEvent;
@@ -48,6 +49,8 @@ import java.util.List;
 public class TileEntityMachinePatternStorage extends MOTileEntityMachineEnergy implements IMatterNetworkClient,
 		IMatterDatabase, IScannable, IMatterNetworkConnection, IMatterNetworkDispatcher {
 	public static final int TASK_PROCESS_DELAY = 40;
+	public static final int CHILL_COST = 10;
+	public static final int ENERGY_DRAIN_PER_DRIVE = 10;
 	private static final EnumSet<UpgradeTypes> upgradeTypes = EnumSet.of(UpgradeTypes.PowerStorage,
 			UpgradeTypes.PowerUsage);
 	public static int ENERGY_CAPACITY = 512000;
@@ -76,55 +79,57 @@ public class TileEntityMachinePatternStorage extends MOTileEntityMachineEnergy i
 	@Override
 	public void update() {
 		super.update();
-
 		if (!world.isRemote) {
-			if (energyStorage.getEnergyStored() > 0) {
-				manageLinking();
-				if (getNetwork() != null) {
-					List<IMatterNetworkClient> clients = getNetwork().getClients();
-					List<IMatterDatabase> databases = new ArrayList<>();
-					List<TileEntityMachinePatternMonitor> monitors = new ArrayList<>();
-
-					for (IMatterNetworkClient client : clients) {
-						if (client instanceof IMatterDatabase) {
-							databases.add((IMatterDatabase) client);
-						}
+			if (this.energyStorage.getEnergyStored() >= getEnergyDrainPerTick()) {
+				if (hasEnoughPower()) {
+					if (isActive() && random.nextFloat() < 0.2f && getBlockType(BlockPatternStorage.class) != null
+							&& getBlockType(BlockPatternStorage.class).hasVentParticles
+							&& world.getBlockState(getPos()).getBlock() == MatterOverdrive.BLOCKS.pattern_storage) {
+						SpawnVentParticles(0.03f, world.getBlockState(getPos()).getValue(MOBlock.PROPERTY_DIRECTION),
+								1);
 					}
-					patternCount = 0;
-					for (IMatterDatabase database : databases) {
-						for (ItemStack patternDrive : database.getPatternStorageList()) {
-							if (patternDrive != null && patternDrive.getItem() instanceof IMatterPatternStorage) {
-								int capacity = ((IMatterPatternStorage) patternDrive.getItem())
-										.getCapacity(patternDrive);
-								for (int i = 0; i < capacity; i++) {
-									ItemPattern pattern = ((IMatterPatternStorage) patternDrive.getItem())
-											.getPatternAt(patternDrive, i);
-									if (pattern != null) {
-										patternCount++;
+					this.energyStorage.extractEnergy(getEnergyDrainPerTick(), false);
+					UpdateClientPower();
+					manageLinking();
+					if (getNetwork() != null) {
+						List<IMatterNetworkClient> clients = getNetwork().getClients();
+						List<IMatterDatabase> databases = new ArrayList<>();
+						List<TileEntityMachinePatternMonitor> monitors = new ArrayList<>();
+						for (IMatterNetworkClient client : clients) {
+							if (client instanceof IMatterDatabase) {
+								databases.add((IMatterDatabase) client);
+							}
+						}
+						patternCount = 0;
+						for (IMatterDatabase database : databases) {
+							for (ItemStack patternDrive : database.getPatternStorageList()) {
+								if (patternDrive != null && patternDrive.getItem() instanceof IMatterPatternStorage) {
+									int capacity = ((IMatterPatternStorage) patternDrive.getItem())
+											.getCapacity(patternDrive);
+									for (int i = 0; i < capacity; i++) {
+										ItemPattern pattern = ((IMatterPatternStorage) patternDrive.getItem())
+												.getPatternAt(patternDrive, i);
+										if (pattern != null) {
+											patternCount++;
+										}
 									}
 								}
 							}
 						}
-					}
-					if (TileEntityMachinePatternMonitor.patternCount != patternCount) {
-						for (IMatterNetworkClient client : clients) {
-							if (client instanceof TileEntityMachinePatternMonitor) {
-								monitors.add((TileEntityMachinePatternMonitor) client);
-								TileEntityMachinePatternMonitor.patternCount = patternCount;
-								world.markBlockRangeForRenderUpdate(((TileEntityMachinePatternMonitor) client).getPos(),
-										((TileEntityMachinePatternMonitor) client).getPos());
-								markDirty();
+						if (TileEntityMachinePatternMonitor.patternCount != patternCount) {
+							for (IMatterNetworkClient client : clients) {
+								if (client instanceof TileEntityMachinePatternMonitor) {
+									monitors.add((TileEntityMachinePatternMonitor) client);
+									TileEntityMachinePatternMonitor.patternCount = patternCount;
+									world.markBlockRangeForRenderUpdate(
+											((TileEntityMachinePatternMonitor) client).getPos(),
+											((TileEntityMachinePatternMonitor) client).getPos());
+									markDirty();
+								}
 							}
 						}
-
 					}
 				}
-			}
-		} else {
-			if (isActive() && random.nextFloat() < 0.2f && getBlockType(BlockPatternStorage.class) != null
-					&& getBlockType(BlockPatternStorage.class).hasVentParticles
-					&& world.getBlockState(getPos()).getBlock() == MatterOverdrive.BLOCKS.pattern_storage) {
-				SpawnVentParticles(0.03f, world.getBlockState(getPos()).getValue(MOBlock.PROPERTY_DIRECTION), 1);
 			}
 		}
 	}
@@ -378,13 +383,39 @@ public class TileEntityMachinePatternStorage extends MOTileEntityMachineEnergy i
 
 	@Override
 	public boolean canConnectFromSide(IBlockState blockState, EnumFacing side) {
-		// return side == blockState.getValue(MOBlock.PROPERTY_DIRECTION);
+		EnumFacing facing = blockState.getValue(MOBlock.PROPERTY_DIRECTION);
+		return facing.getOpposite() == side;
+	}
 
-		// Let's see if this allows connections from ANY side.
-		return true;
+	public boolean hasEnoughPower() {
+		return energyStorage.getEnergyStored() >= getEnergyDrainPerTick();
+	}
 
-		// EnumFacing facing = blockState.getValue(MOBlock.PROPERTY_DIRECTION);
-		// return facing.getOpposite() == side;
+	public int getEnergyDrainPerTick() {
+		int maxEnergy = getEnergyDrainMax();
+		return maxEnergy;
+	}
+
+	public int getEnergyDrainMax() {
+		int patternDrives = 0;
+		for (ItemStack patternDrive : getPatternStorageList()) {
+			if (patternDrive != null && patternDrive.getItem() instanceof IMatterPatternStorage) {
+				int capacity = ((IMatterPatternStorage) patternDrive.getItem()).getCapacity(patternDrive);
+				for (int i = 0; i < capacity; i++) {
+					IMatterPatternStorage pattern = ((IMatterPatternStorage) patternDrive.getItem());
+					if (pattern != null) {
+						patternDrives++;
+					}
+				}
+			}
+		}
+		if (patternDrives > 0) {
+			patternDrives = patternDrives / 2;
+			int Drives = ENERGY_DRAIN_PER_DRIVE * patternDrives;
+			return (int) Math.round(Drives) + Math.round(CHILL_COST);
+		} else {
+			return (int) Math.round(CHILL_COST);
+		}
 	}
 
 	@Override
