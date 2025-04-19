@@ -146,7 +146,7 @@ public class MatterOverdriveBlocks {
 		network_router = register(new BlockNetworkRouter(TRITANIUM, "network_router"));
 		matter_analyzer = register(new BlockMatterAnalyzer(TRITANIUM, "matter_analyzer"));
 		matter_analyzer_running = register(new BlockMatterAnalyzer(TRITANIUM, "matter_analyzer_running"));
-		matter_analyzer.setCreativeTab(null);
+		matter_analyzer_running.setCreativeTab(null);
 		pattern_monitor = register(new BlockPatternMonitor(TRITANIUM, "pattern_monitor"));
 		pattern_storage = register(new BlockPatternStorage(TRITANIUM, "pattern_storage"));
 		network_switch = register(new BlockNetworkSwitch(TRITANIUM, "network_switch"));
