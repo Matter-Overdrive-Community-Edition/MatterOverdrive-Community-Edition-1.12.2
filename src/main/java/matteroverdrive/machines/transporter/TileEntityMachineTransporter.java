@@ -53,11 +53,10 @@ import java.util.EnumSet;
 import java.util.List;
 
 @Optional.InterfaceList({
-		@Optional.Interface(modid = "computercraft", iface = "dan200.computercraft.api.peripheral.IPeripheral"),
-            @Optional.Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "opencomputers"),
-            @Optional.Interface(iface = "li.cil.oc.api.network.ManagedPeripheral", modid = "opencomputers")
-    })
-    @SimpleComponent.SkipInjection
+		@Optional.Interface(iface = "dan200.computercraft.api.peripheral.IPeripheral", modid = "computercraft"),
+		@Optional.Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "opencomputers"),
+		@Optional.Interface(iface = "li.cil.oc.api.network.ManagedPeripheral", modid = "opencomputers") })
+@SimpleComponent.SkipInjection
 public class TileEntityMachineTransporter extends MOTileEntityMachineMatter
 		implements ITransportList, IPeripheral, SimpleComponent, ManagedPeripheral {
 	public static int MATTER_PER_TRANSPORT = 25;
@@ -456,7 +455,8 @@ public class TileEntityMachineTransporter extends MOTileEntityMachineMatter
 
 	@Override
 
-	@Optional.Method(modid = "OpenComputers") public Object[] invoke(String
-			  method, Context context, Arguments args) throws Exception { return
-			  computerComponent.invoke(method,context,args); }
+	@Optional.Method(modid = "OpenComputers")
+	public Object[] invoke(String method, Context context, Arguments args) throws Exception {
+		return computerComponent.invoke(method, context, args);
+	}
 }

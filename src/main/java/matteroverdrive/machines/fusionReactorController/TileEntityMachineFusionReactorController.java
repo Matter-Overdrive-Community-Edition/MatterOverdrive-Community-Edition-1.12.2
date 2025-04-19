@@ -53,12 +53,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.fml.common.Optional;
 
 @Optional.InterfaceList({
-		@Optional.Interface(modid = "computercraft", iface = "dan200.computercraft.api.peripheral.IPeripheral"),
-        @Optional.Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "opencomputers"),
-        @Optional.Interface(iface = "li.cil.oc.api.network.ManagedPeripheral", modid = "opencomputers")
-})
+		@Optional.Interface(iface = "dan200.computercraft.api.peripheral.IPeripheral", modid = "computercraft"),
+		@Optional.Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "opencomputers"),
+		@Optional.Interface(iface = "li.cil.oc.api.network.ManagedPeripheral", modid = "opencomputers") })
 @SimpleComponent.SkipInjection
-public class TileEntityMachineFusionReactorController extends MOTileEntityMachineMatter implements IPeripheral, SimpleComponent, ManagedPeripheral {
+public class TileEntityMachineFusionReactorController extends MOTileEntityMachineMatter
+		implements IPeripheral, SimpleComponent, ManagedPeripheral {
 	public static final int[] positions = new int[] { 0, 5, 1, 0, 2, 0, 3, 1, 4, 2, 5, 3, 5, 4, 5, 5, 5, 6, 5, 7, 4, 8,
 			3, 9, 2, 10, 1, 10, 0, 10, -1, 10, -2, 10, -3, 9, -4, 8, -5, 7, -5, 6, -5, 5, -5, 4, -5, 3, -4, 2, -3, 1,
 			-2, 0, -1, 0 };
@@ -423,10 +423,12 @@ public class TileEntityMachineFusionReactorController extends MOTileEntityMachin
 	}
 
 	public String getCMonitorInfo() {
-			return ("POWER 100\nCHARGE " + DecimalFormat.getPercentInstance().format((double) getEnergyStorage().getEnergyStored() / 
-					(double) getEnergyStorage().getMaxEnergyStored()) + "\nMATTER " 
-					+ DecimalFormat.getPercentInstance().format((double) getMatterStorage().getMatterStored()
-					/ (double) getMatterStorage().getCapacity()));
+		return ("POWER 100\nCHARGE "
+				+ DecimalFormat.getPercentInstance()
+						.format((double) getEnergyStorage().getEnergyStored()
+								/ (double) getEnergyStorage().getMaxEnergyStored())
+				+ "\nMATTER " + DecimalFormat.getPercentInstance().format(
+						(double) getMatterStorage().getMatterStored() / (double) getMatterStorage().getCapacity()));
 	}
 
 	public MonitorInfo getMonitorInfo() {
@@ -466,59 +468,74 @@ public class TileEntityMachineFusionReactorController extends MOTileEntityMachin
 		return super.getCapability(capability, facing);
 	}
 
+	// region ComputerCraft
 
-	  //region ComputerCraft
-	  
-	  @Override
-	  
-	  @Optional.Method(modid = "computercraft") public String getType() { return
-	  componentComputers.getType(); }
-	  
-	  @Override
-	  
-	  @Optional.Method(modid = "computercraft") public String[] getMethodNames() {
-	  return componentComputers.getMethodNames(); }
-	  
-	  @Override
-	  
-	  @Optional.Method(modid = "computercraft") public Object[]
-	  callMethod(IComputerAccess computer, ILuaContext context, int method,
-	  Object[] arguments) throws LuaException, InterruptedException { return
-	  componentComputers.callMethod(computer,context,method,arguments); }
-	  
-	  @Override
-	  
-	  @Optional.Method(modid = "computercraft") public void attach(IComputerAccess
-	  computer) {componentComputers.attach(computer);}
-	  
-	  @Override
-	  
-	  @Optional.Method(modid = "computercraft") public void detach(IComputerAccess
-	  computer) {componentComputers.detach(computer);}
-	  
-	  @Override
-	  
-	  @Optional.Method(modid = "computercraft") public boolean equals(IPeripheral
-	  other) { return componentComputers.equals(other); }
-	  
-	  //endregion
+	@Override
 
-	  //region OpenComputers
-	  @Override
-	  
-	  @Optional.Method(modid = "opencomputers") public String getComponentName() {
-	  return componentComputers.getComponentName(); }
-	  
-	  @Override
-	  
-	  @Optional.Method(modid = "opencomputers") public String[] methods() { return
-	  componentComputers.getMethodNames(); }
-	  
-	  @Override
-	  
-		@Optional.Method(modid = "OpenComputers") public Object[] invoke(String
-				  method, Context context, Arguments args) throws Exception { return
-				  componentComputers.invoke(method,context,args); }
+	@Optional.Method(modid = "computercraft")
+	public String getType() {
+		return componentComputers.getType();
+	}
+
+	@Override
+
+	@Optional.Method(modid = "computercraft")
+	public String[] getMethodNames() {
+		return componentComputers.getMethodNames();
+	}
+
+	@Override
+
+	@Optional.Method(modid = "computercraft")
+	public Object[] callMethod(IComputerAccess computer, ILuaContext context, int method, Object[] arguments)
+			throws LuaException, InterruptedException {
+		return componentComputers.callMethod(computer, context, method, arguments);
+	}
+
+	@Override
+
+	@Optional.Method(modid = "computercraft")
+	public void attach(IComputerAccess computer) {
+		componentComputers.attach(computer);
+	}
+
+	@Override
+
+	@Optional.Method(modid = "computercraft")
+	public void detach(IComputerAccess computer) {
+		componentComputers.detach(computer);
+	}
+
+	@Override
+
+	@Optional.Method(modid = "computercraft")
+	public boolean equals(IPeripheral other) {
+		return componentComputers.equals(other);
+	}
+
+	// endregion
+
+	// region OpenComputers
+	@Override
+
+	@Optional.Method(modid = "opencomputers")
+	public String getComponentName() {
+		return componentComputers.getComponentName();
+	}
+
+	@Override
+
+	@Optional.Method(modid = "opencomputers")
+	public String[] methods() {
+		return componentComputers.getMethodNames();
+	}
+
+	@Override
+
+	@Optional.Method(modid = "OpenComputers")
+	public Object[] invoke(String method, Context context, Arguments args) throws Exception {
+		return componentComputers.invoke(method, context, args);
+	}
 
 	public static enum MonitorInfo implements IStringSerializable {
 		INVALID_STRUCTURE, NEED_COILS, INVALID_MATERIALS, NO_ANOMALY, ANOMALY_TOO_FAR, OK;
