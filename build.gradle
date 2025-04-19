@@ -104,7 +104,7 @@ artifacts {
 }
 
 runClient {
-    jvmArgs "-Xmx1024m", "-Xms1024m", "-ea"
+    jvmArgs "-Xmx2048m", "-Xms2048m", "-ea"
     if (project.hasProperty("appArgs")) {
         args Eval.me(appArgs)
     }
