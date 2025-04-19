@@ -1,13 +1,18 @@
 
 package matteroverdrive.items;
 
+import matteroverdrive.MatterOverdrive;
+import matteroverdrive.data.matter_network.ItemPattern;
 import matteroverdrive.items.includes.MOBaseItem;
+import matteroverdrive.util.MatterDatabaseHelper;
+import matteroverdrive.util.MatterHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -32,13 +37,14 @@ public class TransportFlashDrive extends MOBaseItem {
 	@SideOnly(Side.CLIENT)
 	public void addDetails(ItemStack itemstack, EntityPlayer player, @Nullable World worldIn, List<String> infos) {
 		super.addDetails(itemstack, player, worldIn, infos);
-
 		if (hasTarget(itemstack)) {
 			BlockPos target = getTarget(itemstack);
 			IBlockState state = player.world.getBlockState(target);
 			Block block = state.getBlock();
 			infos.add(TextFormatting.YELLOW + String.format("[%s] %s", target.toString(),
 					state.getMaterial() != Material.AIR ? block.getLocalizedName() : "Unknown"));
+		} else {
+			infos.add(TextFormatting.RED + "No Location Information.");
 		}
 	}
 
@@ -80,7 +86,22 @@ public class TransportFlashDrive extends MOBaseItem {
 		return null;
 	}
 
+	@Override
+	public boolean hasDetails(ItemStack itemStack) {
+		return true;
+	}
+
 	public boolean hasTarget(ItemStack itemStack) {
 		return itemStack.hasTagCompound() && itemStack.getTagCompound().hasKey("target", Constants.NBT.TAG_LONG);
+	}
+
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+		ItemStack stack = playerIn.getHeldItem(handIn);
+		if (playerIn.isSneaking()) {
+			return new ActionResult<>(EnumActionResult.SUCCESS,
+					new ItemStack(MatterOverdrive.ITEMS.transportFlashDrive, 1, 0));
+		}
+		return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
 	}
 }
