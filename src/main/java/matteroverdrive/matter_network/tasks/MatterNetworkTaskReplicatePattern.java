@@ -54,8 +54,7 @@ public class MatterNetworkTaskReplicatePattern extends MatterNetworkTask {
 
 	@Override
 	public String getName() {
-		return String.format("[%s] %s", amount,
-				MOStringHelper.translateToLocal(pattern.getItem().getTranslationKey() + ".name"));
+		return String.format("[%s] %s", amount, pattern.getDisplayName());
 	}
 
 	public ItemPattern getPattern() {
