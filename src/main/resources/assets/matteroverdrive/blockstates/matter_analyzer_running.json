@@ -6,7 +6,7 @@
       "bottom": "matteroverdrive:blocks/base",
       "top": "matteroverdrive:blocks/analyzer_top",
       "side": "matteroverdrive:blocks/vent2",
-      "front": "matteroverdrive:blocks/analyzer_front",
+      "front": "matteroverdrive:blocks/analyzer_front_anim",
       "back": "matteroverdrive:blocks/network_port",
       "particle": "matteroverdrive:blocks/analyzer_front"
     }
