@@ -56,6 +56,7 @@ public class BlockDecomposer extends MOMatterEnergyStorageBlock<TileEntityMachin
 		}
 	}
 
+	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return Item.getItemFromBlock(MatterOverdrive.BLOCKS.decomposer);
 	}
