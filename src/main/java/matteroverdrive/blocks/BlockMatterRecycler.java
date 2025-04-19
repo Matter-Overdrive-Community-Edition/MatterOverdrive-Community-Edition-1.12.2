@@ -4,20 +4,22 @@ import matteroverdrive.MatterOverdrive;
 import matteroverdrive.blocks.includes.MOMatterEnergyStorageBlock;
 import matteroverdrive.tile.TileEntityMachineMatterRecycler;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 import javax.annotation.Nonnull;
 
 public class BlockMatterRecycler extends MOMatterEnergyStorageBlock<TileEntityMachineMatterRecycler> {
-	public static final PropertyBool RUNNING = PropertyBool.create("running");
+	private static boolean keepInventory;
 
 	public BlockMatterRecycler(Material material, String name) {
 		super(material, name, true, true);
@@ -25,81 +27,62 @@ public class BlockMatterRecycler extends MOMatterEnergyStorageBlock<TileEntityMa
 		setHardness(20.0F);
 		this.setResistance(9.0f);
 		this.setHarvestLevel("pickaxe", 2);
-		this.setDefaultState(getBlockState().getBaseState().withProperty(RUNNING, false)
-				.withProperty(PROPERTY_DIRECTION, EnumFacing.NORTH));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(PROPERTY_DIRECTION, EnumFacing.NORTH));
+		this.setTranslationKey("matter_recycler");
 		setHasGui(true);
 	}
 
 	@Nonnull
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, PROPERTY_DIRECTION, RUNNING);
+		return new BlockStateContainer(this, PROPERTY_DIRECTION);
 	}
 
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
 			ItemStack stack) {
 		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+	}
 
-		IBlockState blockState = worldIn.getBlockState(pos);
+	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+		if (keepInventory) {
 
-		worldIn.setBlockState(pos, blockState.withProperty(RUNNING, false));
+		} else {
+
+			super.breakBlock(worldIn, pos, state);
+		}
+	}
+
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return Item.getItemFromBlock(MatterOverdrive.BLOCKS.recycler);
 	}
 
 	public static void setState(boolean active, World worldIn, BlockPos pos) {
-		IBlockState state = worldIn.getBlockState(pos);
-		TileEntity tileEntity = worldIn.getTileEntity(pos);
+		IBlockState iblockstate = worldIn.getBlockState(pos);
+		TileEntity tileentity = worldIn.getTileEntity(pos);
+		keepInventory = true;
 
 		if (active) {
-			worldIn.setBlockState(pos, MatterOverdrive.BLOCKS.recycler.getDefaultState()
-					.withProperty(PROPERTY_DIRECTION, state.getValue(PROPERTY_DIRECTION)).withProperty(RUNNING, true),
-					3);
+			worldIn.setBlockState(pos, MatterOverdrive.BLOCKS.recycler_running.getDefaultState()
+					.withProperty(PROPERTY_DIRECTION, iblockstate.getValue(PROPERTY_DIRECTION)), 3);
+			worldIn.setBlockState(pos, MatterOverdrive.BLOCKS.recycler_running.getDefaultState()
+					.withProperty(PROPERTY_DIRECTION, iblockstate.getValue(PROPERTY_DIRECTION)), 3);
 		} else {
 			worldIn.setBlockState(pos, MatterOverdrive.BLOCKS.recycler.getDefaultState()
-					.withProperty(PROPERTY_DIRECTION, state.getValue(PROPERTY_DIRECTION)).withProperty(RUNNING, false),
-					3);
+					.withProperty(PROPERTY_DIRECTION, iblockstate.getValue(PROPERTY_DIRECTION)), 3);
+			worldIn.setBlockState(pos, MatterOverdrive.BLOCKS.recycler.getDefaultState()
+					.withProperty(PROPERTY_DIRECTION, iblockstate.getValue(PROPERTY_DIRECTION)), 3);
 		}
 
-		if (tileEntity != null) {
-			tileEntity.validate();
+		keepInventory = false;
 
-			worldIn.setTileEntity(pos, tileEntity);
+		if (tileentity != null) {
+			tileentity.validate();
+			worldIn.setTileEntity(pos, tileentity);
 		}
 	}
-
-//    @SideOnly(Side.CLIENT)
-//	public void registerBlockIcons(IIconRegister iconRegister)
-//    {
-//        this.iconTop = iconRegister.registerIcon(Reference.MOD_ID + ":decomposer_top");
-//        this.iconSideAnim = iconRegister.registerIcon(Reference.MOD_ID + ":recycler_side_anim");
-//    }
-//
-//    @SideOnly(Side.CLIENT)
-//    public IIcon getIcon(int side, int meta)
-//    {
-//        if (side == MOBlockHelper.getAboveSide(meta))
-//        {
-//            return iconTop;
-//        }
-//
-//        return MatterOverdriveIcons.Recycler;
-//    }
-//
-//    @SideOnly(Side.CLIENT)
-//    public IIcon getIcon(IBlockAccess blockAccess, int x, int y, int z, int side)
-//    {
-//        if (side != MOBlockHelper.getAboveSide(blockAccess.getBlockMetadata(x, y, z)))
-//        {
-//            if (blockAccess.getTileEntity(x, y, z) instanceof TileEntityMachineMatterRecycler)
-//            {
-//                if (((TileEntityMachineMatterRecycler) blockAccess.getTileEntity(x, y, z)).isActive())
-//                {
-//                    return iconSideAnim;
-//                }
-//            }
-//        }
-//        return this.getIcon(side, blockAccess.getBlockMetadata(x, y, z));
-//    }
 
 	@Override
 	public Class<TileEntityMachineMatterRecycler> getTileEntityClass() {
@@ -111,8 +94,4 @@ public class BlockMatterRecycler extends MOMatterEnergyStorageBlock<TileEntityMa
 	public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState meta) {
 		return new TileEntityMachineMatterRecycler();
 	}
-
-	/*
-	 * @Override public int getRenderType() { return MOBlockRenderer.renderID; }
-	 */
 }

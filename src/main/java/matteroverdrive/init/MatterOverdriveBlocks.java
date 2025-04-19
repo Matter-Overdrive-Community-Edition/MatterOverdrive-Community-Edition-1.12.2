@@ -14,6 +14,7 @@ import matteroverdrive.util.MOLog;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -42,7 +43,9 @@ public class MatterOverdriveBlocks {
 	public MOBlock machine_hull;
 	// Matter Network
 	public BlockDecomposer decomposer;
+	public BlockDecomposer decomposer_running;
 	public BlockMatterRecycler recycler;
+	public BlockMatterRecycler recycler_running;
 	public BlockReplicator replicator;
 	public BlockMatterPipe matter_pipe;
 	public BlockMatterPipe heavy_matter_pipe;
@@ -130,7 +133,11 @@ public class MatterOverdriveBlocks {
 
 //		Matter Network
 		decomposer = register(new BlockDecomposer(TRITANIUM, "decomposer"));
+		decomposer_running = register(new BlockDecomposer(TRITANIUM, "decomposer_running"));
+		decomposer_running.setCreativeTab(null);
 		recycler = register(new BlockMatterRecycler(TRITANIUM, "matter_recycler"));
+		recycler_running = register(new BlockMatterRecycler(TRITANIUM, "matter_recycler_running"));
+		recycler_running.setCreativeTab(null);
 		replicator = register(new BlockReplicator(TRITANIUM, "replicator"));
 		matter_pipe = register(new BlockMatterPipe(TRITANIUM, "matter_pipe"));
 		heavy_matter_pipe = register(new BlockHeavyMatterPipe(TRITANIUM, "heavy_matter_pipe"));

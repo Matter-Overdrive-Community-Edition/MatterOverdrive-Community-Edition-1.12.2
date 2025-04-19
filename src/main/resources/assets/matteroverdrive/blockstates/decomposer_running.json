@@ -6,8 +6,7 @@
       "bottom": "matteroverdrive:blocks/vent2",
       "top": "matteroverdrive:blocks/decomposer_top",
       "side": "matteroverdrive:blocks/base_stripes",
-      "front": "matteroverdrive:blocks/tank_empty",
-      "front_anim": "matteroverdrive:blocks/tank_full",
+      "front": "matteroverdrive:blocks/tank_full",
       "particle": "matteroverdrive:blocks/base_stripes",
       "back": "matteroverdrive:blocks/base_stripes"
     }
