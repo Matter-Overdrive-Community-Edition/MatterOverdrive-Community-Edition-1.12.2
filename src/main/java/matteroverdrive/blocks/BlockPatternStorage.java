@@ -24,15 +24,6 @@ public class BlockPatternStorage extends MOBlockMachine<TileEntityMachinePattern
 		setHasGui(true);
 	}
 
-	/*
-	 * @Override
-	 * 
-	 * @SideOnly(Side.CLIENT) public IIcon getIcon(int side, int metadata) { if(side
-	 * == getOppositeSide(metadata)) { return MatterOverdriveIcons.Vent; }
-	 * 
-	 * return MatterOverdriveIcons.Base; }
-	 */
-
 	@Override
 	public Class<TileEntityMachinePatternStorage> getTileEntityClass() {
 		return TileEntityMachinePatternStorage.class;
@@ -43,11 +34,6 @@ public class BlockPatternStorage extends MOBlockMachine<TileEntityMachinePattern
 	public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
 		return new TileEntityMachinePatternStorage();
 	}
-
-	/*
-	 * @Override public int getRenderType() { return
-	 * RendererBlockPatternStorage.renderID; }
-	 */
 
 	@Override
 	@Deprecated
@@ -60,8 +46,8 @@ public class BlockPatternStorage extends MOBlockMachine<TileEntityMachinePattern
 		hasVentParticles = config.getMachineBool(getTranslationKey(), "particles.vent", true,
 				"Should vent particles be displayed");
 		TileEntityMachinePatternStorage.ENERGY_CAPACITY = config.getMachineInt(getTranslationKey(), "storage.energy",
-				64000, String.format("How much energy can the %s hold", getLocalizedName()));
+				512000, String.format("How much energy can the %s hold", getLocalizedName()));
 		TileEntityMachinePatternStorage.ENERGY_TRANSFER = config.getMachineInt(getTranslationKey(), "transfer.energy",
-				128, String.format("The Transfer speed of the %s", getLocalizedName()));
+				512000, String.format("The Transfer speed of the %s", getLocalizedName()));
 	}
 }
