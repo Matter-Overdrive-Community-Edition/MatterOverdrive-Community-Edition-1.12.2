@@ -106,35 +106,4 @@ public class ElementTaskList extends MOElementListBox {
 			buttonHandler.handleElementButtonClick(this, "DropTask", index);
 		}
 	}
-
-	/*
-	 * @Override public void drawBackground(int mouseX, int mouseY, float gameTicks)
-	 * { lastTooltip.clear();
-	 * 
-	 * for (int i = 0; i < taskQueue.size();i++) { if (i == 0)
-	 * gui.bindTexture(TASK_ELEMENT_BG); else
-	 * gui.bindTexture(TASK_ELEMENT_SECCOUNDARY_BG);
-	 * 
-	 * int height = 22; int width = 132; int x = posX; int y = posY + (28 * (i -
-	 * scroll));
-	 * 
-	 * if (mouseX > x && mouseX < x + width && mouseY > y && mouseY < y + height) {
-	 * gui.drawSizedTexturedModalRect(x, y, 0, height, width, height, width, height
-	 * * 2); taskQueue.getAt(i).addInfo(lastTooltip); lastTooltip.add("");
-	 * lastTooltip.add(EnumChatFormatting.GOLD + EnumChatFormatting.BOLD.toString()
-	 * + "Shift" + EnumChatFormatting.GOLD + " Click to Deque"); } else {
-	 * gui.drawSizedTexturedModalRect(x,y,0,0,width,height,width,height*2); }
-	 * MatterNetworkTask task = taskQueue.getAt(i);
-	 * Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(task.getKey(), x +
-	 * 8, y + 7, 0xFFFFFF); } }
-	 */
-
-	/*
-	 * @Override public void addTooltip(List<String> list) { if
-	 * (!lastTooltip.isEmpty()) { list.addAll(lastTooltip); } }
-	 * 
-	 * @Override public void drawForeground(int mouseX, int mouseY) {
-	 * 
-	 * }
-	 */
 }
