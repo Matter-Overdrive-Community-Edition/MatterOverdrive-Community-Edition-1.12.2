@@ -48,8 +48,8 @@ import java.util.List;
 public class TileEntityMachinePatternStorage extends MOTileEntityMachineEnergy implements IMatterNetworkClient,
 		IMatterDatabase, IScannable, IMatterNetworkConnection, IMatterNetworkDispatcher {
 	public static final int TASK_PROCESS_DELAY = 40;
-	public static final int CHILL_COST = 10;
-	public static final int ENERGY_DRAIN_PER_DRIVE = 10;
+	public static int ENERGY_DRAIN_CHILL = 1000;
+	public static int ENERGY_DRAIN_PER_DRIVE = 100;
 	private static final EnumSet<UpgradeTypes> upgradeTypes = EnumSet.of(UpgradeTypes.PowerStorage,
 			UpgradeTypes.PowerUsage);
 	public static int ENERGY_CAPACITY = 512000;
@@ -416,9 +416,9 @@ public class TileEntityMachinePatternStorage extends MOTileEntityMachineEnergy i
 		if (patternDrives > 0) {
 			patternDrives = patternDrives / 2;
 			int Drives = ENERGY_DRAIN_PER_DRIVE * patternDrives;
-			return (int) Math.round(Drives) + Math.round(CHILL_COST);
+			return (int) Math.round(Drives) + Math.round(ENERGY_DRAIN_CHILL);
 		} else {
-			return (int) Math.round(CHILL_COST);
+			return (int) Math.round(ENERGY_DRAIN_CHILL);
 		}
 	}
 
