@@ -21,6 +21,7 @@ import matteroverdrive.machines.events.MachineEvent;
 import matteroverdrive.matter_network.MatterNetworkTaskQueue;
 import matteroverdrive.matter_network.components.MatterNetworkComponentClient;
 import matteroverdrive.tile.MOTileEntityMachineMatter;
+import matteroverdrive.util.MOBlockHelper;
 import matteroverdrive.util.math.MOMathHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -144,9 +145,9 @@ public class TileEntityMachineReplicator extends MOTileEntityMachineMatter
 		if (isActive()) {
 			if (getBlockType(BlockReplicator.class).hasVentParticles) {
 				SpawnVentParticles(0.05f,
-						getLeftSide(getWorld().getBlockState(getPos()).getValue(MOBlock.PROPERTY_DIRECTION)), 1);
+						MOBlockHelper.getLeftSide(getWorld().getBlockState(getPos()).getValue(MOBlock.PROPERTY_DIRECTION)), 1);
 				SpawnVentParticles(0.05f,
-						getLeftSide(getWorld().getBlockState(getPos()).getValue(MOBlock.PROPERTY_DIRECTION)), 1);
+						MOBlockHelper.getRightSide(getWorld().getBlockState(getPos()).getValue(MOBlock.PROPERTY_DIRECTION)), 1);
 			}
 		}
 	}
