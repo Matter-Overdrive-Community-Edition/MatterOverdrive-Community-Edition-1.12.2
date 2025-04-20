@@ -20,7 +20,6 @@ import matteroverdrive.data.matter_network.MatterDatabaseEvent;
 import matteroverdrive.data.transport.MatterNetwork;
 import matteroverdrive.items.MatterScanner;
 import matteroverdrive.machines.MachineNBTCategory;
-import matteroverdrive.machines.components.ComponentMatterNetworkConfigs;
 import matteroverdrive.machines.events.MachineEvent;
 import matteroverdrive.machines.pattern_monitor.TileEntityMachinePatternMonitor;
 import matteroverdrive.matter_network.MatterNetworkTaskQueue;
@@ -58,7 +57,6 @@ public class TileEntityMachinePatternStorage extends MOTileEntityMachineEnergy i
 	public int input_slot;
 	public int[] pattern_storage_slots;
 	private ComponentMatterNetworkPatternStorage networkComponent;
-	private ComponentMatterNetworkConfigs componentMatterNetworkConfigs;
 	private TaskQueueComponent<MatterNetworkTaskReplicatePattern, TileEntityMachinePatternStorage> taskQueueComponent;
 
 	public TileEntityMachinePatternStorage() {
@@ -153,10 +151,8 @@ public class TileEntityMachinePatternStorage extends MOTileEntityMachineEnergy i
 	@Override
 	protected void registerComponents() {
 		super.registerComponents();
-		componentMatterNetworkConfigs = new ComponentMatterNetworkConfigs(this);
 		networkComponent = new ComponentMatterNetworkPatternStorage(this);
 		taskQueueComponent = new TaskQueueComponent<>("Tasks", this, 1, 0);
-		addComponent(componentMatterNetworkConfigs);
 		addComponent(networkComponent);
 		addComponent(taskQueueComponent);
 	}
