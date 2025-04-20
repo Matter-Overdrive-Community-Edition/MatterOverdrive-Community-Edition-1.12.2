@@ -33,12 +33,12 @@ public class TileEntityRendererHoloSign extends TileEntitySpecialRenderer<TileEn
 			int rightMargin = 10;
 			float maxSize = 4f;
 			EnumFacing leftSide = getLeftSide(side);
-			if (tile.getWorld().getBlockState(tile.getPos().offset(leftSide)).getBlock() instanceof BlockHoloSign) {
+			if (tile.getWorld().getBlockState(tile.getPos().offset(leftSide)).getBlock() instanceof BlockHoloSign && side == tile.getWorld().getBlockState(tile.getPos().offset(leftSide)).getValue(MOBlock.PROPERTY_DIRECTION) ) {
 				leftMargin = -80;
 				maxSize = 8;
 			}
 			EnumFacing rightSide = getRightSide(side);
-			if (tile.getWorld().getBlockState(tile.getPos().offset(rightSide)).getBlock() instanceof BlockHoloSign) {
+			if (tile.getWorld().getBlockState(tile.getPos().offset(rightSide)).getBlock() instanceof BlockHoloSign && side == tile.getWorld().getBlockState(tile.getPos().offset(rightSide)).getValue(MOBlock.PROPERTY_DIRECTION) ) {
 				rightMargin = -80;
 				maxSize = 8;
 			}
